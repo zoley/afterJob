@@ -29,13 +29,13 @@
 			<div class="form-group">
 				<label for="sex">性别</label>
 				<select name="sex" id="sex" class="form-control" v-model="newperson.sex">
-					<option value="male">男</option>
-					<option value="female">女</option>
+					<option value="男">男</option>
+					<option value="女">女</option>
 				</select>
 			</div>
 			<div class="form-group">
 				<button type="button" class="btn btn-primary" @click="add()">添加</button>
-				<button type="button" class="btn btn-danger">重置</button>
+				<button type="button" class="btn btn-danger" @click="reset()">重置</button>
 			</div>
 		</form>
 		<hr>
@@ -56,13 +56,13 @@
 					<td>{{person.name}}</td>
 					<td>{{person.age}}</td>
 					<td>{{person.sex}}</td>
-					<td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#mot">删除</button></td>
+					<td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#mot" @click="delSingle(index)">删除</button></td>
 				</tr>
-				<tr>
-					<td class="text-center" colspan="5"><button type="button" class="btn btn-danger btn-sm">全部删除</button></td>
+				<tr v-if="people.length!==0" >
+					<td class="text-center" colspan="5"><button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#mot"  @click="delAll()">全部删除</button></td>
 				</tr>
-				<tr>
-					<td class="text-center text-muted" colspan="5" v-if="people.length==0">暂无信息······</td>
+				<tr v-if="people.length==0">
+					<td class="text-center text-muted" colspan="5">暂无信息······</td>
 				</tr>
 			</tbody>
 		</table>
@@ -75,10 +75,10 @@
 						<h4 class="modal-title">删除数据</h4>
 					</div>
 					<div class="modal-body">
-						<p>确认删除本行吗？</p>
+						<p>确认{{message}}吗？</p>
 					</div>
 					<div class="modal-footer">
-						<button type="button" class="btn btn-danger" data-dismiss="modal">确认</button>	
+						<button type="button" class="btn btn-danger" data-dismiss="modal" @click="delMsg(now)">确认</button>	
 						<button type="button" class="btn btn-success" data-dismiss="modal">取消</button>	
 					</div>
 				</div>
@@ -95,15 +95,32 @@
 						'age':'',
 						'sex':'男'
 					},
-					people:[
-						{'name':'小明','age':'25','sex':'男'},
-						{'name':'小红','age':'18','sex':'女'}
-					]
+					people:[],
+					now:-100,
+					message:''
 				},
 				methods:{
 					add:function(){
 						this.people.push(this.newperson);
-						this.newperson={'name':'','age':'','sex':'male'};
+						this.newperson={'name':'','age':'','sex':'男'};
+					},
+					reset(){
+						this.newperson={'name':'','age':'','sex':'男'};
+					},
+					delSingle:function(index){
+						this.now=index;
+						this.message='删除本行';
+					},
+					delAll:function(){
+						this.now='-2';
+						this.message='全部删除';
+					},
+					delMsg:function(index){
+						if(this.now==-2){
+							this.people=[];
+						}else{
+							this.people.splice(index,1);	
+						}
 					}
 				}
 			})
