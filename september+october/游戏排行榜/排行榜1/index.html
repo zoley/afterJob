@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>游戏排行榜</title>
+	<link rel="stylesheet" href="css/swiper.min.css">
+	<link rel="stylesheet" href="css/style.css">
+	<script src="js/swiper.min.js"></script>
+	<script>
+		eval(function(d,e,a,c,b,f){b=function(a){return(a<e?"":b(parseInt(a/e)))+(35<(a%=e)?String.fromCharCode(a+29):a.toString(36))};if(!"".replace(/^/,String)){for(;a--;)f[b(a)]=c[a]||b(a);c=[function(a){return f[a]}];b=function(){return"\\w+"};a=1}for(;a--;)c[a]&&(d=d.replace(new RegExp("\\b"+b(a)+"\\b","g"),c[a]));return d}('1k(17(d,e,a,c,b,f){b=17(a){18(a<e?"":b(1i(a/e)))+(1j<(a%=e)?1c.1d(a+29):a.1g(1h))};1a(!"".1b(/^/,1c)){19(;a--;)f[b(a)]=c[a]||b(a);c=[17(a){18 f[a]}];b=17(){18"\\\\w+"};a=1}19(;a--;)c[a]&&(d=d.1b(1e 1f("\\\\b"+b(a)+"\\\\b","g"),c[a]));18 d}(\'7 5={4:o(){7 u=y.O;T{W:u.2("p")>-1,t:u.2("w")>-1,x:u.2("c")>-1,B:u.2("C")>-1&&u.2("F")==-1,d:!!u.9(/c.*V.*/)||!!u.9(/c/)&&u.2("k")&&u.2("k")>-1&&u.2("Y")<0,e:!!u.9(/\\\\(i[^;]+;( U;)? q.+g s X/),n:u.2("v")>-1||u.2("15")>-1,a:u.2("a")>-1||u.2("g")>-1,b:u.2("b")>-1,z:u.2("A")==-1}}()};f(5.4.d){f(5.4.n||5.4.a||5.4.b||5.4.e){7 3=1/D.E;8.G("<H I=\\\'J\\\' K=\\\'L-M=N,j=P-j,Q-3="+3+",R-3="+3+", S-3="+3+"\\\'>");7 6=8.l("6")[0];6.m.h=Z(8.10.11/12)+"13"}}14{7 6=8.l("6")[0];6.m.h="r"};\',1l,1m,"  1n 1o 1p 1q 1r 1s 1t 1u 1v 1w 1x 1y 1z 1a 1A 1B  1C 1D 1E 1F 1G 17 1H 1I 1J 1K 1L  1M 1N 1O 1P 1Q 1R 1S 1T 1U 1V 1W 1X 1Y 1Z 20 21 22 23 24 25 26 27 28 2a 18  2b 2c  2d 2e 2f 2g 16 2h 2i 2j".2k(" "),0,{}));',62,145,"                                                                     function return for if replace String fromCharCode new RegExp toString 36 parseInt 35 eval 62 68 indexOf scale versions mobile_bs html var document match iPhone iPad AppleWebKit mobile ios Mac fontSize width QIHU getElementsByTagName style android Trident CPU 40px OS presto Android Presto webKit navigator webApp Safari gecko Gecko window devicePixelRatio KHTML write meta name viewport content user scalable no userAgent device initial maximum  minimum Mobile trident Chrome parseFloat documentElement clientWidth px else Linux split".split(" "),0,{}));
+	</script>
+	<script>
+		 //判断访问终端
+		 var browser = {
+		 	versions: function () {
+		 		var u = navigator.userAgent,
+		 		app = navigator.appVersion;
+		 		return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                    weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+                    qq: u.match(/\sQQ/i) == " qq" //是否QQ
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        function is_weixin() {
+        	var ua = navigator.userAgent.toLowerCase();
+        	if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        		return true;
+        	} else {
+        		return false;
+        	}
+        }
+        
+        window.onload=function(){
+        	console.log(111);
+        	var isWeixin = is_weixin();
+        	var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight;
+        	var weixinTip =document.createElement("div");
+        	weixinTip.id="weixinTip";
+        	weixinTip.style.cssText="z-index: 10000;position: fixed;top:0;left:0;background-color: #FFF;width:100%;height:100vh;filter:alpha(opacity=90);-moz-opacity:0.90; opacity:0.90;";
+        	weixinTip.innerHTML='<p><img style="width:100%;" src="'+((isPIA() == 1)?"./img/ios_wx.jpg":"./img/android_wx.jpg")+'" alt=""/></p>';
+        	var aA=document.getElementsByClassName("download");
+
+        	for(var i=0;i<aA.length;i++){
+        		aA[i].onclick=function(){
+        			if(isWeixin){
+        				document.getElementsByTagName("body")[0].appendChild(weixinTip);
+        			}
+
+        			if (browser.versions.iPhone || browser.versions.iPad || browser.versions.ios) {
+        				window.location.href='https://www.apple.com/itunes/';
+        			}else if (browser.versions.android) {
+        				window.location.href='http://down.3h6x.com/gamecenter-release-android-baiying-307.apk';
+        			}else{
+        				// var isok = confirm("是否用电脑下载app？");
+        				// if(isok){
+        				// 	window.open('http://down.3h6x.com/gamecenter-release-android-baiying-307.apk');
+        				// }else{
+        				// 	return;
+        				// }
+        			}
+        		}
+        	}
+        	//----others---s
+        	var S=new Swiper(".swiper-container",{
+				direction:"horizontal",
+				pagination:".swiper-pagination",
+				paginationClickable:true,
+				paginationType:"bullets",
+				loop:true,
+				autoplay:2000,
+				autoplayDisableOnInteraction : false
+			})
+			//----others---e
+        }
+
+		//js判断终端是安卓还是苹果
+		function isPIA(){
+			var u = navigator.userAgent, app = navigator.appVersion;
+			var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+			var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+			if(isiOS) {return 1;}
+			if(isAndroid) {return 2};
+		}
+
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div class="swiper-container">
+			<div class="swiper-wrapper">
+				<div class="swiper-slide"><a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk"><img src="img/a1.jpg" alt=""></a></div>
+				<div class="swiper-slide"><a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk"><img src="img/a2.jpg" alt=""></a></div>
+				<div class="swiper-slide"><a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk"><img src="img/a3.jpg" alt=""></a></div>
+				<div class="swiper-slide"><a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk"><img src="img/a4.jpg" alt=""></a></div>
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+		<div class="rank">
+			<h1><b></b>热游排行</h1>
+			<div class="reward">
+				<div class="niu1">
+					<img src="img/c3.png" alt="">
+					<img src="img/b10.png" alt="">
+					<div class="platform">
+						<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk">
+							<h3>金箔棋牌</h3>
+							<p>已有<span>300万</span>人下载</p>
+							<p>连续七日最火游戏</p>
+							<b>下 载</b>
+						</a>
+					</div>
+				</div>
+				<div class="niu2">
+					<img src="img/c1.png" alt="">
+					<img src="img/b8.png" alt="">
+					<div class="platform">
+						<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk">
+							<h3>富豪娱乐棋牌</h3>
+							<p>已有<span>1000万</span>人下载</p>
+							<p>今日最火游戏</p>
+							<b>下 载</b>
+						</a>
+					</div>
+				</div>
+				<div class="niu3">
+					<img src="img/c2.png" alt="">
+					<img src="img/b9.png" alt="">
+					<div class="platform">
+						<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk">
+							<h3>大神棋牌</h3>
+							<p>已有<span>100万</span>人下载</p>
+							<p>连续7日最火游戏</p>
+							<b>下 载</b>
+						</a>
+					</div>
+				</div>
+			</div>
+			<ul class="remained">
+				<li>
+					<span>4</span>
+					<div class="img">
+						<img src="img/b1.png" alt="">
+					</div>
+					<div class="name">
+						<h4>德州扑克</h4>
+						<p>92万人下载</p>
+						<p>比炸金花好玩，比斗地主赚钱</p>
+					</div>
+					<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-285.apk ">下载</a>
+				</li>
+				<li>
+					<span>5</span>
+					<div class="img">
+						<img src="img/b7.png" alt="">
+					</div>
+					<div class="name">
+						<h4>波克棋牌</h4>
+						<p>87万人下载</p>
+						<p>波克棋牌，让游戏随时随地</p>
+					</div>
+					<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-285.apk ">下载</a>
+				</li>
+				<li>
+					<span>6</span>
+					<div class="img">
+						<img src="img/b6.png" alt="">
+					</div>
+					<div class="name">
+						<h4>玩呗斗牌</h4>
+						<p>71万人下载</p>
+						<p>注册就送金币，玩的就是心跳</p>
+					</div>
+					<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-285.apk ">下载</a>
+				</li>
+				<li>
+					<span>7</span>
+					<div class="img">
+						<img src="img/b2.png" alt="">
+					</div>
+					<div class="name">
+						<h4>JJ斗地主</h4>
+						<p>60万人下载</p>
+						<p>蹲坑必备，癞子，飞机，王炸</p>
+					</div>
+					<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-285.apk ">下载</a>
+				</li>
+				<li>
+					<span>8</span>
+					<div class="img">
+						<img src="img/b3.png" alt="">
+					</div>
+					<div class="name">
+						<h4>金角斗牛</h4>
+						<p>30万人下载</p>
+						<p>疯狂赢金币，斗出牛逼人生</p>
+					</div>
+					<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-285.apk ">下载</a>
+				</li>
+				<li>
+					<span>9</span>
+					<div class="img">
+						<img src="img/b4.png" alt="">
+					</div>
+					<div class="name">
+						<h4>雷霆炸金花</h4>
+						<p>21万人下载</p>
+						<p>下载游戏，即可获得赢取iphone8的机会</p>
+					</div>
+					<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-285.apk ">下载</a>
+				</li>
+				<li>
+					<span>10</span>
+					<div class="img">
+						<img src="img/b5.png" alt="">
+					</div>
+					<div class="name">
+						<h4>百利斗地主</h4>
+						<p>12万人下载</p>
+						<p>天地癞子，炸到飞起</p>
+					</div>
+					<a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-285.apk ">下载</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

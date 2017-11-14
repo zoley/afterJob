@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>zoley</title>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write('<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale='+scale+', maximum-scale='+scale+', minimum-scale='+scale+'" />');
+		var html=document.getElementsByTagName("html")[0];
+		//判断终端
+		var mobile_bs = {
+			versions: function() {
+				var u = navigator.userAgent;
+				return {
+				   trident: u.indexOf('Trident') > -1, //IE内核
+				   presto: u.indexOf('Presto') > -1, //opera内核
+				   webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+				   gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+				   mobile: !! u.match(/AppleWebKit.*Mobile.*/) || !! u.match(/AppleWebKit/) && u.indexOf('QIHU') && u.indexOf('QIHU') > -1 && u.indexOf('Chrome') < 0, //是否为移动终端
+				   ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+				   android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+				   iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+				   iPad: u.indexOf('iPad') > -1,  //是否iPad
+				   webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+				}
+			} ()
+		};
+		if (mobile_bs.versions.mobile) {
+			if (mobile_bs.versions.android || mobile_bs.versions.iPhone || mobile_bs.versions.iPad || mobile_bs.versions.ios) {
+				html.style.fontSize=document.documentElement.clientWidth/16+"px";//1rem=40px;
+			}
+		}else{
+			html.style.fontSize="40px";
+		} 
+	</script>
+	<style>
+		*{margin:0;padding:0;border:none;box-sizing:border-box;outline:none;}
+		body{font-family:"Microsoft Yahei",arial,sans-serif;color:#776E65;background-color:#FAF8EF;}
+		#wrap{position: absolute;width: 100%;max-width:16rem;top:0;left:50%;padding-top:1rem;height:100%;margin-left:-8rem;}
+		#wrap>h1{height: 3rem;width: 6rem;float:left;font-size:1.2rem;line-height:3rem;margin-left:2.5rem;vertical-align:top;}
+		#wrap>.note{float:left;height:3rem;width: 6rem;font-size:0.8rem;}
+		#wrap>.note span{color:brown;}
+		#wrap>.note p{margin-bottom:0.5rem;}
+		#wrap>.note input{color:white;background-color:#8F7A66;padding:0.3rem 0.5rem;font-size:0.6rem;border-radius:0.2rem;}
+		#main{width:12rem;height:12rem;margin:5rem auto;border-radius:0.2rem;background-color:#BBADA0;position: relative;}
+		.grid,.ele{width: 2.5rem;height: 2.5rem;border-radius:0.15rem;}
+		.grid{float:left;margin:0.4rem 0 0 0.4rem;background-color:#ccc0b3;}
+		.ele{text-align:center;line-height:2.5rem;color:#776e65;font-size:1.2rem;position: absolute;}
+		/*每一行同样的top，每一列同样的left*/
+		#b00,#b01,#b02,#b03{top:0.4rem;}
+		#b00,#b10,#b20,#b30{left:0.4rem;}
+		#b10,#b11,#b12,#b13{top:3.3rem;}
+		#b01,#b11,#b21,#b31{left:3.3rem;}
+		#b20,#b21,#b22,#b23{top:6.2rem;}
+		#b02,#b12,#b22,#b32{left:6.2rem;}
+		#b30,#b31,#b32,#b33{top:9.1rem;}
+		#b03,#b13,#b23,#b33{left:9.1rem;}
+		.n8,.n16,.n32,.n64,.n128,.n256,.n512,.n1024,.n2048,.n4096,.n8192{color:#fff;}
+		.n128,.n256,.n512{font-size:1rem;}
+		.n1024,.n2048,.n4096,.n8192{font-size:0.8rem;}
+		.n2{background-color:#eee3da;}
+		.n4{background-color:#ede0c8;}
+		.n8{background-color:#f2b179;}
+		.n16{background-color:#f59563;}
+		.n32{background-color:#f67c5f;}
+		.n64{background-color:#f65e3b;}
+		.n128{background-color:#edcf72;}
+		.n256{background-color:#edcc61;}
+		.n512{background-color:#9c0;}
+		.n1024{background-color:#33b5e5;}
+		.n2048{background-color:#09c;}
+		.n4096{background-color:#a6c;}
+		.n8192{background-color:#93c;}
+		#over{width: 100%;height: 100%;position: absolute;left:0;top:0;background:rgba(0,0,0,0.6);color:white;padding-top:6rem;display:none;}
+		#over p{text-align: center;font-size:1.5rem;margin-bottom:0.5rem;color:#f40;}
+		#over input{color:white;background-color:#8F7A66;padding:0.3rem 0.5rem;font-size:1rem;border-radius:0.2rem;display:block;margin:0 auto;}
+	</style>
+</head>
+<body>
+	<div id="wrap">
+		<h1>2048</h1>
+		<div class="note">
+			<p>SCORE: <span id="score">0</span></p>
+			<input type="button" id="start" value="New Game">
+		</div>
+		<div id="main">
+			<!-- 背景 -->
+			<div id="a00" class="grid"></div>
+			<div id="a01" class="grid"></div>
+			<div id="a02" class="grid"></div>
+			<div id="a03" class="grid"></div>
+
+			<div id="a10" class="grid"></div>
+			<div id="a11" class="grid"></div>
+			<div id="a12" class="grid"></div>
+			<div id="a13" class="grid"></div>
+
+			<div id="a20" class="grid"></div>
+			<div id="a21" class="grid"></div>
+			<div id="a22" class="grid"></div>
+			<div id="a23" class="grid"></div>
+
+			<div id="a30" class="grid"></div>
+			<div id="a31" class="grid"></div>
+			<div id="a32" class="grid"></div>
+			<div id="a33" class="grid"></div>
+			<!-- 数字 -->
+			<div id="b00" class="ele"></div><!--n2  2-->
+			<div id="b01" class="ele"></div><!--n4  4-->
+			<div id="b02" class="ele"></div><!--n8  8-->
+			<div id="b03" class="ele"></div><!--n16  16-->
+
+			<div id="b10" class="ele"></div><!--n32  32-->
+			<div id="b11" class="ele"></div><!--n64  64-->
+			<div id="b12" class="ele"></div><!--n128  128-->
+			<div id="b13" class="ele"></div><!--n256  256-->
+
+			<div id="b20" class="ele"></div><!--n512  512-->
+			<div id="b21" class="ele"></div><!--n1024  1024-->
+			<div id="b22" class="ele"></div><!--n2048  2048-->
+			<div id="b23" class="ele"></div><!--n4096  4096-->
+
+			<div id="b30" class="ele"></div><!--n8192  8192-->
+			<div id="b31" class="ele"></div>
+			<div id="b32" class="ele"></div>
+			<div id="b33" class="ele"></div>
+		</div>
+		<div id="over">
+			<p>GAME OVER</p>
+			<p>SCORE: <span id="finalSocre">0</span></p>
+			<input type="button" id="restart" value="Try Again">
+		</div>
+	</div>
+	<script>
+		window.onload=function(){
+			window.onresize=function(){
+				window.location.reload();
+			}
+			game.start();
+			var oStart=document.getElementById("start");
+			oStart.onclick=function(){
+				game.start();
+			}
+			document.onkeyup=function(e){
+				var e=e || event;
+				if(game.state!=game.running){
+					if(game.state==game.canRun){
+						if(e.keyCode==37){
+							game.moveLeft();
+							
+						}
+					}
+				}
+			}
+		}
+
+
+		var game={
+			data:[],//存储单元格所有数据
+			state:1,
+			canRun:1,
+			running:2,
+			score:0,
+			over:0,
+			start:function(){
+				this.data=[
+					[0,0,0,0],
+					[0,0,0,0],
+					[0,0,0,0],
+					[0,0,0,0]
+				];
+				this.score=0;
+				this.state=this.canRun;
+				var over=document.getElementById("over");
+				over.style.display="none";
+				//随机位置生成2或4
+				this.randomNum();
+				this.randomNum();
+				this.update();
+			},
+			isFull:function(){//判断是否满了
+				//遍历data,有0返回false；否则返回true;
+				for(var row=0;row<4;row++){//this.data.length=4
+					for(var col=0;col<4;col++){//this.data[row].length=4
+						if(this.data[row][col]==0){
+							return false;
+						}
+					}
+				}
+				return true;
+			},
+			randomNum:function(){
+				if(this.isFull())return false;
+				//随机产生row 和col (范围0~3)，判断 this.data[row][col]==0 ? //  =0就放入2或者4 , 2和4出现概率可以调控，4出现的越多越难，
+				//可以用math.random()<n 调控概率
+				while(true){//使用while避免重合，当重合时本次产生作废，重新再循环
+					var row=Math.floor(Math.random()*(4-0)+0);//0~3
+					var col=Math.floor(Math.random()*(4-0)+0);//0~3
+					if(this.data[row][col]==0){
+						this.data[row][col]=Math.random()<0.8?2:4;//控制80%的概率出2
+						break;
+					}
+				}
+			},
+			update:function(){//及时更新游戏页面（不是刷新）
+				//遍历this.data数组，判断this.data[row][col]==0 ? // =0就为空，否则把该数据放入页面格子里
+				//把div加上应的class
+				for(var row=0;row<4;row++){
+					for(var col=0;col<4;col++){
+						var oDiv=document.getElementById("b"+row+col);
+						oDiv.innerHTML=this.data[row][col]==0?"":this.data[row][col];
+						oDiv.className=this.data[row][col]==0?"ele":"ele n"+this.data[row][col];
+					}
+				}
+				//分数累加
+				var oScore=document.getElementById("score");
+				oScore.innerHTML=this.score;
+				//game over
+				if(this.isGameOver()){
+					var oOver=document.getElementById("over");
+					var oFinalScore=document.getElementById("finalSocre");
+					var oRestart=document.getElementById("restart");
+					oFinalScore.innerHTML=this.score;
+					oOver.style.display="block";
+					oRestart.onclick=function(){
+						game.start();
+					}
+				}
+				
+			},
+			isGameOver:function(){//判断是否gameover
+				if(!this.isFull())return false;
+				//-->if(this.canLeft() || this.canRight() || this.canUp() || this.canDown() ){return false}else{return true}
+				//-->法二，已经满了，但是邻近有相同项
+				for(var row=0;row<3;row++){
+					for(var col=0;col<3;col++){
+						if(this.data[row][col]==this.data[row][col+1]){
+							return false;
+						}
+						if(this.data[row][col]==this.data[row+1][col]){
+							return false;
+						}
+					}
+				}
+				return true;
+			},
+			canLeft:function(){
+				//遍历所有元素，只要当前元素（最左边元素除外）的左边=0 或者与左边的值一致，那么就可以左移
+				for(var row=0;row<4;row++){
+					for(var col=1;col<4;col++){
+						if(this.data[row][col]!=0){
+							if(this.data[row][col-1]==0 || this.data[row][col]==this.data[row][col-1]){
+								return true;
+							}	
+						}
+					}
+				}
+				return false;
+			},
+			moveLeft:function(){
+				if(this.canLeft()){
+					for(var row=0;row<4;row++){
+						this.moveLeftInRow(row);
+					}
+					this.state=this.running;
+					animation.start();
+					setTimeout(function(){
+						game.state=game.canRun;
+						game.randomNum();
+						game.update();
+					},animation.timers*animation.interval)
+				}
+			},
+			moveLeftInRow:function(row){//某一行元素左移
+				//遍历这一行元素（0~2，最右侧除外），若其右侧元素值不为空（0），则获取其下标nextCol,判断是否合并，否则返回-1 (不移动)；
+				//合并：1.当前=0；则右侧移动替换到当前，右侧=0；2.当前值=右侧值，则当前值*2，右侧=0；
+				for(var col=0;col<3;col++){
+					var nextCol=this.getNextRight(row,col);
+					if(nextCol==-1)break;
+					if(this.data[row][col]==0){
+						this.data[row][col]=this.data[row][nextCol];
+						this.data[row][nextCol]=0;
+						animation.addTask(""+row+nextCol,""+row+col);
+					}else if(this.data[row][col]==this.data[row][nextCol]){
+						this.data[row][col]*=2;
+						this.data[row][nextCol]=0;
+						this.score+=this.data[row][col];
+						animation.addTask(""+row+nextCol,""+row+col);
+					}
+				}
+			},
+			getNextRight:function(row,col){
+				for(var i=col+1;i<4;i++){//col=0: 1 2 3 ; col=1: 2 3 ; col=2: 3 ;
+					if(this.data[row][i]!=0){
+						return i;
+					}
+				}
+				return -1;
+			}
+
+		}
+		var animation={
+			times:10,//每个动作10步完成
+			interval:10,//每一步10毫秒
+			timer:null,
+			tasks:[],//保存每次需要移动的任务
+			addTask:function(next,now){
+				var oNext=document.getElementById("b"+next);
+				var nextStyle=window.getComputedStyle(document.getElementById("b"+next),null);
+				var nowStyle=window.getComputedStyle(document.getElementById("b"+now),null);
+				var topStep=(parseInt(nowStyle.top)-parseInt(nextStyle.top))/this.times;
+				var leftStep=(parseInt(nowStyle.left)-parseInt(nextStyle.left))/this.times;
+				var task=new Task(oNext,topStep,leftStep);
+				this.tasks.push(task);
+			},
+			start:function(){
+				this.timer=setInterval(function(){
+					for(var i=0;i<animation.tasks.length;i++){
+						animation.tasks[i].moveStep();
+					}
+					animation.times--;
+					if(animation.times==0){
+						for(var i=0;i<animation.tasks.length;i++){
+							animation.tasks[i].clear();
+						}
+						clearInterval(animation.timer);
+						animation.tasks=[];
+						animation.times=10;
+						animation.timer=null;
+					}
+				},this.interval)
+			}
+		}
+		function Task(obj,topStep,leftStep){
+			this.obj=obj;
+			this.topStep=topStep;
+			this.leftStep=leftStep;
+		}
+		/*moveStep方法将元素对象移动一步*/
+		Task.prototype.moveStep=function(){
+			var oStyle=window.getComputedStyle(this.obj,null);
+			var top=parseInt(oStyle.top);
+			var left=parseInt(oStyle.left);
+			this.obj.style.top=(top+this.topStep)/40+"rem";
+			this.obj.style.left=(left+this.leftStep)/40+"rem";
+			console.log(top+","+left)
+		}
+		/*清除样式*/
+		Task.prototype.clear=function(){
+			this.obj.style.top="";
+			this.obj.style.left="";
+		}
+	</script>
+</body>
+</html>

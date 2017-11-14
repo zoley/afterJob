@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>红包雨</title>
+	<style>
+		*{margin:0;padding:0;}
+		#game{position: fixed;top:60%;right:5px;width: 15%;}
+		#game img{width: 100%;display:block;}
+
+		.wrap{width: 100%;height: 100%;display:none;}
+		.wrap>i{position: absolute;width: 25px;height: 25px;background:url(img/gclose.png) no-repeat;-webkit-background-size: 100% 100%;top:10%;right:5%;
+			background-size: 100% 100%;top:2%;right:2%;z-index:1;}
+		.time{width: 100%;height: 100%;position: absolute;top:0;left:0;background:rgba(255,255,255,0.5);z-index:1;}
+		.time span{display:block;width: 100%;height: 100%;text-align:center;line-height:800%;font-size:500%;color:#f40;text-shadow:0 0 20px gold;}
+		.rain{width: 100%;height: 100%;position: absolute;left:0;top:0;background:url(img/r1.jpg) no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;overflow:hidden;}		
+		.rain a{position: absolute;top:-100px;}
+		.rain a img{display:block;width: 100%;}
+
+		.result{width: 100%;height: 100%;background:rgba(0,0,0,0.8);position: absolute;top:0;left:0;z-index:2;display:none;}
+		.result i{position: absolute;width: 25px;height: 25px;background:url(img/gclose.png) no-repeat;-webkit-background-size: 100% 100%;top:10%;right:5%;
+			background-size: 100% 100%;top:5%;right:10%;}
+		.result .ghead{width: 80%;margin:0 auto;}
+		.result .ghead img{width: 100%;display:block;}
+		.result .gbody{background-color:#FF364C;overflow:hidden;width: 80%;margin:0 auto;}
+		.result .gbody .con{width: 90%;margin:10px auto;}
+		.result .gbody .con img{width: 100%;display:block;}
+		.result .gbody span{display:block;width: 90%;height: 40px;margin:20px auto;text-align:center;line-height:40px;font-size:20px;background:url(img/gdown.png) no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;}
+		.result b{display:block;width: 80%;position: absolute;top:8%;left:50%;margin-left:-40%;}
+		.result b img{display:block;width: 100%}
+	</style>
+</head>
+<body>
+	<div id="game">
+		<img src="img/game2.gif">
+	</div>
+
+	<div class="wrap">
+		<i></i>
+		<div class="time">
+			<span></span>
+		</div>
+		<div class="rain">
+			<!-- <a class="" href="javascript:;"><img src="img/r2.png"></a> -->
+		</div>
+		<div class="result">
+			<i></i>
+			<div class="ghead"><img src="img/ghead.png"></div>
+			<div class="gbody">
+				<div class="con">
+					<img src="img/r6.png">
+				</div>
+				<span class="gdown">马上使用</span>
+			</div>
+			<b><img src="img/gbg.png"></b>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script src="js/d.js"></script>
+	<script>
+	$(document).ready(function(){
+		$("#game").click(function(){
+			$(".wrap").css("display","block");
+			time();
+			setTimeout(sprinkle,3000);
+		})
+		//------后添加的i按钮
+		$(".wrap>i").click(function(){
+			$(".wrap").css("display","none");
+			window.location.reload();
+
+		})		
+	})
+	$(window).resize(function(){
+		// window.location.reload();
+	})
+	var num=4;
+	var time=function(){
+		num--;
+		if(num==0){
+			$(".time").remove();
+		}else{
+			$(".time span").html(num);
+		}
+		setTimeout(time,1000);
+	}
+	var count=1;
+	var sprinkle=function(){
+		var src=Math.floor(Math.random()*(4-2)+2);
+		var size=Math.floor(Math.random()*(60-20)+20);
+		var left=Math.floor(Math.random()*($(window).width()-60));
+		var rot=Math.floor(Math.random()*(45+45)-45);
+		count++;
+		var con='<a class="a'+count+'" href="javascript:;"><img src="img/r'+src+'.png"></a>';
+		$(".rain").append(con);
+		$(".rain .a"+count).css({"width":size,"left":left,"transform":"rotate("+rot+"deg)"}).animate({"top":$(window).height()+10},5000,"swing",function(){
+			$(this).remove();
+		}).click(function(){
+			$(".result").fadeIn(450);
+		})
+		$(".result i").click(function(){
+			$(".result").css("display","none");
+		})		
+		$(".result .gdown").click(function(){
+			window.location.href="http://www.baidu.com";
+		})
+
+		setTimeout(sprinkle,400);
+	}
+	</script>
+</body>
+</html>

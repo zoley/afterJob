@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+	<style>
+	@keyframes afive{
+	0%{transform:scale(1);transform:scale(1)}
+	70%,73%{transform:scale(1);transform:scale(1)}
+	77.5%{transform:translate(4px,3px)}
+	78%{transform:translate(4px,-4px)}
+	78.5%{transform:translate(3px,-4px)}
+	79%{transform:translate(-4px,-4px)}
+	79.5%{transform:translate(-4px,3px)}
+	80%{transform:translate(-4px,4px)}
+	80.5%{transform:translate(3px,4px)}
+	81%{transform:translate(0,0)}
+	100%{transform:scale(1) rotate(0);transform:scale(1) rotate(0)}}
+/**
+ * --------------------------------
+ */
+	@-webkit-keyframes afive{
+		0%{transform:scale(0.5);}
+		20%{transform:scale(0.1);}
+		40%{transform:scale(0.6);}
+		60%{transform:scale(1);}
+		80%{transform:scale(1.5);}
+		100%{transform:scale(1);}
+	}
+	
+	</style>
+</head>
+<body>
+	<script>
+	//移动漂浮
+	var Dw = document.body.clientWidth,
+	Dh = Dw * zone.height / zone.width,
+	i = '<iframe src="' + ifsrc + '" width="100%" height="' + Dh + '" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>', o = document.createElement("div"),
+	arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.className = 'a' + arand;
+	o.style.cssText = "position: fixed;z-index: 2147483646;left:0px;width:100%;height:"+Dh+"px;text-align:center;background-color: rgba(0,0,0,.64);box-shadow: 0 -1px 1px rgba(0,0,0,.10);";
+	if(zone.htmlcontrol){
+		var _po = (zone.htmlcontrol.position== 'top')?'bottom':'top';
+		(zone.htmlcontrol.position== 'top')? o.style.top = "0px" : o.style.bottom = "0px";
+		(zone.htmlcontrol.position== 'top')?(document.body.style.paddingTop = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-top')) + Dh + "px"):(document.body.style.paddingBottom = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-bottom')) + Dh + "px");
+	}
+	o.innerHTML = "<div style='position:relative;display:inline-block; zoom:1; vertical-align:middle; text-align:left;margin:0px auto;width:"+Dw+"px;height:"+Dh+"px'><div style='background:rgba(0,0,0,0.1);position:absolute;"+_po+":0px;right:0px;width:20px;text-align:center;color:#ffffff;font-size:12px;line-height:20px;font-family:Arial;height:20px;z-index:2147483647;' id='c"+arand+"'>X</div>"+i+"</div><div style='height:100%; overflow:hidden; display:inline-block; width:1px; overflow:hidden; margin-left:-1px; zoom:1; vertical-align:middle;'></div>";
+	var     ostyle = document.createElement('style');
+	ostyle.innerHTML = 'div.a'+arand+'{-webkit-animation:afive 5s both;-moz-animation:afive 5s both;-ms-animation:afive 5s both;animation:afive 5s both}@keyframes afive{0%{transform:scale(1);transform:scale(1)}70%,73%{transform:scale(1);transform:scale(1)}77.5%{transform:translate(4px,3px)}78%{transform:translate(4px,-4px)}78.5%{transform:translate(3px,-4px)}79%{transform:translate(-4px,-4px)}79.5%{transform:translate(-4px,3px)}80%{transform:translate(-4px,4px)}80.5%{transform:translate(3px,4px)}81%{transform:translate(0,0)}100%{transform:scale(1) rotate(0);transform:scale(1) rotate(0)}}';
+	document.head.appendChild(ostyle);
+	document.body.appendChild(o);
+	function close(){
+		if(o && Math.random() > 0.5) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+
+//-----------
+
+	var Dw = document.body.clientWidth,
+	Dh = Dw * config.height / config.width,
+	str = "<a target='_blank' href='"+ads[0].url+"' id='v_ads'><img src='"+ads[0].imageurl+"' border='0' width='100%' height='"+Dh+"'></a>";
+	document.writeln(str);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+//-================================================================================================================
+//移动横幅
+	var Dw = document.body.clientWidth;
+	var Dh = Dw * zone.height / zone.width;
+	var i = '<iframe src="' + ifsrc + '" width="100%" height="' + Dh + '" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>';
+
+	var arand=Math.floor(Math.random()*100000);
+	var o = "<div id="+arand+" style='width:100%;height:"+Dh+"px'><div style='clear:both;padding:0px;margin:0px;'>"+i+"</div></div>";
+	document.write(o);
+
+
+//---------------
+
+	var ext= ads[0].imageurl.substr(ads[0].imageurl.lastIndexOf(".")).toLowerCase();
+	var Dw = document.body.clientWidth;
+	//Dw = Dw > 666 ? 666 : Dw;
+	var Dh = Dw * config.height / config.width;
+
+	if(ext!='.swf'){
+		var str = "<a target='_blank' href="+ads[0].url+" id='v_ads'><img src='"+ads[0].imageurl+"' border='0' width='100%' height='" + Dh + "'></a>";
+	}else{
+		var str = '<div id="v_ads" style="position:absolute;z-index:10000;background-color:#fff;opacity:0.01;filter:alpha(opacity:1);"><a href="'+ads[0].url+'" target="_blank" style="display:block;width:'+config.width+'px;height:'+config.height+'px;" id="_z_add_s_"></a></div><embed src="'+ads[0].content+'" type="application/x-shockwave-flash" height="'+config.height+'" width="'+config.width+'"   name="Zad" quality="high" wmode="opaque"   allowscriptaccess="always" >';  
+	}
+	document.writeln(str);
+	/*
+	* RUN STATS
+	*/
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+
+
+//移动悬浮--可拖动
+		var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.style.cssText = "height:70px; width:70px; position:fixed; top:50%; right:12px; z-index:2147483646; ";
+	o.innerHTML = '<a href="'+ads[0].url+'" target="_self" style="position:relative;display:inline-block; zoom:1;"><img src="' + ads[0].imageurl + '" style="width:100%;display:block;"/></a><span style="height:14px; width:14px; font-size:13px; color:#444; position:absolute; top:0; left:0;" id="c'+arand+'">X</span>';
+
+	document.body.appendChild(o);
+	dragg(o);
+
+	function dragg(obj){
+		var W=document.documentElement.clientWidth;
+		var H=document.documentElement.clientHeight;
+		obj.addEventListener("touchstart",function(e){
+			e.preventDefault();
+			var e=e.changedTouches[0];
+			var disX=e.clientX;
+			var disY=e.clientY;
+			var tempX=disX-toLeft(this);
+			var tempY=disY-toTop(this);
+			var maxTop=H-this.offsetHeight;
+			var lastLeft=0;
+			obj.addEventListener("touchmove",function(e){
+				e.preventDefault();
+				var e=e.changedTouches[0];
+				var left1=e.clientX-tempX;
+				var top1=e.clientY-tempY;
+				if(top1<=0){
+					top1=0;
+				}else if(top1>maxTop){
+					top1=maxTop;
+				}
+				this.style.left=left1+"px";
+				this.style.top=top1+"px";
+				lastLeft=left1;
+			})
+			obj.addEventListener("touchend",function(e){
+				if(lastLeft==0)return;
+				if(lastLeft>=W/2){
+					perfectMove(obj,{"left":W-obj.offsetWidth});
+				}else{
+					perfectMove(obj,{"left":0});
+				}
+			})
+		})
+	}
+	function toTop(obj){
+		var iTop=0;
+		while(obj){
+			iTop+=obj.offsetTop;
+			obj=obj.offsetParent;
+		}
+		return iTop;
+	}	
+	function toLeft(obj){
+		var iLeft=0;
+		while(obj){
+			iLeft+=obj.offsetLeft;
+			obj=obj.offsetParent;
+		}
+		return iLeft;
+	}
+	function getStyle(obj,attr) {
+		return obj.currentStyle ?obj.currentStyle[attr]:window.getComputedStyle(obj,false)[attr];
+	}
+	function perfectMove(obj,json,endFn){								
+		clearInterval(obj.timer2);							
+		obj.timer2=setInterval(function(){							
+			var bStop=true;		//这一次运动就结束了――所有的值都到达了				
+			for(var attr in json){						
+				//1.取当前的值					
+				var iCur=0;					
+				if(attr=="opacity"){					
+					iCur=Math.ceil(parseFloat(getStyle(obj,attr))*100);				
+				}else{					
+					iCur=parseInt(getStyle(obj,attr));				
+				}					
+				//2.算速度					
+				var speed=(json[attr]-iCur)/7;					
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);					
+				//3.检测停止					
+				if(iCur!=json[attr]){					
+					bStop=false;				
+				}					
+				if(attr=="opacity"){					
+					obj.style.filter="alpha(opacity="+(iCur+speed)+")";				
+					obj.style.opacity=(iCur+speed)/100;				
+				}else{					
+					obj.style[attr]=iCur+speed+"px";				
+				}					
+			}						
+			if(bStop){						
+				clearInterval(obj.timer2);					
+				endFn && endFn();					
+			}						
+		},30)							
+	}
+
+	function close(){  
+		if(o) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+	</script>
+
+	<script>
+	</script>
+</body>
+</html>

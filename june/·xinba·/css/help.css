@@ -1,0 +1,180 @@
+#problem{
+	width: 100%;
+	min-width: 970px;
+	background-color: #F9F9F9;
+	border:1px solid #F1F1F1;
+	padding-bottom: 40px;
+}
+.sprite_icon{
+	background-image:url(../img/sprite.png);
+	display: block;
+}
+.problem_top{
+	height: 95px;
+	border:1px solid #F1F1F1;
+	background-color: white;
+	margin-top: 50px;
+}
+
+.problem_icon{
+	width: 30px;
+	height: 30px;
+	background-position: 0 -400px;
+	margin:0 20px;
+	margin-top: 38px;
+}
+.problem_top h2{
+	height: 95px;
+	line-height: 95px;
+	font-size: 26px;
+	color: black;
+}
+.problem_main{
+	position: relative;
+	height: 450px;
+	border:1px solid #F1F1F1;
+	background-color: white;
+}
+.problem_left{
+	height: 100%;
+	width: 384px;
+	box-sizing: border-box;
+	border-right:1px solid #F1F1F1;
+	
+}
+.pl_title{
+	cursor: pointer;
+	width: 100%;
+	height: 60px;
+	font-size: 22px;
+	line-height: 60px;
+	padding: 0 20px 0 35px ;
+	font-weight: 400;
+	color: black;
+	box-sizing: border-box;
+	border-bottom:1px solid #F1F1F1;
+}
+.pl_icon{
+	width: 20px;
+	height: 18px;
+	margin-top: 20px;
+}
+.pl_item{
+	width: 100%;
+	height: 330px;
+	box-sizing: border-box;
+	padding: 20px 45px;
+	background: #EFEFEF;
+}
+.pl_item li:hover{
+	cursor: pointer;
+	color: red;
+}
+.pl_item:first-of-type li{
+	line-height: 40px;
+}
+.pl_item:last-of-type li{
+	line-height:25px;
+}
+.problem_right{
+	position: absolute;
+	left: 384px;
+	top: 0;
+	padding: 40px 50px;
+	color: #000000;
+	line-height: 30px;
+}
+.problem_right h3{
+	font-size: 28px;
+	margin-bottom: 20px;
+}
+
+/*预约zi询*/
+#consulting{
+	width: 100%;
+	min-width: 970px;
+	background-color: #EAEAEA;
+	border:1px solid #F1F1F1;
+	text-align: center;
+}
+#consulting h3{
+	font-size: 24px;
+	color: black;
+	line-height: 60px;
+}
+.csl_contain{
+	width: 970px;
+	margin: 100px auto;
+}
+.input_box{
+	height: 50px;
+	width: 340px;
+	box-shadow:0 0 1px #F1F1F1;
+	margin: 30px auto 0 auto;
+	position:relative;
+}
+.input_box input{
+	width: 100%;
+	height: 100%;
+	border-radius: 4px;
+	line-height: 50px;
+	text-indent: 50px;
+}
+.name_icon{
+	position: absolute;
+	display: block;
+	top: 10px;
+	left: 10px;
+	height: 30px;
+	width: 24px;
+	background: url(../img/icon-reservation.png) 0 0;
+}
+.phone_icon{
+	position: absolute;
+	display: block;
+	top: 10px;
+	left: 12px;
+	height: 30px;
+	width: 23px;
+	background: url(../img/icon-reservation.png) 0 -50px;
+}
+.email_icon{
+	position: absolute;
+	display: block;
+	top: 10px;
+	left: 10px;
+	height: 20px;
+	width: 20px;
+	background: url(../img/icon-reservation.png) 0 -100px;
+}
+#submit_csl{
+	width: 230px;
+	height: 60px;
+	border: 1px solid #3DA8EE;
+	color: #3DA8EE;
+	text-align: center;
+	font-size: 20px;
+	line-height: 60px;
+	margin: 40px auto 0 auto;
+	background: none;
+}
+#submit_csl:hover{
+	background: #3DA8EE;
+	color: white;
+}
+.tel_icon{
+    width: 100px;
+    height: 100px;
+    margin: 40px auto 0 auto;
+    background-position: 0 -230px;
+}
+#tel_number{
+	display: block;
+	font-size: 40px;
+	color: #008DE8;
+	margin: 20px auto;
+}
+.csl_right b{
+	font-size: 18px;
+	color: black;
+}

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="个人博客,个人小站,主成睿" />
+	<meta name="description" content="主成睿的个人小站">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>流光字体渐变效果</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../../img/ico.ico">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/syntaxy.dark.min.css">
+	<link rel="stylesheet" href="../../css/blog.css">
+	<link rel="stylesheet" href="css/3.css">
+</head>
+<body>
+	<div class="bg"></div>
+	<header id="head">
+		<div class="motto">
+			<span>入不言兮出不辞，乘回风兮载云旗。</span>
+			<span>悲莫悲兮生别离，乐莫乐兮新相知。</span>
+		</div>
+		<div class="line"></div>
+	</header>
+	<div class="btn">
+		<div class="icon"></div>
+	</div>
+	<div id="nav">
+		<div class="photo"></div>
+		<ul>
+			<li><a href="http://zoley.me">主页<i></i></a></li>
+			<li><a class="active" href="http://zoley.me/blog.php">博客<i></i></a></li>
+			<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历<i></i></a></li>
+		</ul>
+		<div class="email">zole1314@163.com</div>
+	</div>
+	<div class="mask"></div>
+	<div class="container">
+		<div class="con-left fl">
+			<div class="articles">
+				<p class="back"><a href="http://zoley.me/blog.php">>>返回首页</a></p>
+				<h1 id="3">流光字体渐变效果</h1>
+				<p class="authors">发布时间：2017-09-06 &nbsp; &nbsp; 编辑：<span>主小睿</span></p>
+				<div class="content">
+					<p>这是一个纯CSS的百度学院小demo，只有短短几行代码，做出来的效果却不落窠臼，主要是利用了背景渐变的原理，调整背景大小，再让它动起来就差不多啦。</p>
+					<p>老规矩，先看demo。</p>
+					<fieldset id="fieldset">
+						<legend>流光字体渐变效果</legend>
+						<div class="imgg">
+							<img src="../../img/image/a3.1.jpg">
+							<div class="maskk"></div>
+							<h2>你是大笨蛋</h2>
+						</div>
+					</fieldset>
+					<p>原理不难，重要有几个小的技术点。</p>
+					<p>1.图片模糊运用的是-webkit-filter属性。</p>
+					<p>2.伪元素的应用，初始宽度为0，left：50%，最后宽度为100%，left：0，这样就能保证线条是从中间开始加载。</p>
+					<p>3.背景渐变的运用，尤其是background-clip: text;这一步是关键，然后配合着css3关键帧动画，实现背景颜色的流动。</p>
+					<p>OK,又到了上代码的时候了。</p>
+					<pre class="codebox" data-title="HTML：" data-type="default" data-min-height="0px;">
+						<div class="imgg">
+							<img src="../../img/image/a3.1.jpg">
+							<div class="maskk"></div>
+							<h2>你是大笨蛋</h2>
+						</div>
+					</pre>
+					<p>当当当当，大CSS粉墨登场↖(^ω^)↗</p>
+					<pre class="codebox" data-title="CSS：" data-type="default" data-min-height="0px;">
+						.imgg{width: 100%;margin:0 auto;max-width:600px;position: relative;}
+						.imgg img{width: 100%;}
+						.imgg:hover img{-webkit-filter:blur(1px);}
+						.imgg .maskk{width: 80%;height: 80%;position: absolute;left:50%;top:50%;margin-left:-40%;margin-top:-27%;}
+						.imgg:hover .maskk{background-color: #000;opacity:0.2;transition:2s ease;}
+						.imgg h2{display: flex;justify-content:center;align-items:center;width:80%;height:80%;position: absolute;left:50%;top:50%;margin-left:-40%;margin-top:-27%;text-align:center;font-size:40px;background:-webkit-linear-gradient(0deg, red 0%, yellow 25%, blue 50%, green 75%, red 100%);-webkit-background-size:200% 100%;background-size:200% 100%;-webkit-background-clip: text;color:transparent;-webkit-animation:5s move infinite; opacity: 0;}
+						.imgg h2::before{content:"";position: absolute;width: 0;height: 100%;border-width:0;border-top-width:thick;border-bottom-width:thick;left:50%;top:0;border-color:#000;}
+						.imgg:hover h2::before{width: 100%;height: 100%px;border-color:white;border-style:solid;left:0;top:0;border-width:0;border-top-width:thick;border-bottom-width:thick;transition:2s ease-in;}
+						.imgg h2::after{content:"";position: absolute;width: 100%;height: 0px;border-width:0;border-left-width:thick;border-right-width:thick;left:0;top:50%;border-color:#000;}
+						.imgg:hover h2::after{width: 100%;height: 100%;border-color:white;border-style:solid;left:0;top:0;border-width:0;border-left-width:thick;border-right-width:thick;transition:2s ease-in;}
+						.imgg:hover h2{opacity:1;}
+						@-webkit-keyframes move{0%{background-position: 0 0;}100%{background-position: -200% 0;}} 
+					</pre>
+					<p>好啦，到此就基本齐活了。不过呢，由于我这边是想做响应式的，遇到了一个问题就是如何把文字设置垂直居中？！</p>
+					<p>由于h2本身的高度是随着浏览器大小而变化的，所以直接用line-height来设置是行不通的，然后我想着是不是可以用display：table以及display：table-cell来设置呢，结果尝试以后也不行，最终想到了用弹性盒模型，flexbox来设置。</p>
+					<pre class="codebox" data-title="居中，妥妥的" data-type="default" data-min-height="0px;">
+						h2{display: flex;justify-content:center;align-items:center;}
+						//第二种方法
+						h2{display:flex;text-align:center;}
+						h2 span{margin:auto;}
+					</pre>
+					<p id="zhenbang">真棒！鼓掌，撒花~~~</p>
+					<div style="width:80%;margin:10px auto;max-width: 400px;"><img style="width:100%;"  src="../../img/two.gif" alt=""></div>
+					
+					
+					<p>著作权归zole站长所有。商业转载请联系站长获得授权，非商业转载请注明出处！</p>
+					<p>本文出处：<a href="http://zoley.me/article/3" style="color:#008DE8">http://zoley.me/article/3</a></p>
+					<div class="shang">
+						<a href="javascript:;">赏</a>
+						<div class="shangs">
+							<i>╳</i>
+							<p>谢谢你请我吃糖果</p>
+							<div class="ercode">
+								<img class="wei" src="../../img/image/weixin.jpg" title="扫一扫">
+								<img class="zhi" src="../../img/image/alipay.jpg" title="扫一扫" style="display:none">
+							</div>
+							<span>扫码打赏，多少随意，您高兴就行</span>
+							<div class="choose">
+								<label><input type="radio" name="haha" checked> &nbsp;<b></b></label>
+								<label><input type="radio" name="haha"> &nbsp;<b></b></label>
+							</div>
+							<span class="dashang">打开微信扫一扫，即可进行扫码打赏哦</span>
+						</div>
+					</div>
+				</div>
+				<div id="SOHUCS" sid="3" class="changyan"></div>
+				<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+				<script type="text/javascript">
+					window.changyan.api.config({
+						appid: 'cyt9zXQLD',
+						conf: 'prod_7cbb58befa46b554911ecccd8faec7eb'
+					});
+				</script>
+			</div>
+		</div>
+		<div class="con-middle fl hidden-xs"></div>
+		<div class="con-right fr hidden-xs">
+			<div class="pardon">
+				<div class="photo"></div>
+				<h1>zole</h1>
+				<div class="email">zole1314@163.com</div>
+				<ul class="clearfix">
+					<li><a href="http://zoley.me">主页</a></li>
+					<li><a class="active" href="http://zoley.me/blog.php">博客</a></li>
+					<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历</a></li>
+				</ul>
+			</div>
+			<div class="clock">
+				<embed src="../../swf/clock.swf" wmode="transparent">
+			</div>
+		</div>
+	</div>
+	<div id="up"></div>
+	<footer>
+		<p>Copyright&copy;2017<a href="http://www.miitbeian.gov.cn/">&nbsp;苏ICP备17035373号</a>&nbsp;All Rights Reserved&nbsp;Design by zole</p>
+	</footer>
+	<canvas id="canvas"></canvas>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/canvasStar.js"></script>
+	<script src="../../js/syntaxy.min.js"></script>
+	<script src="../../js/blog.js"></script>
+	<script>
+		window.onload=function(){
+			var h1=document.getElementsByTagName("h1")[0];
+			$.ajax({
+				type:"post",
+				url:"http://zoley.me/inquire.php",
+				data:{id:h1.id},
+				success:function(data){
+					// console.log(data[0]);
+					//var d=JSON.parse(data);
+					var viewNum=parseInt(data[0]);
+					viewNum++;
+					$.ajax({
+						type:"post",
+						data:{view:viewNum,id:h1.id},
+						url:"http://zoley.me/contact.php",
+						success:function(){
+
+						}
+					})
+				}
+			})
+			
+		}
+	</script>
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+</body>
+</html>

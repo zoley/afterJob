@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="个人博客,个人小站,主成睿" />
+	<meta name="description" content="主成睿的个人小站">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>webpack之打怪升级</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../../img/ico.ico">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/syntaxy.dark.min.css">
+	<link rel="stylesheet" href="../../css/blog.css">
+	<link rel="stylesheet" href="css/7.css">
+	<style>.stx-wrap .stx-header{display:none;}</style>
+</head>
+<body>
+	<div class="bg"></div>
+	<header id="head">
+		<div class="motto">
+			<span>若似月轮终皎洁，不辞冰雪为卿热。</span>
+			<span>唱罢秋坟愁未歇，春丛认取双栖蝶。</span>
+		</div>
+		<div class="line"></div>
+	</header>
+	<div class="btn">
+		<div class="icon"></div>
+	</div>
+	<div id="nav">
+		<div class="photo"></div>
+		<ul>
+			<li><a href="http://zoley.me">主页<i></i></a></li>
+			<li><a class="active" href="http://zoley.me/blog.php">博客<i></i></a></li>
+			<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历<i></i></a></li>
+		</ul>
+		<div class="email">zole1314@163.com</div>
+	</div>
+	<div class="mask"></div>
+	<div class="container">
+		<div class="con-left fl">
+			<div class="articles">
+				<p class="back"><a href="http://zoley.me/blog.php">>>返回首页</a></p>
+				<h1 id="7">webpack之打怪升级</h1>
+				<p class="authors">发布时间：2017-11-3 &nbsp; &nbsp; 编辑：<span>主小睿</span></p>
+				<div class="content">
+					<div style="width:90%;margin:20px auto;max-width: 500px;"><img style="width:100%;border-radius: 10px;"  src="../../img/image/a7.1.jpg" alt=""></div>
+					<p>艾玛，面对webpack，只想说一句：web虐我千百遍，我待pack如初恋。鉴于当初的惨痛经历，本文将从零基础一步步解释如何使用它，所以本文只适合纯小白，大牛请自动忽略。</p>
+					<p>老规矩，先看demo。</p>
+					<fieldset id="fieldset">
+						<legend>webpack打包</legend>
+						这个是打包后的小项目，有兴趣的童鞋可以控制台查看下。另外，由于本人水平有限，bootstrap的打包问题bug层出不穷，一气之下，把它扔一边去了，如果哪位童鞋知道如何成功打包它，还请不吝赐教。。。<a href="http://zoley.me/2/kuaiyan" style="color:#1475EE;" target="_blank">传送门</a>
+					</fieldset>
+					<p>首先把<span class="abc">node</span>安装了，安装方法和普通软件一样，比如QQ怎么装你就怎么装。（可以msi格式的也可以exe的）</p>
+					<p>装好之后新建一个文件夹，或者找到你之前做的某个小项目的文件夹，这里因为我要打包项目，所以就拿之前的文件夹用了。</p>
+					<p>进入文件夹，并在里面把项目需要的文件都放置好,src文件夹用来存放原始引用的js数据，js文件夹用来存放JavaScript入口文件以及待会儿将要使用webpack打包生成的js文件。具体文件树如下图所示：</p>
+					<div style="margin:20px auto;max-width: 500px;"><img style="margin:0 auto;display:block;border-radius: 10px;"  src="../../img/image/a7.2.png" alt=""></div>
+					<p>文件创立好之后打开命令行程序<span class="abc">cmd</span>。如果你使用的编辑器是集成的IDE，比如<span class="abc">webstorm</span>或者<span class="abc">vs code</span>，那么你可以直接在编辑器里打开端口进行编辑。本文使用的是<span class="abc">vs code</span>。</p>
+					<p>准备东西就绪，下面我们开始正式敲代码。</p>
+					<p>在<span class="abc">cmd</span>中进入项目文件夹，并初始化<span class="abc">npm</span></p>
+					<p class="abcd">D:\web\kuaiyan>npm init</p>
+					<p>输入<span class="abc">npm init</span>这个命令后，终端会问你一系列诸如项目名称，项目描述，作者等信息，不过不用担心，如果你不准备在<span class="abc">npm</span>中发布你的模块，这些问题的答案都不重要，回车默认即可。</p>
+					<p>回车结束之后你会发现在项目文件夹下多了一个<span class="abc">package.json</span>文件。这是一个标准的<span class="abc">npm</span>说明文件，里面包含了当前项目的依赖模块，自定义的脚本等。</p>
+					<p><span class="abc">package.json</span>文件已经就绪，接下来我们就在本项目中安装<span class="abc">Webpack</span>作为依赖包</p>
+					<p>指定文件夹安装(推荐)</p>
+					<p class="abcd">npm install webpack --save-dev</p>
+					<p>全局安装</p>
+					<p class="abcd">npm install webpack -g</p>
+					<p>其中我们设定打包后的文件名为<span class="abc">pack.js</span>，所以最基础的<span class="abc">index.html</span>的结构如下图：</p>
+					<div style="margin:20px auto;max-width: 500px;"><img style="margin:0 auto;display:block;border-radius: 10px;"  src="../../img/image/a7.3.png" alt=""></div>
+					<p>打开<span class="abc">package.json</span>文件，添加一行属性。</p>
+					<pre class="codebox" data-title="js：" data-type="default" data-min-height="0px;">
+						"scripts": {
+							"test": "echo \"Error: no test specified\" && exit 1",
+							"webpack":"webpack"//// 添加的是这里，JSON文件不支持注释，引用时请清除
+						},
+					</pre>
+					<p>接下来我们通过配置文件来使用<span class="abc">webpack</span>。</p>
+					<p>在当前文件夹的根目录下新建一个名为<span class="abc">webpack.config.js</span>的文件，我们在其中写入如下所示的简单配置代码，目前的配置主要涉及到的内容是入口文件路径,打包后文件的存放路径以及打包所依赖的loader。</p>
+					<pre class="codebox" data-title="js：" data-type="default" data-min-height="0px;">
+						module.exports={
+						    entry:'./js/main.js',
+						    output:{
+						        path:__dirname+'/js',
+						        filename:'pack.js'
+						    },
+						    module:{
+						        loaders:[
+						            { test: /\.css$/, loader: 'style-loader!css-loader' },
+						            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+						            { test: /\.(png|jpg|jpeg|gif)$/, loader: 'url-loader?limit=8192&name=[path][name].[ext]' },
+						            { test: /\.(otf|eot|ttf|woff|woff2)$/, loader: "file?prefix=font/" },
+						            { test: /\.svg$/, loader: "file" } 
+						        ]
+						    }
+						}
+					</pre>
+					<p>以上配置好了以后，我们需要在入口文件<span class="abc">main.js</span>里写上依赖的JS。如下所示：</p>
+					<pre class="codebox" data-title="js：" data-type="default" data-min-height="0px;">
+						require('../src/home.js');
+						require('../css/home.css');
+					</pre>
+					<p>由于引用是异步执行，其中关于<span class="abc">home.js</span>的依赖文件写在<span class="abc">home.js</span>里面，而不是直接<span class="abc">require('依赖文件')</span>。</p>
+					<p>本文情况，<span class="abc">home.js</span>需要依赖<span class="abc">'jquery','fullpage','move'</span>，所以书写代码如下：</p>
+					<pre class="codebox" data-title="js：" data-type="default" data-min-height="0px;">
+						import $ from 'jquery';
+						import fullpage from 'fullpage.js';
+						import move from 'move-js';
+					</pre>
+					<p>入口文件配置完毕后，我们需要<span class="abc">npm</span>安装各种loader以便解析css,less,jpg,png等文件。</p>
+					<p class="abcd">npm install style-loader css-loader url-loader less-loader file file-loader --save-dev</p>
+					<p >接下来安装<span class="abc">jquery.js</span>, <span class="abc">fullpage.js</span>以及<span class="abc">move.js</span></p>
+					<p class="abcd">npm install --save jquery fullpage.js move-js</p>
+					<p>如果你按照步骤走到了这里并且都没有出错的话，那么接下来就是见证奇迹的时刻！</p>
+					<p><span class="abc">webpack</span> ,以我之名命你打包！</p>
+					<p class="abcd">npm run webpack   &nbsp;&nbsp;//可以简写为：webpack</p>
+					<p>当当当当，绿油油的代码真好看！</p>
+					<div style="margin:20px auto;max-width: 500px;"><img id="specialImg" style="margin:0 auto;display:block;border-radius: 10px;"  src="../../img/image/a7.4.png" alt=""></div>
+					<p>到这里，咱今儿的闲谈废话就基本结束啦！但是还有几个点得说一下。</p>
+					<p><span class="abc">bootstrap.css</span>打包的时候字体老是出错，npm安装吧，引用的又是js，实在是折磨的我够够的，于是暂时放弃它！</p>
+					<p>另外一个就是打包后的文件比较大，那么怎么才能压缩打包呢，暂时有两个方法，先说最简单的一个。在webpack后面加一个<span class="abc">-p</span>，然后正常打包就行。</p>
+					<pre class="codebox" data-title="js：" data-type="default" data-min-height="0px;">
+						"scripts": {
+							"test": "echo \"Error: no test specified\" && exit 1",
+							"webpack":"webpack -p"//// 修改的是这里，JSON文件不支持注释，引用时请清除
+						},
+					</pre>
+					<p>方法二就是在<span class="abc">webpack.config.js</span>文件中加上下面代码，然后正常打包就行。</p>
+					<pre class="codebox" data-title="js：" data-type="default" data-min-height="0px;">
+						var webpack=require('webpack');
+						module.exports={
+						    entry:'./js/main.js',
+						    output:{
+						        path:__dirname+'/js',
+						        filename:'pack.js'
+						    },
+						    module:{
+						        loaders:[
+						            { test: /\.css$/, loader: 'style-loader!css-loader' },
+						            { test: /\.less$/, loader: 'style-loader!css-loader!less-loader' },
+						            { test: /\.(png|jpg|jpeg|gif)$/, loader: 'url-loader?limit=8192&name=[path][name].[ext]' },
+						            { test: /\.(otf|eot|ttf|woff|woff2)$/, loader: "file?prefix=font/" },
+						            { test: /\.svg$/, loader: "file" } 
+						        ]
+						    },
+						    plugins:[
+						        new webpack.optimize.UglifyJsPlugin({
+						            compress: {
+						                warnings: false
+						            }
+						        })
+						    ]
+						}
+					</pre>
+					<p>实测第一种压缩率更高，推荐第一种。</p>
+					<p id="zhenbang">真棒！鼓掌，撒花~~~今儿咱就到这吧~下次再见么么哒 （づ￣3￣）づ╭❤～</p>
+					<div style="width:80%;margin:10px auto;max-width: 400px;"><img style="width:100%;"  src="../../img/two.gif" alt=""></div>
+					
+					
+					<p>著作权归zole站长所有。商业转载请联系站长获得授权，非商业转载请注明出处！</p>
+					<p>本文出处：<a href="http://zoley.me/article/7" style="color:#008DE8">http://zoley.me/article/7</a></p>
+					<div class="shang">
+						<a href="javascript:;">赏</a>
+						<div class="shangs">
+							<i>╳</i>
+							<p>谢谢你请我吃糖果</p>
+							<div class="ercode">
+								<img class="wei" src="../../img/image/weixin.jpg" title="扫一扫">
+								<img class="zhi" src="../../img/image/alipay.jpg" title="扫一扫" style="display:none">
+							</div>
+							<span>扫码打赏，多少随意，您高兴就行</span>
+							<div class="choose">
+								<label><input type="radio" name="haha" checked> &nbsp;<b></b></label>
+								<label><input type="radio" name="haha"> &nbsp;<b></b></label>
+							</div>
+							<span class="dashang">打开微信扫一扫，即可进行扫码打赏哦</span>
+						</div>
+					</div>
+				</div>
+				<div id="SOHUCS" sid="7" class="changyan"></div>
+				<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+				<script type="text/javascript">
+					window.changyan.api.config({
+						appid: 'cyt9zXQLD',
+						conf: 'prod_7cbb58befa46b554911ecccd8faec7eb'
+					});
+				</script>
+			</div>
+		</div>
+		<div class="con-middle fl hidden-xs"></div>
+		<div class="con-right fr hidden-xs">
+			<div class="pardon">
+				<div class="photo"></div>
+				<h1>zole</h1>
+				<div class="email">zole1314@163.com</div>
+				<ul class="clearfix">
+					<li><a href="http://zoley.me">主页</a></li>
+					<li><a class="active" href="http://zoley.me/blog.php">博客</a></li>
+					<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历</a></li>
+				</ul>
+			</div>
+			<div class="clock">
+				<embed src="../../swf/clock.swf" wmode="transparent">
+			</div>
+		</div>
+	</div>
+	<div id="up"></div>
+	<footer>
+		<p>Copyright&copy;2017<a href="http://www.miitbeian.gov.cn/">&nbsp;苏ICP备17035373号</a>&nbsp;All Rights Reserved&nbsp;Design by zole</p>
+	</footer>
+	<canvas id="canvas"></canvas>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/canvasStar.js"></script>
+	<script src="../../js/syntaxy.min.js"></script>
+	<script src="../../js/blog.js"></script>
+	<script>
+		window.onload=function(){
+			var h1=document.getElementsByTagName("h1")[0];
+			$.ajax({
+				type:"post",
+				url:"http://zoley.me/inquire.php",
+				data:{id:h1.id},
+				success:function(data){
+					// console.log(data[0]);
+					//var d=JSON.parse(data);
+					var viewNum=parseInt(data[0]);
+					viewNum++;
+					$.ajax({
+						type:"post",
+						data:{view:viewNum,id:h1.id},
+						url:"http://zoley.me/contact.php",
+						success:function(){
+
+						}
+					})
+				}
+			})
+			
+
+		}
+	</script>
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+</body>
+</html>

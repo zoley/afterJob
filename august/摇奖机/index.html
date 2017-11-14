@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>摇奖机</title>
+	<script src="jquery.min.js"></script>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=parseFloat(document.documentElement.clientWidth/16)+"px";
+	</script>
+	<style>
+		*{margin:0;padding:0;list-style:none;font-family:"Microsoft Yahei";}
+		.wrap{overflow:auto;position: absolute;left:0;top:0;width: 100%;min-height: 100%;background:url(img/bg.jpg) repeat;}
+		.banner{width: 16rem;height:7.5rem;background:url(img/y66.jpg) no-repeat;background-size:cover;}
+		.chouj{width:16rem;height:20.45rem;background:url(img/y7.jpg) no-repeat;background-size:cover;overflow:hidden;position: relative;}
+		.chouj::before{content:"";width: 0;height: 0;line-height: 0;position: absolute;border:0.5rem solid transparent;border-left-color:#E73621;left:2.5rem;top:3.7rem;}
+		.chouj::after{content:"";width: 0;height: 0;line-height: 0;position: absolute;border:0.5rem solid transparent;border-right-color:#E73621;right:1.92rem;top:3.7rem;overflow:hidden;}
+		.light{width:12.7rem;height:6.45rem;background:url(img/light1.png) no-repeat;background-size:cover;position: absolute;left:1.88rem;top:0.9rem;-webkit-animation:0.5s twinkle infinite;}
+		@-webkit-keyframes twinkle{0%{background-image:url(img/light1.png);background-size:cover;}100%{background-image:url(img/light2.png);background-size:cover;}}
+		/*-----------搖獎-----------*/
+		.gun{width:14.45rem;height:4.85rem;margin:1.77rem 0 0 3rem;box-sizing:border-box;}
+		.gun .hb{float:left;width:3.225rem;background:url(img/hb1.png)  repeat-y;height:4.85rem;background-size:100%;background-position-y:0.425rem;}
+		.gun .hb:nth-of-type(2){margin-left:0.37rem;}
+		.gun .hb:nth-of-type(3){margin-left:0.37rem;}
+		.gungun{-webkit-animation:gunagun 3s ease-in-out alternate;}
+		.gungun2{-webkit-animation:gunagun2 3s ease-in-out both;}
+		.gungun3{-webkit-animation:gunagun3 3s ease-in-out both;}
+		.gungun4{-webkit-animation:gunagun4 3s ease-in-out both;}
+		@-webkit-keyframes gunagun{0%{background-position-y:0.425rem;}100%{background-position-y:12.425rem;}}
+		/*@-webkit-keyframes gunagun2{0%{background-position-y:0.425rem;}100%{background-position-y:128.415rem;}}*/
+
+		.begin-c{-webkit-animation:aaa 3s infinite;transform-origin:center bottom;width: 6.05rem;height:4.5rem;margin:0.5rem 0 0 8.5rem;}
+		.begin-c img{width: 100%;display:block;}
+		@-webkit-keyframes aaa{0%,100%{transform:scaleY(1);}50%{transform:scaleY(1.1);}}
+
+		#z-num{color:white;font-size:0.7rem;text-align:center;margin:1rem 0 0;}
+
+		/*---*/
+		.broadcast{width: 9rem;height:3.5rem;margin:1.3rem auto;color:white;font-size:0.4rem;text-align:center;overflow:hidden;letter-spacing:0.02rem;}
+		.broadcast h3{line-height:1.5rem;}
+		.broadcast .box li{line-height:1rem;height:1rem;}
+		.broadcast .box {height:3rem;overflow:hidden;}
+		.broadcast .box ul{margin-top:-1rem;}
+
+		/*中奖后*/
+		#zj_contain{position: absolute;width: 100%;height: 100%;background-color:rgba(0,0,0,.8);z-index: 100;top:0;left:0;
+		}
+		#close_btn{position: absolute;top:8%;right: 10%;height: 4.6%;width: 8.3%;background: url(img/close.png) no-repeat;background-size:100% 100%;z-index: 103;
+		}
+		.coupon-modal-showPrize-dialog {-webkit-animation-name: showCoupon;animation-name: showCoupon;-webkit-animation-duration: .5s;animation-duration: .5s;-webkit-animation-fill-mode: both;animation-fill-mode: both;
+		}
+		.coupon-modal-showPrize-dialog{position:absolute;width: 96%;height: 21rem;left: 2%;top: 8.5%;background-image: url(img/couponBg.png);background-repeat: no-repeat;background-size: 100%;z-index: 101;
+		}
+		.decorate1,.decorate2,.decorate3,.decorate4,.decorate5,.decorate6{background-repeat: no-repeat;background-size: 100%;position: absolute;-webkit-animation-name: showDecorate;animation-name: showDecorate;-webkit-animation-duration: .5s;animation-duration: .5s;-webkit-animation-delay: .5s;animation-delay: .5s;-webkit-animation-fill-mode: both;animation-fill-mode: both;
+		}
+		.decorate1 {background-image: url(img/hua1.png);width: 84%;height: 21%;top:5%;left: 8%;z-index: 102;
+		}
+		.decorate2 {background-image: url(img/blue.png);width: 6.8%;height: 2.1%;top:50%;left: 10%;z-index: 102;
+		}
+		.decorate5 {background-image: url(img/blue.png);width: 6.8%;height: 2.1%;top:80%;left: 80%;z-index: 102;
+		}
+		.decorate3 {background-image: url(img/yellow.png);width: 5%;height: 4%;top:50%;left: 90%;z-index: 102;
+		}
+		.decorate6 {background-image: url(img/yellow.png);width: 5%;height: 4%;top:30%;left: 50%;z-index: 102;
+		}
+		.decorate4 {background-image: url(img/d5.png);width: 100%;height: 48%;top: 0;left: 0;
+		}
+		#zj_main{width: 100%;height: 50%;position: absolute;top:8rem;z-index: 103;
+		}
+		#zj_main h2{display: block;position: absolute;left:25%;text-align: center;font-size:0.5rem;width: 50%;height:8%;line-height:8% ;color:white;
+		}
+		#zj_imgbox{position: absolute;left:20%;width: 60%;height: 50%;top: 10%;
+		}
+		#zj_imgbox img{width: 100%;height: 100%;display:block;
+		}
+		#zj_btn{position: absolute;left:20%;width: 58%;height: 18%;top: 75%;border: none;background: white;background: url(img/btnBg.png) no-repeat;background-size:100% ;font-size: 0.8rem;font-family: "Microsoft Yahei";padding-bottom: 3%;
+		}
+		@keyframes showCoupon{from{transform: scale(.2,.2);}to{transform: scale(1,1);}
+		}
+		@keyframes showDecorate{from{opacity: 0;}to{opacity: 1;}
+		}
+			/*新增*/
+		#prizeku{width: 2.5rem;height:1.25rem;top:0.5rem;right:0.5rem;background:url(img/prizeku.png) no-repeat;position: absolute;-webkit-background-size:cover;	background-size:cover;}
+		#rule{width: 2.21rem;height:0.816rem;top:0.8rem;left:0.6rem;background:url(img/rule.png) no-repeat;position: absolute;-webkit-background-size:cover;	background-size:cover;}
+		/*rule*/
+		.rule{width: 14rem;height:18rem;background-color:#EA7F27;border-radius:0.5rem;position: absolute;top:50%;left:50%;margin-top:-9rem;margin-left:-7rem;z-index:10;overflow:scroll;font-size:0.5rem;box-sizing:border-box;padding:0.5rem;color:white;}
+		.rule h2{text-align: center;margin-bottom:0.4rem;}
+		.rule h2 i{width:0.4rem;height:0.4rem;border-radius: 50%;background-color:#fff;display:inline-block;vertical-align:top;margin-top:0.35rem;}
+		.rule p{line-height:1rem;}
+		.rule b{position: absolute;width:1.2rem;height: 1.2rem;background:url(img/close.png) no-repeat;-webkit-background-size: 100% 100%;
+			background-size: 100% 100%;top:2%;right:3%;}
+		.heart{width: 3rem;height:3rem;position: absolute;background:url(img/heart-sprite.png) no-repeat;background-size:cover;-webkit-animation:1.2s twinkle1 steps(28) infinite;animation:1.2s twinkle1 steps(28) infinite;left:50%;top:5.2rem;margin-left:-1.5rem;}
+		@-webkit-keyframes twinkle1{0%{background-position: 0 0;}100%{background-position: -84rem 0;}}
+		/*==========新增===========*/
+		.fail{position: absolute;left:0;right:0;top:0;bottom: 0;background:rgba(0,0,0,0.5);z-index:200;display:none;}
+		.fail-bg{width: 12.75rem;height:15.05rem;background:url(img/no.png) no-repeat;background-size:cover;position: absolute;left:50%;top:50%;margin-left:-6.375rem;margin-top:-7.525rem;text-align: center;}
+		.fail-bg span{display:inline-block;text-align: center;width: 77%;height: 2rem;background-color:#f40;color:white;margin-top:11.5rem;border-radius:1rem;line-height: 2rem;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<a id="prizeku" href="prizeku.html"></a>
+		<a id="rule" href="javascript:;"></a>
+		<div class="rule" style="display:none;">
+			<b></b>
+			<h2><i></i> 活动说明 <i></i></h2>
+			<p>远离套路，拿福利，点击领取属于的你真福利！</p>
+			<p>活动说明：<span style="color:#000;">点击开始抽奖，当显示三个红包时即为中奖</span>。快来试试吧！</p>
+			<p>惊喜一：OPPO R11 热力红色一部</p>
+			<p>惊喜二：200元支付宝购机红包</p>
+			<p>惊喜三：50元全国话费直充</p>
+			<p>惊喜四：5元幸运红包</p>
+			<p>惊喜五：幸运奖</p>
+			<p>－－－－－－－－－－－－－－－－</p>
+			<p>重要声明</p>
+			<p>1、实物类奖品将在活动结束后5-10个工作日安排发货，请耐心等待</p>
+			<p>2、优惠券类奖品的使用规则详见每个优惠券的介绍页</p>
+			<p>3、请兑换后仔细阅读使用流程，如有疑问，可直接联系客服专线：400-080-6659或客服QQ：4000806659（工作日9:00至18:00）</p>
+			<p>4、通过非法途径获得奖品的，主办方有权不提供奖品</p>
+		</div>
+		<i class="heart"></i>
+		<div class="banner"></div>
+		<div class="chouj">
+			<div class="light"></div>
+			<div class="gun">
+				<div class="hb"></div>
+				<div class="hb"></div>
+				<div class="hb"></div>
+			</div>
+			<div class="begin-c">
+				<img src="img/y1.png">
+			</div>
+			<p id="z-num">您还有<span>5</span>次机会，加油哦 ~</p>
+			<div class="broadcast">
+				<h3>───── 中奖名单 ─────</h3>
+				<div class="box">
+					<ul>
+						<li>手机号 131xxxx9566 刚刚抢了一个99元红包</li>
+						<li>手机号 189xxxx4236 刚刚抢了一个15元红包</li>
+						<li>手机号 181xxxx2204 刚刚抢了一个50元红包</li>
+						<li>手机号 187xxxx0705 刚刚抢了一个15元红包</li>
+						<li>手机号 183xxxx1147 刚刚抢了一个50元红包</li>
+						<li>手机号 139xxxx5381 刚刚抢了一个10元红包</li>
+						<li>手机号 132xxxx2843 刚刚抢了一个99元红包</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div id="zj_contain" style="display:none">
+			<div id="close_btn"></div>
+			<div class="coupon-modal-showPrize-dialog">
+				<div id="zj_main">
+					<h2>你的运气真是太棒啦!!!</h2>
+					<div id="zj_imgbox"><img src="img/y66.jpg"></div>
+					<button id="zj_btn">立即领取</button>
+				</div>
+				<i class="decorate1"></i><i class="decorate2"></i><i class="decorate3"></i><i class="decorate5"></i></i><i class="decorate6"></i>
+			</div>
+			<i class="decorate4"></i>
+		</div>	
+		<div class="fail">
+			<div class="fail-bg">
+				<span id="tryagain">再试一次</span>
+			</div>
+		</div>
+	</div>
+	
+	<script>
+		$(function(){
+			// window.onresize=function(){
+			// 	window.location.reload();
+			// }
+
+			var oUl=$(".box ul").get(0);
+			oUl.innerHTML+=oUl.innerHTML;
+			var num=0;
+			var per=-1;
+			setInterval(function(){
+				num++;
+				if(num==8){
+					$(".box ul").css("marginTop","0rem");
+					num=1;
+				}
+				$(".box ul").animate({"marginTop":per*num+"rem"},450,"swing");
+			},1000)
+
+			//-----------------gungun--------init-----
+			var gun_timer=null;
+			var u=0;
+			// $(".hb").eq(u%3).addClass("gungun");
+			// gun_timer=setInterval(function(){
+			// 	u++;
+			// 	$(".hb").eq(u%3).addClass("gungun");
+			// 	$(".hb").eq((u-1)%3).removeClass("gungun");
+
+			// },3000)
+			// -----------------------gun-gun-gun---------------------
+			var alert=document.getElementById("zj_contain");
+			var close=document.getElementById("close_btn");
+			var result=document.getElementById("zj_btn");
+			var hh=4;
+			var onOff=false;
+
+			/////////-------------------------------------------
+			var cishu=document.getElementById("z-num").getElementsByTagName("span")[0];
+			//存时间妈蛋！！！
+			// window.localStorage.removeItem("time")       
+			// window.localStorage.removeItem("numm")          
+			// window.localStorage.clear();    
+			if(window.localStorage.getItem("time")){
+				var str=window.localStorage.getItem("time");
+				var time=str.split(",");
+			}
+			cishu.innerHTML=window.localStorage.getItem("numm")||5;
+			var dd=parseInt(new Date().getDate());
+			if(time){
+				if(dd>parseInt(time[0])){
+					window.localStorage.removeItem("numm");
+					window.localStorage.removeItem("time");
+					time=[];
+					cishu.innerHTML=5;
+				}	
+			}
+			/////////---------------------------------------------
+			var style=document.getElementsByTagName("style")[0];//重绘css
+			var temp=style.innerHTML;
+
+			$(".begin-c").click(function(){
+
+				///////////////////------------------------------
+				if(window.localStorage.getItem("time")){
+					var str=window.localStorage.getItem("time");
+					var time=str.split(",");
+				}else{
+					var time=[];
+				}
+				if(time[time.length-1]>parseInt(time[0])){
+					window.localStorage.removeItem("numm");
+					window.localStorage.removeItem("time");
+					time=[];
+				}
+				if(parseInt(cishu.innerHTML)<=0){
+					window.alert("您的抽奖次数已用完");//抽奖次数用完后的弹出框
+					return false;
+				}
+				var d=new Date()
+				time.push(d.getDate());
+				window.localStorage.setItem("time",time);
+
+				var now=parseInt(window.localStorage.getItem("numm")||5);
+				window.localStorage.setItem("numm",now-1);
+				cishu.innerHTML=window.localStorage.getItem("numm");
+				///////////////////----------------------------------------
+
+				var a1=Math.random()>0.3?2:1;
+				var a2=Math.random()<0.8?2:1;
+				var arr=[a1,a2,2];
+				var _style2='@-webkit-keyframes gunagun2{0%{background-position-y:0.425rem;}100%{background-position-y:'+Number((hh*30)+(hh*arr[0])+0.415)+'rem;}}';
+				var _style3='@-webkit-keyframes gunagun3{0%{background-position-y:0.425rem;}100%{background-position-y:'+Number((hh*30)+(hh*arr[1])+0.415)+'rem;}}';
+				var _style4='@-webkit-keyframes gunagun4{0%{background-position-y:0.425rem;}100%{background-position-y:'+Number((hh*30)+(hh*arr[2])+0.415)+'rem;}}';
+				clearInterval(gun_timer);
+				if(onOff){return false;}
+				onOff=true;
+				$(this).find("img").attr("src","img/y2.png");
+				$(".hb").removeClass("gungun2");
+				$(".hb").removeClass("gungun3");
+				$(".hb").removeClass("gungun4");
+				$(".hb").css("backgroundPositionY","0.425rem");
+				$(".hb").each(function(index){
+					var _hb=$(this);
+					setTimeout(function(){
+						style.innerHTML=temp+_style2+_style3+_style4;
+						// console.log(style.innerHTML)
+						// _hb.animate({backgroundPositionY:(hh*30)+(hh*arr[index])+0.415+"rem"},3000+index*2000,"easeInOutCirc",function(){
+							_hb.addClass("gungun"+(index+2));
+							if($(".hb:nth-of-type(3)").hasClass("gungun4")){
+								setTimeout(function(){
+									onOff=false;
+									$(".begin-c").find("img").attr("src","img/y1.png");
+									console.log(arr)
+									if(arr[0]==2 && arr[1]==2){
+										// setTimeout(function(){
+											alert.style.display="block";
+										// },400)
+									}else{
+										$(".fail").css("display","block");
+										$(".hb").removeClass("gungun2");
+										$(".hb").removeClass("gungun3");
+										$(".hb").removeClass("gungun4");
+										$(".hb").css("backgroundPositionY","0.425rem");
+									}
+									
+								},3500)
+							}
+						// })
+					},index*1000)
+				})
+			})
+			//---rule
+			$("#rule").click(function(){
+				$(".rule").css("display","block");
+			})
+			$(".rule b").click(function(){
+				$(".rule").css("display","none");
+			})
+			//----------------fail
+			$("#tryagain").click(function(){
+				$(".fail").css("display","none");
+			})
+			close.onclick=function(){
+				alert.style.display="none";
+				$(".hb").removeClass("gungun2");
+				$(".hb").removeClass("gungun3");
+				$(".hb").removeClass("gungun4");
+				$(".hb").css("backgroundPositionY","0.425rem");
+				// gun_timer=setInterval(function(){
+				// 	u++;
+				// 	$(".hb").eq(u%3).addClass("gungun");
+				// 	$(".hb").eq((u-1)%3).removeClass("gungun");
+
+				// },3000)
+			}
+			result.onclick=function(){
+				window.location.href="http://www.zoley.me";
+			}
+			
+		})
+	</script>
+	<script>
+		//jQuery["\x65\x61\x73\x69\x6e\x67"]["\x6a\x73\x77\x69\x6e\x67"]=jQuery["\x65\x61\x73\x69\x6e\x67"]["\x73\x77\x69\x6e\x67"];jQuery["\x65\x78\x74\x65\x6e\x64"](jQuery["\x65\x61\x73\x69\x6e\x67"],{def:"\x65\x61\x73\x65\x4f\x75\x74\x51\x75\x61\x64",swing:function(JloJR1,HcGScwIA2,Z$_smn3,X4,sWEIGgjf5){return jQuery["\x65\x61\x73\x69\x6e\x67"][jQuery["\x65\x61\x73\x69\x6e\x67"]["\x64\x65\x66"]](JloJR1,HcGScwIA2,Z$_smn3,X4,sWEIGgjf5)},easeInQuad:function(wagpe_hw6,EYfFC7,$UIuv$8,tGhzoz$j9,FmG10){return tGhzoz$j9*(EYfFC7/=FmG10)*EYfFC7+$UIuv$8},easeOutQuad:function(IHr11,ycLJdbXYe12,XvNfwBAII13,Xh_sMeQG14,nMKfRp15){return -Xh_sMeQG14*(ycLJdbXYe12/=nMKfRp15)*(ycLJdbXYe12-2)+XvNfwBAII13},easeInOutQuad:function(XO_zMABF16,EkTznEh17,ToFvEHI18,NEiGijs19,ro20){if((EkTznEh17/=ro20/2)<1){return NEiGijs19/2*EkTznEh17*EkTznEh17+ToFvEHI18}return -NEiGijs19/2*((--EkTznEh17)*(EkTznEh17-2)-1)+ToFvEHI18},easeInCubic:function(D21,Gfk22,FP23,fRybEBoWk24,vCjKnhS25){return fRybEBoWk24*(Gfk22/=vCjKnhS25)*Gfk22*Gfk22+FP23},easeOutCubic:function(w26,T27,wFEk28,t29,Kt30){return t29*((T27=T27/Kt30-1)*T27*T27+1)+wFEk28},easeInOutCubic:function(_LBBVn31,eBDbE32,crh33,dEbsO34,_o35){if((eBDbE32/=_o35/2)<1){return dEbsO34/2*eBDbE32*eBDbE32*eBDbE32+crh33}return dEbsO34/2*((eBDbE32-=2)*eBDbE32*eBDbE32+2)+crh33},easeInQuart:function(whkjHRgK36,EiQvvkfzJ37,AbKhy38,qpfs39,KvFUSFAit40){return qpfs39*(EiQvvkfzJ37/=KvFUSFAit40)*EiQvvkfzJ37*EiQvvkfzJ37*EiQvvkfzJ37+AbKhy38},easeOutQuart:function(eNNmBKzuu41,vRMzwH42,Tl$jRw43,_RFQkqMzY44,yZadqhmj45){return -_RFQkqMzY44*((vRMzwH42=vRMzwH42/yZadqhmj45-1)*vRMzwH42*vRMzwH42*vRMzwH42-1)+Tl$jRw43},easeInOutQuart:function(_Wu46,RIHKZXrn47,Kr_DUJCe48,DsG49,iXC50){if((RIHKZXrn47/=iXC50/2)<1){return DsG49/2*RIHKZXrn47*RIHKZXrn47*RIHKZXrn47*RIHKZXrn47+Kr_DUJCe48}return -DsG49/2*((RIHKZXrn47-=2)*RIHKZXrn47*RIHKZXrn47*RIHKZXrn47-2)+Kr_DUJCe48},easeInQuint:function(PmaQ51,_vWqE52,QHslJgTy53,VzC54,NrAp55){return VzC54*(_vWqE52/=NrAp55)*_vWqE52*_vWqE52*_vWqE52*_vWqE52+QHslJgTy53},easeOutQuint:function(nABc56,w57,csObP58,OHQ59,Z60){return OHQ59*((w57=w57/Z60-1)*w57*w57*w57*w57+1)+csObP58},easeInOutQuint:function(yRHfmVzA61,GaFV62,$s63,RElP64,afROksa65){if((GaFV62/=afROksa65/2)<1){return RElP64/2*GaFV62*GaFV62*GaFV62*GaFV62*GaFV62+$s63}return RElP64/2*((GaFV62-=2)*GaFV62*GaFV62*GaFV62*GaFV62+2)+$s63},easeInSine:function(XFLr66,qpAaLttMi67,WwPuw68,zaq69,tMnL70){return -zaq69*window["\x4d\x61\x74\x68"]["\x63\x6f\x73"](qpAaLttMi67/tMnL70*(window["\x4d\x61\x74\x68"]["\x50\x49"]/2))+zaq69+WwPuw68},easeOutSine:function(L71,yp72,wHF73,bKSdQ74,BnZsHHzY75){return bKSdQ74*window["\x4d\x61\x74\x68"]["\x73\x69\x6e"](yp72/BnZsHHzY75*(window["\x4d\x61\x74\x68"]["\x50\x49"]/2))+wHF73},easeInOutSine:function(V_miOoode76,RR$mls77,q78,SgfrwsUBt79,SM_80){return -SgfrwsUBt79/2*(window["\x4d\x61\x74\x68"]["\x63\x6f\x73"](window["\x4d\x61\x74\x68"]["\x50\x49"]*RR$mls77/SM_80)-1)+q78},easeInExpo:function(JCESmaAO81,BRYpv82,EFTeV83,zA_MOIr84,aNJzlQmT85){return(BRYpv82==0)?EFTeV83:zA_MOIr84*window["\x4d\x61\x74\x68"]["\x70\x6f\x77"](2,10*(BRYpv82/aNJzlQmT85-1))+EFTeV83},easeOutExpo:function(zvRyKzEVh86,w$uliw87,RsPchd88,k$RF89,pQfV90){return(w$uliw87==pQfV90)?RsPchd88+k$RF89:k$RF89*(-window["\x4d\x61\x74\x68"]["\x70\x6f\x77"](2,-10*w$uliw87/pQfV90)+1)+RsPchd88},easeInOutExpo:function(b$z91,BlgwrA92,W93,yvNTWRGS94,tAYXpC$f_95){if(BlgwrA92==0){return W93}if(BlgwrA92==tAYXpC$f_95){return W93+yvNTWRGS94}if((BlgwrA92/=tAYXpC$f_95/2)<1){return yvNTWRGS94/2*window["\x4d\x61\x74\x68"]["\x70\x6f\x77"](2,10*(BlgwrA92-1))+W93}return yvNTWRGS94/2*(-window["\x4d\x61\x74\x68"]["\x70\x6f\x77"](2,-10*--BlgwrA92)+2)+W93},easeInCirc:function(e96,iflhPufj97,MkrZqvI98,j99,Iinvsh100){return -j99*(window["\x4d\x61\x74\x68"]["\x73\x71\x72\x74"](1-(iflhPufj97/=Iinvsh100)*iflhPufj97)-1)+MkrZqvI98},easeOutCirc:function(w101,lHX102,SAmVtm103,Q104,KLrOkDaXi105){return Q104*window["\x4d\x61\x74\x68"]["\x73\x71\x72\x74"](1-(lHX102=lHX102/KLrOkDaXi105-1)*lHX102)+SAmVtm103},easeInOutCirc:function(gQazBcOOK106,sj107,QU108,GtQj109,Rmn110){if((sj107/=Rmn110/2)<1){return -GtQj109/2*(window["\x4d\x61\x74\x68"]["\x73\x71\x72\x74"](1-sj107*sj107)-1)+QU108}return GtQj109/2*(window["\x4d\x61\x74\x68"]["\x73\x71\x72\x74"](1-(sj107-=2)*sj107)+1)+QU108},easeInElastic:function(eguUTbW111,wi112,GcAFlih113,ce114,epPZiR115){var res116=1.70158;var cStJO117=0;var hy118=ce114;if(wi112==0){return GcAFlih113}if((wi112/=epPZiR115)==1){return GcAFlih113+ce114}if(!cStJO117){cStJO117=epPZiR115*0.3}if(hy118<window["\x4d\x61\x74\x68"]["\x61\x62\x73"](ce114)){hy118=ce114;var $119=cStJO117/4}else{var WfnWN120=cStJO117/(2*window["\x4d\x61\x74\x68"]["\x50\x49"])*window["\x4d\x61\x74\x68"]["\x61\x73\x69\x6e"](ce114/hy118)}return -(hy118*window["\x4d\x61\x74\x68"]["\x70\x6f\x77"](2,10*(t-=1))*window["\x4d\x61\x74\x68"]["\x73\x69\x6e"]((wi112*epPZiR115-res116)*(2*window["\x4d\x61\x74\x68"]["\x50\x49"])/cStJO117))+GcAFlih113},Y121:function(mi122,BFBc123,qrK124,Jo125,MJSmbhj126){var zeYz127=1.70158;var pJ128=0;var YZB129=Jo125;if(BFBc123==0){return qrK124}if((BFBc123/=MJSmbhj126)==1){return qrK124+Jo125}if(!pJ128){pJ128=MJSmbhj126*0.3}if(YZB129<window["\x4d\x61\x74\x68"]["\x61\x62\x73"](Jo125)){YZB129=Jo125;var Lh_mb$drE130=pJ128/4}else{var FZlcio131=pJ128/(2*window["\x4d\x61\x74\x68"]["\x50\x49"])*window["\x4d\x61\x74\x68"]["\x61\x73\x69\x6e"](Jo125/YZB129)}return YZB129*window["\x4d\x61\x74\x68"]["\x70\x6f\x77"](2,-10*t)*window["\x4d\x61\x74\x68"]["\x73\x69\x6e"]((t*d-s)*(2*window["\x4d\x61\x74\x68"]["\x50\x49"])/p)+c+b},LFE132:function(Q133,CLzRJ134,CuNi135,lo136,Y137){var coSXe138=1.70158;var QmqQVc139=0;var zaWroqda140=lo136;if(CLzRJ134==0){return CuNi135}if((CLzRJ134/=Y137/2)==2){return CuNi135+lo136}if(!QmqQVc139){QmqQVc139=Y137*(0.3*1.5)}if(zaWroqda140<window["\x4d\x61\x74\x68"]["\x61\x62\x73"](lo136)){zaWroqda140=lo136;var UN_vfSIf141=QmqQVc139/4}else{var XzrpH142=QmqQVc139/(2*window["\x4d\x61\x74\x68"]["\x50\x49"])*window["\x4d\x61\x74\x68"]["\x61\x73\x69\x6e"](lo136/zaWroqda140)}if(CLzRJ134<1){return -0.5*(zaWroqda140*window["\x4d\x61\x74\x68"]["\x70\x6f\x77"](2,10*(CLzRJ134-=1))*window["\x4d\x61\x74\x68"]["\x73\x69\x6e"]((CLzRJ134*Y137-coSXe138)*(2*window["\x4d\x61\x74\x68"]["\x50\x49"])/QmqQVc139))+CuNi135}return zaWroqda140*window["\x4d\x61\x74\x68"]["\x70\x6f\x77"](2,-10*(CLzRJ134-=1))*window["\x4d\x61\x74\x68"]["\x73\x69\x6e"]((CLzRJ134*Y137-coSXe138)*(2*window["\x4d\x61\x74\x68"]["\x50\x49"])/QmqQVc139)*0.5+lo136+CuNi135},easeInBack:function(WcGdL143,heEAZ144,fLdwzoU145,ZeUrsX146,sc_F_qPl147,i148){if(i148==undefined){i148=1.70158}return ZeUrsX146*(heEAZ144/=sc_F_qPl147)*heEAZ144*((i148+1)*heEAZ144-i148)+fLdwzoU145},easeOutBack:function(dAn149,fSLd150,sk151,FNT152,lHadBXHXK153,kA154){if(kA154==undefined){kA154=1.70158}return FNT152*((fSLd150=fSLd150/lHadBXHXK153-1)*fSLd150*((kA154+1)*fSLd150+kA154)+1)+sk151},easeInOutBack:function(jzWbOy155,PtVb156,zFN157,MqbrFqPY158,EZSk159,bfP160){if(bfP160==undefined){bfP160=1.70158}if((PtVb156/=EZSk159/2)<1){return MqbrFqPY158/2*(PtVb156*PtVb156*(((bfP160*=(1.525))+1)*PtVb156-bfP160))+zFN157}return MqbrFqPY158/2*((PtVb156-=2)*PtVb156*(((bfP160*=(1.525))+1)*PtVb156+bfP160)+2)+zFN157},easeInBounce:function(fRyzZj161,yF162,j163,_IqPZv164,gMi165){return _IqPZv164-jQuery["\x65\x61\x73\x69\x6e\x67"]["\x65\x61\x73\x65\x4f\x75\x74\x42\x6f\x75\x6e\x63\x65"](fRyzZj161,gMi165-yF162,0,_IqPZv164,gMi165)+j163},easeOutBounce:function(YUfq166,wKvHE167,KleevmE168,lEQLHJ169,igbFJ170){if((wKvHE167/=igbFJ170)<(1/2.75)){return lEQLHJ169*(7.5625*wKvHE167*wKvHE167)+KleevmE168}else{if(wKvHE167<(2/2.75)){return lEQLHJ169*(7.5625*(wKvHE167-=(1.5/2.75))*wKvHE167+0.75)+KleevmE168}else{if(wKvHE167<(2.5/2.75)){return lEQLHJ169*(7.5625*(wKvHE167-=(2.25/2.75))*wKvHE167+0.9375)+KleevmE168}else{return lEQLHJ169*(7.5625*(wKvHE167-=(2.625/2.75))*wKvHE167+0.984375)+KleevmE168}}}},easeInOutBounce:function(N171,AqId172,dNliojgI173,FvbsadS174,KSamuCOW175){if(AqId172<KSamuCOW175/2){return jQuery["\x65\x61\x73\x69\x6e\x67"]["\x65\x61\x73\x65\x49\x6e\x42\x6f\x75\x6e\x63\x65"](N171,AqId172*2,0,FvbsadS174,KSamuCOW175)*0.5+dNliojgI173}return jQuery["\x65\x61\x73\x69\x6e\x67"]["\x65\x61\x73\x65\x4f\x75\x74\x42\x6f\x75\x6e\x63\x65"](N171,AqId172*2-KSamuCOW175,0,FvbsadS174,KSamuCOW175)*0.5+FvbsadS174*0.5+dNliojgI173}});
+	</script>
+</body>
+</html>

@@ -1,0 +1,24 @@
+
+/*con-con----s*/
+/* .con-con h3{width: 100%;height: 76px;font-size:16px;border-bottom:1px solid #e5e6e7;font-weight:normal;line-height: 76px;color:#222;position: relative;}
+** .con-con h3::after{width: 70px;height: 2px;background-color:#00A8FF;position: absolute;content:"";left:0;bottom:0;}
+*/
+.con-con>div{width: 100%;background-color: #fff;border:1px solid #e5e6e7;}
+.con-con table{width: 100%;text-align:left;}
+.con-con table thead tr{width: 100%;background-color:#ECECEC;height: 76px;line-height: 76px;font-size:14px;color:#555;}
+.con-con table thead tr:first-child{background-color: #fff;font-size:16px;}
+.con-con table thead tr th:nth-child(2){width: 200px;font-weight:normal;}
+.con-con table thead tr th:nth-child(1){padding-left:40px;font-weight:normal;}
+.con-con table tbody tr {border-bottom:1px solid #e5e6e7;height: 76px;line-height: 76px;}
+.con-con table tbody tr td:nth-child(1){padding-left:40px;}
+.con-con table tbody tr td:nth-child(1) i{width: 16px;height: 16px;display:inline-block;background:url(../img/add.png) no-repeat;background-size:cover;vertical-align:middle;margin-right:10px;margin-bottom:5px;}
+.con-con table tbody tr:hover{background-color:#E1E5E9;}
+
+
+
+
+
+
+
+
+

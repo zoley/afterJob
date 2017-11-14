@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>有美直播</title>
+	<script>
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/15+"px";
+
+		function is_weixin() {
+        	var ua = navigator.userAgent.toLowerCase();
+        	if (ua.match(/MicroMessenger/i) == "micromessenger") {
+        		return true;
+        	} else {
+        		return false;
+        	}
+        }
+        var browser = {
+		 	versions: function () {
+		 		var u = navigator.userAgent,
+		 		app = navigator.appVersion;
+		 		return {
+                    trident: u.indexOf('Trident') > -1, //IE内核
+                    presto: u.indexOf('Presto') > -1, //opera内核
+                    webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+                    gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,//火狐内核
+                    mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+                    ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+                    android: u.indexOf('Android') > -1 || u.indexOf('Adr') > -1, //android终端
+                    iPhone: u.indexOf('iPhone') > -1, //是否为iPhone或者QQHD浏览器
+                    iPad: u.indexOf('iPad') > -1, //是否iPad
+                    webApp: u.indexOf('Safari') == -1, //是否web应该程序，没有头部与底部
+                    weixin: u.indexOf('MicroMessenger') > -1, //是否微信 （2015-01-22新增）
+                    qq: u.match(/\sQQ/i) == " qq" //是否QQ
+                };
+            }(),
+            language: (navigator.browserLanguage || navigator.language).toLowerCase()
+        }
+        window.onload=function(){
+        	var isWeixin = is_weixin();
+        	var winHeight = typeof window.innerHeight != 'undefined' ? window.innerHeight : document.documentElement.clientHeight;
+        	var weixinTip =document.createElement("div");
+        	weixinTip.id="weixinTip";
+        	weixinTip.style.cssText="z-index: 10000;position: fixed;top:0;left:0;background-color: #FFF;width:100%;height:100vh;filter:alpha(opacity=90);-moz-opacity:0.90; opacity:0.90;";
+        	weixinTip.innerHTML='<p><img style="width:100%;" src="'+((isPIA() == 1)?"./img/ios_wx.jpg":"./img/android_wx.jpg")+'" alt=""/></p>';
+        	var aA=document.getElementsByClassName("download");
+
+        	for(var i=0;i<aA.length;i++){
+        		aA[i].onclick=function(){
+        			if(isWeixin){
+        				document.getElementsByTagName("body")[0].appendChild(weixinTip);
+        			}
+
+        			if (browser.versions.iPhone || browser.versions.iPad || browser.versions.ios) {
+        				window.location.href='https://www.apple.com/itunes/';
+        			}else if (browser.versions.android) {
+        				window.location.href='http://down.3h6x.com/gamecenter-release-android-baiying-307.apk';
+        			}else{
+        				// var isok = confirm("是否用电脑下载app？");
+        				// if(isok){
+        				// 	window.open('http://down.3h6x.com/gamecenter-release-android-baiying-307.apk');
+        				// }else{
+        				// 	return;
+        				// }
+        			}
+        		}
+        	}
+        	//----others---s
+			//----others---e
+        }
+
+		//js判断终端是安卓还是苹果
+		function isPIA(){
+			var u = navigator.userAgent, app = navigator.appVersion;
+			var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+			var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+			if(isiOS) {return 1;}
+			if(isAndroid) {return 2};
+		}
+	</script>
+	<style>
+		*{margin:0;padding:0;}
+		.div img{width: 100%;display:block;}
+		.div {position: relative;width: 100%;}
+		#float{position: fixed;width: 100%;height:2.6rem;background:rgba(0,0,0,0.8);top:0;left:0;}
+		#float div{float:left;}
+		#float div:nth-of-type(1) img{height:2.16rem;width:2.16rem;display:block;margin:0.22rem;}
+		#float div:nth-of-type(2) p{color:white;font-size:0.5rem;margin-top: 0.4rem;font-weight:bold;margin-left:0.5rem;font-family: "Microsoft Yahei";}
+		#float div:nth-of-type(3) a{display:block;}
+		#float div:nth-of-type(3) img{height:1.6rem;display:block;margin-top:0.5rem;margin-left: 0.4rem;}
+	</style>
+</head>
+<body>
+	<div class="div"><img src="img/c1.jpg" alt=""></div>
+	<div class="div"><img src="img/c2.jpg" alt=""></div>
+	<div class="div"><a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk"><img src="img/c3.png" alt=""></a></div>
+	<div id="float">
+		<div><img src="img/b1.png"></div>
+		<div>
+			<p>有美直播</p>
+			<p>各色美女直播在线等你来嗨！</p>
+		</div>
+		<div><a class="download" href="http://down.3h6x.com/gamecenter-release-android-baiying-307.apk"><img src="img/b2.png"></a></div>
+	</div>
+</body>
+</html>

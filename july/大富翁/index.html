@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>大富翁</title>
+	<script src="jquery.min.js"></script>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+	<style>
+		*{margin:0;padding:0;}
+		.star{width: 2.5rem;height:2.5rem;position: absolute;background:url(img/star-sprite.png) no-repeat;background-size:cover;-webkit-animation:1.2s twinkle2 step-start infinite;left:50%;top:1rem;margin-left:-1.3rem;}
+		@-webkit-keyframes twinkle2{0%{background-position:0 0}3.4%{background-position:-2.5rem 0}6.8%{background-position:-5rem 0}10.2%{background-position:-7.5rem 0}13.6%{background-position:-10rem 0}17%{background-position:-12.5rem 0}20.4%{background-position:-15rem 0}23.8%{background-position:-17.5rem 0}27.2%{background-position:-20rem 0}30.6%{background-position:-22.5rem 0}34%{background-position:-25rem 0}37.4%{background-position:-27.5rem 0}40.8%{background-position:-30rem 0}44.2%{background-position:-32.5rem 0}47.6%{background-position:-35rem 0}51%{background-position:-37.5rem 0}54.4%{background-position:-40rem 0}57.8%{background-position:-42.5rem 0}61.2%{background-position:-45rem 0}64.6%{background-position:-47.5rem 0}68%{background-position:-50rem 0}71.4%{background-position:-52.5rem 0}74.8%{background-position:-55rem 0}78.2%{background-position:-57.5rem 0}81.6%{background-position:-60rem 0}85%{background-position:-62.5rem 0}88.4%{background-position:-65rem 0}91.8%{background-position:-67.5rem 0}95.2%{background-position:-70rem 0}100%{background-position:0 0}}
+		.wrap{width: 100%;height: 100%;position: absolute;left:0;top:0;background:url(img/a11.png) no-repeat;background-size:100% 100%;}
+		.money-god{width: 100%;height:19rem;background:url(img/a3.png) no-repeat;-webkit-background-size:cover;background-size:cover;margin-top:5.7rem;position: relative;}
+		.begin-c{width:6.8rem;height:2.2rem;background:url(img/a2.png) no-repeat;-webkit-background-size:cover;background-size:cover;margin:-3rem auto;display: block;-webkit-tap-highlight-color:transparent;position: relative;-webkit-animation:breath 3s infinite;}
+		@-webkit-keyframes breath{0%,100%{transform:scaleY(1);transform-origin:center bottom;}50%{transform:scaleY(1.1);transform-origin:center bottom;}} 
+		.money-god .left-ear{width:3.175rem;height:2.125rem;position: absolute;background:url(img/a4.png) no-repeat;background-size:cover;left:2.3rem;top:1.05rem;-webkit-animation:shake1 0.6s alternate infinite;}
+		.money-god .right-ear{width:3.175rem;height:2.125rem;position: absolute;background:url(img/a5.png) no-repeat;background-size:cover;left:10.05rem;top:1.05rem;-webkit-animation:shake2 0.6s alternate infinite;}
+		@-webkit-keyframes shake1{0%{transform:rotate(-10deg);transform-origin:right bottom;}100%{transform:rotate(10deg);transform-origin:right bottom;}}
+		@-webkit-keyframes shake2{0%{transform:rotate(10deg);transform-origin:left bottom;}100%{transform:rotate(-10deg);transform-origin:left bottom;}}
+
+		/*second page*/
+		.secondpage{width: 100%;height:72%;margin-top:4rem;position: relative;overflow:hidden;}
+		.secondpage .gift{width:2rem;height:3rem;position: absolute;top:-1rem;left:0;-webkit-animation:2s show both ease-in;}
+		.secondpage .gift img{width: 100%;height:100%;display:block;}
+		@-webkit-keyframes show{0%{opacity:0;margin-top:0rem;}20%{opacity:1;}100%{opacity:1;margin-top:150%;}}
+		.catch{width:4rem;height:3.8565rem;background:url(img/b1.png) no-repeat;-webkit-background-size:cover;position: absolute;left:0rem;top:74.5%;}
+		.catch span{position: absolute;top:-1rem;left:42%;color:green;display:none;}
+
+		b.score{position: absolute;left:45%;color:brown;font-family:"MicroSoft Yahei";top:3.8rem;}
+		/*third page*/
+		.thirdpage{width: 100%;height: 100%;background:rgba(0,0,0,0.8);position: absolute;top:0;left:0;z-index:2;display:none;-webkit-animation:1s thirdpage both;}
+		.thirdpage i{position: absolute;width:1.2rem;height: 1.2rem;background:url(img/close.png) no-repeat;-webkit-background-size: 100% 100%;
+			background-size: 100% 100%;top:5%;right:10%;z-index:5;}
+		.thirdpage .ghead{width: 10rem;margin:1.5rem auto 0;}
+		.thirdpage .ghead img{width: 100%;display:block;}
+		.thirdpage .gbody{background:url(img/c2.png) no-repeat;overflow:hidden;width:13rem;height:9.1rem;margin:0 auto;-webkit-background-size:cover;
+		background-size:cover;}
+		.thirdpage .gbody .con{width:10rem;height:6rem;margin:1.6rem auto 0;}
+		.thirdpage .gbody .con img{width: 100%;display:block;}
+		.thirdpage .gfoot{position: relative;}
+		.thirdpage .gfoot span{display:block;width:7.35rem;height: 2.475rem;margin:1rem auto 0;text-align:center;line-height:2.475rem;font-size:30/30rem;background:url(img/c3.png) no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;}
+		.thirdpage .gfoot b{display:block;width: 92%;position: absolute;top: -18rem;left: 50%;margin-left: -48%;}
+		.thirdpage .gfoot b img{display:block;width: 100%}
+		@-webkit-keyframes thirdpage{0%{transform:scale(0.2,0.2);}100%{transform:scale(1,1);}}
+
+			/*新增*/
+		#prizeku{width: 2.5rem;height:1.25rem;top:0.5rem;right:0.5rem;background:url(img/prizeku.png) no-repeat;position: absolute;-webkit-background-size:cover;	background-size:cover;}
+		#rule{width: 2.21rem;height:0.816rem;top:0.8rem;left:0.6rem;background:url(img/rule.png) no-repeat;position: absolute;-webkit-background-size:cover;	background-size:cover;}
+		/*rule*/
+		.rule{width: 14rem;height:18rem;background-color:#EA7F27;border-radius:0.5rem;position: absolute;top:50%;left:50%;margin-top:-9rem;margin-left:-7rem;z-index:10;overflow:scroll;font-size:0.5rem;box-sizing:border-box;padding:0.5rem;color:white;}
+		.rule h2{text-align: center;margin-bottom:0.4rem;}
+		.rule h2 i{width:0.4rem;height:0.4rem;border-radius: 50%;background-color:#fff;display:inline-block;vertical-align:top;margin-top:0.35rem;}
+		.rule p{line-height:1rem;}
+		.rule b{position: absolute;width:1.2rem;height: 1.2rem;background:url(img/close.png) no-repeat;-webkit-background-size: 100% 100%;
+			background-size: 100% 100%;top:2%;right:3%;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<a id="prizeku" href="prizeku.html"></a>
+		<a id="rule" href="javascript:;"></a>
+		<div class="rule" style="display:none;">
+			<b></b>
+			<h2><i></i> 活动说明 <i></i></h2>
+			<p>远离套路，拿福利，点击领取属于的你真福利！</p>
+			<p>活动说明：<span style="color:#000;">点击开始抽奖，移动“财神”接奖品，红包+1分，福袋+2分，炸弹-3分，累计达到20分即可获奖</span>。快来试试吧！</p>
+			<p>惊喜一：OPPO R11 热力红色一部</p>
+			<p>惊喜二：200元支付宝购机红包</p>
+			<p>惊喜三：50元全国话费直充</p>
+			<p>惊喜四：5元幸运红包</p>
+			<p>惊喜五：幸运奖</p>
+			<p>－－－－－－－－－－－－－－－－</p>
+			<p>重要声明</p>
+			<p>1、实物类奖品将在活动结束后5-10个工作日安排发货，请耐心等待</p>
+			<p>2、优惠券类奖品的使用规则详见每个优惠券的介绍页</p>
+			<p>3、请兑换后仔细阅读使用流程，如有疑问，可直接联系客服专线：400-080-6659或客服QQ：4000806659（工作日9:00至18:00）</p>
+			<p>4、通过非法途径获得奖品的，主办方有权不提供奖品</p>
+		</div>
+		<i class="star"></i>
+		<b class="score" style="display:none;">0分</b>
+		<div class="money-god">
+			<div class="left-ear"></div>
+			<div class="right-ear"></div>
+		</div>
+		<a class="begin-c" href="javascript:;"></a>
+		<div class="secondpage" style="display:none">
+			<!-- <div class="gift"><img src="img/b2.png"></div> -->
+		</div>
+		<div class="catch" style="display:none;">
+			<span>+1</span>
+		</div>
+		<div class="thirdpage">
+			<i></i>
+			<div class="ghead"><img src="img/c1.png"></div>
+			<div class="gbody">
+				<div class="con">
+					<img src="img/c4.png">
+				</div>
+			</div>
+			<div class="gfoot">
+				<span class="gdown"></span>
+				<b><img src="img/c5.png"></b>
+			</div>
+		</div>
+	</div>
+	<script>
+		$(function(){
+			window.onresize=function(){
+				window.location.reload();
+			}
+			var W=document.documentElement.clientWidth;
+			var H=document.documentElement.clientHeight;
+			var L=0;
+			// var arrDom=[];
+			$(".begin-c").click(function(){
+				$(this).remove();
+				$(".money-god").remove();
+			})
+			function sprinkle(){
+				var src=Math.random()<0.7?Math.floor(Math.random()*2+2):4;
+				var left=Math.floor(Math.random()*(16-2)+0);
+				// var rot=Math.floor(Math.random()*(45+45)-45);transform:rotate('+rot+'deg);
+				var con='<div style="left:'+left+'rem;" class="gift"><img class="x'+src+'" src="img/b'+src+'.png"></div>';
+				$(".secondpage").append(con);
+				// arrDom.push($(".secondpage .gift:last-child"));
+				var h=$(window).height()*0.75+(4*40);
+				setTimeout(function(){
+					$(".secondpage .gift").each(function(){
+						if($(this).offset().top>h){
+							$(this).remove();
+						}
+					})
+				},1000)
+				setTimeout(sprinkle,700)
+			}
+			
+			var oCatch=$(".catch").get(0);
+			var aGift=document.getElementsByClassName("secondpage")[0].getElementsByClassName("gift");
+			dragg(oCatch);
+			function dragg(obj){
+				obj.addEventListener("touchstart",function(e){
+					e.preventDefault();
+					var e=e.targetTouches[0];
+					var disX=e.clientX;
+					var tempX=disX-this.offsetLeft;
+					var maxLeft=W-this.offsetWidth;
+					obj.addEventListener("touchmove",function(e){
+						e.preventDefault();
+						var e=e.targetTouches[0];
+						var left1=e.clientX-tempX;
+						if(left1<=0){
+							left1=0;
+						}else if(left1>maxLeft){
+							left1=maxLeft;
+						}                    
+						obj.style.left=left1+"px";
+						L=left1;
+
+					})
+					obj.addEventListener("touchend",function(e){
+
+					})
+				})
+			}
+			var score=0;
+			setInterval(function(){
+				for(var i=0;i<aGift.length;i++){
+					var sL=L-aGift[0].offsetWidth;
+					var bL=L+$(".catch").width();
+					var hh=aGift[i].offsetTop;
+					var leftt=aGift[i].offsetLeft;
+					if(leftt>sL && leftt<bL && (hh/H)>0.48 && (hh/H)<0.7){
+						if(aGift[i].children[0].className=="x2"){
+							aGift[i].parentNode.removeChild(aGift[i]);
+							$(".catch span").html("+1").css("color","green");
+							$(".catch span").fadeIn(300).delay(300).fadeOut(100);
+						}else if(aGift[i].children[0].className=="x3"){
+							aGift[i].parentNode.removeChild(aGift[i]);
+							$(".catch span").html("+2").css("color","green");
+							$(".catch span").fadeIn(300).delay(300).fadeOut(100);
+						}else if(aGift[i].children[0].className=="x4"){
+							aGift[i].parentNode.removeChild(aGift[i]);
+							$(".catch span").html("-3").css("color","red");
+							$(".catch span").fadeIn(300).delay(300).fadeOut(100);
+						}
+						score+=parseInt($(".catch span").html());
+					}
+				}
+				$(".score").html(score+"分");
+				if(parseInt($(".score").html())>=20){
+					$(".thirdpage").css("display","block");
+				}
+			},100)
+
+			$(".thirdpage>i").click(function(){
+				$(".thirdpage").css("display","none");
+				score=0;
+				$(".score").html(score+"分");
+			})
+			$(".gfoot .gdown").click(function(){
+				window.location.href="http://zoley.me";
+			})
+			//---rule
+			$("#rule").click(function(){
+				$(".rule").css("display","block");
+			})
+			$(".rule b").click(function(){
+				$(".rule").css("display","none");
+			})
+			//---begin-c
+			$(".begin-c").click(function(){
+				$(".money-god").css("display","none");
+				$(this).css("display","none");
+				$(".catch").css("display","block");
+				$(".score").css("display","block");
+				$(".secondpage").css("display","block");
+				sprinkle();
+			})
+			
+		})
+	</script>
+</body>
+</html>

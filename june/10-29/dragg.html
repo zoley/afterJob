@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>手机侧边红包拖拽效果</title>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale="+scale+", maximum-scale="+scale+", minimum-scale="+scale+"'>")
+		var html=document.getElementsByTagName("html")[0];
+        html.style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+	<style>
+		*{margin:0;padding:0;border:0;outline:none;-webkit-box-sizing:border-box;box-sizing:border-box;}
+		a{-webkit-tap-highlight-color:transparent;text-decoration:none; color:#333;}
+		input{-webkit-appearance:none;}
+		ul,li{list-style:none;}
+		/*public*/
+		.fl{float:left;}
+		.fr{float:right;}
+		body{font-size:0.5rem;}
+		.clearfix:after{height: 0;line-height: 0;content:"";visibility:hidden;clear:both;display:block;}
+		.wrap{width: 16rem;margin:0 auto;}
+		@-webkit-keyframes shake{
+			0%{
+				transform:rotate(-30deg);
+			}50%{
+				transform:rotate(30deg);
+			}100%{
+				transform:rotate(-30deg);
+			}
+		} 
+		.wallet{position: fixed;top:70%;right:0;width: 2rem;height: 2rem;-webkit-animation:1s shake linear infinite;/*margin-top:-55px;*/}
+		.wallet a{display:block;width: 100%;height: 100%;}
+		.wallet a img{display:block;width: 100%;height: 100%;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="wallet">
+			<a href="#"><img src="img/wallet.png"></a>
+		</div>
+	</div>
+	<script>
+		window.onload=function(){
+			window.onresize=function(){
+				window.location.reload();
+			}
+			var oDiv=document.querySelector(".wallet");
+
+	dragg(oDiv);
+	function dragg(obj){
+		var W=document.documentElement.clientWidth;
+		var H=document.documentElement.clientHeight;
+		obj.addEventListener("touchstart",function(e){
+			e.preventDefault();
+			var e=e.changedTouches[0];
+			var disX=e.clientX;
+			var disY=e.clientY;
+			var tempX=disX-toLeft(this);
+			var tempY=disY-toTop(this);
+			var maxTop=H-this.offsetHeight;
+			var lastLeft=0;
+			obj.addEventListener("touchmove",function(e){
+				e.preventDefault();
+				var e=e.changedTouches[0];
+				var left1=e.clientX-tempX;
+				var top1=e.clientY-tempY;
+				if(top1<=0){
+					top1=0;
+				}else if(top1>maxTop){
+					top1=maxTop;
+				}
+				this.style.left=left1+"px";
+				this.style.top=top1+"px";
+				lastLeft=left1;
+			})
+			obj.addEventListener("touchend",function(e){
+				if(lastLeft==0)return;
+				if(lastLeft>=W/2){
+					perfectMove(obj,{"left":W-obj.offsetWidth});
+				}else{
+					perfectMove(obj,{"left":0});
+				}
+			})
+		})
+	}
+	function toTop(obj){
+		var iTop=0;
+		while(obj){
+			iTop+=obj.offsetTop;
+			obj=obj.offsetParent;
+		}
+		return iTop;
+	}	
+	function toLeft(obj){
+		var iLeft=0;
+		while(obj){
+			iLeft+=obj.offsetLeft;
+			obj=obj.offsetParent;
+		}
+		return iLeft;
+	}
+	function getStyle(obj,attr) {
+		return obj.currentStyle ?obj.currentStyle[attr]:window.getComputedStyle(obj,false)[attr];
+	}
+	function perfectMove(obj,json,endFn){								
+		clearInterval(obj.timer2);							
+		obj.timer2=setInterval(function(){							
+			var bStop=true;		//这一次运动就结束了――所有的值都到达了				
+			for(var attr in json){						
+				//1.取当前的值					
+				var iCur=0;					
+				if(attr=="opacity"){					
+					iCur=Math.ceil(parseFloat(getStyle(obj,attr))*100);				
+				}else{					
+					iCur=parseInt(getStyle(obj,attr));				
+				}					
+				//2.算速度					
+				var speed=(json[attr]-iCur)/7;					
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);					
+				//3.检测停止					
+				if(iCur!=json[attr]){					
+					bStop=false;				
+				}					
+				if(attr=="opacity"){					
+					obj.style.filter="alpha(opacity="+(iCur+speed)+")";				
+					obj.style.opacity=(iCur+speed)/100;				
+				}else{					
+					obj.style[attr]=iCur+speed+"px";				
+				}					
+			}						
+			if(bStop){						
+				clearInterval(obj.timer2);					
+				endFn && endFn();					
+			}						
+		},30)							
+	}
+
+
+
+		}
+	</script>
+<!-- 	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script>
+	window.onload=function(){
+		var o=$("body>div:last").get(0); 
+		var p=$("body>div:last>div").get(0); 
+		o.style.width="400px";
+		o.style.height="400px";
+		o.style.top="50%";
+		o.style.left="50%";
+		p.style.width="400px";
+		p.style.height="400px";
+		console.log(222);
+		
+	}
+	</script> -->
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>m.轮播</title>
+	<script src="js/jquery.min.js"></script>
+	<style>
+		*{margin:0;padding:0;}
+		/*.clearfix:after{content:"";line-height: 0;height: 0;display:block;visibility:hidden;clear:both;}*/
+		#bannerm{width: 100%;margin: 0 auto;position: relative;overflow: hidden;
+		}
+		#bannerm ul{width: 500%;height: 100%;overflow: hidden;
+		}
+		#bannerm li{position: relative;width: 20%;height: 100%;overflow: hidden;float: left;
+		}
+		#bannerm li img{width: 100%;vertical-align:top;
+		}
+		#numberI{display: block;width: 100%;text-align: center;
+		}
+	</style>
+</head>
+<body>
+	<div id="bannerm">
+		<ul class="clearfix">
+			<li class="active">
+				<img src="img/d1.png" alt="banner1">
+			</li>
+			<li>
+				<img src="img/d2.png" alt="banner2">
+			</li>
+			<li>
+				<img src="img/d3.png" alt="banner3">
+			</li>
+			<li>
+				<img src="img/d4.png" alt="banner3">
+			</li>
+			<li>
+				<img src="img/d1.png" alt="banner3">
+			</li>
+		</ul>
+	</div>
+	<strong class="center" id="numberI">1</strong>
+
+
+<!-- 调用方法：
+（1）jquery方法：$(document).bind("touchend", function(e){}）；
+（2）javascript方法：document.addEventListener("touchend",function(e){});
+
+手机端jquery获取pageX和pageY:
+
+touchstart事件下获取：e.originalEvent.targetTouches[0].pageX。
+touchmove事件下获取：e.originalEvent.targetTouches[0].pageX。
+touchend事件的下获取：e.originalEvent.changedTouches[0].pageX 。 -->
+
+	<script>
+		$(function () {
+			var startX, startY, endX, endY;
+			var size = $("#bannerm li").size();
+			$("#bannerm").bind("touchstart", function(e) {
+				startX = e.originalEvent.targetTouches[0].clientX;
+            clearInterval(t);                                           
+        });
+
+		$("#bannerm").bind("touchmove", function (e) {
+			e.preventDefault();
+			endX = e.originalEvent.targetTouches[0].clientX;
+			// $("#bannerm ul").css("margin-left", endX-startX);  
+		});
+        var i, _left, numberI;
+        var t = setInterval(move, 4000);
+        $("#bannerm").bind("touchend", function (e) {
+        	e.preventDefault();
+        	if ((startX - endX) > 100) {
+        		move()
+        	}
+        	else if ((startX - endX) < -100){
+                //初始 < 结束 右滑
+                i  = $("#bannerm li.active").index();
+                i--;
+                numberI = i;
+                if(i<0){
+                	var lefts = -100*(size-1) +"%";
+                    $("#bannerm ul").css("margin-left", lefts);        
+                    i = size -2;
+                    numberI = i;
+                    show()
+                }else {
+                	show()
+                }
+            }
+            t = setInterval(move, 4000);                 
+        });
+        function move(){
+            //判断滑动方向，初始 > 结束 左滑
+            i = $("#bannerm li.active").index();
+            i++;
+            numberI = i;
+            if(i == size){
+                $("#bannerm ul").css("margin-left", "0");   
+                i = 1;
+                numberI = i;
+                show();
+            }else{
+                show()
+            }
+
+        }
+        function show(){
+            _left = -100*i +"%";
+            if(i==size-1){
+                numberI=0;
+            }
+            $("#bannerm li").eq(i).addClass("active").siblings().removeClass("active");
+            $("#bannerm ul").animate({
+                "margin-left":_left
+            },500);
+            $("#numberI").text(numberI+1);
+        }
+    });
+
+	</script>
+</body>
+</html>

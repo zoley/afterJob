@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<script>
+	var mobile_bs = {
+		versions: function() {
+			var u = navigator.userAgent;
+			return {
+			   trident: u.indexOf('Trident') > -1, //IE内核
+			   presto: u.indexOf('Presto') > -1, //opera内核
+			   webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+			   gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+			   mobile: !! u.match(/AppleWebKit.*Mobile.*/) || !! u.match(/AppleWebKit/) && u.indexOf('QIHU') && u.indexOf('QIHU') > -1 && u.indexOf('Chrome') < 0, //是否为移动终端
+			   ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+			   android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+			   iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+			   iPad: u.indexOf('iPad') > -1,  //是否iPad
+			   webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+			}
+		} ()
+	};
+	if (mobile_bs.versions.mobile) {
+		if (mobile_bs.versions.android || mobile_bs.versions.iPhone || mobile_bs.versions.iPad || mobile_bs.versions.ios) {
+				window.location.href = "http://zoley.me";
+		}
+	}; 
+
+</script>
+	<meta charset="UTF-8">
+	<title>图标字体</title>
+	<link rel="stylesheet" href="font/css/font-awesome.min.css">
+	<style>
+		.fa-camera-retro{font-size:50px;color:red;}
+		.fa-spinner{font-size:50px;color:green;}
+		#div{width: 100px;height: 100px;border:3px solid green;}
+	</style>
+</head>
+<body>
+<ul>
+	<li><i class="fa fa-camera-retro fa-border fa-spin"></i> fa-camera-retro </li>
+	<li><i class="fa fa-angle-double-down"></i>fa-angle-double-down</li>
+	<li><i class="fa fa-strikethrough "></i>fa-angle-double-down</li>
+	<li><i class="fa fa-resistance fa-pulse"></i>fa-resistance</li>
+	<li><i class="fa fa-spinner fa-spin"></i>fa-resistance</li>
+	<li><i class="fa fa-spinner fa-pulse"></i>fa-resistance</li>
+</ul>
+<div id="div"></div>
+<script>
+var D=document.getElementById("div");
+D.addEventListener("touchstart",function(e){
+	this.style.backgroundColor="red";
+	e.preventDefault();
+},false)
+D.addEventListener("touchmove",function(){
+	this.style.backgroundColor="blue";
+},false)
+D.addEventListener("touchend",function(){
+	this.style.backgroundColor="yellow";
+},false)
+</script>
+</body>
+</html>

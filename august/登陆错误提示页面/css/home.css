@@ -1,0 +1,146 @@
+/*适屏*/
+@media screen and (min-width:1000px) {
+	.wrap{width: 970px;}
+}		
+@media screen and (min-width: 1250px) {
+	.wrap{width: 1200px;}
+}
+/*所有样式初始化*/
+html,body,ul,li,p,h1,h2,h3,h4,input,textarea,form,table,img,th,td,select{margin:0;padding:0;}
+img,input{border:0;}
+ul,li{list-style: none;}
+table{border-collapse:collapse;}
+body{color:#777;font:13px/20px "Microsoft Yahei","SimSun","宋体","Arial",sans-serif;background-color: #fff;overflow:auto;}
+.clearfix:after{content:"";line-height: 0;height: 0;display:block;visibility:hidden;clear:both;}
+.clearfix{zoom:1;}
+a{text-decoration:none;color:#666;}
+.fl{float:left;}
+.fr{float:right;}
+/*下面开始正文*/
+.wrap{margin:0 auto;min-width: 970px;}
+#header{width: 100%;}
+#header .topbar {width: 100%;height: 105px;border-bottom:1px solid #f1f1f1;display:inline-block;}
+#header .topbar .logo{height: 68px;margin-top:15px;padding-top:12px;}
+#header .topbar .logo>a{display:inline-block;}
+#header .topbar .logo>a .img{height:56px;width: 56px;background:url(../img/sprite.png) no-repeat 0 0;}
+#header .topbar .logo>a h1{height:56px;width: 300px;line-height: 56px;color:#008DE8;margin-left:13px;font-size:20px;}
+#header .topbar .logo>.login a{height:37px;width:65px;line-height: 37px;border:1px solid #008DE8;margin:8px 13px 0 0;border-radius:5px;text-align:center;display:inline-block;font-size:13px;}
+#header .topbar .logo>.login a{background-color:white;color:#008DE8;}
+#header .topbar .logo>.login a:hover{background-color:#008DE8;color:white;}
+
+#header .nav{height: 67px;}
+#header .nav ul:first-child li{float:left;height: 67px;margin-right:20px;position: relative;}
+#header .nav ul:first-child li a{display:inline-block;height: 100%;padding:0 12px;line-height: 67px;}
+#header .nav ul:first-child li i{width:0;height: 4px;background-color:#008DE8;content:"";position: absolute;left:50%;bottom:0;transition:1s;}
+#header .nav ul:first-child li:hover a{color:#008DE8;}
+#header .nav ul:first-child li:hover i{width:100%;left:0;}
+#header .nav ul:first-child li.active a{color:#008DE8;} 
+#header .nav ul:first-child li.active i{width:100%;left:0;} 
+#header .nav ul:last-child li{height:67px;color:#008DE8;line-height: 67px;}
+#header .nav ul:last-child li i{width: 32px;height: 30px;display:inline-block;background:url(../img/icon-tel.png) no-repeat;vertical-align:middle;}
+#header .nav ul:last-child li span{font-size:13px;font-weight:bold;padding:0 12px;}
+/*banner--s*/
+#banner {width: 100%;height: 574px;background:url(../img/home_10.jpg) no-repeat;background-size:100% 100%;min-width:970px;}
+#banner .banner-text{padding:150px 0 0 12px;height:424px;overflow:hidden;}
+#banner .banner-text h2{font-size:32px;height: 55px;line-height: 55px;color:#3b3b3b;}
+#banner .banner-text p{font-size:16px;line-height: 30px;color:#999;width:370px;}
+#banner .banner-text a{font-size:16px;line-height: 63px;color:white;width:240px;height: 63px;display:block;text-align:center;background-color:#008DE8;margin-top:35px;}
+/*banner--e*/
+/*advantage--s*/
+#advantage{height:940px;overflow:hidden;}
+#advantage>h2{text-align:center;width: 350px;margin:40px auto 0;height:74px;line-height: 74px;border-bottom:1px solid #777;font-size:34px;color:#000;}
+#advantage>p{text-align:center;height:70px;line-height:70px;font-size:22px;margin-bottom:37px;}
+#advantage ul{width: 100%;height: 288px;margin-bottom:55px;}
+#advantage ul li{width:30%;height: 288px;float:left;box-sizing: border-box;border:1px solid #777;}
+#advantage ul li+li{margin-left:5%;}
+#advantage ul li div{width:286px;margin:0 auto;height:100%;position: relative;overflow:hidden;}
+#advantage ul li div img{width: 220px;display:block;position: absolute;left:50%;margin-left:-110px;top:10px;}
+#advantage ul li div h3{text-align:center;color:#000;border-bottom:1px solid #D7D7D7;height: 50px;line-height: 50px;font-size:20px;margin-bottom:10px;margin-top:150px;transition:1s;}
+#advantage ul li div p{text-align:center;height: 24px;line-height: 24px;font-size:14px;}
+@-webkit-keyframes moveX{
+	0%{left:50%;top:10px;}50%{left:400px;top:10px;}51%{left:400px;top:-150px;}52%{top:-150px;left:-300px;}53%{top:10px;left:-300px;}100%{left:50%;top:10px;}
+}
+#advantage ul li:hover div img{-webkit-animation:0.8s moveX linear;}
+/*advantage--e*/
+/*quality--s*/
+#quality{height: 640px;width: 100%;background-color:#F3F4F6;}
+#quality .quality-text{height: 640px;position: relative;}
+#quality .quality-text div:first-child{position: absolute;left:0;top:65px;}
+#quality .quality-text div:first-child img{display:block;}
+#quality .quality-text div:last-child {padding:150px 0 0 12px;height:490px;overflow:hidden;width:377px;}
+#quality .quality-text div:last-child h2{font-size:36px;height: 70px;line-height: 70px;color:#3b3b3b;margin-bottom:30px;}
+#quality .quality-text div:last-child p{font-size:22px;line-height: 43px;color:#999;width:390px;}
+#quality .quality-text div:last-child p span{color:#008DE8;}
+#quality .quality-text div:last-child a{font-size:25px;line-height: 76px;color:white;width:390px;height: 76px;display:block;text-align:center;background-color:#008DE8;margin-top:35px;}
+/*quality--e*/
+/*style--s*/
+#style{width: 100%;height: 987px;background-color:#E9EAEB;}
+#style .style-text{height: 987px;overflow:hidden;position: relative;}
+#style .style-text>h2{text-align:center;width: 350px;margin:40px auto 0;height:74px;line-height: 74px;border-bottom:1px solid #777;font-size:34px;color:#000;}
+#style .style-text>p{text-align:center;height:70px;line-height:70px;font-size:22px;margin-bottom:37px;}
+#style .style-text .lunbo{height:750px;}
+#style .style-text .tab{text-align:center;width: 100%;height: 60px;font-size:0;}
+#style .style-text .tab a{text-align:center;display:inline-block;width: 170px;height: 57px;border-radius:5px;border:1px solid #d3d3d3;font-size:19px;line-height: 57px;color:#333;}
+#style .style-text .tab a+a{margin-left:1%;}
+#style .style-text .tab a.active{background-color:#008DE8;color:white;}
+#style .style-text .big{position: absolute;left:0;top:287px;height: 700px;}
+#style .style-text .big li {position: relative;width: 100%;height: 700px;float:left;}
+#style .style-text .big li .pic{width:615px;height:543px;background:url(../img/home_39.png) no-repeat;position: absolute;top:50px;left:15%;display:inline-block;}
+#style .style-text .big li .pic img{position: absolute;left:23px;top:90px;}
+#style .style-text .big li .con-text{height:543px;width: 377px;float:right;margin-right:10%;text-align:center;}
+#style .style-text .big li .con-text h2{font-size:36px;height: 70px;line-height: 70px;color:#000;margin:120px 0 30px;}
+#style .style-text .big li .con-text p{font-size:15px;line-height: 43px;color:#333;width:377px;text-align:left;}
+#style .style-text .big li .con-text span{color:#008DE8;}
+#style .style-text .big li .con-text a{font-size:25px;line-height: 76px;color:white;width:300px;height: 76px;display:inline-block;text-align:center;background-color:#008DE8;margin-top:35px;border-radius:10px;}
+#style .style-text .small{width:135px;height: 15px;position: absolute;bottom:50px;left:50%;margin-left:-67px;z-index:1;}
+#style .style-text .small li{width: 15px;height: 15px;border-radius:50%;background-color:gray;float:left;cursor:pointer;}
+#style .style-text .small li+li{margin-left:15px;}
+#style .style-text .small li.active{background-color:#008DE8;box-sizing:border-box; }
+/*style--e*/
+/*declare--s*/
+#declare{width: 100%;height:790px;min-width:970px;}
+#declare>h2{width: 100%;text-align:center;margin:40px auto 0;height:74px;line-height: 74px;font-size:34px;color:#000;}
+#declare ul{background-color:#E9EAEB;height: 715px;width: 100%;}
+#declare ul li{height:189px;border-bottom:1px solid #CCC;text-align:center;}
+#declare ul li .date{height:100px;width: 223px;display:inline-block;border-right:1px solid #ccc;text-align:right;margin-top:40px;vertical-align:top;}
+#declare ul li .date h4{color:#008DE8;font-size:44px;font-weight:bold;padding-right:50px;margin-top:30px;margin-bottom:10px;}
+#declare ul li .date p{padding-right:52px;}
+#declare ul li .info{height:150px;width: 700px;display:inline-block;text-align:left;border:1px solid transparent;}
+#declare ul li .info h3{color:#333;margin-left:50px;font-size:25px;margin-bottom:10px;margin-top:50px;}
+#declare ul li .info p{margin-left:50px;line-height:25px;}
+#declare ul>a{width: 180px;height: 50px;border:1px solid #777;border-radius:10px;margin:48px auto;line-height: 50px;font-size:25px;display:block;text-align:center;}
+#declare ul>a:hover{color:white;background-color:#008DE8;}
+/*declare--e*/
+/*banner2---s*/
+#banner2{height: 645px;}
+#banner2>h2{text-align:center;width: 350px;margin:40px auto 0;height:74px;line-height: 74px;border-bottom:1px solid #777;font-size:34px;color:#000;}
+#banner2 .boast{width: 100%;border-bottom:1px solid #eaeaea;height: 113px;text-align:center;}
+#banner2 .boast div{display:inline-block;height:91px;margin-top:20px;}
+#banner2 .boast div+div{margin-left:30px;}
+#banner2 .boast div b{color:#D62F40;font:900 40px/50px arial;}
+#banner2 .boast div span{color:#777;font-size:26px;font-weight:bold;font-family:arial;}
+#banner2>h3{text-align:center;height:74px;line-height: 74px;color:#777;font-family:arial;font-size:21px;color:#999;}
+#banner2 .frame{width: 960px;margin:0 auto;height: 325px;position: relative;}
+#banner2 .bannerTab{width: 860px;height: 325px;margin:0 auto;position: relative;overflow:hidden;}
+#banner2 .bannerTab ul{height: 325px;position: absolute;left:0;top:0;}
+#banner2 .bannerTab ul li{width: 860px;height: 325px;float:left;}
+#banner2 .bannerTab ul li div{width: 100%;height: 100%;}
+#banner2 .bannerTab ul li div a{width:160px;height:95px;float:left;box-sizing:border-box;border:1px solid #eaeaea;margin-right:15px;margin-bottom:20px;}
+#banner2 .bannerTab ul li div a:nth-of-type(5n){margin-right:0px;}
+#banner2 .bannerTab ul li div .divide~a{margin-bottom:0px;}
+#banner2 .bannerTab ul li div a img{width:100%;height:100%;display:block;}
+#banner2 .frame span{width: 42px;height: 72px;position: absolute;top:126px;cursor:pointer;}
+#banner2 .frame span:first-of-type{left:0px;background:url(../img/sprite.png) no-repeat 0 -75px;}
+#banner2 .frame span:last-child{right:0px;background:url(../img/sprite.png) no-repeat -64px -75px;}
+@-webkit-keyframes flex{0%{transform:scale(0.1);}100%{transform:scale(1);}}
+#banner2 .bannerTab ul li div a:hover{border-color:green;}
+#banner2 .bannerTab ul li div a:hover img{-webkit-animation:1s flex;}
+/*banner2---e*/
+
+
+
+
+
+
+
+

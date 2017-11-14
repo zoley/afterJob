@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>通栏banner</title>
+	<style>
+		*{margin:0;padding:0;}ul,li{list-style:none;}
+		.banner{width: 100%;background-color:#c53652;}
+		.flash{width: 1000px;height: 388px;margin:10px auto;position: relative;}
+		.flash .big li{width: 100%;height: 100%;position: absolute;left:0;top:0;}
+		.flash .big li a img{width: 100%;height: 100%;display:block;}
+		.flash .small{width:90px;height: 10px;position: absolute;bottom:10px;left:50%;margin-left:-45px;z-index:999;}
+		.flash .small li{width: 10px;height: 10px;border-radius:50%;background-color:white;float:left;}
+		.flash .small li+li{margin-left:10px;}
+		.flash .big li:first-child{z-index:1;}
+		.flash .small li.active{background-color:blue;}
+	</style>
+</head>
+<body>
+	<div class="banner">
+		<div class="flash">
+			<ul class="big">
+				<li name="#c53652"><a href="#"><img src="img/s1.png"></a></li>
+				<li name="#e0b98b"><a href="#"><img src="img/s2.png"></a></li>
+				<li name="#6b9a7a"><a href="#"><img src="img/s3.png"></a></li>
+				<li name="#082841"><a href="#"><img src="img/s4.png"></a></li>
+				<li name="#9f9d60"><a href="#"><img src="img/s5.png"></a></li>
+			</ul>
+			<ul class="small">
+				<li class="active"></li>
+				<li></li>
+				<li></li>
+				<li></li>
+				<li></li>
+			</ul>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script>
+	$(document).ready(function(){
+		var timer=null;
+		var now=0;
+		$(".small li").hover(function(){
+			$(".small li").removeClass("active");
+			$(this).addClass("active");
+			$(".big li").css("display","none");
+			$(".big li").eq($(this).index()).fadeIn(700);
+			$(".big li").eq($(this).index()).css("display","block");
+			$(".banner").css({"background-color":$(".big li").eq($(this).index()).attr("name")});
+			now=$(this).index();
+			clearInterval(timer);
+		},function(){
+			go();
+		})
+		go();
+		function go(){
+			timer=setInterval(function(){
+				now++;
+				if(now==5){
+					now=0;
+				}
+				$(".small li").removeClass("active");
+				$(".small li").eq(now).addClass("active");
+				$(".big li").css("display","none");
+				$(".big li").eq(now).fadeIn(700);
+				$(".big li").eq(now).css("display","block");
+				$(".banner").css({"background-color":$(".big li").eq(now).attr("name")});
+			},3000)	
+		}
+		
+	})
+	
+	</script>
+</body>
+</html>

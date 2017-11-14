@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>jsonp</title>
+	<script src="js/jquery.min.js"></script>
+	<!-- <script>
+		var h=document.documentElement.clientWidth;
+		if(h<=768){
+			var scale=1/window.devicePixelRatio;
+			document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+			var html=document.getElementsByTagName("html")[0];
+			html.style.fontSize=parseFloat(document.documentElement.clientWidth/16)+"px";	
+		}
+	</script> -->
+	<style>
+		*{margin:0;padding:0;box-sizing:border-box;}
+		@media screen and (min-width: 1250px) {
+			ul{width:70%;margin:50px auto;background-color:#D0C2C2;}
+		}
+		@media screen and (max-width: 1250px) {
+			ul{width:70%;margin:50px auto;background-color: #D0A7A7;}
+		}
+		@media screen and (max-width: 1000px) {
+			ul{width:80%;margin:50px auto;background-color:#CAE4CE;}
+		}
+		@media screen and (max-width:768px) {
+
+			ul{width: 100%;background-color:#F3DBAE;margin:0;font-size:12px;}
+		}
+		ul{min-width:320px;}
+		ul li{list-style:none;border-bottom:1px dotted green;height:40px;}
+		ul li div{display:inline-block;height:40px;line-height:40px;}
+		ul li div:first-child{width:13%;vertical-align:top;margin-left:1%;}
+		ul li div:nth-child(2){width:50%;margin-left:3%;color:#5A6CEB;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;}
+		ul li div:last-child{width:30%;float:right;overflow:hidden;text-overflow:ellipsis;white-space: nowrap;}
+		ul li div img{display:block;width: 40px;border-radius:50%;height: 40px;}
+		p{width: 70%;margin:20px auto;height: 40px;line-height: 40px;text-align: center;background:-webkit-linear-gradient(270deg,#f40,yellowgreen);cursor:pointer;color:white;border-radius:20px;}
+		body{background:#DCD4C5;}
+	</style>
+	<script>
+	$(document).ready(function(){
+		var s=null;
+		var oUl=$("ul").get(0);
+		$.ajax({
+			type:"get",
+			url:"5agent.php?id=372235354",
+			success:function(data){
+				s=JSON.parse(data).result.tracks;
+				console.log(s)
+				var num=7;//默认显示个数
+				init();
+				function init(){
+					for(var i=0;i<num;i++){
+						var oLi=document.createElement("li");
+						oLi.innerHTML='<div><img src="'+s[i].album.picUrl+'" alt=""></div><div>'+s[i].name+'</div><div>'+s[i].album.artists[0].name+'</div>'
+						oUl.appendChild(oLi);
+					}
+				}
+			},
+			error:function(msg){
+				console.log(msg)
+			}
+		})		
+
+		$("#btn").on("click",loadMore);
+		function loadMore(){
+			var size=$("ul li").size();
+			if(size>=118){
+				$("#btn").css("display","none");
+			}
+			for(var i=size;i<size+7;i++){
+				var oLi=document.createElement("li");
+				if(s[i]){
+					oLi.innerHTML='<div><img src="'+s[i].album.picUrl+'" alt=""></div><div>'+s[i].name+'</div><div>'+s[i].album.artists[0].name+'</div>'
+					oUl.appendChild(oLi);
+				}
+			}
+			console.log(oUl.children.length)
+		}
+	})
+	</script>
+</head>
+<body >
+	<ul>
+		<!-- <li>
+			<div><img src="img/arrow.png" alt=""></div>
+			<div>music name</div>
+			<div>music artist</div>
+		</li> -->
+	</ul>
+	<p id="btn">点击加载更多</p>
+	<canvas id="canvas"></canvas>
+	<script src="js/canvasStar.js"></script>
+	<script>
+		new CanvasStar().init();
+	</script>
+</body>
+</html>

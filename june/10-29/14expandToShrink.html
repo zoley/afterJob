@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>this</title>
+	<style>
+		#div{width: 90%;height: 60%;position: absolute;top:40%;right:10px;}
+		#div a{display:block;width: 100%;height: 100%;}
+		#div a img{width: 100%;height: 100%;display:block;}
+	</style>
+</head>
+<body>
+	<div id="div">
+		<a href="#">
+			<img src="img/wallet.png">
+		</a>
+	</div>
+	<script src="js/move.min.js"></script>
+	<script>
+	window.onload=function(){
+		move("#div").set("width","70px").set("height","70px").duration("3s").end();
+		// var oDiv=document.getElementById("div");
+	}
+	</script>
+</body>
+</html>

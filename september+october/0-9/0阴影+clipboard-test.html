@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+	<script src="js/clipboard.min.js"></script>
+	<style>
+		*{margin:0;padding:0;}
+		img{box-shadow:0px 0 500px #888;display:block;margin:100px auto 0;}
+	</style>
+</head>
+<body>
+	<div style="background-color: rgba(0,0,0,0.9);width: 1000px;height: 600px;overflow:auto;">
+		<!-- <embed src="clock.swf" wmode="transparent"> -->
+		<img src="img/a1.jpg" alt="哈哈">
+	</div>
+	<h1 class="copycon">Hello , World ！</h1>
+	<button class="cbtn" data-clipboard-target=".copycon" data-clipboard-action="copy">一键复制</button>
+	<script>
+
+	new Clipboard('.cbtn').on('success',function(e){
+		console.log(e.text);
+	});
+
+
+
+
+	var a=null;
+	var b=null;
+	console.log(a==b);
+	// var a=(x)=>x+8;
+	// var b='彭毛线'
+	// alert(a(9));
+	// alert(`你是谁？\n我是${b}`);
+
+	setInterval(function(){
+		var now=parseInt(window.localStorage.getItem("num") || 20160101);
+		window.localStorage.setItem("num",now+1);
+		// console.log(window.localStorage.getItem("num"));
+		// window.location.href=window.location.href;
+		// window.location.reload();
+	},2000)
+
+	</script>
+</body>
+</html>

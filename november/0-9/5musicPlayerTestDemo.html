@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>页面切换音乐不刷新demo</title>
+	<style>
+
+		html,body,ul,li,p,h1,h2,h3,h4,input,textarea,form,table,img,th,td,select{margin:0;padding:0;}
+		img,input{border:0;}
+		ul,li{list-style: none;}
+		table{border-collapse:collapse;}
+		body{color:#777;font:13px/20px "Microsoft Yahei","SimSun","宋体","Arial",sans-serif;background-color: #334959;overflow:auto;}
+		.clearfix:after{content:"";line-height: 0;height: 0;display:block;visibility:hidden;clear:both;}
+		.clearfix{zoom:1;}
+		a{text-decoration:none;color:#F7EAEA;}
+		.fl{float:left;}
+		.fr{float:right;}
+
+		@media screen and (max-width: 768px){
+			#hide{display:none;}
+		}
+		@media screen and (min-width: 768px){
+			.wrap{width: 721px;}
+		}
+		@media screen and (min-width: 992px){
+			.wrap{width: 940px;}
+		}
+		@media screen and (min-width: 1200px){
+			.wrap{width: 1145px;}
+		}
+		.wrap{padding-right: 15px;padding-left: 15px;margin-right: auto;margin-left: auto;}
+		#header{width: 100%;background-color: #334959;}
+
+		#header .nav{height: 67px;}
+		#header .nav ul:first-child li{float:left;height: 67px;margin-right:20px;position: relative;}
+		#header .nav ul:first-child li a{display:inline-block;height: 100%;padding:0 12px;line-height: 67px;}
+		#header .nav ul:first-child li i{width:0;height: 4px;background-color:#008DE8;content:"";position: absolute;left:50%;bottom:0;transition:1s;}
+		#header .nav ul:first-child li:hover a{color:#008DE8;}
+		#header .nav ul:first-child li:hover i{width:100%;left:0;}
+		#header .nav ul:first-child li.active a{color:#008DE8;} 
+		#header .nav ul:first-child li.active i{width:100%;left:0;} 
+		#header .nav ul:last-child li{height:67px;color:#008DE8;line-height: 67px;}
+		#header .nav ul:last-child li i{width: 32px;height: 30px;display:inline-block;vertical-align:middle;}
+		#header .nav ul:last-child li span{font-size:13px;font-weight:bold;padding:0 12px;}
+
+		.music{width: 100%;height: 70px;position: fixed;bottom:0;left:0;background-color:#161616;}
+		.music .rot{width: 70px;height: 70px;display:inline-block;margin-left: 15px;vertical-align: top;transform:rotate(0deg);}
+		.music .rott{-webkit-animation:rot 15s linear infinite;}
+
+		@-webkit-keyframes rot{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+		.music .rot img{width: 100%;height: 100%;vertical-align: top;border-radius: 50%;}
+		.music .sound{vertical-align: top;margin-top:20px;margin-left: 15px;}
+		.iframe{width: 100%;height: 2577px;position: relative;}
+	</style>
+</head>
+<body>
+	<header id="header">
+		<nav class="nav wrap">
+			<ul class="fl">
+				<li class="active"><a href="javascript:;">分页</a><i></i></li>
+				<li><a href="javascript:;">五角星</a><i></i></li>
+				<li><a href="javascript:;">流光字体</a><i></i></li>
+				<li><a href="javascript:;">境非挽鹿</a><i></i></li>
+				<li><a href="javascript:;">小丑</a><i></i></li>
+				<li><a href="javascript:;">爆炸图片</a><i></i></li>
+			</ul>
+			<ul class="fr" id="hide">
+				<li><i></i><span class="tel-lun">139134713**</span></li>
+			</ul>
+		</nav>
+	</header>
+	<iframe class="iframe" id="ziframe" src="http://zoley.me/article/1" frameborder="0" scrolling="no"></iframe>
+	<div class="music">
+		<div class="wrap">
+			<div class="rot"><img src="img/a1.jpg"></div>
+			<audio id="m" class="sound" src="src/star.mp3" controls=""></audio>
+		</div>
+	</div>
+	<script>
+	window.onload=function(){
+		var ziframe=document.getElementById('ziframe');
+		var m=document.getElementById('m');
+		m.play();
+		m.addEventListener('playing',function(){
+			// console.log(getStyle(m,'transform'));
+			document.getElementsByClassName('rot')[0].classList.add('rott');
+		})
+		m.addEventListener('pause',function(){
+			document.getElementsByClassName('rot')[0].classList.remove('rott');
+		})
+
+		var arr=['http://zoley.me/article/1','http://zoley.me/article/2','http://zoley.me/article/3','http://zoley.me/article/4','http://zoley.me/article/5','http://zoley.me/article/6'];
+		var li=document.getElementsByTagName('li');
+		for(var i=0;i<li.length-1;i++){
+			li[i].index=i;
+			li[i].onclick=function(){
+				clearInterval(window.timer);
+				ziframe.src=arr[this.index];
+				ziframe.style.height='1000px';//设置最小值，然后自然撑大
+				for(var i=0;i<li.length-1;i++){
+					li[i].className='';
+				}
+				this.className='active';
+				window.timer=setInterval(reinitIframe,200);
+			}
+		}
+
+	}
+	// function getStyle(obj,attr) {
+	// 	return obj.currentStyle ?obj.currentStyle[attr]:window.getComputedStyle(obj,false)[attr];
+	// }
+	// function setIframeHeight(iframe) {
+	// 	if (iframe) {
+	// 		var iframeWin = iframe.contentWindow || iframe.contentDocument.parentWindow;
+	// 		if (iframeWin.document.body || iframeWin.document.getElementsByTagName('body')[0]) {
+	// 			iframe.height = iframeWin.document.getElementsByTagName('body')[0].scrollHeight || iframeWin.document.body.scrollHeight;
+	// 		}
+	// 	}
+	// }
+	//默认取大的那个
+	function reinitIframe(){
+		var iframe = document.getElementById("ziframe");
+		var dHeight = iframe.contentWindow.document.documentElement.scrollHeight;
+		iframe.style.height = dHeight+'px';
+	}
+	</script>
+</body>
+</html>

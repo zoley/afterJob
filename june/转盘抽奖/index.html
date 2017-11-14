@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>大转盘</title>
+		<script>
+		var mobile_bs = {
+			versions: function() {
+				var u = navigator.userAgent;
+				return {
+			   trident: u.indexOf('Trident') > -1, //IE内核
+			   presto: u.indexOf('Presto') > -1, //opera内核
+			   webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+			   gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+			   mobile: !! u.match(/AppleWebKit.*Mobile.*/) || !! u.match(/AppleWebKit/) && u.indexOf('QIHU') && u.indexOf('QIHU') > -1 && u.indexOf('Chrome') < 0, //是否为移动终端
+			   ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+			   android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+			   iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者QQHD浏览器
+			   iPad: u.indexOf('iPad') > -1,  //是否iPad
+			   webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+				}
+			} ()
+		};
+		if (mobile_bs.versions.mobile) {
+			if (mobile_bs.versions.android || mobile_bs.versions.iPhone || mobile_bs.versions.iPad || mobile_bs.versions.ios) {
+				var scale=1/window.devicePixelRatio;
+				document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+				var html=document.getElementsByTagName("html")[0];
+				html.style.fontSize=parseFloat(document.documentElement.clientWidth/16)+"px";
+			}
+		}else{
+			var html=document.getElementsByTagName("html")[0];
+			html.style.fontSize="40px";
+		}; 
+
+	</script>
+	<style>
+		*{margin:0;padding:0;border:0;outline:none;-webkit-box-sizing:border-box;box-sizing:border-box;}
+		a{-webkit-tap-highlight-color:transparent;text-decoration:none; color:#333;}
+		input{-webkit-appearance:none;}
+		ul,li{list-style:none;}
+		/*public*/
+		.fl{float:left;}
+		.fr{float:right;}
+		body{font-size:0.5rem;font-family:"MicroSoft Yahei";}
+		.clearfix:after{height: 0;line-height: 0;content:"";visibility:hidden;clear:both;display:block;}
+		/*抽奖------*/
+		.wrap{width: 16rem;min-height: 100%;background:url(img/bg.png) no-repeat;-webkit-background-size:cover;background-size:cover;position: absolute;left:0;top:0;}
+		.wrap>i{position: absolute;right:0.2rem;top:0.2rem;font-style:normal;color:red;font-size:1.2rem;}
+		.wrap .bg{width: 16rem;height:21.34rem;background:url(img/cj2.png) no-repeat;-webkit-background-size:cover;background-size:cover;margin-top:4rem;overflow:hidden;}
+		.wrap .bg>p{width:6.5rem;height: 0.7rem;margin:2.1rem auto 0;color:white;text-align:center;font-size:0.5rem;letter-spacing:0.1rem;}
+		.wrap .bg .light{width: 14.7rem;height: 14.7rem;background:url(img/light1.png) no-repeat;-webkit-background-size:cover;background-size:cover;margin:1.2rem auto 0;-webkit-animation:1s shan infinite;animation:1s shan infinite;overflow:hidden;position: relative;}
+		@-webkit-keyframes shan{0%{background:url(img/light1.png) no-repeat;background-size:cover;}50%{background:url(img/light2.png) no-repeat;background-size:cover;}100%{background:url(img/light1.png) no-repeat;background-size:cover;}}		
+		@keyframes shan{0%{background:url(img/light1.png) no-repeat;background-size:cover;}50%{background:url(img/light2.png) no-repeat;background-size:cover;}100%{background:url(img/light1.png) no-repeat;background-size:cover;}}		
+
+		.wrap .bg .light>i{position: absolute;top:-0.5rem;left:50%;margin-left:-1.9rem;width: 3.75rem;height: 3.75rem;background:url(img/pointer.png) no-repeat;-webkit-background-size:cover;background-size:cover;z-index:2;}	
+		.wrap .bg .cj{width: 13.5rem;height: 13.5rem;margin:0.6rem auto;position: relative;}
+		.wrap .bg .goo{-webkit-animation: goo 100s linear infinite;-moz-animation: goo 100s linear infinite;-ms-animation: goo 100s linear infinite;-o-animation: goo 100s linear infinite;animation: goo 100s linear infinite;}
+		@keyframes goo{0%{transform:rotate(0deg);}100%{transform: rotate(360deg)}}
+		@-webkit-keyframes goo{0%{transform:rotate(0deg);}100%{transform: rotate(360deg)}}
+		.wrap .bg .goo2{-webkit-animation: goo2 4s ease both;-moz-animation: goo2 4s ease both;-ms-animation: goo2 4s ease both;-o-animation: goo2 4s ease both;animation: goo2 4s ease both;}
+
+		.wrap .bg .cj i{width: 100%;height: 100%;position: absolute;top:0;left:0;background:url(img/cj.png) no-repeat;-webkit-background-size:cover;background-size:cover;-webkit-transform:rotate(30deg);}	
+		.wrap .bg .cj div{position: absolute;height: 7rem;width: 3.4rem;left:50%;margin-left:-1.7rem;top:1.2rem;font-size:0.5rem;transform-origin: center 83%;box-sizing:border-box;padding-top:1rem;text-align: center;}
+		.wrap .bg .cj div:nth-of-type(2n-1){color:green;}
+		.wrap .bg .cj div:nth-of-type(2n){color:gold;}
+		.wrap .bg .cj div img{width: 50%;display:block;margin:0.2rem auto;}
+		.wrap .bg .light .rotate{width: 5rem;height: 5rem;position: absolute;z-index:4;top:50%;left:50%;margin-left:-2.5rem;margin-top:-2.5rem;}
+		.wrap .bg .light .rotate img{display:block;width: 100%;height: 100%;}
+		/*hand*/
+		.guide{width: 4rem;height: 4rem;position: absolute;left:51%;top:7.5rem;z-index:4;}
+		.guide .hand{width: 100%;height: 100%;display:block;background:url(img/hand.png) no-repeat 0 0;-webkit-background-size:cover;background-size:cover;-webkit-animation:0.5s shake2 step-start infinite;}
+		.guide .dot{width:2rem;height:2rem;position: absolute;left:-0.7rem;top:-0.2rem;background:url(img/dot.png) no-repeat;background-size:cover;-webkit-animation:1.5s shake1 infinite;}
+		@-webkit-keyframes shake2{0%{background-position: 0 0;}50%{background-position: -3.7rem 0;}}
+		@-webkit-keyframes shake1{0%,20% {opacity: 0;transform: scale(0,0)}50%,80% {opacity: 1;transform: scale(1,1)}100% {opacity: 0;transform: scale(1,1)}}
+	
+		/*中奖后*/
+		#zj_contain{position: absolute;width: 100%;height: 100%;background-color:rgba(0,0,0,.8);z-index: 100;top:0;left:0;
+		}
+		#close_btn{position: absolute;top:8%;right: 10%;height: 4.6%;width: 8.3%;background: url(img/close.png) no-repeat;background-size:100% 100%;z-index: 103;
+		}
+		.coupon-modal-showPrize-dialog {-webkit-animation-name: showCoupon;animation-name: showCoupon;-webkit-animation-duration: .5s;animation-duration: .5s;-webkit-animation-fill-mode: both;animation-fill-mode: both;
+		}
+		.coupon-modal-showPrize-dialog{position:absolute;width: 96%;height: 21rem;left: 2%;top: 8.5%;background-image: url(img/couponBg.png);background-repeat: no-repeat;background-size: 100%;z-index: 101;
+		}
+		.decorate1,.decorate2,.decorate3,.decorate4,.decorate5,.decorate6{background-repeat: no-repeat;background-size: 100%;position: absolute;-webkit-animation-name: showDecorate;animation-name: showDecorate;-webkit-animation-duration: .5s;animation-duration: .5s;-webkit-animation-delay: .5s;animation-delay: .5s;-webkit-animation-fill-mode: both;animation-fill-mode: both;
+		}
+		.decorate1 {background-image: url(img/hua1.png);width: 84%;height: 21%;top:5%;left: 8%;z-index: 102;
+		}
+		.decorate2 {background-image: url(img/blue.png);width: 6.8%;height: 2.1%;top:50%;left: 10%;z-index: 102;
+		}
+		.decorate5 {background-image: url(img/blue.png);width: 6.8%;height: 2.1%;top:80%;left: 80%;z-index: 102;
+		}
+		.decorate3 {background-image: url(img/yellow.png);width: 5%;height: 4%;top:50%;left: 90%;z-index: 102;
+		}
+		.decorate6 {background-image: url(img/yellow.png);width: 5%;height: 4%;top:30%;left: 50%;z-index: 102;
+		}
+		.decorate4 {background-image: url(img/d5.png);width: 100%;height: 48%;top: 0;left: 0;
+		}
+		#zj_main{width: 100%;height: 50%;position: absolute;top:8rem;z-index: 103;
+		}
+		#zj_main h2{display: block;position: absolute;left:25%;text-align: center;font-size:0.5rem;width: 50%;height:8%;line-height:8% ;
+		}
+		#zj_imgbox{position: absolute;left:20%;width: 60%;height: 50%;top: 10%;
+		}
+		#zj_imgbox img{width: 100%;height: 100%;display:block;
+		}
+		#zj_btn{position: absolute;left:20%;width: 58%;height: 18%;top: 75%;border: none;background: white;background: url(img/btnBg.png) no-repeat;background-size:100% ;font-size: 0.8rem;font-family: "Microsoft Yahei";padding-bottom: 3%;
+		}
+		@keyframes showCoupon{from{transform: scale(.2,.2);}to{transform: scale(1,1);}
+		}
+		@keyframes showDecorate{from{opacity: 0;}to{opacity: 1;}
+		}
+			/*新增*/
+		#prizeku{width: 2.5rem;height:1.25rem;top:0.5rem;right:0.5rem;background:url(img/prizeku.png) no-repeat;position: absolute;-webkit-background-size:cover;	background-size:cover;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<a id="prizeku" href="prizeku.html"></a>
+		<div class="bg">
+			<p id="z-num">今日免费：<span>9</span>次</p>
+			<div class="light">
+				<i></i>
+				<div class="cj goo" id="rot">
+					<i></i>
+					<div><span class="0">谢谢参与</span><img src="img/z1.png"></div>
+					<div><span class="5">饿了么会员</span><img src="img/z4.png"></div>
+					<div><span class="4">京东plus会员</span><img src="img/z3.png"></div>
+					<div><span class="3">幸运奖</span><img src="img/z2.png"></div>
+					<div><span class="2">10元红包</span><img src="img/z6.png"></div>
+					<div><span class="1">美团外卖会员</span><img src="img/z5.png"></div>
+				</div>
+				<div class="rotate">
+					<img id="hit" src="img/rotate1.png">
+				</div>
+				<div class="guide">
+					<!-- <i class="dot"></i> -->
+					<i class="hand"></i>
+				</div>
+			</div>
+		</div>
+		<div id="zj_contain" style="display:none">
+			<div id="close_btn"></div>
+			<div class="coupon-modal-showPrize-dialog">
+				<div id="zj_main">
+					<h2>你的运气真是太棒啦!!!</h2>
+					<div id="zj_imgbox"><img src="img/r6.png"></div>
+					<button id="zj_btn">立即领取</button>
+				</div>
+				<i class="decorate1"></i><i class="decorate2"></i><i class="decorate3"></i><i class="decorate5"></i></i><i class="decorate6"></i>
+			</div>
+			<i class="decorate4"></i>
+		</div>	
+	
+	</div>
+
+	<script>
+	window.onload = function() {
+    window.onresize = function() {
+        window.location.reload()
+    };
+    var wrap = document.getElementsByClassName("wrap")[0];
+    var oBg = wrap.getElementsByClassName("bg")[0];
+    var h = document.documentElement.clientHeight;
+    console.log(h);
+    if (oBg.offsetHeight > h) {
+        wrap.style.height = oBg.offsetHeight + 360 + "px"
+    }
+    var aSdiv = document.querySelector(".cj").querySelectorAll("div");
+    var oBclose = document.querySelector(".wrap").querySelector("#b-close");
+    for (var i = 0; i < aSdiv.length; i++) {
+        aSdiv[i].style.transform = "rotate(" + i * 60 + "deg)"
+    }
+    var oImg = document.querySelector("#hit");
+    var alert = document.getElementById("zj_contain");
+    var close = document.getElementById("close_btn");
+    var result = document.getElementById("zj_btn");
+    var timer_cj = null;
+    var cj = wrap.getElementsByClassName("cj")[0];
+    var style = document.getElementsByTagName("style")[0];
+    var str = "";
+    var originCon = style.innerHTML;
+    var cishu = document.getElementById("z-num").getElementsByTagName("span")[0];
+    var onOff = 0;
+    if (window.localStorage.getItem("time")) {
+        var str = window.localStorage.getItem("time");
+        var time = str.split(",")
+    }
+    cishu.innerHTML = window.localStorage.getItem("numm") || 5;
+    var dd = parseInt(new Date().getDate());
+    if (time) {
+        if (dd != parseInt(time[0])) {
+            window.localStorage.removeItem("numm");
+            window.localStorage.removeItem("time");
+            time = [];
+            cishu.innerHTML = 5
+        }
+    }
+    oImg.addEventListener("click", zhuan, false);
+    function zhuan(e) {
+        e.preventDefault();
+        if (onOff) {
+            return
+        }
+        if (window.localStorage.getItem("time")) {
+            var str = window.localStorage.getItem("time");
+            var time = str.split(",")
+        } else {
+            var time = []
+        }
+        if (time[time.length - 1] > parseInt(time[0])) {
+            window.localStorage.removeItem("numm");
+            window.localStorage.removeItem("time");
+            time = []
+        }
+        if (parseInt(cishu.innerHTML) <= 0) {
+            window.alert("您的抽奖次数已用完");
+            return false
+        }
+        var d = new Date();
+        time.push(d.getDate());
+        window.localStorage.setItem("time", time);
+        var now = parseInt(window.localStorage.getItem("numm") || 5);
+        window.localStorage.setItem("numm", now - 1);
+        cishu.innerHTML = window.localStorage.getItem("numm");
+        var deg = Math.floor(Math.random() * 6) * 60 + 2160;
+        str = "@keyframes goo2{0%{transform:rotate(0deg);}100%{transform: rotate(" + deg + "deg)}}@-webkit-keyframes goo2{0%{transform:rotate(0deg);}100%{transform: rotate(" + deg + "deg)}}";
+        style.innerHTML = "";
+        style.innerHTML = originCon + str;
+        cj.className = "cj goo2";
+        oImg.src = "img/rotate2.png";
+        onOff = 1;
+        setTimeout(function() {
+            var num = (deg - 2160) / 60;
+            onOff = 0;
+            str = "";
+            oImg.src = "img/rotate1.png";
+            if (num != 0) {
+                alert.style.display = "block"
+            }
+            cj.className = "cj goo"
+        },
+        4300)
+    }
+    close.onclick = function() {
+        alert.style.display = "none";
+        cj.className = "cj goo"
+    };
+    result.onclick = function() {
+        window.location.href = "http://www.zoley.me"
+    }
+};
+
+	</script>
+</body>
+</html>

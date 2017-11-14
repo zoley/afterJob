@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>手机侧边红包拖拽效果</title>
+	<link rel="stylesheet" href="css/less1.css">
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale="+scale+", maximum-scale="+scale+", minimum-scale="+scale+"'>")
+		var html=document.getElementsByTagName("html")[0];
+        html.style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<header class="head">头部</header>
+		<section class="main">
+		<p>主题</p>
+		<div class="bg">
+			<a id="jchi" href="javascript:;">奖池</a>
+			<ol id="jchi-con">
+			<i id="jchi-con-close">×</i>
+			</ol>
+			<i id="b-close">×</i>
+			<div class="cj">
+				<i></i>
+				<div><span>一元现金</span></div>
+				<div><span>二元现金</span></div>
+				<div><span>三元现金</span></div>
+				<div><span>四元现金</span></div>
+				<div><span>五元现金</span></div>
+				<div><span>六元现金</span></div>
+				<div><span>七元现金</span></div>
+				<div><span>八元现金</span></div>
+				<div><span>九元现金</span></div>
+				<div class="rotate">
+					<img id="rot" src="img/rotate.png">
+					<!-- <strong>点击抽奖</strong> -->
+				</div>
+				<div class="alert">
+					<b class="close">×</b>
+					<span>恭喜你中了<b class="selected"></b></span>
+					<a href="http://www.baidu.com">去领取</a>
+				</div>
+			</div>
+		</div>
+
+		</section>
+		<footer class="foot">尾部</footer>
+		<div class="wallet">
+			<a href="#"><img src="img/wallet.png"></a>
+		</div>
+	</div>
+	<script>
+			var aSdiv=document.querySelector(".cj").querySelectorAll("div");
+			for(var i=0;i<aSdiv.length-2;i++){
+				aSdiv[i].style.transform="rotate("+i*40+"deg)"
+			}
+	</script>
+</body>
+</html>

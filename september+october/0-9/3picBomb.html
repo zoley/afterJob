@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>图片爆炸</title>
+	<script>
+// 		eval(function(d,e,a,c,b,f){b=function(a){return(a<e?"":b(parseInt(a/e)))+(35<(a%=e)?String.fromCharCode(a+29):a.toString(36))};if(!"".replace(/^/,String)){for(;a--;)f[b(a)]=c[a]||b(a);c=[function(a){return f[a]}];b=function(){return"\\w+"};a=1}for(;a--;)c[a]&&(d=d.replace(new RegExp("\\b"+b(a)+"\\b","g"),c[a]));return d}('8 5={4:Y(){8 a=y.O;T{W:-1<a.2("s"),u:-1<a.2("w"),x:-1<a.2("d"),B:-1<a.2("C")&&-1==a.2("F"),e:!!a.9(/d.*V.*/)||!!a.9(/d/)&&a.2("l")&&-1<a.2("l")&&0>a.2("p"),f:!!a.9(/\\(i[^;]+;( U;)? r.+h t X/),o:-1<a.2("v")||-1<a.2("14"),b:-1<a.2("b")||-1<a.2("h"),c:-1<a.2("c"),z:-1==a.2("A")}}()};g(5.4.e){g(5.4.o||5.4.b||5.4.c||5.4.f){8 3=1/D.E;7.G("<H I=\'J\' K=\'L-M=N,k=P-k,Q-3="+3+",R-3="+3+", S-3="+3+"\'>");8 6=7.m("6")[0];6.n.j=Z(7.10.11/15)+"12"}}13 6=7.m("6")[0],6.n.j="q";',
+// 62,68,"  indexOf scale versions mobile_bs html document var match  iPhone iPad AppleWebKit mobile ios if Mac  fontSize width QIHU getElementsByTagName style android Chrome 50px CPU Trident OS presto Android Presto webKit navigator webApp Safari gecko Gecko window devicePixelRatio KHTML write meta name viewport content user scalable no userAgent device initial maximum minimum return  Mobile trident  function parseFloat documentElement clientWidth px else Linux ".split(" "),0,{}));
+
+
+		var scale=1/window.devicePixelRatio;
+		childFn(scale);
+		function childFn(scale){
+			document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+		}
+	</script>
+	<style>
+		*{margin:0;padding:0;list-style:none;box-sizing:border-box;}
+		body{width: 100%;height: 0;}
+		.wrap{margin:100px auto 0;width: 506px;height: 506px;border:3px solid white;}
+		.wrap ul{width: 100%;height: 100%;perspective:800px;position: relative;}
+		.wrap ul li{position: absolute;width: 50px;height: 50px;}
+
+		.bg{background:url(img/bg.jpg) center center;background-size:cover;position: absolute;top:0;bottom:0;left:0;right:0;z-index:-1;opacity:0.6;}
+	</style>
+</head>
+<body>
+	<div class="bg"></div>
+	<p style="margin:70px 0 0;text-align:center;color:#B91D1D;font-family:'Microsoft Yahei';font-size:25px;">请点击图片查看效果</p>
+	<div class="wrap" id="wrap">
+		<ul>
+		</ul>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script>
+		$(function() {
+			var arrImg = ["img/a1.jpg", "img/a2.jpg", "img/a3.jpg", "img/a4.jpg", "img/a5.jpg", "img/a6.jpg", "img/a7.jpg"];
+			var aLi = $("ul").get(0).children;
+			var liW = 50;
+			var liH = 50;
+			var num = 10;
+
+			function createLi() {
+				for (var i = 0; i < 100; i++) {
+					var li = document.createElement("li");
+					li.top = parseInt(i / num) * liH;
+					li.left = i % num * liW;
+					styleLi(li);
+					$(li).click(function() {
+						arrImg.push(arrImg.shift());
+						for (var i = 0; i < aLi.length; i++) {
+							var distX = (aLi[i].left - this.left) / liW,
+								distY = (aLi[i].top - this.top) / liH;
+							distX = distX == 0 ? 0.5 : distX;
+							distY = distY == 0 ? 0.5 : distY;
+							gogo(aLi[i], distX, distY);
+						}
+					});
+					$("ul").append($(li));
+				}
+			}
+			createLi();
+
+			function gogo(obj, distX, distY) {
+				var distZ = Math.sqrt((num - Math.abs(distX)) * (num - Math.abs(distX)) + (num - Math.abs(distY)) * (num - Math.abs(distY))),
+					delay = Math.abs(distX) + Math.abs(distY),
+					rotateX = (100 * distZ + 360) * (Math.random() - 0.5),
+					rotateY = (100 * distZ + 360) * (Math.random() - 0.5),
+					translateX = distZ * liW / 25 * distX / Math.abs(distX),
+					translateY = distZ * liH / 25 * distY / Math.abs(distY),
+					translateZ = distZ * 50 + 200;
+				setTimeout(function() {
+					$(obj).css({
+						"transform": "translateX(" + translateX + "px) translateY(" + translateY + "px) translateZ(" + translateZ + "px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)",
+						"transition": "all " + (delay * 50 + 700) / 1000 + "s linear"
+					});
+					$(obj).animate({
+						"opacity": 0
+					}, delay * 50 + 500, "linear", function() {
+						styleLi(obj);
+					});
+				}, delay * 30);
+			};
+
+			function styleLi(obj) {
+				obj.style.cssText = "";
+				$(obj).css({
+					"background": "url(" + arrImg[0] + ") no-repeat",
+					"background-position": (-obj.left) + "px " + (-obj.top) + "px",
+					"background-size": "500px 500px",
+					"top": obj.top + "px",
+					"left": obj.left + "px",
+					"transform": "translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg)",
+					"opacity": 1
+				});
+			};
+		})
+	</script>
+</body>
+</html>

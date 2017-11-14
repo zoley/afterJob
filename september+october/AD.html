@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+</head>
+<body>
+	<script>
+	//-------2017-09-07---移动横幅原版备份---
+	var Dw = document.body.clientWidth;
+	var Dh = Dw * zone.height / zone.width;
+	var i = '<iframe src="' + ifsrc + '" width="100%" height="' + Dh + '" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>';
+
+	var arand=Math.floor(Math.random()*100000);
+	var o = "<div id="+arand+" style='width:100%;height:"+Dh+"px'><div style='clear:both;padding:0px;margin:0px;'>"+i+"</div></div>";
+	document.write(o);
+	//----
+	var ext= ads[0].imageurl.substr(ads[0].imageurl.lastIndexOf(".")).toLowerCase();
+	var Dw = document.body.clientWidth;
+	//Dw = Dw > 666 ? 666 : Dw;
+	var Dh = Dw * config.height / config.width;
+	if(ext!='.swf'){
+		var str = "<a target='_blank' href="+ads[0].url+" id='v_ads'><img src='"+ads[0].imageurl+"' border='0' width='100%' height='" + Dh + "'></a>";
+	}else{
+		var str = '<div id="v_ads" style="position:absolute;z-index:10000;background-color:#fff;opacity:0.01;filter:alpha(opacity:1);"><a href="'+ads[0].url+'" target="_blank" style="display:block;width:'+config.width+'px;height:'+config.height+'px;" id="_z_add_s_"></a></div><embed src="'+ads[0].content+'" type="application/x-shockwave-flash" height="'+config.height+'" width="'+config.width+'"   name="Zad" quality="high" wmode="opaque"   allowscriptaccess="always" >';  
+	}
+	document.writeln(str);
+	/*
+	* RUN STATS
+	*/
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+	//
+	//---------2017-09-07----移动横幅修改---翻转--上下翻转，间隔6秒重复
+	//
+	var Dw = document.body.clientWidth;
+	var Dh = Dw * zone.height / zone.width;
+	var i = '<iframe src="' + ifsrc + '" width="100%" height="' + Dh + '" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>';
+
+	var arand=Math.floor(Math.random()*100000);
+	var o = "<div id=z"+arand+" style='width:100%;height:"+Dh+"px'><div style='clear:both;padding:0px;margin:0px;'>"+i+"</div></div>";
+	var zstyle=document.createElement("style");
+	zstyle.innerHTML="#z"+arand+"{-webkit-animation:zfive 8s 0s infinite;-moz-animation:zfive 8s 0s infinite;-ms-animation:zfive 8s 0s infinite;animation:zfive 8s 0s infinite}@-webkit-keyframes zfive{0%,75%{transform:rotateX(0deg);}87.5%{transform:rotateX(180deg);}100%{transform:rotateX(360deg);}}@keyframes zfive{0%,75%{transform:rotateX(0deg);}87.5%{transform:rotateX(180deg);}100%{transform:rotateX(360deg);}}"
+	document.head.appendChild(zstyle);
+	document.write(o);
+
+	var ss=0;
+	setInterval(function(){
+		ss++;
+		ss%=8;
+		document.title=ss;
+	},1000)
+	//----------------------
+	var ext= ads[0].imageurl.substr(ads[0].imageurl.lastIndexOf(".")).toLowerCase();
+	var Dw = document.body.clientWidth;
+	//Dw = Dw > 666 ? 666 : Dw;
+	var Dh = Dw * config.height / config.width;
+
+	if(ext!='.swf'){
+		var str = "<a target='_blank' href="+ads[0].url+" id='v_ads'><img src='"+ads[0].imageurl+"' border='0' width='100%' height='" + Dh + "'></a>";
+	}else{
+		var str = '<div id="v_ads" style="position:absolute;z-index:10000;background-color:#fff;opacity:0.01;filter:alpha(opacity:1);"><a href="'+ads[0].url+'" target="_blank" style="display:block;width:'+config.width+'px;height:'+config.height+'px;" id="_z_add_s_"></a></div><embed src="'+ads[0].content+'" type="application/x-shockwave-flash" height="'+config.height+'" width="'+config.width+'"   name="Zad" quality="high" wmode="opaque"   allowscriptaccess="always" >';  
+	}
+	document.writeln(str);
+	/*
+	* RUN STATS
+	*/
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+	</script>
+</body>
+</html>

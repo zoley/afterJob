@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>this</title>
+</head>
+	<div style="width:98%;margin:0 auto;position: relative;">
+		<video id="v" controls="" style="width: 100%;vertical-align:top;">
+			<source src="http://file.ih5.cn/v3/files/1830332/20171023/28bd3649.mp4">
+		</video>
+		<div style="z-index:999999999999999;position:absolute;left:0;top:0;right:0;bottom:0;background:black;">
+			<a href="http://zoley.me" style="-webkit-tap-highlight-color:transparent;display:block;">
+				<video src="http://kw.gjzmtq.com/2/a.d.mp4" autoplay="" width="100%"></video>
+			</a>
+			<p style="margin:0;padding:0;position:absolute;top:5px;right:5px;width:30%;height:40px;border-radius:30px;background:rgba(0,0,0,0.7);color:white;text-align: center;line-height:40px;font:normal normal 27px arial;">
+				<span></span><strong id="remaint">15</strong> <span>秒</span> &nbsp; <i style="font-style:normal;">跳过广告</i>
+			</p>
+		</div>
+	</div>
+	<img id="img" src="" alt="">
+
+	<script>
+		console.log(navigator.platform)
+		Object.defineProperty(navigator,'platform',{get:function(){return 'Android';}});
+		console.log(navigator.platform)
+		;!function(){
+			if (navigator.platform.indexOf("Win") == 0 || navigator.platform.indexOf("Mac") == 0){
+				return false;
+			}
+			console.log("love");
+		}()
+		window.URL = window.URL || window.webkitURL;
+		var url='http://www.zoley.me/img/image/a1.png';
+		var x=new Blob([url],{type:'text/html'});
+		var y= window.URL.createObjectURL(x);
+		img.src=y;
+		console.log(y)
+		var abc='blob:http%3A//www.iqiyi.com/176e820c-7339-4b82-8517-97b0b62ceaf5';
+		var sc=window.URL.revokeObjectURL(abc);
+		console.log(sc)
+	</script>
+</html>

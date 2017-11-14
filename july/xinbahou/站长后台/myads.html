@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>辛巴网盟-站长后台</title>
+	<link rel="shortcut icon" type="image/x-icon" href="img/ico.ico">
+	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/myads.css">
+</head>
+<body>
+	<header id="head" class="wrap">
+		<a href="build_adverst.html" class="new-set fr">新建广告</a>
+		<div class="ico fr">
+			<a href="news.html" title="消息中心"><i></i></a>
+			<a href="javascript:;">
+				<i></i>
+				<ul class="ico-issue">
+					<li onclick="window.location.href='#'">常见问题</li>
+					<li onclick="window.location.href='#'">最新公告</li>
+					<li onclick="window.location.href='#'">反馈意见</li>
+					<li onclick="window.location.href='#'">咨询客服</li>
+				</ul>	
+			</a>
+			<!-- <a href="javascript:;"><i></i></a> -->
+		</div>
+		<a href="javascript:;" class="contact fr"><i></i>专属客服</a>
+	</header>
+	<div id="main" class="wrap">
+		<div id="side-bar">
+			<div class="logo">
+				<div></div>
+				<h1>辛巴网盟</h1>
+			</div>
+			<div class="personal">
+				<div class="photo"><img id="photo" src="img/photo/1.png" alt="头像"></div>
+				<div class="user">
+					<span id="userid">辣条</span>
+					<div class="setting">
+						<a href="setting.html">账户设置</a>
+						<a href="#">立即注销</a>
+					</div>
+				</div>
+			</div>
+			<a href="index.html"><i></i>平台概况</a>
+			<a class="active" href="myads.html"><i></i>我的广告</a>
+			<a href="actads.html"><i></i>活动广告</a>
+			<a href="siteManage.html"><i></i>网站管理</a>
+			<a href="pay.html"><i></i>付款中心</a>
+			<a href="news.html"><i></i>消息中心</a>
+			<a href="report.html"><i></i>效果报告</a>
+		</div>
+		<div id="content">
+			<h2>我的广告</h2>
+			<div class="con-con">
+				<div id="news-table">
+					<table>
+						<thead>
+							<tr><th>我的广告</th></tr>
+							<tr>
+								<th>广告位名称</th>
+								<th>广告位ID</th>
+								<th>尺寸</th>
+								<th>广告</th>
+								<th>计费方式</th>
+								<th>上次修改时间</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr class="gzid_36493" zname="创建于2017-06-27 15:10:11" zid="36493" zsize="200x200" ztype="1003" zl="0">
+								<td><span >测试广告 </span><a href="edit_ads.html"> 修改</a><a class="getcode" href="javascript:;">获取代码</a><a class="del" href="#">删除</a><a href="report.html">查看报告</a></td>
+								<td>36493</td>
+								<td>640*200</td>
+								<td>移动漂浮</td>
+								<td>CPC</td>
+								<td><span>2017-07-02</span>&nbsp;17.25.41</td>
+							</tr>
+							<tr class="gzid_36493" zname="创建于2017-06-27 15:10:11" zid="36493" zsize="200x200" ztype="1003" zl="0">
+								<td><span>测试广告</span><a href="edit_ads.html">修改</a><a class="getcode" href="javascript:;">获取代码</a><a class="del" href="#">删除</a><a href="report.html">查看报告</a></td>
+								<td>36493</td>
+								<td>200*200</td>
+								<td>移动悬浮</td>
+								<td>CPC</td>
+								<td><span>2017-07-02</span>&nbsp;17.25.41</td>
+							</tr>
+							<tr class="gzid_36493" zname="创建于2017-06-27 15:10:11" zid="36493" zsize="200x200" ztype="1003" zl="0">
+								<td><span>测试广告</span><a href="edit_ads.html">修改</a><a class="getcode" href="javascript:;">获取代码</a><a class="del" href="#">删除</a><a href="report.html">查看报告</a></td>
+								<td>36493</td>
+								<td>640*200</td>
+								<td>移动漂浮</td>
+								<td>CPC</td>
+								<td><span>2017-07-02</span>&nbsp;17.25.41</td>
+							</tr>
+
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="lean_overlay" class="con_del con_del1" style=" position: fixed; z-index: 100; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.1; background: rgb(0, 0, 0);"></div>
+	<div class="modal con_del" style="width: 300px; "><div class="modal-header"><div class="modal_title">删除广告</div><div class="modal_close"></div></div><div class="modal-body"><div class="icon"></div><div class="text">确认删除吗</div></div><div class="modal-footer"><button id="modeal_ok" class="btn bnt51a35" type="submit">确认</button><button id="modeal_cancel" class="btn rowbnt" type="submit">取消</button></div></div>
+
+
+	<div class="modal con_del1" style="width: 600px; top: 163.5px; left:43%;">
+		<div class="modal-header">
+			<div class="modal_title">
+				获取代码
+			</div>
+			<div class="modal_close"></div>
+		</div>
+		<div class="modal-body">
+			<div class="icon"></div>
+			<div class="text">
+				<b>投放注意事项:<font color="red">(有以下投放情况将影响您的收益甚至封号)</font></b>
+				<br />1：人工/使用工具模拟移动流量来路、人为恶意重复点击
+				<br />2：明示、强制性/有偿性要求用户只点广告
+				<br />3：相同位置投放多层广告或并排衔接多个广告
+				<br />4：将代码放在空白网页或没有任何实际内容的网页里！
+				<br />5：将横幅/中屏放在不可见iframe中显示,视为作弊
+				<br />注意:广告代码应放在己登记域名的网站下投放，否则将出现不计费的情况.(如有疑问请联系你的专属客服（本页右上角）
+				<br />
+				<br />HTML代码：
+				<br />
+				<textarea class="input_text span70 textarea_text" name="log_text" id="log_text" style="width: 90%;">&lt;script src='http://a5.lerencx.cn/36493'&gt;&lt;/script&gt;</textarea>
+				<input name="button" type="button" class="btn btn-green big" id="getcode" value="复制代码" />
+				<span class="copy_ok _ok1" style=" ">复制成功!</span>
+				<br />
+				<br />JS代码：
+				<br />
+				<textarea class="input_text span70 textarea_text" name="log_text" id="log_js_text" style="width: 90%;">document.writeln(&quot;&lt;script src='http:\/\/a5.lerencx.cn\/36493'&gt;&lt;\/script&gt;&quot;);</textarea>
+				<input name="button" type="button" class="btn btn-green big" id="getjscode" value="复制代码" />
+				<span class="copy_ok _ok2" id="copy_js_ok">复制成功!</span>
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button id="modeal_ok1" class="btn bnt51a35" type="submit" style="display: none;">确认</button>
+			<button id="modeal_cancel1" class="btn rowbnt" type="submit">取消</button>
+		</div>
+	</div>
+	<div id="change-photo">
+		<h2>修改头像</h2>
+		<ul>
+			<li class="active"><img src="img/photo/1.png" alt=""></li>
+			<li><img src="img/photo/2.png" alt=""></li>
+			<li><img src="img/photo/3.png" alt=""></li>
+			<li><img src="img/photo/4.png" alt=""></li>
+			<li><img src="img/photo/5.png" alt=""></li>
+			<li><img src="img/photo/6.png" alt=""></li>
+			<li><img src="img/photo/7.png" alt=""></li>
+			<li><img src="img/photo/8.png" alt=""></li>
+			<li><img src="img/photo/9.png" alt=""></li>
+			<li><img src="img/photo/10.png" alt=""></li>
+			<li><img src="img/photo/11.png" alt=""></li>
+			<li><img src="img/photo/12.png" alt=""></li>
+			<li><img src="img/photo/13.png" alt=""></li>
+			<li><img src="img/photo/14.png" alt=""></li>
+			<li><img src="img/photo/15.png" alt=""></li>
+			<li><img src="img/photo/16.png" alt=""></li>
+			<li><img src="img/photo/17.png" alt=""></li>
+			<li><img src="img/photo/18.png" alt=""></li>
+			<li><img src="img/photo/19.png" alt=""></li>
+			<li><img src="img/photo/20.png" alt=""></li>
+			<li><img src="img/photo/21.png" alt=""></li>
+			<li><img src="img/photo/22.png" alt=""></li>
+			<li><img src="img/photo/23.png" alt=""></li>
+			<li><img src="img/photo/24.png" alt=""></li>
+			<li><img src="img/photo/25.png" alt=""></li>
+			<li><img src="img/photo/26.png" alt=""></li>
+			<li><img src="img/photo/27.png" alt=""></li>
+			<li><img src="img/photo/28.png" alt=""></li>
+			<li><img src="img/photo/29.png" alt=""></li>
+			<li><img src="img/photo/30.png" alt=""></li>
+			<li><img src="img/photo/31.png" alt=""></li>
+			<li><img src="img/photo/32.png" alt=""></li>
+			<li><img src="img/photo/33.png" alt=""></li>
+			<li><img src="img/photo/34.png" alt=""></li>
+			<li><img src="img/photo/35.png" alt=""></li>
+			<li><img src="img/photo/36.png" alt=""></li>
+			<li><img src="img/photo/37.png" alt=""></li>
+			<li><img src="img/photo/38.png" alt=""></li>
+			<li><img src="img/photo/39.png" alt=""></li>
+			<li><img src="img/photo/40.png" alt=""></li>
+		</ul>
+		<p><input type="button" value="关闭" id="photo-cancel"><input type="button" id="photo-btn" value="提交修改"></p>
+	</div>
+
+
+
+	<script src="js/home.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<script type="text/javascript">
+		$(".del").on("click",function(){
+			c = $(this);
+			$(".con_del").show();
+//			确认删除
+			$("#modeal_ok").on("click",function(){
+				$(".con_del").hide();
+				c.parentsUntil("tbody").remove();
+			});
+//			确认删除end
+//			取消删除
+			$(".modal_close,#modeal_cancel").on("click",function(){
+				$(".con_del").hide();
+			});		
+		})		
+// 		$(".showcode").on("click",function(){
+// 			c = $(this);
+// 			$(".con_del1").show();
+// //			取消删除
+// 			$(".modal_close,#modeal_cancel1").on("click",function(){
+// 				$(".con_del1").hide();
+// 			});		
+// 		})
+
+
+		$('.getcode').on('click', function(option) { 
+			var zid = $(this).parent().parent().attr("zid");
+			get_code(zid);
+			c = $(this);
+			$(".con_del1").show();
+//			取消删除
+			$(".modal_close,#modeal_cancel1").on("click",function(){
+				$(".con_del1").hide();
+			});	
+		});
+
+
+
+		function get_code(zid){
+			var zl = $('.gzid_'+zid).attr('zl');
+			var ztype =  $('.gzid_'+zid).attr('ztype');
+
+			if(zl>0){  
+				var surl = "http://a5.lerencx.cn/"+zid;
+			}else {
+				var surl = "<script src='http://a5.lerencx.cn/"+zid+"'><\/script>";
+			}
+
+			text = '<b>投放注意事项:<font color=red>(有以下投放情况将影响您的收益甚至封号)</font></b><br>1：人工/使用工具模拟移动流量来路、人为恶意重复点击<br>2：明示、强制性/有偿性要求用户只点广告<br>3：相同位置投放多层广告或并排衔接多个广告<br>4：将代码放在空白网页或没有任何实际内容的网页里！<br>5：将横幅/中屏放在不可见iframe中显示,视为作弊<br>注意:广告代码应放在己登记域名的网站下投放，否则将出现不计费的情况.(如有疑问请联系你的专属客服（本页右上角）<br><br>';
+
+			text += 'HTML代码：<br /><textarea  class="input_text span70 textarea_text" name="log_text" id="log_text" style="width: 90%;">'+surl+'</textarea><input name="button"  type="button" class="btn btn-green big" id="getcode"  value="复制代码" /><span class="copy_ok" style=" ">复制成功!</span><br /><br />';
+
+
+			var ccurl = surl.replace(/\//g, '\\\/');
+			text += 'JS代码：<br /><textarea  class="input_text span70 textarea_text" name="log_text" id="log_js_text" style="width: 90%;">document.writeln("'+ccurl+'");</textarea><input name="button"  type="button" class="btn btn-green big" id="getjscode"  value="复制代码" /><span class="copy_ok" id="copy_js_ok" style="display:none">复制成功!</span>';
+
+			$("#modeal_ok1").hide();
+			$('#getcode').on('click', function(option) {  
+				var Url1=document.getElementById("log_text");
+				Url1.select(); // 选择对象
+				document.execCommand("Copy"); // 执行浏览器复制命令
+				$("._ok1").css("display","inline-block");
+			});
+
+			$('#getjscode').on('click', function(option) {  
+				var Url2=document.getElementById("log_js_text");
+				Url2.select(); // 选择对象
+				document.execCommand("Copy"); // 执行浏览器复制命令
+				$("._ok2").css("display","inline-block");
+			});
+		}
+	</script>
+	<script>
+		$("tbody tr td:first-child span").css({"maxWidth":"260px","overflow":"hidden","display":"inline-block","text-overflow":"ellipsis","white-space":"nowrap","vertical-align":"middle","height":"80px"});
+
+		$("tbody tr td:first-child span").each(function(){
+			$(this).attr("title",$(this).parent().parent().attr("zname"));
+		});
+	</script>
+</body>
+</html>

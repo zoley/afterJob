@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>辛巴网盟-站长后台</title>
+	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/indexTotal.css">
+</head>
+<body>
+	<header id="head" class="wrap">
+		<div class="logo fl"></div>
+		<a href="javascript:;" class="contact fl">408122059</a>
+		<div class="ico fl">
+			<a href="javascript:;"><i></i></a>
+			<a href="javascript:;"><i></i></a>
+			<a href="javascript:;"><i></i></a>
+		</div>
+		<a href="javascript:;" class="new-set fr">新建广告</a>
+	</header>
+	<div id="main" class="wrap">
+		<div id="side-bar">
+			<a href="javascript:;"><i></i>首页</a>
+			<a href="javascript:;"><i></i>我的广告</a>
+			<a href="javascript:;"><i></i>活动广告</a>
+			<a href="javascript:;"><i></i>效果报告</a>
+		</div>
+		<div id="content">
+			<div class="con-side-bar">
+				<a class="active" href="javascript:;">整体情况</a>
+				<a href="javascript:;">账户设置</a>
+				<a href="javascript:;">网站管理</a>
+				<a href="javascript:;">付款中心</a>
+				<a href="javascript:;">消息中心</a>
+			</div>
+			<div class="con-con">
+				<ul class="gain">
+					<li>
+						<div>&yen;</div>
+						<div>
+							<p>账户余额</p>
+							<b>0.00</b><span>元</span>
+						</div>
+					</li>
+					<li>
+						<div>&yen;</div>
+						<div>
+							<p>今日收入</p>
+							<b>0.00</b><span>元</span>
+						</div>
+					</li>
+					<li>
+						<div>&yen;</div>
+						<div>
+							<p>昨日收入</p>
+							<b>0.00</b><span>元</span>
+						</div>
+					</li>
+					<li>
+						<div>&yen;</div>
+						<div>
+							<p>本月收入</p>
+							<b>0.00</b><span>元</span>
+						</div>
+					</li>
+				</ul>
+				<div class="condition">
+					<div class="title">
+						<span>整体情况</span>
+						<div>
+							<span class="report-date">今天：2017-6-26</span>
+							<i class="report-arrow"></i>
+						</div>
+					</div>
+
+					<!-- <div class="box" >
+						<div class="box-title" style="height:76px;">
+							<div style="font-size:18px; "> 整体情况</div>
+							<div class="button" style="float:left">
+								<button class="btn btn-primary defaul_report">设置为默认报告</button>
+								<span class="report_view_type"><strong>数据显示</strong>：
+									<label><input name="report_view_type" type="radio" value="all"  checked/>汇总报告</label>
+									<label><input name="report_view_type" type="radio" value="plan"   />项目报告</label>
+									<label><input name="report_view_type" type="radio" value="site" />网站报告</label>
+									<label><input name="report_view_type" type="radio" value="zone" />广告位报告</label>
+									<label><input name="report_view_type" type="radio" value="adtpl" />广告类型</label>
+								</span> 
+							</div>
+							<div class="report_menu">
+								<div class="report_menu_date">
+									<div class="report_menu_date_text">按时间段</div>
+									<div class="report_menu_date_time">2017-5-31 至 2017-06-29</div>
+								</div>
+								<div class="report_menu_right">
+									<div class="report_menu_right_bg"></div>
+								</div>
+							</div>
+							<div class="report_menu_html" style="display:none">
+								<div class="up">
+									<div class="up_left">
+										<div><strong>日期范围</strong></div>
+										<div style="margin-top:10px">
+											<input type="text" name="sta" id="sta" onclick="__C('sta','1')">
+											<span> – </span>
+											<input type="text" name="end" id="end" onclick="__C('end','1')">
+										</div>
+									</div>
+									<div class="up_right">
+										<div><strong>快速报告的时间范围</strong></div>
+										<div style="margin-top:10px">
+											<table>
+												<tbody>
+													<tr>
+														<td><a class="menubutton" href="javascript:void(0)" data_href="2017-06-29_2017-06-29">今天：6月29日</a></td>
+														<td><a class="menubutton" href="javascript:void(0)" data_href="2017-6-1_2017-06-29">本月：6月</a></td>
+													</tr>
+													<tr>
+														<td><a class="menubutton" href="javascript:void(0)" data_href="2017-6-28_2017-6-28">昨天：6月28日</a></td>
+														<td><a class="menubutton" href="javascript:void(0)" data_href="2017-5-1_2017-5-31">上月：5月</a></td>
+													</tr>
+													<tr>
+														<td><a class="menubutton" href="javascript:void(0)" data_href="2017-6-23_2017-06-29">过去 7 天</a></td>
+														<td><a class="menubutton" href="javascript:void(0)" data_href="">所有时间</a></td>
+													</tr>
+													<tr>
+														<td><a class="menubutton" href="javascript:void(0)"  data_href="2017-5-31_2017-06-29">最近 30 天</a></td>
+														<td>&nbsp;</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
+								</div>
+								<div class="down">
+									<button class="btn btn-primary staendbutton" style="margin-right:10px">应用</button>
+									<a href="#">取消 </a></div>
+								</div>
+							</div>
+							<div class="box-content" >
+								<div  id="container" style="margin-top:40px; height:230px;"> </div>
+								<div class="fold"> <a href="javascript:void(0);" id="fold_close"></a> </div>
+							</div>
+							<div class="box-content mt30">
+								<table class="table">
+									<thead>
+										<tr>
+											<th>日期</th>
+											<th>网页浏览量</th>
+											<th>CPC有效</th>
+											<th>CPM有效</th>
+											<th>CPV有效</th>
+											<th>ECD有效</th>
+											<th>收入</th>
+											<th>点击率</th>
+											<th>千次收益</th>
+											<th>平均单价</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>2017-06-27	周二</td>
+											<td>0</td>
+											<td>3</td>
+											<td>0</td>
+											<td>0</td>
+											<td>0</td>
+											<td>0.3元</td>
+
+											<td>INF%</td>
+											<td>INF</td>
+											<td>0.1</td>
+										</tr>
+										<tr>
+											<td>2017-06-11	周日</td>
+											<td>0</td>
+											<td>1</td>
+											<td>0</td>
+											<td>0</td>
+											<td>0</td>
+											<td>0.12元</td>
+
+											<td>INF%</td>
+											<td>INF</td>
+											<td>0.12</td>
+										</tr>
+									</tbody>
+								</table>
+								<div></div>
+							</div>
+						</div>
+					</div> -->
+				</div>
+				<ul class="rank">
+					<li>
+						<h3>曝光量<span>（TOP5）</span></h3>
+						<div>
+							<p>站长名字1</p>
+							<p>站长名字2</p>
+							<p>站长名字3</p>
+							<p>站长名字4</p>
+							<p>站长名字5</p>
+						</div>
+						<div>
+							<p>1234567</p>
+							<p>123456</p>
+							<p>12345</p>
+							<p>1234</p>
+							<p>123</p>
+						</div>
+					</li>
+					<li>
+						<h3>点击率<span>（TOP5）</span></h3>
+						<div>
+							<p>站长名字1</p>
+							<p>站长名字2</p>
+							<p>站长名字3</p>
+							<p>站长名字4</p>
+							<p>站长名字5</p>
+						</div>
+						<div>
+							<p>1234567</p>
+							<p>123456</p>
+							<p>12345</p>
+							<p>1234</p>
+							<p>123</p>
+						</div>
+					</li>
+					<li>
+						<h3>花费（元）<span>（TOP5）</span></h3>
+						<div>
+							<p>站长名字1</p>
+							<p>站长名字2</p>
+							<p>站长名字3</p>
+							<p>站长名字4</p>
+							<p>站长名字5</p>
+						</div>
+						<div>
+							<p>1234567</p>
+							<p>123456</p>
+							<p>12345</p>
+							<p>1234</p>
+							<p>123</p>
+						</div>
+					</li>
+					<li>
+						<h3>点击量<span>（TOP5）</span></h3>
+						<div>
+							<p>站长名字1</p>
+							<p>站长名字2</p>
+							<p>站长名字3</p>
+							<p>站长名字4</p>
+							<p>站长名字5</p>
+						</div>
+						<div>
+							<p>1234567</p>
+							<p>123456</p>
+							<p>12345</p>
+							<p>1234</p>
+							<p>123</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
+
+	<script src="js/home.js"></script>
+	<script src="js/jquery.min.js"></script>
+	<!-- <script src="js/indexTotal.js"></script> -->
+</body>
+</html>

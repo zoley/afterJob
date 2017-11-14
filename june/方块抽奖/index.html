@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>方块抽奖</title>
+	<style>
+		html,body{width: 100%;height: 100%;position: relative;font-family:"Microsoft Yahei";}
+		*{margin:0;padding:0}.wrap{width:100%;height:100%;position:absolute;left:0;top:0;background:url(img/bg.jpg) no-repeat;background-size:cover}#main{width:16rem;height:13.75rem;background:url(img/light1.png) no-repeat;background-size:cover;font-size:.4rem;position:relative;margin-top:7.5rem;-webkit-animation:1s shan infinite;overflow:hidden}@-webkit-keyframes shan{0%{background:url(img/light1.png) no-repeat;background-size:cover}50%{background:url(img/light2.png) no-repeat;background-size:cover}100%{background:url(img/light1.png) no-repeat;background-size:cover}}#main table{width:13.5rem;height:11rem;border-spacing:.125rem;margin:1.5rem auto}#main table tbody tr td{width:4.25rem;height:3.5rem;background:url(img/item.png) no-repeat;background-size:cover;font-size:.75rem;line-height:3.5rem;text-align:center}#main table tbody tr td.active{background:url(img/active.png) no-repeat;background-size:cover}#main table tbody tr td.begin{position:relative;background:url(img/begin.png) no-repeat;background-size:cover;font-size:1rem;color:#D48101;font-weight:700;font-family:"Microsoft Yahei"}#main table tbody tr td.begin .dot{width:2rem;height:2rem;position:absolute;left:1.1rem;top:-.4rem;background:url(img/dot.png) no-repeat;background-size:cover;-webkit-animation:1.5s shake1 infinite}@-webkit-keyframes shake1{0%,20%{opacity:0;transform:scale(0,0)}50%,80%{opacity:1;transform:scale(1,1)}100%{opacity:0;transform:scale(1,1)}}.result{width:100%;height:100%;background:rgba(0,0,0,.8);position:absolute;top:0;left:0;z-index:10;display:none}.result i{position:absolute;width:.6rem;height:.6rem;background:url(img/gclose.png) no-repeat;-webkit-background-size:100% 100%;top:10%;right:5%;background-size:100% 100%;top:5%;right:10%}.result .ghead{width:80%;margin:0 auto}.result .ghead img{width:100%;display:block}.result .gbody{background-color:#FF364C;overflow:hidden;width:80%;margin:0 auto}.result .gbody .con{width:90%;margin:10px auto}.result .gbody .con img{width:100%;display:block}.result .gbody span{display:block;width:90%;height:2rem;margin:.5rem auto;text-align:center;line-height:2rem;font-size:1rem;background:url(img/gdown.png) no-repeat;-webkit-background-size:100% 100%;background-size:100% 100%}.result b{display:block;width:80%;position:absolute;top:8%;left:50%;margin-left:-40%}.result b img{display:block;width:100%}.prize{width:100%;height:3rem;position:relative;font-size:0;border-bottom:1px solid gold;margin-top:.5rem}.prize i{width:2rem;height:2rem;background:url(img/prize.png) no-repeat;background-size:cover;position:absolute;top:-.15rem;left:0}.prize a img{width:3rem;height:3rem}.prize a:nth-of-type(1) img{margin-left:.5rem}
+	</style>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div id="main">
+			<table id="tab">
+				<tbody>
+					<tr>
+						<td class="a0">一等奖</td>
+						<td class="a1">二等奖</td>
+						<td class="a2">三等奖</td>
+					</tr>
+					<tr>
+						<td class="a7">四等奖</td>
+						<td class="begin">START<i class="dot"></i></td>
+						<td class="a3">二等奖</td>
+					</tr>
+					<tr>
+						<td class="a6">三等奖</td>
+						<td class="a5">四等奖</td>
+						<td class="a4">特别奖</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div class="prize">
+			<i></i>
+			<a href="javascript:;"><img src="img/prize1.png"></a>
+			<a href="javascript:;"><img src="img/prize2.png"></a>
+			<a href="javascript:;"><img src="img/prize3.png"></a>
+			<a href="javascript:;"><img src="img/prize4.png"></a>
+			<a href="javascript:;"><img src="img/prize5.png"></a>
+		</div>
+		<div class="result">
+			<i></i>
+			<div class="ghead"><img src="img/ghead.png"></div>
+			<div class="gbody">
+				<div class="con">
+					<img src="img/prize-3.png">
+				</div>
+				<span class="gdown">马上使用</span>
+			</div>
+			<b><img src="img/gbg.png"></b>
+		</div>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script>
+	window.onload=function(){
+		var oTab=document.getElementById("tab");
+		var aTd=oTab.getElementsByTagName("td");
+		var oBegin=oTab.getElementsByClassName("begin")[0];
+		var index=0;
+		var time=null;//转一圈时间
+		var quan=0;//累计圈数
+		var oNum=4;//自定义圈数
+		var oIndex=null;//奖品对应下标
+		var sNum=0;//记录上一次td
+		var sec=0.8;
+		var onOff=0;
+		for(var i=0;i<aTd.length;i++){
+			if(i==4)continue;
+			aTd[i].index=i;
+		}
+		aTd[sNum].style.backgroundImage="url(img/active.png)";
+		function go(){
+			clearInterval(oBegin.timer);
+			oBegin.timer=setInterval(function(){
+				index++;
+				if(index==aTd.length){//判断走完一圈
+					index=0;
+					time=parseInt(time/sec);
+					sec-=0.1;
+					quan++;
+					if(quan==oNum){
+						oIndex=Math.floor(Math.random()*(8-0));
+					}
+					go();
+				}
+				aTd[sNum].style.backgroundImage="url(img/item.png)";
+				// aTd[sNum].className="active";
+				for(var i=0;i<aTd.length;i++){
+					if(i==4){i=5;}
+					if(aTd[i].className==("a"+index)){
+						sNum=i;
+						aTd[i].style.backgroundImage="url(img/active.png)";
+						if(index==oIndex){
+							aTd[i].style.backgroundImage="url(img/active.png)";
+							clearInterval(oBegin.timer);
+							quan=0;
+							index=0;
+							sec=0.8;
+							onOff=0;
+							console.log(oIndex);
+							$(".result").delay(500).fadeIn(450);
+							oIndex=null;
+						}
+					}
+				}
+			},time)
+		}
+		oBegin.onclick=function(){
+			if(!onOff){
+				onOff=1;
+				time=50;
+				go();
+			}
+		}
+		$(".result i").click(function(){
+			$(".result").css("display","none");
+		})    
+		$(".result .gdown").click(function(){
+			window.location.href="http://www.zoley.me/2/fish";
+		})		
+	}
+	</script>
+</body>
+</html>

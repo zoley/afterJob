@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="辛巴网盟,辛巴广告联盟,移动广告平台,站长广告联盟,点击CPC" />
+	<meta name="description" content="辛巴网盟，辛巴广告联盟移动手机广告平台，一直致力于广告主拓展精准有效的投放通路，提供各种形式的网络广告投放服务；移动手机广告平台每天的广告显示量达到2亿次以上，超高的广告单价，预计千次展现收益20元。" />
+	<title>辛巴网盟-广告商后台</title>
+	<link rel="shortcut icon" type="image/x-icon" href="img/ico.ico">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/buildPlan.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/jquery.validate.js"></script>
+	<script src="js/home.js"></script>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale="+scale+", maximum-scale="+scale+", minimum-scale="+scale+"'>")
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/25+"px";
+	</script>
+</head>
+<body>
+	<header id="head">
+		<div class="logo fl">
+			<i class="fl"></i>
+			<h1>辛巴网盟</h1>
+		</div>
+		<div class="menu fr">
+			<i id="show-menu"></i>			
+		</div>
+	</header>
+	<div id="side">
+		<a href="index.html"><i></i>我的概况<span>></span></a>
+		<a href="plan.html"><i></i>计划管理<span>></span></a>
+		<a href="ads.html"><i></i>广告管理<span>></span></a>
+		<a href="report.html"><i></i>效果报告<span>></span></a>
+		<a href="javascript:;"><i></i>退出<span>></span></a>
+	</div>
+	<p class="z-title">计划管理>>新建计划</p>
+	<div id="content">
+		<form action="&#10;/index.php?e=adv/plan.create_post" method="POST" enctype="multipart/form-data" name="form_b" class="form-horizontal z-form" id="form_b">
+			<div class="z-choice">
+				<div class="z-basic active">基本信息</div>
+				<div class="z-direction">定向设置</div>
+			</div>
+			<input name="planid" id="planid" type="hidden" value="">
+			<input name="olb_price" id="olb_price" type="hidden" value="">
+			<div class="box">
+				<div class="z-basic-a">
+					<div class="box-content" style="position:relative">
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" class="zone_form controls">
+							<tbody>
+								<tr>
+									<td width="150">计划名称</td>
+									<td><input type="text" name="planname" id="planname" class="input-27" value=""></td>
+								</tr>
+								<tr>
+									<td>计费模式</td>
+									<td>
+										<select name="plantype" id="plantype" style="padding:5px;">
+											<option value="cpc">&nbsp;CPC&nbsp;</option>
+											<option value="cpm">&nbsp;CPM&nbsp;</option>
+											<option value="cpv">&nbsp;CPV&nbsp;</option>
+											<option value="ecd">&nbsp;ECD&nbsp;</option>
+										</select>
+									</td>
+								</tr>
+
+								<tr>
+									<td>结算周期 </td>
+									<td>
+										<select name="clearing" style="padding:5px;">
+											<option value="week" selected="">周结项目</option>
+											<option value="day">日结项目</option>
+											<option value="month">月结项目</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>计划活动分类</td>
+									<td>
+										<select name="classid" style="padding:5px;">
+											<option value="173">推广</option>
+											<option value="172">H5游戏</option>
+											<option value="171">交友</option>
+											<option value="170">网赚</option>
+											<option value="169">视频类</option>
+											<option value="168">播放器</option>
+											<option value="167">女性保健</option>
+											<option value="157">手游</option>
+											<option value="156">网站推广</option>
+											<option value="150">手机应用</option>
+											<option value="145">男性保健</option>
+											<option value="143">其它</option>
+										</select>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" class="zone_form controls keys" style="display: none;">
+
+							<tbody>
+								<tr>
+									<td width="150">接口密钥</td>
+									<td> 
+										<input name="pkey" type="text" class="input_text span30" id="info" value="">
+										<span class="helpsp">商家与联盟对接数据时的密钥.</span>
+									</td>
+								</tr>
+
+								<tr>
+									<td width="150">数据返回</td>
+									<td>
+										<input name="datatime" type="text" class="input-27" value="隔天">
+										<span class="helpsp">返回给站长的时间，比如 隔天 月底.</span>
+									</td>
+								</tr>
+								<tr>
+									<td>cookie有效期</td>
+									<td>
+										<input name="cookie" type="text" class="input-27" value="30">
+										天 <span class="helpsp">在cookie有效期内联盟分成有效</span>
+									</td>
+								</tr>
+
+							</tbody>
+						</table>
+
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" class="zone_form controls table_cps" style="display: none;">
+
+							<tbody>
+								<tr>
+									<td valign="top" width="150">自定义链接</td>
+									<td>
+										<input name="linkon" type="radio" id="linkurl" value="y" checked="">
+										开启
+										<input type="radio" name="linkon" value="n">
+										关闭 <span class="helpsp">站长可以随意自定义商品地址.</span>
+									</td>
+								</tr>
+								<tr>
+									<td valign="top">自定义链接主域</td>
+									<td>
+										<input name="linkurl" type="text" class="input-27" value="">
+										<span class="helpsp">如：www.taobao.com可自定义到这个域名下任何链接</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="box-content" style="position:relative">
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" class="zone_form controls">
+							<tbody>
+								<tr id="gradeprice_d" style="display: none;">
+									<td width="150">站长分级佣金</td>
+									<td>
+										<input type="radio" name="gradeprice" value="0" checked="">
+										<span id="price_text1">不分等级</span>
+										<input type="radio" name="gradeprice" id="gradeprice" value="1">
+										<span id="price_text2">分网站等级</span>
+
+										<input type="radio" name="gradeprice" id="gradeprice" value="2">
+										<span>接口自定义分成比例</span>
+
+									</td>
+								</tr>
+								<tr id="classprice_d" style="display:none">
+									<td width="150">按类提成</td>
+									<td>
+										<div style="position: relative;">
+											<table style="width:100%" border="0" cellpadding="0" cellspacing="0" class="c_f_i">
+												<tbody>
+													<tr>
+														<td>
+															<table style="width:100%" border="0" cellpadding="0" cellspacing="0" class="c_f_f">
+																<tbody>
+																	<tr>
+																		<td>分成标识</td>
+																		<td>标识说明</td>
+																		<td>佣金（%）</td>
+																		<td>备注</td>
+																	</tr>
+																	<tr>
+																		<td>
+																			<div>
+																				<input name="classprice_mark[]" type="text" class="input-27 " style="width:90px" value="">
+																			</div>
+																		</td>
+																		<td>
+																			<div>
+																				<input name="classprice_mark_info[]" type="text" class="input-27 " style="width:120px" value="">
+																			</div>
+																		</td>
+																		<td>
+																			<div>
+																				<input name="classprice_adv[]" type="text" class="input_text span30 " style="width:50px" value="">%
+																			</div>
+																		</td>
+																		<td>
+																			<div>
+																				<input name="classprice_memo[]" type="text" class="input-27 " style="width:120px" value="">
+																			</div>
+																		</td>
+																	</tr>
+																</tbody>
+															</table>
+														</td>
+														<td width="100"><a href="javascript:;" class="newbtn">增加一行</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr id="price_d">
+									<td width="150" id="price_text5">单价</td>
+									<td>
+										<input name="priceadv" type="text" class="input-27" id="priceadv" value="">
+										<span id="price_text4"> 元</span>
+									</td>
+								</tr>
+
+								<tr>
+									<td>移动设备出价</td>
+									<td> 
+										<input name="mobile_price" type="text" class="input-27" id="mobile_price" value="1"> 
+										倍 <span class="helpsp">为电脑设备的几倍</span>
+									</td>
+								</tr>
+
+								<tr>
+									<td>每日限额</td>
+									<td>
+										<input name="budget" type="text" class="input-27" id="budget" value="">
+										元 <span class="helpsp">达到每日预算限额时，广告就会在当天停止展示</span>
+									</td>
+								</tr>
+								<tr>
+									<td>价格说明</td>
+									<td>
+										<input name="priceinfo" type="text" class="input-27" id="priceinfo" value=""> &nbsp; 
+										<span class="helpsp">&nbsp;广告计费简要说明</span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+
+					<div class="box-content box-content-date" style="position:relative">
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" class="zone_form controls">
+							<tbody>
+								<tr>
+									<td>结束日期</td>
+									<td><input type="radio" name="expire_date" value="0000-00-00" checked="">
+										没有结束日期 &nbsp;&nbsp;&nbsp;
+										<input name="expire_date" type="radio" value="no">
+										<select name="expire_year" id="expire_year" disabled="disabled">
+											<option value="2017">2017年</option>
+											<option value="2018" selected="">2018年</option>
+											<option value="2019">2019年</option>
+											<option value="2020">2020年</option>
+											<option value="2021">2021年</option>
+											<option value="2022">2022年</option>
+											<option value="2023">2023年</option>
+											<option value="2024">2024年</option>
+											<option value="2025">2025年</option>
+											<option value="2026">2026年</option>
+											<option value="2027">2027年</option>
+											<option value="2028">2028年</option>
+											<option value="2029">2029年</option>
+											<option value="2030">2030年</option>
+											<option value="2031">2031年</option>
+											<option value="2032">2032年</option>
+											<option value="2033">2033年</option>
+											<option value="2034">2034年</option>
+											<option value="2035">2035年</option>
+											<option value="2036">2036年</option>
+											<option value="2037">2037年</option>
+										</select>
+										<select name="expire_month" id="expire_month" disabled="disabled">
+											<option value="1">1月</option>
+											<option value="2">2月</option>
+											<option value="3">3月</option>
+											<option value="4">4月</option>
+											<option value="5">5月</option>
+											<option value="6">6月</option>
+											<option value="7" selected="">7月</option>
+											<option value="8">8月</option>
+											<option value="9">9月</option>
+											<option value="10">10月</option>
+											<option value="11">11月</option>
+											<option value="12">12月</option>
+										</select>
+										<select name="expire_day" id="expire_day" disabled="disabled">
+											<option value="1">1日</option>
+											<option value="2">2日</option>
+											<option value="3">3日</option>
+											<option value="4">4日</option>
+											<option value="5">5日</option>
+											<option value="6">6日</option>
+											<option value="7">7日</option>
+											<option value="8">8日</option>
+											<option value="9">9日</option>
+											<option value="10" selected="">10日</option>
+											<option value="11">11日</option>
+											<option value="12">12日</option>
+											<option value="13">13日</option>
+											<option value="14">14日</option>
+											<option value="15">15日</option>
+											<option value="16">16日</option>
+											<option value="17">17日</option>
+											<option value="18">18日</option>
+											<option value="19">19日</option>
+											<option value="20">20日</option>
+											<option value="21">21日</option>
+											<option value="22">22日</option>
+											<option value="23">23日</option>
+											<option value="24">24日</option>
+											<option value="25">25日</option>
+											<option value="26">26日</option>
+											<option value="27">27日</option>
+											<option value="28">28日</option>
+											<option value="29">29日</option>
+											<option value="30">30日</option>
+											<option value="31">31日</option>
+										</select>（注：投放截止日期为前一日24:00）<!--提示用户截止时间(尚)-->
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div> 
+				<div class="z-next">
+					<a href="javascript:;">下一步</a>
+				</div>
+				<div class="z-direction-a hide">                   
+					<div class="box-content" style="position:relative">
+						<table width="100%" border="0" cellpadding="0" cellspacing="0" class="zone_form controls dx">
+							<tbody>
+								<tr>
+									<td >网站审核方式</td>
+									<td>
+										<input name="audit" type="radio" value="n" checked="">
+										无需申请 &nbsp;&nbsp;&nbsp;
+										<input type="radio" name="audit" value="y">
+										人工审核 <span class="helpsp">需要站长申请才能投放</span>
+									</td>
+								</tr>
+								<tr>
+									<td width="150">流量类型</td>
+									<td >
+										<input type="radio" value="acls" name="acl[adview_type][isacl]" id="acl9isacl" checked="" style="display:none;">
+										<div>
+											<table style="width:100%" class="class_tb">
+												<tbody>
+													<tr  class="flux">
+														<td><label style="font-size:0.7rem;text-indent:0rem;"><input type="radio" name="acl[adview_type][data]" id="aclsitetype" value="0">电脑网站(PC)</label></td><td><label style="font-size:0.7rem;text-indent:0rem;"><input type="radio" name="acl[adview_type][data]" id="aclsitetype" value="1" checked="">手机网站(Wap)</label></td><td><label style="font-size:0.7rem;text-indent:0rem;"><input type="radio" name="acl[adview_type][data]" id="aclsitetype" value="2">手机应用(APP)</label></td>                                        
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td width="150" >操作系统</td>
+									<td>
+										<input type="radio" value="all" name="acl[mobile][isacl]" checked="">
+										不限&nbsp;&nbsp;&nbsp;
+										<input type="radio" value="acls" name="acl[mobile][isacl]" id="acl4isacl">
+										指定操作系统 <span id="mobile_data_error" class="frc_error"></span>
+										<div style="display:none">
+											<table style="width:100%" class="class_tb">
+												<tbody>
+													<tr>
+														<td><label><input type="checkbox" name="acl[mobile][data][]" id="aclsitetype" value="pc">桌面电脑</label></td><td><label><input type="checkbox" name="acl[mobile][data][]" id="aclsitetype" value="ios">苹果IOS</label></td><td><label><input type="checkbox" name="acl[mobile][data][]" id="aclsitetype" value="android">Android</label></td><td><label><input type="checkbox" name="acl[mobile][data][]" id="aclsitetype" value="windows phone">微软WP</label></td>                                    
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td width="150">浏览器</td>
+									<td>
+										<input type="radio" value="all" name="acl[browser][isacl]" checked="">
+										不限&nbsp;&nbsp;&nbsp;
+										<input type="radio" value="acls" name="acl[browser][isacl]" id="acl3isacl">
+										指定浏览器 <span id="browser_data_error" class="frc_error"></span>
+										<div style="display:none">
+											<table style="width:100%" class="class_tb">
+												<tbody>
+													<tr>
+														<td><label><input type="checkbox" name="acl[browser][data][]" id="aclsitetype" value="Wechat">微信</label></td><td><label><input type="checkbox" name="acl[browser][data][]" id="aclsitetype" value="QQbrowser">QQ</label></td><td><label><input type="checkbox" name="acl[browser][data][]" id="aclsitetype" value="Safari">Safari</label></td><td><label><input type="checkbox" name="acl[browser][data][]" id="aclsitetype" value="UC">UC</label></td><td><label><input type="checkbox" name="acl[browser][data][]" id="aclsitetype" value="Chrome">Chrome</label></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td width="150">投放运营商</td>
+									<td>
+										<input type="radio" value="all" name="acl[carrier][isacl]" checked="">
+										不限&nbsp;&nbsp;&nbsp;
+										<input type="radio" value="acls" name="acl[carrier][isacl]" id="acl6isacl">
+										指定运营商 <span id="carrier_data_error" class="frc_error"></span>
+										<div style="display:none">
+											<table style="width:100%" class="class_tb">
+												<tbody>
+													<tr>
+														<td><label><input type="checkbox" name="acl[carrier][data][]" id="aclsitetype" value="0">电信</label></td><td><label><input type="checkbox" name="acl[carrier][data][]" id="aclsitetype" value="1">移动</label></td><td><label><input type="checkbox" name="acl[carrier][data][]" id="aclsitetype" value="2">联通</label></td><td><label><input type="checkbox" name="acl[carrier][data][]" id="aclsitetype" value="3">铁通</label></td><td><label><input type="checkbox" name="acl[carrier][data][]" id="aclsitetype" value="4">其他</label></td>                                    
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr >
+									<td width="150">网站类型</td>
+									<td>
+										<input type="radio" value="all" name="acl[siteclass][isacl]" checked="">
+										不限&nbsp;&nbsp;&nbsp;
+										<input type="radio" value="acls" name="acl[siteclass][isacl]" id="acl1isacl">
+										指定类目 <span id="class_data_error" class="frc_error"></span>
+										<div style="display:none">
+											<input type="radio" value="==" name="acl[siteclass][comparison]" checked="">
+											允许
+											<input type="radio" value="!=" name="acl[siteclass][comparison]">
+											拒绝 
+										</div>
+										<div style="display:none">
+											<table width="100%" id="s1" class="class_tb">
+												<tbody>
+													<tr>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="165">
+																游戏
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="164">
+																女性小说
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="163">
+																音乐
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="161">
+																电影
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="132">
+																工具
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="131">
+																女性
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="128">
+																小说
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="127">
+																图片
+															</label>
+														</td>
+													</tr>
+													<tr>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="120">
+																生活服务
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="119">
+																教育
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="117">
+																健康
+															</label>
+														</td>
+														<td>
+															<label>
+																<input type="checkbox" name="acl[siteclass][data][]" value="110">
+																新闻
+															</label>
+														</td>
+													</tr>                                    
+												</tbody>
+											</table>
+										</div>
+									</td>
+								</tr>
+								<tr style="display: none;">
+									<td width="150" >投放关键字</td>
+									<td><input type="radio" value="all" name="acl[keyword][isacl]" checked="">
+										不限&nbsp;&nbsp;&nbsp;
+										<input type="radio" value="acls" name="acl[keyword][isacl]" id="acl5isacl">
+										填写关键字 <span id="keyword_data_error" class="frc_error"></span>
+										<div style="  display:none">
+											<textarea name="acl[keyword][data]" class="input-27" style="width:320px;height:100px"></textarea>
+											<span class="helpsp">一行一个</span>
+										</div>
+									</td>
+								</tr>
+								<tr >
+									<td width="150" >投放站点</td>
+									<td><input type="radio" value="all" name="acl[site][isacl]" checked="">
+										不限&nbsp;&nbsp;&nbsp;
+										<input type="radio" value="acls" name="acl[site][isacl]" id="acl8isacl">
+										填写站点 <span id="site_data_error" class="frc_error"></span>
+										<div style=" display:none">
+											<input type="radio" value="==" name="acl[site][comparison]" checked="">
+											允许
+											<input type="radio" value="!=" name="acl[site][comparison]">
+											拒绝 
+										</div>
+										<div style="  display:none">
+											<textarea name="acl[site][data]" class="input-27" style="width:320px;height:100px"></textarea>
+											<span class="helpsp">一行一个</span>
+										</div>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="form-actions" style="">
+				<input type="button" name="laststep" class="z-prev" value="上一步">&nbsp;&nbsp;&nbsp;
+				<input type="submit" name="submit" class="btn btn-primary" value="提 交"> 
+			</div>
+		</form>
+	</div>
+	<script>
+		$(document).ready(function () {
+			do_c($('#plantype').val());
+			add_plan_vlt.init();
+			$(".z-next a").click(function(){
+				$(this).parent().css("display","none");
+				$(".z-basic-a").addClass("hide");
+				$(".z-direction-a").removeClass("hide");
+				$(".z-choice div").removeClass("active");
+				$(".z-choice .z-direction").addClass("active");
+				$(".form-actions").css("display","block");
+			})        
+			$(".z-prev").click(function(){
+				$(this).parent().css("display","none");
+				$(".z-basic-a").removeClass("hide");
+				$(".z-direction-a").addClass("hide");
+				$(".z-choice div").removeClass("active");
+				$(".z-choice .z-basic").addClass("active");
+				$(".form-actions").css("display","none");
+				$(".z-next").css("display","block");
+			})
+
+		});
+
+$('input:radio[name=expire_date]').on('click', function (option) {
+        var v = $(this).val();
+        if (v == 'no') {
+            $("#expire_year,#expire_month,#expire_day").removeAttr("disabled");
+        } else {
+            $("#expire_year,#expire_month,#expire_day").attr("disabled", "disabled");
+        }
+    });
+
+    $('input:radio[name="acl[city][isacl]"],input:radio[name="acl[keyword][isacl]"],input:radio[name="acl[carrier][isacl]"],input:radio[name="acl[siteclass][isacl]"],input:radio[name="acl[week][isacl]"],input:radio[name="acl[browser][isacl]"],input:radio[name="acl[mobile][isacl]"],input:radio[name="acl[site][isacl]"]').on('click', function (option) {
+        var v = $(this).val();
+        if (v == 'all') {
+            $(this).next().next().next().next().hide();
+            $(this).next().next().next().hide();
+        } else {
+            $(this).next().next().show();
+            $(this).next().next().next().show();
+        }
+        add_plan_vlt.init();
+    });
+    $(".region >div").bind('mouseover', function ()
+    {
+        if ($(this).next(".p_city").find('li').length > 2) {
+            var v = $(this).find('input').val();
+            $(this).addClass("hover");
+            position = $(this).position();
+            poptop = position.top;
+            popleft = position.left + 66;
+            $(this).next().show().css("top", poptop + "px").css("left", popleft + "px");
+        }
+
+    }).bind('mouseleave', function ()
+    {
+        $(this).next().hide();
+        $(this).removeClass("hover");
+    });
+    $(".region >div").next().bind('mouseover', function ()
+    {
+        $(this).prev().addClass("hover");
+        $(this).show();
+    }).bind('mouseleave', function ()
+    {
+        $(this).hide();
+        $(this).prev().removeClass("hover");
+    });
+
+    $(".region >div>input").click(function () {
+
+        var a = $(this).attr("checked");
+        a = !a ? false : true;
+        $(this).parent().next().find(':input').each(function () {
+
+            $(this).attr("checked", a);
+        });
+    });
+
+
+    $(".week_in").click(function () {
+        var a = $(this).attr("checked");
+        a = !a ? false : true;
+
+        if ($(this).parent().parent().parent().find(".week_in:checked").length >= 1) {
+            a = true;
+        } else {
+            a = false;
+        }
+
+        $(this).parent().parent().parent().find("input:first").attr("checked", a);
+    });
+
+
+    $(".city_in").click(function () {
+        var a = $(this).attr("checked");
+        a = !a ? false : true;
+        var v = $(this).attr("id");
+        id = v.split('_');
+
+        if ($(".city_in:checked").length >= 1) {
+            a = true;
+        } else {
+            a = false;
+        }
+
+        $("#province_" + id[1]).attr("checked", a);
+    });
+
+
+
+    $(".week").click(function () {
+        var a = $(this).attr("checked");
+        a = !a ? false : true;
+
+
+        $(this).parent().parent().parent().find(':input:gt(0)').each(function () {
+            $(this).attr("checked", a);
+        });
+    });
+
+
+    $('input:radio[name="linkon"]').on('click', function (option) {
+        var v = $(this).val();
+        if (v == 'y') {
+            $("#linkurl_s").show();
+        } else {
+            $("#linkurl_s").hide();
+        }
+
+    });
+
+
+
+    $('#plantype').on('change', function (option) {
+        var v = $(this).val();
+
+        do_c(v)
+
+    });
+
+
+    $('input:radio[name=gradeprice]').on('click', function (option) {
+        var v = $(this).val();
+        if (v == 0) {
+            $('#classprice_d').hide("");
+            $('#price_d').show("");
+        } else if (v == 1) {
+            $('#classprice_d').show("");
+            $('#price_d').hide("");
+        } else {
+            $('#classprice_d').hide("");
+            $('#price_d').hide("");
+        }
+
+        add_plan_vlt.init();
+    });
+
+
+    function do_c(v) {
+
+        $('.keys').hide("");
+        $('.table_cps').hide("");
+        if (v == "cps" || v == "cpa") {
+            $('.keys').show("");
+        }
+
+        if (v == "cps") {
+            $('#price_text1').html("固定分成");
+            $('#price_text2').html("按类目分成");
+            $('#price_text5').html("佣金分成");
+            $('#price_text3,#price_text4').html(" %");
+            $('.table_cps').show("");
+            $('#gradeprice_d').show("");
+            //$('#classprice_d').show("");
+
+            //$('#price_d').hide("");
+
+        } else {
+            $('#price_text1').html("不分等级");
+            $('#price_text2').html("分网站等级");
+            $('#price_text5').html("单价");
+            $('#price_text3,#price_text4').html(" 元");
+            $('.table_cps').hide("");
+            $('#s_price_f_cps').hide("");
+            $('#gradeprice_d').hide("");
+            $('#classprice_d').hide("");
+            //$('#price_d').show("");
+        }
+
+    }
+
+    add_plan_vlt = {
+        init: function () {
+            jQuery.validator.addMethod("SmallSize", function (value, element, params) {
+                var pv = parseFloat($(params).val());
+                if (!pv)
+                    pv = 0;
+                return parseFloat(value) <= pv;
+            }, "test值");
+            jQuery.validator.addMethod("LargeSize", function (value, element, params) {
+                var pv = parseFloat($(params).val());
+                if (!pv)
+                    pv = 0;
+                return parseFloat(value) >= pv;
+            }, "test值");
+
+            form_roles_validator = $("#form_b").validate({
+                errorClass: "error",
+                highlight: function (element) {
+                    $(element).closest('td').addClass("f_error");
+                },
+                unhighlight: function (element) {
+                    $(element).closest('td').removeClass("f_error");
+                },
+                rules: {
+                    uid: {required: true},
+                    planname: {
+                        required: true
+                    }
+                    , classid: {
+                        required: true
+                    },
+                    'pkey': {
+                        required: true
+                    },
+                    'datatime': {
+                        required: true
+                    },
+                    'cookie': {
+                        required: true
+                    },
+                    linkurl: {
+                        required: "#linkurl:checked",
+                    },
+                    'acl[city][province][]': {
+                        required: "#acl0isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[class][data][]': {
+                        required: "#acl1isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[week][data][]': {
+                        required: "#acl2isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[browser][data][]': {
+                        required: "#acl3isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[mobile][data][]': {
+                        required: "#acl4isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[adview_type][data]': {
+                        required: "#acl9isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[keyword][data]': {
+                        required: "#acl5isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[carrier][data][]': {
+                        required: "#acl6isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[age][data]': {
+                        required: "#acl7isacl:checked",
+                        minlength: 1
+                    },
+                    'acl[site][data]': {
+                        required: "#acl8isacl:checked",
+                        minlength: 1
+                    },
+                    'classprice_mark[]': {
+                        required: "#gradeprice:checked",
+                        minlength: 1
+                    },
+                    'classprice_mark_info[]': {
+                        required: "#gradeprice:checked",
+                        minlength: 1
+                    },
+                    'classprice_adv[]': {
+                        required: "#gradeprice:checked",
+                        minlength: 1,
+                        number: true
+                    },
+                    priceadv: {
+                        required: true,
+                        number: true,
+                        LargeSize: "#olb_price",
+                        min: 0.0000001
+                    },
+                    budget: {
+                        required: true,
+                        digits: true
+                    }
+
+                },
+                messages: {
+                    uid: "选择一个广告商",
+                    planname: "请正确填写",
+                    classid: "选择一个活动分类",
+                    'pkey': "接口密钥不能为空",
+                    'datatime': "请正确填写",
+                    'cookie': "请正确填写",
+                    'linkurl': "请正确填写",
+                    'acl[city][province][]': "需要选择一个城市",
+                    'acl[keyword][data]': "需要填写关键词",
+                    'acl[age][data]': "需要选择年龄段",
+                    'acl[site][data]': "需要填写站点",
+                    'acl[class][data][]': "需要选择一个网站类型",
+                    'acl[week][data][]': "需要选择一个日程",
+                    'acl[browser][data][]': "需要选择一个浏览器",
+                    'acl[carrier][data][]': "需要选择一个运营商",
+                    'acl[mobile][data][]': "需要选择一个操作系统",
+                    'acl[adview_type][data]': "需要选择一个流量类型",
+                    'classprice_mark[]': "",
+                    'classprice_mark_info[]': "",
+                    'classprice_aff[]': "",
+                    priceadv: {required: "请正确填写", number: "填写一个整数或是小数", LargeSize: "单价不能小于之前的", min: "单价值太小了吧"},
+                    budget: "请正确填写一个整数",
+                },
+                errorElement: 'span',
+                errorPlacement: function (error, element) {
+                    if (element.is(':input')) {
+                        var eid = element.attr('name');
+                        if (eid == "acl[city][province][]")
+                            $('#city_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[class][data][]")
+                            $('#class_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[week][data][]")
+                            $('#week_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[adview_type][data]")
+                            $('#adview_type_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[browser][data][]")
+                            $('#browser_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[mobile][data][]")
+                            $('#mobile_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[carrier][data][]")
+                            $('#carrier_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[keyword][data]")
+                            $('#keyword_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[age][data]")
+                            $('#age_data_error').html(error).addClass("frc_error");
+                        if (eid == "acl[site][data]")
+                            $('#site_data_error').html(error).addClass("frc_error");
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            });
+
+        }
+    };
+
+    $(".newbtn").bind("click", function () {
+            //alert($("input:checked"));
+            $(".c_f_f").append(
+                        '<tr><td><div><input name="classprice_mark[]" type="text" class="input_text span30 classprice {validate:{ required:true,email:true }}" style="width:90px" value="" /></div></td><td><div><input name="classprice_mark_info[]" type="text" class="input_text span30 classprice" style="width:120px" value="" /></div></td> <td><div><input name="classprice_adv[]" type="text" class="input_text span30 classprice" style="width:50px" value="" /> %</div></td><td><div><input name="classprice_memo[]" type="text" class="input_text span30 classprice" style="width:110px" value="" /><a href="javascript:;" class="delbtn"> 删</a></div> </td></tr>');
+ 
+            $(".delbtn").bind("click", function () {
+                    $(this).parent().parent().parent().remove();
+                    add_plan_vlt.init();
+            });
+            add_plan_vlt.init();
+    });
+
+	</script>
+</body>
+</html>

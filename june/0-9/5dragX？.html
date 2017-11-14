@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>横向拖拽跳转（有问题）</title>
+    <script>
+        var scale=1/window.devicePixelRatio;
+        document.write("<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale="+scale+", maximum-scale="+scale+", minimum-scale="+scale+"'>");
+        var html=document.getElementsByTagName("html")[0];
+        html.style.fontSize=document.documentElement.clientWidth/16+"px";
+    </script>
+    <style>
+        *{margin:0;padding:0;border:0;outline:none;-webkit-box-sizing:border-box;box-sizing:border-box;}
+        a{-webkit-tap-highlight-color:transparent;text-decoration:none; color:#333;}
+        input{-webkit-appearance:none;}
+        ul,li{list-style:none;}
+        /*public*/
+        .fl{float:left;}
+        .fr{float:right;}
+        body{font-size:0.5rem;}
+        .clearfix:after{height: 0;line-height: 0;content:"";visibility:hidden;clear:both;display:block;}
+        .wrap{width: 16rem;margin:0 auto;}
+        #ad{width: 16rem;height: 7.877rem;position: absolute;bottom:0;left:0;background:url(img/move2.png) no-repeat;}
+        #ad>img{box-shadow:0 0 30px white,0 0 35px gray;position: absolute;}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div id="ad">
+            <img src="img/move1.png">
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $(window).resize(function(){
+            window.location.reload();
+        })
+        var scale=640/1365;
+        $("#ad").css({"background-size":"16rem "+768*scale/40+"rem"})
+        $("#ad img").css({"top":278*scale/40+"rem","width":173*scale/40+"rem","height":166*scale/40+"rem"})
+        var oImg=$("#ad img").get(0);
+        var limit=1092*scale/40;
+        dragg(oImg);
+        function dragg(obj){
+            obj.addEventListener("touchstart",function(e){
+                e.preventDefault();
+                var e=e.targetTouches[0];
+                var disX=e.clientX;
+                // var disY=e.clientY;
+                var tempX=disX-this.offsetLeft;
+                // var tempY=disY-this.offsetTop;
+                var maxLeft=(640-this.offsetWidth)/40;
+                var lastLeft=0;
+                document.addEventListener("touchmove",function(e){
+                    e.preventDefault();
+                    var e=e.targetTouches[0];
+                    var left1=(e.clientX-tempX)/40;
+                    // var top1=e.clientY-tempY;
+                    if(left1<=0){
+                        left1=0;
+                    }else if(left1>maxLeft){
+                        left1=maxLeft;
+                    }
+                    obj.style.left=left1+"rem";
+                    // this.style.top=top1+"px";
+                    lastLeft=left1;
+                })
+                document.addEventListener("touchend",function(e){
+                    if(lastLeft<limit+3 && lastLeft>limit-3){
+                        window.location.href="http://www.baidu.com";
+                    }
+                })
+            })
+        }
+    })
+
+    </script>
+</body>
+</html>

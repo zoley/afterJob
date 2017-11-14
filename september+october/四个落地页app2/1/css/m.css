@@ -1,0 +1,23 @@
+@charset "utf-8";
+*{margin:0;padding:0;word-wrap:break-word;word-break:break-all;}
+body{ max-width:640px; margin:0 auto;color:#000; font-family:"Microsoft Yahei";position:relative; background:#f9f7f7;}
+html, body, h1, h2, h3, h4,input,div,ul,li,p,form,table,dt,dl,dd,tr{list-style-type:none;}
+h3,h4{ font-size:14px; font-weight:bold;}
+a{color:#000;text-decoration:none;}
+a:hover{color:#000;}
+a img{border:none;}
+em{font-style: normal;font-weight: normal;}
+.clear{ clear:both; width:0; height:0;}
+input{ outline:none; font-family:"Microsoft Yahei";}
+
+.bg{ width:100%; height:auto; position:absolute; left:0; top:0;}
+.bg img{ width:100%; height:auto; display:block; }
+.title{ font-size:2rem; color:#fff; font-weight:normal; text-align:center; line-height:100%; padding:1.5rem 0;}
+.content{ position:relative; width:100%; height:auto;}
+.btn{ padding:0 6.7%; overflow:hidden; padding-top:-10.1rem;}
+.btn a{ width:50%; display:block; float:left;}
+.btn a span{ display:block; padding:0 3%;}
+.btn a span img{ width:100%; height:auto; display:block;}
+.footer{ width:100%; position:absolute; left:0; bottom:0;}
+.footer p{ font-size:1.2rem; line-height:100%; text-align:center; color:#fff; padding:4rem 0 2rem;}
+.footer a{ display:block; width:43%; height:auto; overflow:hidden; margin:0 auto;}

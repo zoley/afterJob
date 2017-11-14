@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>奖品池</title>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale="+scale+", maximum-scale="+scale+", minimum-scale="+scale+"'>")
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+	<style>
+		*{margin:0;padding:0;}ul,li{list-style:none;}body{font-family: 'Helvetica Neue',Helvetica,Hiragino Sans GB,'Microsoft Yahei',Arial,sans-serif;}
+		li{height:3.75rem;width: 16rem;border-bottom:1px solid #968181;font-size:0.5rem;}
+		li a{height:3.75rem;width: 16rem;display:block;position: relative;overflow:hidden;}
+		li a b{position: absolute;left:-1.1rem;top:0.36rem;background-color:#E14A3C;color:white;padding:0.1rem 0.9rem;transform:rotate(-45deg);font-weight:normal;padding-bottom:0.2rem;}
+		li a div{float:left;padding:0.5rem;}
+		li a div img{width: 4.75rem;height: 2.65rem;}
+		li a div h4{font-size: 0.7rem;line-height:1.5rem;color:#222;width: 6.25rem;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+		li a div p{font-size: 0.5rem;line-height:1rem;color:#222;width: 6.25rem;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+		li a i{position: absolute;width: 0.7rem;height: 0.7rem;right:1.2rem;top:1.5rem;background:url(img/arrow-right.png) no-repeat;-webkit-background-size:cover;background-size:cover;}
+	</style>
+	<script>
+		window.onresize=function(){
+			window.location.reload();
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li>
+			<a href="http://www.baidu.com">
+				<b>即将过期</b>
+				<div>
+					<img src="img/n11.png" alt="奖品">
+				</div>
+				<div>
+					<h4>有光就有电，高科技不断电！</h4>
+					<p>有效期：<span>2017-07-12</span></p>
+				</div>
+				<i></i>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.baidu.com">
+				<b>即将过期</b>
+				<div>
+					<img src="img/n11.png" alt="奖品">
+				</div>
+				<div>
+					<h4>有光就有电，高科技不断电！</h4>
+					<p>有效期：<span>2017-07-12</span></p>
+				</div>
+				<i></i>
+			</a>
+		</li>
+		<li>
+			<a href="http://www.baidu.com">
+				<div>
+					<img src="img/n11.png" alt="奖品">
+				</div>
+				<div>
+					<h4>有光就有电，高科技不断电！</h4>
+					<p>有效期：<span>2017-07-22</span></p>
+				</div>
+				<i></i>
+			</a>
+		</li>
+	</ul>
+</body>
+</html>

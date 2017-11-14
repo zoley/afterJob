@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>手机端刮奖</title>
+	<style>
+		*{margin:0;padding:0;border:0;}
+
+		.wrap{width: 100%;background-color: #E44A31;position: absolute;left:0;top:0;height: 100%;}
+		.wrap>i{position: absolute;width: 25px;height: 25px;background:url(img/gclose.png) no-repeat;-webkit-background-size: 100% 100%;top:10%;right:5%;
+			background-size: 100% 100%;top:2%;right:2%;}
+		.wrap>img{width: 100%;}
+		.wrap .gua-area{width: 95%;height: 100px;position: relative;margin:-10px auto;background:url(img/g3.png) no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;overflow:hidden;}
+		.wrap #c1{position: absolute;left:2%;top:2%;height:92%;width:96%;z-index:2;}
+		.wrap>p{text-align:center;line-height:30px;height: 30px;margin-top:10px;}
+		.wrap>img:nth-of-type(2){width: 85%;margin:3px auto;display:block;}
+		.wrap .gua-area .gua-word{width: 100%;height: 100%;}
+		.wrap .gua-area .gua-word p{width: 100%;height: 50%;line-height:50px;text-align:center;}
+		.wrap .gua-area .gua-word span{display:block;width: 40%;height: 30%;background-color:#E44A31;margin:0 auto;text-align:center;line-height:30px;color:white;font-weight:700;position: relative;}
+		.wrap .gua-area .gua-word .no,.wrap .gua-area .gua-word .ok{display:none;}
+		.result{width: 100%;height: 100%;background:rgba(0,0,0,0.8);position: absolute;top:0;left:0;z-index:4;display:none;}
+		.result i{position: absolute;width: 25px;height: 25px;background:url(img/gclose.png) no-repeat;-webkit-background-size: 100% 100%;top:10%;right:5%;
+			background-size: 100% 100%;top:5%;right:10%;}
+		.result .ghead{width: 80%;margin:0 auto;}
+		.result .ghead img{width: 100%;display:block;}
+		.result .gbody{background-color:#FF364C;overflow:hidden;width: 80%;margin:0 auto;}
+		.result .gbody .con{width: 90%;margin:10px auto;}
+		.result .gbody .con img{width: 100%;display:block;}
+		.result .gbody span{display:block;width: 90%;height: 40px;margin:20px auto;text-align:center;line-height:40px;font-size:20px;background:url(img/gdown.png) no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;}
+		.result b{display:block;width: 80%;position: absolute;top:8%;left:50%;margin-left:-40%;}
+		.result b img{display:block;width: 100%}
+	</style>
+</head>
+<body>
+	<!-- 强行插入子页面 -->
+	<!-- <iframe src="4walletDrag&lottery.html" frameborder="0" style="position:fixed;top:0" scrolling="no" width=100% height=100%></iframe> -->
+	<!-- 强行插入子页面 -->
+	<div class="wrap">
+		<i></i>
+		<img src="img/g1.png">
+		<div class="gua-area">
+			<div class="gua-word">
+				<p class="prompt"></p>
+				<span class="ok">领取奖品</span>
+				<span class="no">再来一次</span>
+			</div>
+			<canvas id="c1"></canvas>
+		</div>
+		<p>您还有<span class="choice"></span>次刮奖机会</p>
+		<img src="img/g4.png">
+	</div>
+	<div class="result">
+		<i></i>
+		<div class="ghead"><img src="img/ghead.png"></div>
+		<div class="gbody">
+			<div class="con">
+				<img src="img/g2.png">
+			</div>
+			<span class="gdown">马上使用</span>
+		</div>
+		<b><img src="img/gbg.png"></b>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script>
+	var t=1;//刮卡次数
+	window.onload=function(){
+		oC=document.querySelector("#c1");
+		oCg=oC.getContext("2d");
+		isdown=0;//是否按下或者touchstart
+		isOk=0;//抹除面积
+		initialize();
+		//pc
+		oC.addEventListener("mousedown",fnDown,false);
+		oC.addEventListener("mousemove",fnMove,false);
+		oC.addEventListener("mouseup",fnUp,false);		
+		//移动
+		oC.addEventListener("touchstart",fnDown,false);
+		oC.addEventListener("touchmove",fnMove,false);
+		oC.addEventListener("touchend",fnUp,false);
+		
+		var aSpan=document.querySelector(".gua-word").querySelectorAll("span");
+		aSpan[0].style.zIndex="1";
+		aSpan[1].style.zIndex="1";
+
+		//---------------落地页之前
+		$(".result i").click(function(){
+			$(".result").css("display","none");
+		})		
+		$(".result .gdown").click(function(){
+			window.location.href="http://www.baidu.com";
+		})
+		//-------最开始的按钮
+		initCanvas();
+		//------后添加的i按钮
+		$(".wrap i").click(function(){
+			$(".wrap").css("display","none");
+			window.onload();
+			initCanvas();
+			t=1;
+		})		
+
+	}
+	//初始化
+	function initialize(){
+		$(".choice").html(4-t);
+		var num=Math.floor(Math.random()*100);//获得0-100之间的一个随机数值
+		if(num<t*33){
+			$(".ok").get(0).style.display="block";
+			$(".no").get(0).style.display="none";
+			$(".gua-word p").html("恭喜您，中奖了！");
+			$(".ok").click(function(){
+				$(".result").fadeIn(450);
+			})
+		}else{
+			$(".no").get(0).style.display="block";
+			$(".ok").get(0).style.display="none";
+			$(".gua-word p").html("很遗憾，未中奖！");
+		}
+		isOk=0;
+	}
+	function initCanvas(){
+		oC.width=oC.clientWidth;//canvas特性，要么行内样式，要么JS控制，css无效
+		oC.height=oC.clientHeight;
+		oCg.globalCompositeOperation="source-over";
+		oCg.fillStyle="#aaa";
+		oCg.fillRect(0,0,oC.width,oC.height);
+		oCg.fill();
+		var txt="刮一刮";
+		oCg.font="50px impact";
+		oCg.fillStyle="#888"
+		oCg.textBaseline="top";
+		var w=oCg.measureText(txt).width;
+		oCg.fillText(txt,(oC.width-w)/2,15);
+		oCg.globalCompositeOperation="destination-out";
+	}
+	function fnDown(e){
+		e.preventDefault();
+		isdown=1;
+	}
+	function fnUp(e){
+		e.preventDefault();
+		// var px=oCg.getImageData(0,0,oC.width,oC.height);
+		// var j=0;
+		// for(var i=0;i<px.data.length;i++){
+		// 	if(px.data[px.data[i]*4]==170){
+		// 		j++;
+		// 	}
+		// }
+		// if(j){
+		// 	isOk=1;
+		// }
+		isOk=1;
+		isdown=0;
+	}
+	function fnMove(e){
+		e.preventDefault();
+		if(isdown){
+			if(e.touches){
+				var e=e.touches[0];
+			}
+			var x=e.clientX-toLeft(oC);
+			var y=e.clientY-toTop(oC)+document.body.scrollTop;
+			// console.log(x+"|"+y+"|||"+e.clientY+"|||"+toTop(oC))
+			//画圆，因为设置了oCg.golbalCompositeOperation="destination-out"，所以是透明的
+			oCg.beginPath();
+			oCg.arc(x,y,20,0,2*Math.PI,false);
+			//兼容部分手机浏览器--s
+			oC.style.display = 'none';
+			oC.offsetHeight;
+			oC.style.display = 'inherit'; 
+			//兼容部分浏览器---e
+			oCg.closePath();
+			oCg.fill();
+			
+		}
+		if(isOk){
+			var aSpan=document.querySelector(".gua-word").querySelectorAll("span");
+			aSpan[0].style.zIndex="3";
+			aSpan[1].style.zIndex="3";
+		}
+	}
+	//------判断手机电脑端
+	// if ((navigator.userAgent.match(/(iPhone|iPod|Android|ios|iOS|iPad|Backerry|WebOS|Symbian|Windows Phone|Phone)/i))) {
+	// 	$(".no").get(0).addEventListener("touchend",function(){
+	//         t++;
+	// 		$(".no").get(0).style.display="none";
+	// 		$(".ok").get(0).style.display="none";
+	// 		window.onload();
+	// 		initCanvas();
+	// 	})
+ //    }else{ 
+	// 		$(".no").click(function(){
+	// 			t++;
+	// 			$(".no").get(0).style.display="none";
+	// 			$(".ok").get(0).style.display="none";
+	// 			window.onload();
+	// 			initCanvas();
+	// 		})	
+ //    } 
+	$(".no").click(function(){
+		t++;
+		$(".no").get(0).style.display="none";
+		$(".ok").get(0).style.display="none";
+		window.onload();
+		initCanvas();
+	})
+
+	function toTop(obj){
+		var iTop=0;
+		while(obj){
+			iTop+=obj.offsetTop;
+			obj=obj.offsetParent;
+		}
+		return iTop;
+	}	
+	function toLeft(obj){
+		var iLeft=0;
+		while(obj){
+			iLeft+=obj.offsetLeft;
+			obj=obj.offsetParent;
+		}
+		return iLeft;
+	}
+
+	</script>
+</body>
+</html>

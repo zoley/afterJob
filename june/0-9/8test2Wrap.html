@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>wrapTest</title>
+	<style>
+		@media screen and (min-width: 992px) {
+			.wrap{width: 970px;}
+		}		
+		@media screen and (min-width: 1200px) {
+			.wrap{width: 1170px;}
+		}
+		.wrap{height: 70px;background-color:#c0c0c0;margin:0 auto;min-width: 970px;}
+		.wrap div{float:left;}
+		.wrap div:first-child{width: 30%;height: 70px;background-color:green;}
+		.wrap div:nth-of-type(2){width: 50%;height: 70px;background-color:red;}
+		.wrap div:last-child{width: 20%;height: 70px;background-color:blue;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div></div>
+		<div></div>
+		<div></div>
+	</div>
+</body>
+</html>

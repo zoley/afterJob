@@ -1,0 +1,86 @@
+﻿@charset "utf-8";
+/* CSS Document */
+*{ padding:0; margin:0;}
+li{ list-style:none; vertical-align:top; }
+body{ font-size:12px; font-family:"微软雅黑",Arial; padding:0; margin:0}
+div{padding:0; margin:0}
+img{ vertical-align:top; boder:none;}
+a{ text-decoration:none; color:#000}
+#warp{ margin-left:auto; margin-right:auto; width:100%; height:auto;}
+#nav{ height:79px; background:url(../images/menu_bg.gif) no-repeat; width:1200px; left:50%; position:fixed; top:0; margin-left:-600px; z-index:1000; left:50%}
+#menu{ padding-left:246px; height:79px; position:relative; left:0; top:0;}
+#menu li{ float:left; width:123px; border-right:1px solid #e4e4e4; text-align:center; line-height:79px; font-size:18px; font-weight:bold; }
+#menu li a{ display:block; width:100%;height:79px; color:#000;}
+#menu #bg{ position:absolute; top:0px; overflow:hidden;height:79px; width:123px; }
+#menu #ul-list{ position:absolute; left:0; top:0; width:1200px;height:79px;}
+#menu #bg li{  background: url(../images/nav-bg.gif) no-repeat;}
+#menu #bg li a{ display:block; width:100%; height:79px; color:#FFF;}
+#max-box{ margin-right:auto; margin-left:auto;}
+#home{ background:url(../images/home_bg.jpg) no-repeat; height:1100px; width:100%; position:relative; overflow:hidden; margin:0 auto; padding:0;}
+#home .handImg{ height:1100px; width:100%; background:url(../images/handimg.png) no-repeat fixed center bottom; position:absolute; z-index:202; padding:0; top:0;}
+#home .textImg{ width:100%; height:1100px; position:absolute; z-index:200; top:0; background:url(../images/textimg.png) no-repeat fixed center bottom transparent;}
+#home .penImg{ width:100%; height:1100px; z-index:202; position:absolute; top:0; padding:0; background:url(../images/penimg.png) no-repeat scroll center 417px ;} 
+#about{ width:100%; height:1100px; position:relative; overflow:hidden; margin:0 auto; padding:0; background:url(../images/about_bg.jpg) no-repeat fixed center 0;}
+ .contents{ width:1200px; position:absolute; top:200px; z-index:202; margin-left:-600px; left:50%; height:700px; overflow:hidden;}
+#about .aboutRound{width: 439px;height: 439px;padding-left: 350px;background:url(../images/about_img.png) 350px 0px no-repeat;}
+#about .columnSpace{padding-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;}
+#about .border{height: 436px;padding-bottom: 0px;padding-left: 0px;padding-right: 0px;padding-top: 0px;position: relative;text-align: left;width: 100%;}
+#about .borderRight{line-height: 26px;background-color: #fff;display: none;height: 26px;}
+#about .top{line-height: 26px;background:url(../images/4b6c4201437c451fa90d03a4d788cf61.gif).jpg)no-repeat left top;height: 26px;}
+ #about .border .comptitle_05 {position: absolute;width: 98%;bottom: 35px;height: 25px;left: 7px;}
+#about .border .extendLink{ font-size:11px; text-align:right;}
+#about .border .comptitle_05 em{text-align: center;font-style: normal;width: 100%;float: left;
+font-weight: normal;}
+#about .border .extendLink a{ color:#FFF;}
+#about .border .dit{list-style: disc none outside;
+z-index: auto;border-bottom: medium none;text-justify: auto;text-align: left;border-left:medium none;text-transform: none;text-indent: 0px;margin: auto;width: auto;display: inline;border-collapse: separate;font: medium Times New Roman;word-wrap: normal;white-space: normal;
+background: none transparent scroll repeat 0% 0%;float: none;letter-spacing: normal;height:auto;visibility: inherit;color: #333;clear: none;vertical-align: baseline;overflow: visible;
+word-break: normal;border-top: medium none;border-right: medium none;word-spacing: normal;
+text-decoration: none;}
+#about .border .aboutText{line-height: 22px;text-align: center;color: #fff;font-size: 12px;
+padding-top: 175px;}
+#about .clearBoth{line-height: 0;width: 100%;height: 0px;clear: both;font-size: 0px;overflow: hidden;}
+#about .balloon{ background:url(../images/about_sprite_frei.png) no-repeat fixed center 211px transparent;height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index: 200;}
+#about .compasses{ background:url(../images/about_frei.png) no-repeat fixed center bottom transparent;height: 1100px;padding: 0;position: absolute;top:0;width: 100%;z-index:201;}
+#about-cont{ background:url(../images/about_bg_01.jpg) no-repeat fixed center 0; width:100%; height:0; position:relative; overflow:hidden;}
+ #about-cont iframe{border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width:0px;height: 500px;width: 600px;}
+#about-cont frame:not {border-image-source: initial;border-image-slice: initial;border-image-width: initial;border-image-outset: initial;border-image-repeat: initial;}
+#about-cont.aboutRound{width:439px; height:439px; padding-left:350px; background:url(../images/about_img.png) 350px 0px no-repeat;}
+a.close_btu {width: 110px;height: 30px;line-height: 30px;text-decoration: none;color: #fff;text-align: center;background: #8e273c;display: block;position: absolute;left:0px; bottom:150px;z-index:999;}
+#about-cont .balloon{height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index: 200; background:url(../images/about_cont_01.png) no-repeat fixed center 211px transparent;}
+#about-cont .compasses{height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index: 201; background:url(../images/about_cont_02.png) no-repeat fixed center 500px transparent;}
+#about-cont .compasses1{width:100%; height:1100px; background:url(../images/about_cont_03.png) no-repeat fixed center bottom transparent;}
+#new{ height:1100px; width:100%; position:relative; margin:0 auto; background:url(../images/news_bg.jpg) no-repeat fixed center bottom transparent; overflow:hidden; padding:0;}
+#left-news{width: 500px;height: 500px;position: absolute;left: 0px;top: 0px;z-index: 1000;}
+#left-news iframe{border-top-width: 0px;border-right-width: 0px;border-bottom-width: 0px;border-left-width: 0px;height: 650px;width: 800px;}
+#left-news iframe:not{border-image-source: initial;border-image-slice:initial;border-image-width:initial;border-image-outset: initial;border-image-repeat: initial;}
+#Project{width:100%;height:1100px;margin: 0 auto;overflow: hidden;padding:0;position:relative; background:url(../images/projekt_bg.jpg) no-repeat fixed center 0 transparent;}
+#Project .pro_img{width:1204px; height:auto; position:absolute; left:50%; top:150px;margin-left		:-600px;z-index:202;}
+#Project iframe[Attributes Style]{border-top-width: 0px; border-right-width: 0px;border-bottom-width: 0px; border-left-width: 0px; height: 700px; width: 720px;}
+#Project iframe:not{border-image-source: initial;border-image-slice:initial;
+border-image-width: initial;border-image-outset: initial;border-image-repeat: initial;}
+#Project .bulb1{ background:url(../images/pro_sprite_frei.png) no-repeat fixed center 435px transparent;height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index: 200 ;}
+#Project .bulbl2{ background:url(../images/pro_frei.png) no-repeat fixed center 28px transparent; height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index:201;}
+#sector{ background:url(../images/sector_bg.jpg) no-repeat fixed  center 0 transparent; width: 100%;
+height: 1100px;margin: 0 auto;overflow: hidden;padding: 0;position: relative;}
+#sector iframe[Attributes Style] {border-top-width: 0px;border-right-width: 0px;
+border-bottom-width: 0px;border-left-width: 0px;height: 680px;width: 600px;}
+#sector iframe:not([seamless]) {border-image-source: initial;border-image-slice: initial;border-image-width: initial;border-image-outset: initial;border-image-repeat: initial;}
+#sector .pop{ background:url(../images/sector_frei.png) no-repeat fixed center 300px transparent; height:1100px; width:100%; padding:0; top:0; z-index:201; position:absolute;}
+#sector .clock{height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index: 200; background:url(../images/sector_sprite_frei.png) no-repeat fixed center 435px; }
+#tree{ background:url(../images/famous_bg.jpg) no-repeat fixed  center 0 transparent; height:1100px; width:100%; margin: 0 auto;overflow: hidden;padding: 0;position: relative;}
+#tree .Horse{ background:url(../images/famous_sprite_frei.png) no-repeat fixed center 411px transparent;height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index: 200;}
+#footer{ background:url(../images/technik_bg.jpg) no-repeat top center;width: 100%;height: 1100px;margin: 0 auto;overflow: hidden;padding: 0;position: relative;}
+#footer-right{ width: 550px;height: 450px;padding-left: 640px;}
+#footer-right .box1{ padding:0;}
+#footer-right .box2{ width:100%; margin:0 auto;}
+#footer-right .box2 p{padding-bottom: 10px;line-height: 22px;padding-left: 0px;padding-right: 0px;font-size: 12px;padding-top: 5px;}
+#footer-right .box2 strong{ font-weight:bold; color:#8e273c;}
+#footer-right .box2  p a{ text-align: center;line-height: 30px;margin-top: 20px;width: 110px;
+display: block;background: #8e273c;height: 30px;color: #fff;text-decoration: none;}
+#box_feedback{ width:1200px; height:400px;}
+#box_feedback iframe[Attributes Style] {border-top-width: 0px;border-right-width: 0px;
+border-bottom-width: 0px;border-left-width: 0px;height: 400px;width: 700px;}
+#box_feedback iframe:not([seamless]) {border-image-source: initial;border-image-slice: initial;border-image-width: initial;border-image-outset: initial;border-image-repeat: initial;}
+ .book{ background:url(../images/technik_sprite_frei.png) no-repeat fixed center 172px transparent;height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index: 200;}
+ .map{ background:url(../images/technik_frei.png) no-repeat scroll center 200px transparent;height: 1100px;padding: 0;position: absolute;top: 0;width: 100%;z-index: 201;}

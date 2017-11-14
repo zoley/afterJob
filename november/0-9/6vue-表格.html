@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>vue-表格初建</title>
+	<link rel="stylesheet" href="lib/bootstrap.min.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="lib/bootstrap.min.js"></script>
+	<script src="js/vue.js"></script>
+	<style>
+		td{vertical-align:middle !important;}
+		.modal-footer {border-top: none;}
+		.modal-dialog {margin: 100px auto;}
+		[v-cloak]{display:none;}
+	</style>
+</head>
+<body>
+	<div id="app" class="container" style="margin-top: 50px;" v-cloak>
+		<form role="form">
+			<div class="form-group">
+				<label for="name">姓名</label>
+				<input id="name" type="text" class="form-control" placeholder="请输入姓名" v-model="newperson.name">
+			</div>
+			<div class="form-group">
+				<label for="age">年龄</label>
+				<input id="age" type="text" class="form-control" placeholder="请输入年龄" v-model="newperson.age">
+			</div>
+			<div class="form-group">
+				<label for="sex">性别</label>
+				<select name="sex" id="sex" class="form-control" v-model="newperson.sex">
+					<option value="male">男</option>
+					<option value="female">女</option>
+				</select>
+			</div>
+			<div class="form-group">
+				<button type="button" class="btn btn-primary" @click="add()">添加</button>
+				<button type="button" class="btn btn-danger">重置</button>
+			</div>
+		</form>
+		<hr>
+		<table role="table" class="table table-bordered table-striped table-hover text-sm">
+			<caption class="h3 text-primary text-center ">信息记录表</caption>
+			<thead>
+				<tr class="text-info bg-success">
+					<th class="text-center">序号</th>
+					<th class="text-center">姓名</th>
+					<th class="text-center">年龄</th>
+					<th class="text-center">性别</th>
+					<th class="text-center">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="text-center" v-for="(person,index) in people">
+					<td>{{index+1}}</td>
+					<td>{{person.name}}</td>
+					<td>{{person.age}}</td>
+					<td>{{person.sex}}</td>
+					<td><button type="button" class="btn btn-sm btn-warning" data-toggle="modal" data-target="#mot">删除</button></td>
+				</tr>
+				<tr>
+					<td class="text-center" colspan="5"><button type="button" class="btn btn-danger btn-sm">全部删除</button></td>
+				</tr>
+				<tr>
+					<td class="text-center text-muted" colspan="5" v-if="people.length==0">暂无信息······</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- 模态框 -->
+		<div class="modal fade" id="mot" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+						<h4 class="modal-title">删除数据</h4>
+					</div>
+					<div class="modal-body">
+						<p>确认删除本行吗？</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-danger" data-dismiss="modal">确认</button>	
+						<button type="button" class="btn btn-success" data-dismiss="modal">取消</button>	
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script>
+		window.onload=function(){
+			new Vue({
+				el:'#app',
+				data:{
+					newperson:{
+						'name':'',
+						'age':'',
+						'sex':'男'
+					},
+					people:[
+						{'name':'小明','age':'25','sex':'男'},
+						{'name':'小红','age':'18','sex':'女'}
+					]
+				},
+				methods:{
+					add:function(){
+						this.people.push(this.newperson);
+						this.newperson={'name':'','age':'','sex':'male'};
+					}
+				}
+			})
+		}
+	</script>
+</body>
+</html>

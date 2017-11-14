@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>旋转立方体</title>
+	<style>
+		/*****转动*******/
+		.will_rotate{
+			width: 150px;height: 150px;margin: 0 auto;position: relative;box-sizing:border-box;border:1px dashed green;
+		}
+		.rotate_parent, .rotate_parent li {position: absolute;display: block;
+		}
+		.rotate_parent{width: 100%;height: 100%;padding: 0;/*margin: -50px 0;*/-webkit-transform-origin: 50px 50px;transform-origin: 50px 50px;-webkit-transform: rotateX(-33.5deg) rotateY(45deg);transform: rotateX(-33.5deg) rotateY(45deg);-webkit-transform-style: preserve-3d;transform-style: preserve-3d; -webkit-animation: willRotate 3s ease-in-out infinite 1s; animation: willRotate 3s ease-in-out infinite alternate 1s;
+			/*animation: name duration timing-function delay iteration-count direction;*/
+			/*name	规定需要绑定到选择器的 keyframe 名称。。*/
+			/*duration	规定完成动画所花费的时间，以秒或毫秒计。*/
+			/*timing-function	规定动画的速度曲线。*/
+			/*delay	规定在动画开始之前的延迟。*/
+			/*iteration-count	规定动画应该播放的次数。*/
+			/*direction	规定是否应该轮流反向播放动画。*/
+			top: 10%;
+			/*left: 50%;*/
+		}
+
+		.rotate_parent .tip_back, .rotate_parent .tip_front, .rotate_parent .tip_left, .rotate_parent .tip_right, .rotate_parent .tip_top {background: radial-gradient(transparent 30%,rgba(126,17,91,.2) 100%);
+		}
+		.rotate_parent li {width: 100px;height: 100px;transition: -webkit-transform 1s ease-in-out; transition: transform 1s ease-in-out;
+		}
+		.rotate_parent .tip_front {-webkit-transform: translateZ(50px);transform: translateZ(50px);
+		}
+		.rotate_parent .tip_back {-webkit-transform:translateZ(-50px);transform:translateZ(-50px);
+		}
+		.rotate_parent .tip_right {-webkit-transform: rotateY(90deg) translateZ(50px);transform: rotateY(90deg) translateZ(50px);
+		}
+		.rotate_parent .tip_left {-webkit-transform: rotateY(90deg) translateZ(-50px);transform: rotateY(90deg) translateZ(-50px);
+		}
+		.rotate_parent .tip_top {-webkit-transform: rotateX(90deg) translateZ(50px);transform: rotateX(90deg) translateZ(50px);
+		}
+		.rotate_parent .tip_bottom{-webkit-transform: rotateX(90deg) translateZ(-50px);transform: rotateX(90deg) translateZ(-50px);
+		}
+		.rotate_parent .tip_floor {box-shadow: -300px 0 50px rgba(0,0,0,.3);-webkit-backface-visibility: visible;backface-visibility: visible;width: 110px;height: 110px;left: 295px;background-color: transparent;-webkit-transform: rotateX(90deg) translateZ(-60px);transform: rotateX(90deg) translateZ(-60px);
+		}
+		@-webkit-keyframes willRotate{0%{	transform:rotateX(-33.5deg) rotateY(45deg);}50%{	transform:rotateX(-33.5deg) rotateY(180deg);}100%{	transform:rotateX(-33.5deg) rotateY(360deg);}
+		}
+		@keyframes willRotate{0%{	transform:rotateX(-33.5deg) rotateY(45deg);}50%{	transform:rotateX(-33.5deg) rotateY(180deg);}100%{	transform:rotateX(-33.5deg) rotateY(360deg);}
+		}
+	</style>
+</head>
+<body>
+	<div class="will_rotate">
+		<ul class="rotate_parent">
+			<li class="tip_front"></li>
+			<li class="tip_back"></li>
+			<li class="tip_right"></li>
+			<li class="tip_left"></li>
+			<li class="tip_top"></li>
+			<li class="tip_bottom"></li>
+			<li class="tip_floor"></li>
+		</ul>
+	</div>
+	<canvas id="canvas"></canvas>
+	<script src="js/canvasStar.js"></script>
+	<script>
+	new CanvasStar().init();
+	</script>
+</body>
+</html>

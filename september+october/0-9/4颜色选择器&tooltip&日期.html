@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<meta charset="UTF-8">
+	<title>4颜色选择器-tooltip-日期</title>
+	<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css">
+	<link rel="stylesheet" href="bootstrap/css/minicolors.css">
+	<link rel="stylesheet" href="css/laydate.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="bootstrap/js/bootstrap.min.js"></script>
+	<script src="bootstrap/js/minicolors.min.js"></script>
+	<script src="js/laydate.js"></script>
+	<style>
+		.ha{margin:100px 70px;display:inline-block;}
+
+
+
+		/*---------------------------*/
+
+.tooltip {
+  word-wrap: break-word;
+}
+.tooltip-inner {
+  max-width: 200px;
+  padding: 3px 8px;
+  color: #fff;
+  text-align: center;
+  background-color: #38f;
+  border-radius: 10px;
+}
+.tooltip.top .tooltip-arrow {
+  border-top-color: #38f;
+}
+.tooltip.bottom .tooltip-arrow {
+  top: 0;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 0 5px 5px;
+  border-bottom-color: #38f;
+}
+
+
+
+/*----*/
+
+
+
+	</style>
+</head>
+<body>
+	<a class="ha" href="#" data-toggle="tooltip" data-placement="bottom" title="你妹哈哈哈ajkshdjkasjkhdjahsjdhkjashjkdhkjas你说呢">请悬停在我的下面</a>
+	<a class="ha" href="#" data-toggle="tooltip" data-placement="top" title="hello qinai de guniang jiandaoni 新家慌张">请悬停在我的上面</a>
+	<button type="button" class="btn btn-success" title="哈哈" data-toggle="popover" data-placement="bottom" data-content="底部的 Popover 中的一些内容">	底部的 Popover</button>
+
+
+	<div class="form-group">
+		<label for="position-bottom-right">bottom right</label>
+		<input type="text" class="form-control demo" data-position="bottom right" value="#0088cc">
+	</div>
+
+
+	<div class="demo1" style="margin-left: 30px;">
+		<h3>演示一（普通模式）</h3>
+		<input class="laydate-icon" id="demo" value="20-10" style="cursor:default;"> 
+	</div>
+	
+	<div class="demo3">
+		<h3>演示三（日期范围限制）</h3>
+		<ul class="inline">
+		开始日：<li class="inline laydate-icon" id="start" style="width:200px; margin-right:10px;"></li>
+		结束日：<li class="inline laydate-icon" id="end" style="width:200px;"></li>
+		</ul>
+	</div>
+
+
+	<script>
+	$(function () { $("[data-toggle='tooltip']").tooltip(); });
+	$(function () { $("[data-toggle='popover']").popover(); });
+	$('.demo').minicolors({
+					position: $(".demo").attr('data-position'),
+					theme: 'bootstrap'
+				});
+
+	laydate.skin('molv');
+	laydate({elem: '#demo'});
+	;!function(){
+		var day=new Date().getDate();
+		var year=new Date().getFullYear();
+		var mon=new Date().getMonth()+1;
+		var v=(year+"-"+mon+"-"+day);
+		$("#demo").val(v);
+	}();
+
+
+
+	//日期范围限制
+	var start = {
+	    elem: '#start',
+	    format: 'YYYY-MM-DD',
+	    min: laydate.now(), //设定最小日期为当前日期
+	    max: '2099-06-16', //最大日期
+	    istime: true,
+	    istoday: false,
+	    choose: function(datas){
+	         end.min = datas; //开始日选好后，重置结束日的最小日期
+	         end.start = datas //将结束日的初始值设定为开始日
+	    }
+	};
+
+	var end = {
+	    elem: '#end',
+	    format: 'YYYY-MM-DD',
+	    min: laydate.now(),
+	    max: '2099-06-16',
+	    istime: true,
+	    istoday: false,
+	    choose: function(datas){
+	        start.max = datas; //结束日选好后，充值开始日的最大日期
+	    }
+	};
+	laydate(start);
+	laydate(end);
+	</script>
+</body>
+</html>

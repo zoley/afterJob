@@ -1,0 +1,153 @@
+/*样式初始化*/
+html,body,ul,li,p,h1,h2,h3,h4,input,textarea,form,table,img,th,td,select,*{margin:0;padding:0;}
+img{vertical-align:top;}
+ul,li{list-style: none;}
+table{border-collapse:collapse;}
+body{color:#fefefe;font:16px/20px "Microsoft Yahei","SimSun","宋体","Arial",sans-serif;}
+.clearfix:after{content:"";line-height: 0;;height: 0;display:block;visibility:hidden;clear:both;}
+.clearfix{zoom:1;}
+a{text-decoration:none;color:#f1f1f1;-webkit-tap-highlight-color:transparent;}
+.fl{float:left;}
+.fr{float:right;}
+body{background-color:#334959;}
+/*开始正文*/
+.bg{position:fixed;left:0;top:0;right:0;bottom:0;background:url(../img/bg2.jpg) no-repeat center center;background-size:cover;min-height:100vh;opacity:0.2;z-index:-1;}
+#head{overflow:hidden;width: 100%;background:rgba(255,255,255,0);}
+/*#head p{text-align: center;font-size:17px;height:50px;line-height:50px;background:-webkit-linear-gradient(0deg, red 0%, yellow 25%, blue 50%, green 75%, red 100%);background-size:200% 100%;color:transparent;background-clip:text;-webkit-background-clip:text;-webkit-animation:10s move infinite;}
+@-webkit-keyframes move{0%{background-position: 0 0;}100%{background-position: -200% 0;}} */
+#head .motto{position: relative;;text-align: center;font-size:17px;height:50px;line-height:50px;background:-webkit-linear-gradient(270deg,#f35626,#feab3a);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-animation:5s hue infinite linear;}
+@-webkit-keyframes hue{0%{-webkit-filter:hue-rotate(0deg);}100%{-webkit-filter:hue-rotate(-360deg);}}
+#head .line{width: 100%;height: 1px;background:url(../img/line.png) repeat-x;}
+.con-left{width: 79%;min-height:calc(100vh - 111px);background:rgba(0,0,0,0.1);vertical-align:top;box-sizing:border-box;border-radius:0 0 0px 20px;margin-bottom:20px;}
+.con-middle{width:1%;background:url(../img/line2.png) repeat-x;background-size:100% 100%;vertical-align:top;margin-bottom:20px;}
+.con-right{width: 20%;background:rgba(0,0,0,0.1);box-sizing:border-box;border-radius:0 0 20px 0px;margin-bottom:20px;}
+/*btn*/
+.btn{z-index:11;width: 44px;height: 44px;position: absolute;top:3px;right:15px;border-radius:50%;box-shadow:0px 3px rgba(0,0,0,0.9);display:none;}
+.btn .icon{width: 25px;height: 4px;border-radius:2px;position: absolute;background-color:white;left:8px;top:19px;transition:0.5s;}
+.btn .icon::before{content:"";width: 25px;height: 4px;border-radius:2px;position: absolute;background-color:white;left:0px;top:-8px;transition:0.5s;}
+.btn .icon::after{content:"";width: 25px;height: 4px;border-radius:2px;position: absolute;background-color:white;left:0px;top:8px;transition:0.5s;}
+.btn .checked::before{transform:translateY(8px) rotate(45deg);}
+.btn .checked::after{transform:translateY(-8px) rotate(-45deg);}
+.btn .checked{width:0;}
+
+/*nav*/
+#nav{width: 80%;height:100%;position: fixed;right:-80%;top:0;z-index:10;border-bottom:solid #5F6A6B;border-left:180px solid transparent;box-sizing:border-box;border-bottom-width:100vh;}
+#nav .photo{width: 100px;height: 100px;border-radius:50%;background:-webkit-linear-gradient(-40deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 70px,rgba(200,230,30,1) 90px,rgba(200,20,60,1) 110px,rgba(200,20,60,0) 130px) no-repeat -100px -100px,
+	url(../img/wukong.png) no-repeat center top;transition:1s;-webkit-background-size: 100%,100%;background-size: 100%,100%;box-shadow:0 0 3px white;
+	position: absolute;top:130px;right:15px;}
+#nav .photo:hover{background-position:150px 150px,center top;box-shadow:0 0 20px blue,0 0 10px red;}
+#nav ul {position: absolute;right:15px;top:270px;}
+#nav ul li{white-space: nowrap;line-height:40px;text-align:right;}
+#nav ul li a{font-size:17px;display:inline-block;padding:0 30px;position: relative;}	
+#nav ul li .active i{position: absolute;top:50%;left:0;margin-top:-1px;width: 100%;height: 2px;background-color:#15F16F;}	
+#nav ul li .active{color:#15F16F;}
+#nav .email{position: absolute;right:15px;top:90vh;border-top:1px solid #D9DC53;line-height:40px;}
+
+.mask{width: 100%;height:100%;position: fixed;right:0;top:0;z-index:9;background:rgba(0,0,0,0.7);display:none;}
+
+/*con-right*/
+.con-right .pardon{width: 100%;;}
+.con-right .pardon .photo{margin:30px auto 20px;width: 100px;height: 100px;border-radius:50%;background:-webkit-linear-gradient(-40deg,rgba(0,0,0,0) 0,rgba(0,0,0,0) 70px,rgba(200,230,30,1) 90px,rgba(200,20,60,1) 110px,rgba(200,20,60,0) 130px) no-repeat -100px -100px,
+	url(../img/wukong.png) no-repeat center top;transition:1s;-webkit-background-size: 100%,100%;background-size: 100%,100%;box-shadow:0 0 3px #f40;}
+.con-right .pardon .photo:hover{background-position:150px 150px,center top;box-shadow:0 0 20px blue,0 0 10px red;}
+.con-right .pardon h1{font-family:"Segoe Script",cursive;text-align:center;}
+.con-right .pardon .email{line-height:50px;text-align:center;font-family:cursive;letter-spacing:0px;}
+.con-right .pardon ul {border-top:1px solid #949191;border-bottom:1px solid #949191;}
+.con-right .pardon ul li{float:left;width: 33.3%;height:40px;line-height:40px;}
+.con-right .pardon ul li a{display:block;text-align:center;}
+.con-right .pardon ul li a:hover{border-radius:35px 0;background-color:#008DE8;text-decoration:none;}
+.con-right .pardon ul li .active{border-radius:35px 0;background-color:#008DE8;}
+
+.con-right .clock{width: 100%;height: 50px;}
+.con-right .clock embed{width: 100%;height: 100%;}
+
+/*con-left*/
+
+.article{width: 95%;border-radius:20px;margin:10px auto 0;height:200px;background:rgba(1,1,1,0.4);padding:15px 20px;overflow:hidden;}
+.article .pic{width: 30%;height: 100%;padding:0 20px;}
+.article .pic a{display:block;height: 100%;overflow:hidden;}
+.article .pic a span{display:block;height: 100%;transition:0.5s;position: relative;overflow:hidden;width: 100%;}
+.article .pic a span img{width:100%;position: absolute;left:0;top:50%;margin-top:-41.5%;}
+.article .pic a:hover span{transform:scale(1.2);}
+.article .words{width: 70%;height: 100%;}
+.article .words h2{font-size:20px;font-weight:100;line-height:45px;}
+.article .words a:hover{color:#008DE8;}
+.article .words .detail{height:85px;overflow:hidden;position: relative;font-size:12px;}
+.article .words .detail span{color:#ccc;letter-spacing:1px;height:62px;overflow:hidden;position: relative;display:block;}
+.article .words .detail a{position: absolute;right:10px;bottom:3px;color:#72DE70;}
+.article .words .author{font-size:12px;letter-spacing:1px;margin-top:5px;height:25px;line-height:25px;}
+.article .words .author span{display:inline-block;height:25px;line-height:25px;}
+.article .words .author a{color:#72DE70;}
+.article .words .author .skill{padding-left:20px;background:url(../img/image/sprite.png) no-repeat 0 5px;margin-right:10px;display:none;}
+.article .words .author .date{padding-left:20px;background:url(../img/image/sprite.png) no-repeat 0 -45px;margin-right:10px;}
+.article .words .author .view{padding-left:20px;background:url(../img/image/sprite.png) no-repeat 0 -70px;margin-right:10px;}
+.article .words .author .zan{padding-left:20px;background:url(../img/image/sprite.png) no-repeat 0 -174px;}
+.article .words .author .zan:hover{background:url(../img/image/sprite.png) no-repeat 0 -204px;}
+.article .words .author .zans{background:url(../img/image/sprite.png) no-repeat 0 -204px;}
+.article .words .author .zan i{color:orange;display:none;}
+.article .words .author .zan b{font-weight:normal;}
+
+#up{width: 40px;height: 40px;background:url(../img/image/up.png) no-repeat;background-size:cover;position: fixed;top:90%;right:30px;display:none;}
+#up:hover{-webkit-animation:0.5s flex1;-webkit-filter:hue-rotate(180deg)}
+@-webkit-keyframes flex1{0%{transform:scale(1);}50%{transform:scale(0.7);}100%{transform:scale(1);}}
+
+footer p{font:13px/40px SimSun;color:#aaa;width: 100%;height: 40px;background:rgba(0,0,0,0.5);text-align:center;}
+footer p a{color:#aaa;}
+
+
+/*----------*/
+.module-cmt-footer{display:none !important;}
+.module-hot-topic{display:none !important;}
+.module-cmt-notice{display:none !important;}
+.changyan{width: 90% !important;color:#f1f1f1 !important;margin-bottom:20px !important;}
+#SOHUCS #SOHU_MAIN .module-cmt-box .post-wrap-w .post-wrap-main .wrap-area-w .textarea-fw{color:#f1f1f1 !important;}
+.issue-wrap-gw{color:#f1f1f1 !important;}
+.post-wrap-main{background:none !important;}
+/*-----*/
+@media screen and (max-width:768px) {
+	#head .motto span{display:block;}
+	#head .motto{height:50px;line-height:25px;font-size:14px;text-align:left;text-indent:15px;}
+	.con-left{width:100%;}
+	.btn{display:block;}
+	.container{padding:0;}
+	.con-left{background:none;}
+	/*article*/
+	.article .pic{display:none;}
+	.article .words{width: 100%;}
+
+
+	/*footer*/
+	footer p{font:12px/40px SimSun;}
+	footer p a{display:none;}
+}
+@media screen and (min-width:768px) {
+
+}
+@media screen and (min-width:992px) {
+.con-right .pardon .email{letter-spacing:2px;}
+.article .words .author .skill{display:inline-block;}
+}
+@media screen and (min-width:1200px) {
+
+}
+/*
+::-webkit-scrollbar        滚动条整体部分，其中的属性有width,height,background,border（就和一个块级元素一样）等。
+::-webkit-scrollbar-button      滚动条两端的按钮。可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果。
+::-webkit-scrollbar-track         外层轨道。可以用display:none让其不显示，也可以添加背景图片，颜色改变显示效果。
+::-webkit-scrollbar-track-piece        内层轨道，滚动条中间部分（除去）。
+::-webkit-scrollbar-thumb               滚动条里面可以拖动的那部分
+::-webkit-scrollbar-corner               边角
+::-webkit-resizer                       定义右下角拖动块的样式
+注意：对以上各个部分定义width,height时。有如下功能：若是水平滚动条，则width属性不起作用，height属性用来控制滚动条相应部分竖直方向高度；
+	  若是竖直滚动条，则height属性不起作用，width属性用来控制相应部分的宽度。
+*/
+/*滚动条*/
+::-webkit-scrollbar{width:10px;height:10px;}
+::-webkit-scrollbar-button{display:none;}
+::-webkit-scrollbar-track{background-color:#D1CFCF;}
+::-webkit-scrollbar-track-piece{background-color:#D1CFCF;width:10px;height:10px;}
+::-webkit-scrollbar-thumb:vertical{background-clip:padding-box;;background-color:#0196e3;border-radius:100px;border-left:1px solid transparent;border-right:1px solid transparent;box-sizing:border-box;}
+::-webkit-scrollbar-thumb:horizontal{background-clip:padding-box;;background-color:#0196e3;border-radius:100px;border-top:1px solid transparent;border-bottom:1px solid transparent;box-sizing:border-box;}
+
+
+

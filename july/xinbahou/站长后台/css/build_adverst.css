@@ -1,0 +1,47 @@
+.wrap{min-width: 970px;
+}
+.main_container {width: 100%;background-color: white;border: 1px solid #DDE0E3;border-top-width:2px ;
+}
+/*网站管理*/
+.box-title {width: 100%;height: 80px;
+}
+.box-title span {float: left;display: block;line-height: 80px;width: 150px;height: 40px;font-size: 18px;color: rgb(42,52,64);box-sizing: border-box;text-align: center;
+}
+.controls {width: 590px;float: left;margin-top: 10px;
+}
+.form-horizontal {width: 100%;
+   
+}
+.control-group {padding: 25px 0;border-bottom: 1px dashed #DDE0E3;margin: 0 40px;max-width: 900px;
+
+}
+.control-label {text-align: left;float: left;padding-top: 16px;width: 110px;
+}
+.control-group:after{content:"";line-height: 0;height: 0;display:block;visibility:hidden;clear:both;}
+.control-group{zoom:1;}
+.btn-primary{width: 170px;height: 44px;background-color: #00A383;color: white;border: none;border-radius: 5px;margin-left:150px;font-size:16px;
+}
+.btn-primary:hover{background-color:#00A373 ;box-shadow: 1px 1px 1px gray;
+}
+.radiobox{width: 130px;height: 40px;display: inline-block;text-align: center;font-size: 16px;color: rgb(119,119,119);line-height: 40px;border: 1px solid #F5F5F5;border-radius: 5px;margin: 8px 16px;background-color: #F5F5F5;box-sizing: border-box;
+}
+.radiobox:hover{box-shadow: 1px 1px 1px grey;
+}
+.checked{background: #03C19C;border: 1px solid #A3A3A3;color: white;
+}
+.control_box{width: 580px;
+}
+span.fr {width: 120px;
+}
+.controls select{height: 60px;width: 591px;text-align: center;padding:10px 30px;background: linear-gradient(#E9E9E9,#ffffff);border-radius: 5px;
+}
+.input2 {    background-color: #fff;border: 1px solid #ccc;display: inline-block;padding: 4px 6px;margin-bottom: 3px;font-size: 18px;color: #555;vertical-align: middle;border-radius: 4px;text-indent: 30px;width: 578px;height: 50px;line-height: 50px;
+}
+.ad_position {margin-top: 10px;
+}
+
+/*手动选择框*/
+.viewtype_html {background: linear-gradient(#E9E9E9,#ffffff);border: 1px solid #ebebeb;margin-top: 10px;width: 570px;padding: 8px;padding-bottom: 12px;line-height: 50px;
+}
+.viewtype_html p {height: 30px;padding: 10px;margin: 0;line-height: 30px;float: left;padding-left:0;
+}

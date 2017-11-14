@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>行内this传值</title>
+	<style>
+		*{margin:0;padding:0;list-style:none;}
+	</style>
+	<script>
+		function addreduce(obj){
+			if(obj.className=="z-add"){
+				var oYmc=document.getElementById("z-ymc");
+				var oP=document.createElement("p");
+				oP.innerHTML='<input type="text" name="ymc" value=""><span onclick="addreduce(this)" class="z-reduce">[-]</span>';
+				oP.style.cssText='cursor:pointer;line-height:30px;';
+				oYmc.appendChild(oP);
+			}else{
+				var pp=obj.parentNode;
+				pp.parentNode.removeChild(pp);
+			}
+		}
+	</script>
+</head>
+<body>
+	<ul>
+		<li>
+			<div style="display:inline-block;vertical-align:top;width:100px;">域名池：</div>
+			<div id="z-ymc" style="display:inline-block;margin-left:30px;">
+				<p style="cursor:pointer;line-height:30px;"><input type="text" name="ymc" value=""><span onclick="addreduce(this)" class="z-add">[+]</span></p>
+				<p style="cursor:pointer;line-height:30px;"><input type="text" name="ymc" value=""><span onclick="addreduce(this)" class="z-reduce">[-]</span></p>
+			</div>
+		</li>
+	</ul>
+</body>
+</html>

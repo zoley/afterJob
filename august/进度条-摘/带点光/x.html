@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>this</title>
+	<link rel="stylesheet" href="x.css">
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+	<div class="progressbar"">
+		<div class="bar" style="width: 99%;"><span></span><b>100%</b></div>
+	</div>
+
+	<div class="progressbar"">
+		<div class="bar color2" style="width:50%;"><span></span><b>50%</b></div>
+	</div>
+
+	<div class="progressbar">
+		<div class="bar color3" style="width:80%"><span></span><b>80%</b></div>
+	</div>
+
+	<div class="progressbar">
+		<div class="bar color4" style="width:72%;"><span></span><b>72%</b></div>
+	</div>
+	<script>
+		window.onload=function(){
+
+			var show=0;
+			var timer=null;
+			timer=setInterval(function(){
+				$(".bar").each(function(){
+					var str=parseInt($(this).width()/($(this).parent().width()*0.97)*100);
+					$(this).find("b").html(str+"%");
+					if(str==100){
+						clearInterval(timer);
+					}
+				})
+			},20)
+
+
+			// timer=setInterval(function(){
+			// 	var str=parseInt(bbb.offsetWidth/(aaa.offsetWidth*0.97)*100);
+			// 	zNum.innerHTML=str+"%";
+			// 	if(str==100){
+			// 		clearInterval(timer);
+			// 	}
+			// },20)
+		}
+	</script>
+</body>
+</html>

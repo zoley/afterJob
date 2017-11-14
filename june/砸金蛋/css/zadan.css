@@ -1,0 +1,64 @@
+		*{margin: 0;padding: 0;box-sizing: border-box;outline:none;
+		}
+		html,body{height: 100%;
+		}
+		#Container{position: relative;width: 100%;height: 100%;margin: 0 auto;max-width: 640px;max-height: 1024px;
+		}	
+		#content{width: 100%;height: 100%;background-color: #6a5044 !important;background: url(../img/bj.png) no-repeat;background-size:100% 100%;position: absolute;			
+		}
+		#main{width: 100%;height: 44%;position: absolute;top: 20%;
+		}
+		/*鸡蛋跳*/
+		#eggs{width: 100%;height: 100%;
+		}
+		.egg{width: 27%;height: 35%;float: left;margin: 8% 3%;background-image: url(../img/egg1.png) ;background-size: 100% 100%;
+		}
+		.jump{-moz-transform: translateY(-15%);-webkit-transform: translateY(-15%);transform: translateY(-15%);background-image: url(../img/egg-jump.png) ;
+		}
+		/*锤子*/
+		.hammer{height: 16%;width: 13%;position: absolute;left: 87%;top:-14%;background: url(../img/hammer.png);background-size:100% 100%;-moz-transform-origin: right bottom;-webkit-transform-origin: right bottom;transform-origin: right bottom;-moz-transition: top 0.3s linear,left 0.3s linear;-webkit-transition: top 0.3s linear,left 0.3s linear;transition: top 0.3s linear,left 0.3s linear;
+		}
+		
+		.swing{-moz-transform: rotate(-30deg);-webkit-transform: rotate(-30deg);transform: rotate(-40deg);
+		}
+		/*打鸡蛋*/
+		.knock{background-image: url(../img/egg2.png)
+		}
+		/*中奖后*/
+		#zj_contain{position: absolute;width: 100%;height: 100%;background-color:rgba(0,0,0,.8);z-index: 100;top:0;left:0;
+		}
+		#close_btn{position: absolute;top:8%;right: 10%;height: 4.6%;width: 8.3%;background: url(../img/close.png) no-repeat;background-size:100% 100%;z-index: 103;
+		}
+		.coupon-modal-showPrize-dialog {-webkit-animation-name: showCoupon;animation-name: showCoupon;-webkit-animation-duration: .5s;animation-duration: .5s;-webkit-animation-fill-mode: both;animation-fill-mode: both;
+		}
+		.coupon-modal-showPrize-dialog{position:absolute;width: 96%;height: 70%;left: 2%;top: 8.5%;background-image: url(../img/couponBg.png);background-repeat: no-repeat;background-size: 100%;z-index: 101;
+		}
+		.decorate1,.decorate2,.decorate3,.decorate4,.decorate5,.decorate6{background-repeat: no-repeat;background-size: 100%;position: absolute;-webkit-animation-name: showDecorate;animation-name: showDecorate;-webkit-animation-duration: .5s;animation-duration: .5s;-webkit-animation-delay: .5s;animation-delay: .5s;-webkit-animation-fill-mode: both;animation-fill-mode: both;
+		}
+		.decorate1 {background-image: url(../img/hua1.png);width: 84%;height: 21%;top:5%;left: 8%;z-index: 102;
+		}
+		.decorate2 {background-image: url(../img/blue.png);width: 6.8%;height: 2.1%;top:50%;left: 10%;z-index: 102;
+		}
+		.decorate5 {background-image: url(../img/blue.png);width: 6.8%;height: 2.1%;top:80%;left: 80%;z-index: 102;
+		}
+		.decorate3 {background-image: url(../img/yellow.png);width: 5%;height: 4%;top:50%;left: 90%;z-index: 102;
+		}
+		.decorate6 {background-image: url(../img/yellow.png);width: 5%;height: 4%;top:30%;left: 50%;z-index: 102;
+		}
+		.decorate4 {background-image: url(../img/d5.png);width: 100%;height: 48%;top: 0;left: 0;
+		}
+		#zj_main{width: 100%;height: 50%;position: absolute;top:40%;z-index: 103;
+		}
+		#zj_main h2{display: block;position: absolute;left:25%;text-align: center;font-size: 2%;width: 50%;height:8%;line-height:8% ;
+		}
+		#zj_imgbox{position: absolute;left:20%;width: 60%;height: 50%;top: 10%;
+		}
+		#zj_imgbox img{width: 100%;height: 100%;display:block;
+		}
+		#zj_btn{position: absolute;left:20%;width: 58%;height: 18%;top: 75%;border: none;background: white;background: url(../img/btnBg.png) no-repeat;background-size:100% ;font-size: larger;
+		}
+		@keyframes showCoupon{from{transform: scale(.2,.2);}to{transform: scale(1,1);}
+		}
+		@keyframes showDecorate{from{opacity: 0;}to{opacity: 1;}
+		}
+		.prize{width:100%;height:13%;position:relative;font-size:0;border-bottom:1px solid gold;margin-top:130%;}.prize i{width:11%;height:48%;background:url(../img/prize.png) no-repeat;background-size:cover;position:absolute;top:-.15rem;left:0}.prize a img{width:19%;height:85%}.prize a:nth-of-type(1) img{margin-left:2%;}

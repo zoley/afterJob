@@ -1,0 +1,105 @@
+
+body{background:rgba(0,0,0,0.3);}
+*{box-sizing:border-box;margin:0;padding:0;}
+.progressbar{
+    position:relative;
+    display:block;
+    width:92%;
+    max-width:1000px;
+    height:20px;
+    // padding:2px 5px;
+    border-bottom:1px solid rgba(255,255,255,0.25);
+    border-radius:16px;
+    margin:40px auto;
+    box-shadow:0px 4px 4px -4px rgba(255, 255, 255, 0.4),0px -3px 3px -3px rgba(255, 255, 255, 0.25),inset 0px 0px 12px 0px rgba(0, 0, 0, 0.5);
+}
+.progressbar:before{
+    position:absolute;
+    display:block;
+    content:"";
+    width:99%;
+    height:18px;
+    top:0px;
+    left:0px;
+	-webkit-border-radius:20px;
+    border-radius:20px;
+    // background:#222;
+    box-shadow:inset 0px 0px 6px 0px rgba(0, 0, 0, 0.85);
+	border:1px solid rgba(0,0,0,0.8);
+}
+.bar {
+	position:absolute;
+	display:block;
+	width:0px;
+	height:16px;
+	top:1px;
+	left:1px;
+	background:rgb(126,234,25);
+	background:linear-gradient(to bottom,  rgba(126,234,25,1) 0%,rgba(83,173,0,1) 100%);
+	box-shadow:0px 0px 12px 0px rgba(126, 234, 25, 1),inset 0px 1px 0px 0px rgba(255, 255, 255, 0.45),inset 1px 0px 0px 0px rgba(255, 255, 255, 0.25),inset -1px 0px 0px 0px rgba(255, 255, 255, 0.25);
+	border-radius:16px;
+	overflow:hidden;
+	text-align:center;
+	-webkit-animation:gogo linear 30s both;
+}
+@-webkit-keyframes gogo{0%{width:0%;}}
+.bar.color2 {
+	background:rgb(229,195,25);
+	background:linear-gradient(to bottom,  rgba(229,195,25,1) 0%,rgba(168,140,0,1) 100%);
+	box-shadow:0px 0px 12px 0px rgba(229, 195, 25, 1),inset 0px 1px 0px 0px rgba(255, 255, 255, 0.45),inset 1px 0px 0px 0px rgba(255, 255, 255, 0.25),inset -1px 0px 0px 0px rgba(255, 255, 255, 0.25);
+}
+.bar.color3 {
+	background:rgb(232,25,87);
+	background:linear-gradient(to bottom,  rgba(232,25,87,1) 0%,rgba(170,0,51,1) 100%);
+	box-shadow:0px 0px 12px 0px rgba(232, 25, 87, 1),inset 0px 1px 0px 0px rgba(255, 255, 255, 0.45),inset 1px 0px 0px 0px rgba(255, 255, 255, 0.25),inset -1px 0px 0px 0px rgba(255, 255, 255, 0.25);
+}
+.bar.color4 {
+	background:rgb(24,109,226);
+	background:linear-gradient(to bottom,  rgba(24,109,226,1) 0%,rgba(0,69,165,1) 100%);
+	box-shadow:0px 0px 12px 0px rgba(24, 109, 226, 1),inset 0px 1px 0px 0px rgba(255, 255, 255, 0.45),inset 1px 0px 0px 0px rgba(255, 255, 255, 0.25),inset -1px 0px 0px 0px rgba(255, 255, 255, 0.25);
+}
+.bar:before {
+	position:absolute;
+	display:block;
+	content:"";
+	width:606px;
+	height:150%;
+	top:-25%;
+	left:-25px;
+	background:radial-gradient(ellipse at center,  rgba(255,255,255,0.35) 0%,rgba(255,255,255,0.01) 50%,rgba(255,255,255,0) 51%,rgba(255,255,255,0) 100%);
+}
+.bar:after {
+	position:absolute;
+	display:block;
+	content:"";
+	width:64px;
+	height:16px;
+	right:0;
+	top:0;
+	border-radius:0px 16px 16px 0px;
+	background:linear-gradient(to right,  rgba(255,255,255,0) 0%,rgba(255,255,255,0.9) 99%,rgba(255,255,255,0) 100%);
+
+}
+.bar span {
+	position:absolute;
+	display:block;
+	width:100%;
+	height:18px;
+	-webkit-border-radius:16px;
+	border-radius:16px;
+	top:0px;
+	left:0;
+	background:url(snow.png) repeat  0 0;
+	-webkit-animation:sparkle 1500ms linear infinite;
+    animation:sparkle 1500ms linear infinite;
+	opacity:0.3;
+}
+.bar b{color:#000;}
+@-webkit-keyframes sparkle {
+	from {background-position:0 0;}
+	to {background-position:-110px 0 ;}
+}
+@keyframes sparkle {
+	from {background-position:0 0;}
+	to {background-position:-110px 0 ;}
+}

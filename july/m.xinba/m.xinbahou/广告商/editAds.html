@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="辛巴网盟,辛巴广告联盟,移动广告平台,站长广告联盟,点击CPC" />
+	<meta name="description" content="辛巴网盟，辛巴广告联盟移动手机广告平台，一直致力于广告主拓展精准有效的投放通路，提供各种形式的网络广告投放服务；移动手机广告平台每天的广告显示量达到2亿次以上，超高的广告单价，预计千次展现收益20元。" />
+	<title>辛巴网盟-广告商后台</title>
+	<link rel="shortcut icon" type="image/x-icon" href="img/ico.ico">
+	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/buildAds.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/home.js"></script>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale="+scale+", maximum-scale="+scale+", minimum-scale="+scale+"'>")
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/25+"px";
+	</script>
+</head>
+<body>
+	<header id="head">
+		<div class="logo fl">
+			<i class="fl"></i>
+			<h1>辛巴网盟</h1>
+		</div>
+		<div class="menu fr">
+			<i id="show-menu"></i>			
+		</div>
+	</header>
+	<div id="side">
+		<a href="index.html"><i></i>我的概况<span>></span></a>
+		<a href="plan.html"><i></i>计划管理<span>></span></a>
+		<a href="ads.html"><i></i>广告管理<span>></span></a>
+		<a href="report.html"><i></i>效果报告<span>></span></a>
+		<a href="javascript:;"><i></i>退出<span>></span></a>
+	</div>
+	<p class="z-title">广告管理>>编辑广告</p>
+	<div id="content">
+		<div class="main_container clearfix " >
+			<div class="box-title"><span>基本信息</span></div>
+			<form action="" method="POST" class="form-horizontal" id="form_b">
+				<div class="control-group">
+					<label class="control-label">所属计划</label>
+					<div class="controls">
+						<div class="control_box">
+							<select name="planid" id="planid">
+								<option value=""> 请选择一个计划 </option>
+								<optgroup label="CPC">
+									<option value="4190" selected="">&nbsp;男科微信&nbsp;</option>
+									<option value="4189">&nbsp;男科wap&nbsp;</option>
+								</optgroup>
+								<optgroup label="CPM">
+									<option value="4190">&nbsp;妇科微信&nbsp;</option>
+									<option value="4189">&nbsp;妇科wap&nbsp;</option>
+								</optgroup>
+								<optgroup label="CPV">
+									<!--.......-->
+								</optgroup>
+								<optgroup label="ECD">
+									<!--.....-->
+								</optgroup>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label for="textfield" class="control-label">显示效果</label>
+					<div class="controls">
+						<label for="ydcp" class="radiobox checked">移动插屏</label>
+						<label for="ydxf" class="radiobox">移动悬浮</label>
+						<label for="ydtw" class="radiobox">移动图文</label>
+						<label for="ydhf" class="radiobox">移动横幅</label>
+						<label for="ydpf" class="radiobox">移动漂浮</label>
+						<label for="zlgg" class="radiobox">直链广告</label>
+						<label for="yxj" class="radiobox">右下角</label>
+						<label for="stxw" class="radiobox">上图下文</label>
+						<label for="dlgg" class="radiobox">对联广告</label>
+						<input type="radio" name="site_class" id="ydcp"  value="" checked="checked" style="width: 0;"/>
+						<input type="radio" name="site_class" id="ydxf"  value="" style="width: 0;"/>
+						<input type="radio" name="site_class" id="ydtw"  value="" style="width: 0;"/>
+						<input type="radio" name="site_class" id="ydhf"  value="" style="width: 0;"/>
+						<input type="radio" name="site_class" id="ydpf"  value="" style="width: 0;"/>
+						<input type="radio" name="site_class" id="zlgg"  value="" style="width: 0;"/>
+						<input type="radio" name="site_class" id="yxj"  value="" style="width: 0;"/>
+						<input type="radio" name="site_class" id="stxw"  value="" style="width: 0;"/>
+						<input type="radio" name="site_class" id="dlgg"  value="" style="width: 0;"/>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">显示尺寸</label>
+					<div class="controls">
+						<select name="specs" id="ad_size">
+							<option value="640x80"> 640x80</option>
+							<option value="640x200"> 640x200</option>
+							<option value="640x150" selected=""> 640x150</option>
+							<option value="500x100"> 500x100</option>
+						</select>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">显示效果</label>
+					<div class="controls">
+						<div class="upfile">
+							<span id="shang1">http://www.baidu.com</span>
+							<input type="file" class="input2 special"  onchange="shang1.innerHTML=this.value">
+						</div>
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label">后台地址</label>
+					<div class="controls">
+						<input type="url" required="required" name="sitename" id="sitename" class="input2" value="www.jasdghjjasd.com">		
+					</div>
+				</div>
+				<div class="form-actions" style="margin-top:60px; margin-bottom:60px">
+					<button type="submit" class="btn btn-primary"> 提 交 </button>
+				</div>
+			</form>
+		</div>
+	</div>
+	<script type="text/javascript">
+		$(".radiobox").on("click",function(){
+			$(this).addClass(" checked").siblings(".radiobox").removeClass(" checked")
+		})
+		function files(){
+			$('input:radio[name=files]').on('click', function(option) {
+				var v = $(this).val(); 
+				if (v == 'up') {
+					$(this).siblings("#_up").show();
+					$(this).siblings("#_url").hide();
+				} else if (v == 'url') {
+					$(this).siblings("#_up").hide();
+					$(this).siblings("#_url").show();
+				} else {
+					$(this).siblings("#_up").hide();
+					$(this).siblings("#_url").hide();
+				}
+			});
+		} 
+		files();
+	</script>
+</body>
+</html>

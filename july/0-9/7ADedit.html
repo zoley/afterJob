@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+</head>
+<body>
+	<script>
+	//移动悬浮--可拖动---2017-07-15
+		var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.style.cssText = "height:70px; width:70px; position:fixed; top:50%; right:12px; z-index:2147483646; ";
+	o.innerHTML = '<a href="'+ads[0].url+'" target="_self" style="position:relative;display:inline-block; zoom:1;"><img src="' + ads[0].imageurl + '" style="width:100%;display:block;"/></a><span style="height:14px; width:14px; font-size:13px; color:#444; position:absolute; top:0; left:0;" id="c'+arand+'">X</span>';
+
+	document.body.appendChild(o);
+	dragg(o);
+
+	function dragg(obj){
+		var W=document.documentElement.clientWidth;
+		var H=document.documentElement.clientHeight;
+		obj.addEventListener("touchstart",function(e){
+			e.preventDefault();
+			var e=e.changedTouches[0];
+			var disX=e.clientX;
+			var disY=e.clientY;
+			var tempX=disX-toLeft(this);
+			var tempY=disY-toTop(this);
+			var maxTop=H-this.offsetHeight;
+			var lastLeft=0;
+			obj.addEventListener("touchmove",function(e){
+				e.preventDefault();
+				var e=e.changedTouches[0];
+				var left1=e.clientX-tempX;
+				var top1=e.clientY-tempY;
+				if(top1<=0){
+					top1=0;
+				}else if(top1>maxTop){
+					top1=maxTop;
+				}
+				this.style.left=left1+"px";
+				this.style.top=top1+"px";
+				lastLeft=left1;
+			})
+			obj.addEventListener("touchend",function(e){
+				if(lastLeft==0)return;
+				if(lastLeft>=W/2){
+					perfectMove(obj,{"left":W-obj.offsetWidth});
+				}else{
+					perfectMove(obj,{"left":0});
+				}
+			})
+		})
+	}
+	function toTop(obj){
+		var iTop=0;
+		while(obj){
+			iTop+=obj.offsetTop;
+			obj=obj.offsetParent;
+		}
+		return iTop;
+	}	
+	function toLeft(obj){
+		var iLeft=0;
+		while(obj){
+			iLeft+=obj.offsetLeft;
+			obj=obj.offsetParent;
+		}
+		return iLeft;
+	}
+	function getStyle(obj,attr) {
+		return obj.currentStyle ?obj.currentStyle[attr]:window.getComputedStyle(obj,false)[attr];
+	}
+	function perfectMove(obj,json,endFn){								
+		clearInterval(obj.timer2);							
+		obj.timer2=setInterval(function(){							
+			var bStop=true;		//这一次运动就结束了――所有的值都到达了				
+			for(var attr in json){						
+				//1.取当前的值					
+				var iCur=0;					
+				if(attr=="opacity"){					
+					iCur=Math.ceil(parseFloat(getStyle(obj,attr))*100);				
+				}else{					
+					iCur=parseInt(getStyle(obj,attr));				
+				}					
+				//2.算速度					
+				var speed=(json[attr]-iCur)/7;					
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);					
+				//3.检测停止					
+				if(iCur!=json[attr]){					
+					bStop=false;				
+				}					
+				if(attr=="opacity"){					
+					obj.style.filter="alpha(opacity="+(iCur+speed)+")";				
+					obj.style.opacity=(iCur+speed)/100;				
+				}else{					
+					obj.style[attr]=iCur+speed+"px";				
+				}					
+			}						
+			if(bStop){						
+				clearInterval(obj.timer2);					
+				endFn && endFn();					
+			}						
+		},30)							
+	}
+
+	function close(){  
+		if(o) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+	</script>
+	<!-- //////////////////////////////////////////////////////////////////////// -->
+	<script>
+		//移动悬浮--根据手指上下滑动收缩---2017-07-15
+	window.onload=function(){
+		var oDiv=document.getElementById("div");
+		var startX, startY, moveEndX, moveEndY, X, Y;   
+		document.addEventListener('touchstart', function(e) {
+			e.preventDefault();
+			startX = e.touches[0].pageX;
+			startY = e.touches[0].pageY;
+		}, false);
+		document.addEventListener('touchend', function(e) {
+			e.preventDefault();
+			moveEndX = e.changedTouches[0].pageX;
+			moveEndY = e.changedTouches[0].pageY;
+			X = moveEndX - startX;
+			Y = moveEndY - startY;
+		    if( Math.abs(X) > Math.abs(Y) && X > 0 ) {// right
+		    	perfectMove(oDiv,{"right":-30})
+		    }
+		    else if( Math.abs(X) > Math.abs(Y) && X < 0 ) {// left
+		    	perfectMove(oDiv,{"right":20})
+		    }
+		    else if( Math.abs(Y) > Math.abs(X) && Y > 0) {// down
+		    	perfectMove(oDiv,{"right":-30})
+		    }
+		    else if( Math.abs(Y) > Math.abs(X) && Y < 0 ) {// up
+		    	perfectMove(oDiv,{"right":20})
+		    }
+		});
+
+		function getStyle(obj,attr) {
+			return obj.currentStyle ?obj.currentStyle[attr]:window.getComputedStyle(obj,false)[attr];
+		}
+		function perfectMove(obj,json,endFn){								
+			clearInterval(obj.timer2);							
+			obj.timer2=setInterval(function(){							
+				var bStop=true;		//这一次运动就结束了――所有的值都到达了				
+				for(var attr in json){						
+					//1.取当前的值					
+					var iCur=0;					
+					if(attr=="opacity"){					
+						iCur=Math.ceil(parseFloat(getStyle(obj,attr))*100);				
+					}else{					
+						iCur=parseInt(getStyle(obj,attr));				
+					}					
+					//2.算速度					
+					var speed=(json[attr]-iCur)/7;					
+					speed=speed>0?Math.ceil(speed):Math.floor(speed);					
+					//3.检测停止					
+					if(iCur!=json[attr]){					
+						bStop=false;				
+					}					
+					if(attr=="opacity"){					
+						obj.style.filter="alpha(opacity="+(iCur+speed)+")";				
+						obj.style.opacity=(iCur+speed)/100;				
+					}else{					
+						obj.style[attr]=iCur+speed+"px";				
+					}					
+				}						
+				if(bStop){						
+					clearInterval(obj.timer2);					
+					endFn && endFn();					
+				}						
+			},30)							
+		}
+	}
+	</script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>js分页</title>
+    <script src="js/data.js"></script>
+    <style>
+        *{margin:0;padding:0;}
+        #wrap{width: 600px;margin:10px auto;position: relative;height: 500px;}
+        #wrap div{position: absolute;bottom:0;left:20%;}
+        #wrap li{border-bottom:1px dashed green;list-style:none;height: 54px;}
+        #wrap li h4{margin:10px;}
+        a{text-decoration:none;}
+    </style>
+</head>
+<body>
+    <div id="wrap">
+        <ul>
+<!--             <li>
+                <h4>第1页 第1条数据 标题</h4>
+                <p>第1页 第1条数据 内容 内容</p>
+            </li> -->
+        </ul>
+        <div id="select"></div>
+    </div>
+    <script>
+    window.onload=function(){
+        dividePage(1,7);
+    }
+    function dividePage(currentPage,perPageNum){
+        var oSel=document.getElementById("select");
+        var oUl=document.getElementById("wrap").getElementsByTagName("ul")[0];
+        var totalNum=data.data[0].con.length;
+        var totalPage=null;
+        if(totalNum/perPageNum!=parseInt(totalNum/perPageNum)){
+            totalPage=parseInt(totalNum/perPageNum)+1;
+        }else{
+            totalPage=parseInt(totalNum/perPageNum);
+        }
+        //当前页码显示的num
+        var upNum=(currentPage-1)*perPageNum+1;
+        var downNum=currentPage*perPageNum;
+        downNum=(downNum>totalNum)?totalNum:downNum;
+        var str="";
+        for(var i=upNum-1;i<downNum;i++){
+            str+="<li><h4>"+data.data[0].con[i].title+"</h4><p>"+data.data[0].con[i].content+"</p></li>"
+        }
+        oUl.innerHTML=str;
+        var strr="共有"+totalNum+"记录，分"+totalPage+"页，当前是第"+currentPage+"页  ";
+        if(currentPage>1){
+            strr+="<a href='javascript:;' onclick='dividePage(1,"+perPageNum+")'>首页</a> ";
+            strr+=" <a href='javascript:;' onclick='dividePage("+(currentPage-1)+","+perPageNum+")'>上一页</a> ";
+        }else{
+            strr+="首页  上一页";
+        }
+        if(currentPage<totalPage){
+            strr+=" <a href='javascript:;' onclick='dividePage("+(currentPage+1)+","+perPageNum+")'>下一页</a>";
+            strr+=" <a href='javascript:;' onclick='dividePage("+totalPage+","+perPageNum+")'>尾页</a> ";
+        }else{
+            strr+="下一页  尾页";
+        }
+        oSel.innerHTML=strr;
+    }
+    </script>
+</body>
+</html>

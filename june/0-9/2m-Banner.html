@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>移动版轮播图</title>
+	<style>
+		*{margin:0;padding:0;}
+		li{list-style: none;}
+		a{text-decoration:none;}
+		#banner{width: 100%;position: relative;overflow:hidden;}
+		#banner .big{overflow:hidden;width: 1000%;}
+		#banner .big li{float:left;width: 10%;}
+		#banner .big li a{width: 100%;display:block;}
+		#banner .big li a img{width: 100%;display:block;}
+		#banner .small{position: absolute;bottom:10px;left:0;text-align:center;width: 100%;}
+		#banner .small li{display:inline-block;width: 10px;height: 10px;border-radius:50%;background-color:white;}
+		#banner .small .active{background-color:blue;}
+	</style>
+</head>
+<body>
+	<div id="banner">
+		<ul class="big">
+			<li><a href="#"><img src="img/d1.png" alt=""></a></li>
+			<li><a href="#"><img src="img/d2.png" alt=""></a></li>
+			<li><a href="#"><img src="img/d3.png" alt=""></a></li>
+			<li><a href="#"><img src="img/d4.png" alt=""></a></li>
+			<li><a href="#"><img src="img/d5.png" alt=""></a></li>
+			<li><a href="#"><img src="img/d6.png" alt=""></a></li>
+		</ul>
+		<ul class="small">
+			<li class="active"></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+	</div>
+	
+	<!-- AD测试 -->
+<!-- 	<div style="position: fixed;width:70px;height:70px;right:0px;top:50%;">
+		<img style="width: 100%;height: 100%;display:block;" src="img/wallet.png" alt="">
+	</div> -->
+	<!-- <script src="js/touchScroll.js"></script> -->
+<!-- 	<script>
+	window.onload=function(){
+		var aUl=document.querySelector("#banner").querySelectorAll("ul");
+		var aLi1=aUl[0].children;
+		var aLi2=aUl[1].children;
+		var W=document.documentElement.clientWidth;
+		aUl[0].innerHTML+=aUl[0].innerHTML;
+		aUl[0].style.width=aLi1.length*100+"%";
+		for(var i=0;i<aLi1.length;i++){
+			aLi1[i].style.width=1/aLi1.length*100+"%";
+		}
+		var now=0;
+		var timer;		
+		var scroll=new MScroll("banner","x",false);
+		//touchstart
+		scroll.onscrollstart=function(){
+			if(now==0){
+				now=aLi2.length;
+				this.iScroll=-now*W;
+				this.setCss();
+			}
+			if(now==aLi1.length-1){
+				now=aLi2.length-1;
+				this.iScroll=-now*W;
+				this.setCss();
+			}
+			clearInterval(timer);
+		}
+		//touchend
+		scroll.onscrollend=function(){
+			this.dis=this.iScroll-this.iStartT;
+			if(Math.abs(this.dis)>W/2){
+				this.dis>0?now--:now++;
+			}
+			var target=-now*W;
+			//运动
+			this.tweenMove(target-this.iScroll,"easeOut");
+			for(var i=0;i<aLi2.length;i++){
+				aLi2[i].className="";
+			}
+			aLi2[now%aLi2.length].className="active";
+			tGo();
+		}
+		tGo();
+		function tGo(){
+			timer=setInterval(function(){
+				now++;
+				if(now==aLi2.length+1){
+					now=0;
+					scroll.iScroll=-now*W;
+					
+				}
+				var target=-now*W;
+				scroll.tweenMove(target-scroll.iScroll,"easeOut");
+				for(var i=0;i<aLi2.length;i++){
+					aLi2[i].className="";
+				}
+				aLi2[now%aLi2.length].className="active";
+			},2000)	
+		}
+
+		//begin
+		// var dis=0;
+		// var num=0;
+		// aUl[0].addEventListener("touchstart",function(e){
+		// 	e.preventDefault();
+		// 	var ev=e.touches[0];
+		// 	var lastX=ev.clientX+Math.abs(dis);
+		// 	num++;
+		// 	this.addEventListener("touchmove",function(e){
+		// 		e.preventDefault();
+		// 		var ev=e.touches[0];
+		// 		dis=ev.clientX-lastX;
+		// 		this.style.webkitTransform=this.style.transform="translateX("+dis+"px)";
+		// 	},false)			
+		// 	this.addEventListener("touchend",function(e){
+		// 		if(Math.abs(dis)>W/2){
+		// 			this.style.webkitTransform=this.style.transform="translateX("+(-W*num)+"px)";
+		// 		}else{
+		// 			this.style.webkitTransform=this.style.transform="translateX("+(-W*(num--))+"px)";
+		// 		}
+		// 	},false)
+		// },false)
+	}
+	</script> -->
+	<script src="js/jquery.min.js"></script>
+	<script>
+	$(function(){
+		//布局转换
+		$(".big").get(0).innerHTML+=$(".big").get(0).innerHTML;
+		$(".big").css("width",$(".big li").length*100+"%");
+		$(".big li").css("width",1/$(".big li").length*100+"%");
+		//轮播
+		var now=0;
+		var reduce=-$(".big li").width();
+		var oBanner=document.getElementById("banner");
+		var oBig=document.getElementsByClassName("big")[0];
+		var aLi=oBig.getElementsByTagName("li");
+		var aNav=document.getElementsByClassName("small")[0].getElementsByTagName("li");
+		var W=document.documentElement.clientWidth;
+
+		var startX=0;
+		var startEle=0;
+		var timer=null;
+		var now=0;
+		auto();
+		cssTransform(oBig,"translateX",0);
+		oBanner.addEventListener("touchstart",function(e){
+			clearInterval(timer);
+			e.preventDefault();
+			startX=e.changedTouches[0].pageX;
+			oBig.style.transition = "none";
+			var moveX=cssTransform(oBig,"translateX");
+			now=Math.round(-moveX/W);
+			if(now==0){
+				now=aNav.length;
+			}else if(now==aLi.length-1){
+				now=aNav.length-1;
+			}
+			cssTransform(oBig,"translateX",-now*W);
+			startEle=cssTransform(oBig,"translateX");
+			console.log(now)
+		},false)
+		oBanner.addEventListener("touchmove",function(e){
+			e.preventDefault();
+			var zhongX=e.changedTouches[0].pageX;
+			var dis=zhongX-startX;
+			cssTransform(oBig,"translateX",dis+startEle);
+		},false)
+		oBanner.addEventListener("touchend",function(e){
+			var moveX=cssTransform(oBig,"translateX");
+			now=Math.round(-moveX/W);
+			tabmove();
+			auto();
+		},false)
+		function tabmove(){
+			oBig.style.transition="0.5s";
+			cssTransform(oBig,"translateX",-now*W);
+			for(var i=0;i<aNav.length;i++){
+				aNav[i].className="";
+			}
+			aNav[now%aNav.length].className="active";
+		}
+		function auto(){
+			clearInterval(timer);
+			timer=setInterval(function(){
+				if(now==aLi.length-1){
+					now=aNav.length-1;
+				}
+				oBig.style.transition = "none";
+				cssTransform(oBig,"translateX",-now*W);
+				setTimeout(function(){
+					now++;
+					tabmove();//不能和上面的一同执行	
+				},30)
+			},2000)
+		}
+		function cssTransform(ele,attr,val){
+			if(!ele.transform){
+				ele.transform={};
+			}
+			if(arguments.length>2){
+				ele.transform[attr]=val;
+				var sval="";
+				for(var s in ele.transform){
+					if(s=="translateX"){
+						sval+= s + "("+ele.transform[s]+"px)";
+					}
+					ele.style.WebkitTransform=ele.style.transform=sval;
+				}
+			}else{
+				val=ele.transform[attr];
+				if(typeof val=="undefined"){
+					if(attr="translateX"){
+						val=0;
+					}
+				}
+				return val;
+			}
+		}
+
+	})
+	</script>
+</body>
+</html>

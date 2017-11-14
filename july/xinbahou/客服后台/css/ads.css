@@ -1,0 +1,134 @@
+.main_container {
+    width: 100%;
+    background-color: white;
+    border: 1px solid #DDE0E3;
+    border-top-width: 2px;
+}
+
+/*è®¡åˆ’ç®¡ç†*/
+
+
+.box-title {
+    width: 100%;
+    height: 80px;
+    border-bottom: #DDE0E3 1px solid;
+}
+.box-title span {
+    float: left;
+    display: block;
+    line-height: 80px;
+    width: 190px;
+    height: 40px;
+    font-size: 18px;
+    color: rgb(42,52,64);
+    box-sizing: border-box;
+    text-align: center;
+}
+.screen{
+	height: 60px;
+	width: 100%;
+	border-bottom: 1px solid #DDE0E3;
+}
+.screen h4 {
+    display: inline-block;
+    background: #fafafa;
+    height: 60px;
+    width: 144px;
+    line-height: 60px;
+    font-weight: normal;
+    font-size: 15px;
+    text-indent: 42px;
+    float: left;
+}
+.screen ul {
+    height: 60px;
+    float: left;
+    vertical-align: middle;
+}
+.screen ul li {
+    float: left;
+    margin-top: 18px;
+    padding: 4px 7px;
+    border-radius: 3px;
+}
+.screen ul li:hover{
+	background:#16A085 ;
+	color: white;
+	cursor: pointer;
+}
+.btn_clicked{
+	background:#16A085 ;
+	color: white;
+}
+.table {
+    margin-bottom: 20px;
+    font-size: 13px;
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    display: table;
+    margin-top: 20px;
+    color: #777;
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+tr {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+}
+tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.table tr th {
+    background: #FAFAFA;
+    line-height: 50px;
+    text-align: center;
+    border-bottom: 1px solid #dde0e3;
+    border-top: 1px solid #dde0e3;
+    font-weight: normal;
+    font-size: 16px;
+}
+.table tr td {
+    border-bottom: 1px solid #ddd;
+    line-height: 50px;
+    text-align: center;
+    vertical-align: top;
+    font-weight: normal;
+    font-size: 16px;
+}
+.ad_container{
+	width: 50%;
+	height: 197px;
+	padding: 20px 7px 0px 7px;
+	float: left;
+	box-sizing: border-box;
+}
+.ad_container img{
+	width: 90%;
+	height: 170px;
+	
+}
+@media only screen and (min-width: 1330px){
+	.screen ul li{
+		margin-left: 30px;
+	}
+}
+@media only screen and (max-width: 1330px){
+	.screen ul li{
+		margin-left: 0px;
+	}
+}
+@media only screen and (max-width: 1000px){
+	.screen h4{
+		width: 131px;
+	}
+	.ad_container{
+		width: 100%;
+	}
+}

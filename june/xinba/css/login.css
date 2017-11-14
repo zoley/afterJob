@@ -1,0 +1,77 @@
+/*适屏*/
+@media screen and (min-width:1000px) {
+	.wrap{width: 970px;}
+}		
+@media screen and (min-width: 1250px) {
+	.wrap{width: 1200px;}
+}
+/*所有样式初始化*/
+html,body,ul,li,p,h1,h2,h3,h4,input,textarea,form,table,img,th,td,select{margin:0;padding:0;}
+img,input{border:0;outline:none;}
+ul,li{list-style: none;}
+table{border-collapse:collapse;}
+body{color:#777;font:13px/20px "Microsoft Yahei","SimSun","宋体","Arial",sans-serif;background-color: #fff;overflow:auto;}
+.clearfix:after{content:"";line-height: 0;height: 0;display:block;visibility:hidden;clear:both;}
+.clearfix{zoom:1;}
+a{text-decoration:none;color:#008DE8;}
+.fl{float:left;}
+.fr{float:right;}
+/*下面开始正文*/
+.wrap{margin:0 auto;min-width: 970px;}
+/*header---s*/
+.welcom{
+	width: 100%;
+	background-color:#F7F7F7; 
+}
+.welcom span{
+	display: block;
+	font-size: 16px;
+	line-height: 35px;
+	color: black;
+}
+#header1{width: 100%;}
+#header1 .topbar1 {width: 100%;height: 105px;border-bottom:1px solid #f1f1f1;}
+#header1 .topbar1 .logo{height: 68px;padding-top: 30px;}
+#header1 .topbar1 .logo>a{display:inline-block;}
+#header1 .topbar1 .logo>a .img{height:56px;width: 56px;background:url(../img/sprite.png) no-repeat 0 0;}
+#header1 .topbar1 .logo>a h1{height:56px;width: 300px;line-height: 56px;color:#008DE8;margin-left:13px;font-size:20px;}
+.logo p{
+	color: #999999;
+	font-size: 20px;
+	margin: 15px 10px;
+}
+.logo img{
+	display: block;
+	width: 50px;
+}
+.logo span {
+	display: block;
+	color: #008DE8;
+	font-size: 18px;
+	margin: 15px 10px;
+}
+
+/*header---e*/
+/*login---s*/
+#login{width: 100%;height: 630px;background-color:#eee;overflow:hidden;}
+#login .login-wrap{width: 970px;height: 402px;border:1px solid #ccc;margin:80px auto 0;}
+#login .login-wrap .login-con{width: 584px;height: 402px;padding-left: 50px;background-color:#fff;font-size:14px;color:#a9a9a9;}
+#login .login-wrap .login-con h2{width: 100%;height: 80px;line-height: 80px;font-size:25px;color:#000;margin-top:20px;}
+#login .login-wrap .login-con tr{height: 50px;}
+#login .login-wrap .login-con tr .align-r{width: 130px;text-align:right;}
+#login .login-wrap .login-con tr td span{color:red;}
+#login .login-wrap .login-con tr td {position: relative;}
+#login .login-wrap .login-con tr td input{width: 245px;height: 33px;border:1px solid #a2a2a2;}
+#login .login-wrap .login-con tr td a{padding:10px;}
+#login .login-wrap .login-con tr td img{margin-left:10px;width: 120px;height: 50px;display:inline-block;vertical-align:middle;}
+#login .login-wrap .login-con tr td #submit{margin:50px auto 0;display:block;width: 290px;height: 50px;font-size:24px;color:white;background-color:#008DE8;border-radius:5px;word-spacing:10px;}
+#username,#password,#logincode{padding-left:25px;}
+#login .login-wrap .login-con .user-ico,#login .login-wrap .login-con .pass-ico{width: 16px;height: 17px;position: absolute;left:6px;top:16px;}
+#login .login-wrap .login-con .user-ico{background:url(../img/login_06.png) no-repeat 0 0;}
+#login .login-wrap .login-con .pass-ico{background:url(../img/login_06.png) no-repeat 0 -48px;}
+#login .login-wrap .register{width: 336px;height: 402px;background:url(../img/login_03.png) no-repeat;background-size:100% 100%;color:white;font-family:"Microsoft Yahei";}
+#login .login-wrap .register h3{color:#5BB8F9;text-indent:25px;font-size:20px;margin-top:80px;font-weight:normal;}
+#login .login-wrap .register p{text-indent:25px;font-size:18px;font-weight:normal;margin:13px 0;}
+#login .login-wrap .register a{display:block;border:2px solid white;width: 175px;height: 36px;font-size:17px;text-align:center;line-height: 36px;color:white;margin:80px auto;}
+#login .login-wrap .register a:hover{background-color:#008DE8;border-color:#008DE8;}
+/*login---e*/

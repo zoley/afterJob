@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>获取ip</title>
+	<style>
+		.num{width: 40px;height: 40px;object-fit:none;transition:0.3s all;}
+		.num0{object-position: 0px 0px;}
+		.num1{object-position: 0px -40px;}
+		.num2{object-position: 0px -80px;}
+		.num3{object-position: 0px -120px;}
+		.num4{object-position: 0px -160px;}
+		.num5{object-position: 0px -200px;}
+		.num6{object-position: 0px -240px;}
+		.num7{object-position: 0px -280px;}
+		.num8{object-position: 0px -320px;}
+		.num9{object-position: 0px -360px;}
+
+		/*---------------------------------------------------------------------------*/
+
+		.numb{width: 40px;height: 40px;display:inline-block;transition:0.3s all;background:url(img/icons.png);}
+		.numb0{background-position: 0px 0px;}
+		.numb1{background-position: 0px -40px;}
+		.numb2{background-position: 0px -80px;}
+		.numb3{background-position: 0px -120px;}
+		.numb4{background-position: 0px -160px;}
+		.numb5{background-position: 0px -200px;}
+		.numb6{background-position: 0px -240px;}
+		.numb7{background-position: 0px -280px;}
+		.numb8{background-position: 0px -320px;}
+		.numb9{background-position: 0px -360px;}
+		
+	</style>
+</head>
+<body>
+	<h2>img------object-fit/object-position(ie不兼容)</h2>
+	<p><b>显示的数字(100-999) <input class="inp" type="number" value="521"></b></p>
+	<div>
+		<img src="img/icons.png" class="num num5" alt="">
+		<img src="img/icons.png" class="num num2" alt="">
+		<img src="img/icons.png" class="num num1" alt="">
+	</div>
+
+	<p><strong><i style="color:green;" id="show"></i></strong></p>
+
+	<h2>div------background-position</h2>
+	<p><b>显示的数字(100-999) <input class="inp2" type="number" value="521"></b></p>
+	<div>
+		<div class="numb numb5"></div>
+		<div class="numb numb2"></div>
+		<div class="numb numb1"></div>
+	</div>
+	<script>
+		//img------object-fit/object-position
+		var aNum=document.querySelectorAll(".num");
+		var oInp=document.querySelector(".inp");
+		oInp.addEventListener("change",function(){
+			var val=this.value;
+			if(!val ||val<100 || val>999){
+				this.value="521";
+			}
+			val=this.value;
+			val.split("").forEach(function(item,index){
+				aNum[index].className="num num"+item;
+			})
+		})
+	</script>
+	<script>
+		//div------background-position
+		var aNum2=document.querySelectorAll(".numb");
+		var oInp2=document.querySelector(".inp2");
+		oInp2.addEventListener("change",function(){
+			var val2=this.value;
+			if(!val2 ||val2<100 || val2>999){
+				this.value="521";
+			}
+			val2=this.value;
+			val2.split("").forEach(function(item,index){
+				aNum2[index].className="numb numb"+item;
+			})
+		})
+	</script>
+
+<!-- w我是华丽丽的分割线w -->
+<!-- http://chaxun.1616.net/s.php?type=ip&output=json -->
+	<script type="text/javascript" src="http://pv.sohu.com/cityjson?ie=utf-8" charset="utf-8"></script>
+	<script type="text/javascript">
+		console.log=function(){};//禁用console.log
+		delete console.log;
+		var rejson=returnCitySN;
+		for(var key in rejson){
+			show.innerHTML+=key+":"+rejson[key]+"</br>";
+		}
+		console.log(returnCitySN);
+	</script>
+</body>
+</html>

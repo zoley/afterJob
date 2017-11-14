@@ -1,0 +1,100 @@
+
+.classification{
+	width: 138px;
+	height: 50px;
+	border: 1px solid #DDE0E3;
+	margin-bottom: 10px;
+	text-indent: 20px;
+	font-size: 16px;
+}
+.dtl_information{
+	height: 300px;
+	width: 100%;
+}
+.dtl_box{
+	height: 300px;
+	width: 50%;
+	min-width: 491px;
+	box-sizing: border-box;
+	padding: 0 20px;
+}
+.dtl_box h2 {
+    font-size: 13px;
+    font-weight: normal;
+    line-height: 60px;
+}
+.dtl_content{
+	height: 200px;
+	border: 1px solid #DDE0E3;
+	background: white;
+	padding: 20px;
+	box-sizing: border-box;
+}
+form{
+	width: 100%;
+	height: 150px;
+	position: relative;
+}
+#submit_form {
+    width: 90px;
+    height: 30px;
+    background: #16A085;
+    border-radius: 5px;
+    color: white;
+    position: absolute;
+    right: -21px;
+    top: -60px;
+    border: none;
+}
+#submit_form:hover{
+	box-shadow: 1px 1px 2px gray;
+	background: green;
+}
+.input_group{
+	width: 50%;
+	height: 50px;
+	box-sizing: border-box;
+	line-height: 50px;
+	max-width: 280px;
+}
+.input_group h3{
+	height: 50px;
+	font-size: 12px;
+	font-weight: normal;
+	width: 60px;
+	float: left;
+	text-align: center;
+}
+.can_change{
+	font-size: 12px;
+}
+.input_group input[type="text"],.input_group input[type="url"]{
+	margin-top: 18px;
+	height: 16px;
+	line-height: 16px;
+	font-size: 8px;
+	text-indent: 5px;
+	width: 140px;
+	float: right;
+	color: grey;
+	border: 1px solid #DDE0E3;
+}
+#_up input,#_url input{
+	height: 25px;
+	line-height: 16px;
+	font-size: 8px;
+	width: 140px;
+	color: grey;
+	border: 1px solid #DDE0E3;
+	box-sizing: border-box;
+}
+.failup_box{
+	height: 100px;
+	width: 140px;
+	float: right;
+}
+#_up,#_url{
+	width: 140px;
+	height: 20px;
+	box-sizing: border-box;
+}

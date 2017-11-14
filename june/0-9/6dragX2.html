@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <title>横向拖拽跳转</title>
+    <style>
+        *{margin:0;padding:0;border:0;outline:none;-webkit-box-sizing:border-box;box-sizing:border-box;}
+        a{-webkit-tap-highlight-color:transparent;text-decoration:none; color:#333;}
+        input{-webkit-appearance:none;}
+        ul,li{list-style:none;}
+        /*public*/
+        .fl{float:left;}
+        .fr{float:right;}
+        body{font-size:0.5rem;}
+        .clearfix:after{height: 0;line-height: 0;content:"";visibility:hidden;clear:both;display:block;}
+        .wrap{width: 100%;}
+        #ad{width: 100%;position: absolute;bottom:0;left:0;background:url(img/move2-.png) no-repeat;}
+        #ad>img{position: absolute;-webkit-animation:1s bianse infinite alternate;}
+        #ad>b{position: absolute;color:white;top:0;right:5px;font-size:300%;}
+        #ad.hide{display:none;}
+        @-webkit-keyframes bianse{0%{-webkit-filter:hue-rotate(0deg);}50%{-webkit-filter:hue-rotate(180deg);}100%{-webkit-filter:hue-rotate(270deg);}}
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div id="ad">
+            <b>×</b>
+            <img src="img/move1.png">
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+        $(window).resize(function(){
+            window.location.reload();
+        })
+        var W=document.documentElement.clientWidth
+        var scale=W/1242;
+        var bgH=372*scale;
+        $("#ad").css({"background-size":W+"px "+bgH+"px","height":bgH+"px"})
+        $("#ad img").css({"top":114*scale+"px","width":173*scale+"px","height":166*scale+"px","left":150*scale+"px"})
+        $("#ad b").get(0).addEventListener("touchend",function(){
+             $("#ad").addClass("hide");
+        })
+        var oImg=$("#ad img").get(0);
+        var limit=998*scale;
+        var limit2=114*scale;
+        dragg(oImg);
+        function dragg(obj){
+            obj.addEventListener("touchstart",function(e){
+                e.preventDefault();
+                var e=e.targetTouches[0];
+                var disX=e.clientX;
+                var disY=e.clientY;
+                var tempX=disX-this.offsetLeft;
+                var tempY=disY-this.offsetTop;
+                var maxLeft=W-this.offsetWidth;
+                var maxTop=bgH-this.offsetHeight;
+                var lastLeft=0;
+                var lastTop=0;
+                obj.addEventListener("touchmove",function(e){
+                    e.preventDefault();
+                    var e=e.targetTouches[0];
+                    var left1=e.clientX-tempX;
+                    var top1=e.clientY-tempY;
+                    if(left1<=0){
+                        left1=0;
+                    }else if(left1>maxLeft){
+                        left1=maxLeft;
+                    }                    
+                    if(top1<=0){
+                        top1=0;
+                    }else if(top1>maxTop){
+                        top1=maxTop;
+                    }
+                    obj.style.left=left1+"px";
+                    obj.style.top=top1+"px";
+                    lastLeft=left1;
+                    lastTop=top1;
+                })
+                obj.addEventListener("touchend",function(e){
+                    if(lastLeft<limit+6 && lastLeft>limit-6 && lastTop<limit2+6 && lastTop>limit2-6){
+                        window.location.href="http://www.baidu.com";
+                        // window.open("http://www.baidu.com")
+                    }
+                })
+            })
+        }
+    })
+
+    </script>
+</body>
+</html>

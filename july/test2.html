@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>逆转</title>
+	<link rel="stylesheet" href="syntaxy.light.min.css">
+	<script src="clipboard.min.js"></script>
+	<style>
+		pre{max-width:1000px;height:300px;}
+		/*.stx-header{display:none;}*/
+	</style>
+</head>
+<body>
+	<p id="p">Hello Vue.js!</p>
+	<button id="btn">逆转消息</button>
+
+
+	<pre id="codebox" data-type="default">
+	    // some code here to highlight.
+	    // default is the name of the filter that will be used to highlight.
+	    // see more info on using filters below.
+	    btn.onclick=function(){
+	    	p.innerHTML=p.innerHTML.split("").reverse().join("");
+		}
+
+	</pre>
+	<textarea id="bar">Mussum ipsum cacilds...</textarea>
+	<button class="btn" data-clipboard-action="copy" data-clipboard-target="#bar">
+		Cut to clipboard
+	</button>
+
+
+
+
+	<a id="aaa" href="javascript:;" shref="http://www.zoley.me" class="a">hahaahh哈哈哈</a>
+	<script src="jquery.min.js"></script>
+	<script src="syntaxy.min.js"></script>
+	<script>
+	aaa.onclick=function(){
+		aaa.href=aaa.getAttribute("shref");
+	}
+
+
+
+	btn.onclick=function(){
+		p.innerHTML=p.innerHTML.split("").reverse().join("");
+	}
+	</script>
+	<!-- 原生js环境 -->
+	<script type="text/javascript">
+		var options = {};
+		var codebox = document.getElementById( 'codebox' );
+		var syntaxy = new Syntaxy( codebox, options );
+		// add custom filters, modify options, etc. then...
+		syntaxy.render();
+	</script>
+	<!-- jquery环境 -->
+<!-- 	<script type="text/javascript">
+		var options = {};
+		$( '#codebox' ).syntaxy( options );
+	</script> -->
+
+
+
+	<script>
+	console.log(document.getElementsByTagName("head")[0].innerHTML);
+
+
+
+	var clipboard=new Clipboard(".btn");
+
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>中华小厨娘</title>
+	<script>
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/16+"px";
+	</script>
+	<style>
+		*{margin:0;padding:0;}
+		.div {position: relative;width: 100%;}
+		.div a{display:block;}
+		.div img{width: 100%;vertical-align:top;}
+		#float{position: fixed;width: 100%;height: 4rem;background:rgba(0,0,0,0.8);bottom:0;left:0;}
+		#float div{float:left;}
+		#float div:nth-of-type(1) img{height:3rem;width:3rem;display:block;margin:0.5rem;}
+		#float div:nth-of-type(2) img{height:3rem;display:block;margin:0.5rem;margin-left:0.2rem;}
+		#float div:nth-of-type(3) a{display:block;}
+		#float div:nth-of-type(3) img{height:1.3rem;display:block;margin-top:1.3rem;}
+	</style>
+</head>
+<body>
+	<div class="div"><img src="img/z1.jpg"></div>
+	<div class="div"><img src="img/z2.jpg"></div>
+	<div class="div"><a href="http://download.63lm.com/k/cn.apk"><img src="img/z3.jpg"></a></div>
+	<div class="div"><img src="img/z4.jpg"></div>
+	<div id="float">
+		<div><img src="img/z5.png"></div>
+		<div><img src="img/z6.png"></div>
+		<div><a href="http://download.63lm.com/k/cn.apk"><img src="img/z7.png"></a></div>
+	</div>
+</body>
+</html>

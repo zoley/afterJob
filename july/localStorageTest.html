@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+    <script src="jquery.min.js"></script>
+    <style>
+        html{font-size:40px;}
+        #btn{width:calc(50rem / 2);}
+    </style>
+</head>
+<body>
+<input type="button" value="按钮" id="btn">
+	<script>
+	var arr=[30,52,10,28]
+	arr.sort(function(a,b){
+            return b-a});
+
+	if(window.name==""){ 
+		window.name = "0"; 
+		// alert(arr[0])
+	} 
+	else{ 
+		window.name = Number(window.name) + 1; 
+			// alert("已经刷新"+ window.name+'次'); 
+			// alert(arr[window.name%4])
+
+		} 
+
+//  json={
+//     "name1":"236",
+//     "name2":"1345",
+//     "name3":"3123",
+//     "name4":"4123",
+//     "name5":"5123",
+//     "name6":"612"
+    
+//  }
+// var d=JSON.stringify(json);
+// window.localStorage.setItem("data",d);
+
+// btn.onclick=function(){
+//     var now=parseInt(window.localStorage.getItem("num")||0);
+//     window.localStorage.setItem("num",now+1);
+//     console.log(window.localStorage.getItem("num"));
+//     // window.localStorage.clear()
+    
+//     // var da=JSON.parse(window.localStorage.getItem("data"));
+//     // console.log(da["name"+window.localStorage.getItem("num")])
+    
+// }
+
+function calc(){
+    var now=parseInt(window.localStorage.getItem("num")||0);
+    window.localStorage.setItem("num",now+1);
+    if(now>=10){
+        window.localStorage.setItem("num",1);
+    }
+    return window.localStorage.getItem("num");
+}
+var CS;
+alert(CS=calc())
+
+// function count() {
+//     // 当前浏览器是否支持localStorage
+//     if(window.localStorage) {
+//         // 是否已经有记录了，如果有进入操作
+//         if(window.localStorage.getItem("count")) {
+//             //拿出key对应的value， 因为存储进去的是字符串。
+//             var c = parseInt(window.localStorage.getItem("count"));
+//             // 设置key，value加1
+//             window.localStorage.setItem("count",c+1);
+//             // console.log(parseInt(window.localStorage.getItem("count")));
+//         }else {
+//             //如果没有检查到key, 那肯定没设置，那就让他默认为0
+//             window.localStorage.setItem("count",0);
+//             // console.log(0);
+//         }
+//     }
+// }
+// count();
+
+//     $.ajax({
+//         url:"111.txt",
+//         data:"",
+//         type:"post",
+//         dataType:"json",
+//         success:function(str){
+//             // console.log(str.hahah)
+            
+//         }
+//     })
+
+
+	</script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>wiper移动端轮播</title>
+	<link rel="stylesheet" href="lab/css/swiper.min.css">
+	<script src="lab/js/swiper.min.js"></script>
+	<style>
+		*{margin:0;padding:0;}
+		img{display:block;width: 100%;}
+		.swiper-container-horizontal>.swiper-pagination-bullets .swiper-pagination-bullet {
+			margin: 0 12px;
+		}
+		.swiper-pagination-bullet {
+			width: 40px;
+			height: 40px;
+			display: inline-block;
+			border-radius: 100%;
+			background: #000;
+			opacity:0.5;
+		}
+		.swiper-pagination-bullet-active {
+			opacity: 1;
+			background: #007aff;
+		}
+		.swiper-container {
+			margin-left: auto;
+			margin-right: auto;
+			position: relative;
+			overflow: hidden;
+			z-index: 1;
+			height: 423px;
+		}
+	</style>
+</head>
+<body>
+	<div class="swiper-container">
+		<div class="swiper-wrapper">
+			<div class="swiper-slide"><img src="img/d1.png"></div>
+			<div class="swiper-slide"><img src="img/d2.png"></div>
+			<div class="swiper-slide"><img src="img/d3.png"></div>
+			<div class="swiper-slide"><img src="img/d4.png"></div>
+			<div class="swiper-slide"><img src="img/d5.png"></div>
+		</div>
+		<!-- 如果需要分页器 -->
+		<div class="swiper-pagination"></div>
+
+		<!-- 如果需要导航按钮 -->
+		<!-- <div class="swiper-button-prev"></div>
+		<div class="swiper-button-next"></div> -->
+
+		<!-- 如果需要滚动条 -->
+		<div class="swiper-scrollbar"></div>
+	</div>
+	<script>
+		window.onload=function(){
+			var mySwiper = new Swiper ('.swiper-container', {
+				direction: 'horizontal',
+				loop: true,
+				loopAdditionalSlides : 1,
+
+			    // 如果需要分页器
+			    pagination: '.swiper-pagination',
+			    paginationClickable:true,
+			    paginationType:'bullets',
+			    
+			    // 如果需要前进后退按钮
+			    nextButton: '.swiper-button-next',
+			    prevButton: '.swiper-button-prev',
+			    
+			    // 如果需要滚动条
+			    scrollbar: '.swiper-scrollbar',
+			    scrollbarHide:false,
+			    //防止边界模糊
+			    roundLengths : true,
+			    //网格分布
+			    slidesPerView :1.5,
+			    spaceBetween : 20,
+			    centeredSlides : true,
+			    //自动播放
+			    autoplay:2000,
+			    autoplayDisableOnInteraction : false
+			}) 
+		}
+	</script>
+</body>
+</html>

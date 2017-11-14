@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>抢红包</title>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=parseFloat(document.documentElement.clientWidth/16)+"px";
+	</script>
+	<script src="jquery.min.js"></script>
+	<style>
+		*{margin:0;padding:0;list-style:none;font-family:"Microsoft Yahei";}
+		img{vertical-align:top;}
+		a{-webkit-tap-highlight-color:transparent;}
+		body{background:#D64F47;}
+		.wrap{width: 100%;background:url(img/bg.png) no-repeat top center;background-size:100%;overflow:auto;}
+		.congratulation{color:#FAD79C;text-align:center;font-weight:normal;margin-top: 7rem;font-size:0.9rem;}
+		.download{text-align: center;display:block;margin-top:1.9rem;}
+		.download img{width:4.5rem;}
+		.rot{transform:rotateY(720deg);transition:1.95s;}
+		.introduce{text-align: center;color:#DACECE;padding:0.45rem 0;font-size:0.57rem;}
+		.broadcast{width: 100%;height:15.5rem;margin:0.25rem 0 0.5rem;overflow:hidden;}
+		/*.broadcast ul{border-top:1px solid #DA2323;}*/
+		.broadcast ul li{border-bottom:1px solid #DACECE;height:3rem;}
+		.broadcast ul .zouni{overflow:hidden;height:0;}
+		.broadcast ul li img{float:left;width: 2rem;height: 2rem;margin-top:0.5rem;margin-left:0.5rem;border-radius:50%;}
+		.broadcast ul li div{display:inline-block;float:left;margin-top:0.48rem;margin-left:0.45rem;}
+		.broadcast ul li div h2{font:100 0.725rem "Microsoft Yahei";color:#fff;margin-bottom:0.45rem;max-width:4.75rem;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+		.broadcast ul li div p{font-size:0.5rem;color:#D4AD2B;}
+		.broadcast ul li span{font-size:0.65rem;color:;float:right;margin-right:0.45rem;margin-top:1.1rem;display:inline-block;}
+		.broadcast ul li span b{color:#D4AD2B;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<h2 class="congratulation">恭喜您获得一个红包</h2>
+		
+		<a href="javascript:;" class="download"><img src="img/button.png" alt=""></a>
+		<p class="introduce">下载安装即可领红包</p>
+		<div class="broadcast">
+			<ul>
+				
+			</ul>
+		</div>
+	</div>
+	<script src="data.js"></script>
+	<script>
+	window.onload=function(){
+		var broadcast=document.getElementsByClassName("broadcast")[0];
+		var oUl=broadcast.getElementsByTagName("ul")[0];
+		var init=6;
+		for(var i=0;i<init;i++){
+			var str='<li><img src="'+data[i].w_headimg+'" alt=""><div><h2>'+data[i].w_name+'</h2><p>'+data[i].c_time+'分钟前</p></div><span>'+data[i].u_time+'</span></li>';
+			oUl.innerHTML +=str;
+		}
+		var now=6;
+		function addDel(){
+			var oLi=document.createElement("li");
+			oLi.innerHTML='<img src="'+data[now].w_headimg+'" alt=""><div><h2>'+data[now].w_name+'</h2><p>'+data[now].c_time+'分钟前</p></div><span>'+data[now].u_time+'</span>';
+			oLi.className="zouni";
+			oUl.insertBefore(oLi,oUl.children[0]);
+			$("ul li:first-child").animate({height:"3rem"},500);
+			now++;
+			if(now==data.length){
+				now=0;
+			}
+			oUl.removeChild(oUl.lastChild);
+		}
+		setInterval(addDel,2000);
+		//-------------------
+		var download=document.getElementsByClassName("download")[0];
+		download.onclick=function(){
+			this.className="download rot";
+			setTimeout(function(){
+				window.location.href="http://58.241.123.49/sjlm/sjlm_1799_a5lianmeng.apk";
+				download.className="download";
+			},2000)
+		}
+	}
+	</script>
+</body>
+</html>

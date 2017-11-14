@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>syntaxy页面显示代码</title>
+	<link rel="stylesheet" href="css/syntaxy.min.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/syntaxy.min.js"></script>
+</head>
+<body>
+	<br>
+	<p id="p">Hello Vue.js!</p>
+	<button id="btn">逆转消息</button>
+	<br>
+	<script>
+		btn.onclick=function(){
+			p.innerHTML=p.innerHTML.split("").reverse().join("");
+		}
+	</script>
+	<br>
+	<pre class="codebox" data-type="default" data-title="html：">
+		<div id="content">
+			<div class="develop">
+				<p><span>会员发展链接：</span><textarea id="copytext">http://www.xinba.com/index.register</textarea></p> 
+				<p><span>成功发展 <i>0</i> 个</span><a href="javascript:;" id="z-copy">一键复制</a></p>
+			</div>
+			<ul class="gain">
+				<li>
+					<div>&yen;</div>
+					<div>
+						<p>今日收入</p>
+						<b>254555.00</b><span>元</span>
+					</div>
+				</li>
+			</ul>
+			<div class="charts">
+				<h2>当日收益趋势</h2>
+				<div id="container"></div>
+			</div>
+		</div>
+	</pre>
+	<br>
+	<pre class="codebox"  data-title="css：" data-type="default">
+		.z-form .z-direction-a .box-content>table>tbody>tr{border-bottom:1px dashed #ccc;}
+		.z-form .z-direction-a .box-content>table>tbody>tr>td{font-size:22/30rem;}
+		.z-form .z-direction-a .box-content>table>tbody>tr>td:first-of-type{padding:20/30rem 0;padding-left:0.5%;font-size:26/30rem;line-height:40/30rem;}
+		.z-form .z-direction-a .box-content>table>tbody>tr>td:nth-of-type(2) input{width: 20/30rem;height: 20/30rem;vertical-align:middle;}
+		.z-form .z-direction-a .box-content>table>tbody>tr>td:nth-of-type(2) table{margin:10/30rem 0;font-size:22/30rem;}
+		.z-form .z-direction-a .box-content>table>tbody>tr>td:nth-of-type(2) table input{margin-right:10/30rem;}
+		.z-form .z-direction-a .box-content>table>tbody>tr{height: 79/30rem;}
+		.z-form .form-actions{width: 80%;height: 70/30rem;margin:50/30rem 7.5% 30/30rem;}
+	</pre>
+	<br>
+	<pre class="codebox"  data-title="js：" data-type="default">
+		<!-- 原生js环境 -->
+
+		var options = {};
+		var codebox = document.getElementById( 'codebox' );
+		var syntaxy = new Syntaxy( codebox, options );
+		// add custom filters, modify options, etc. then...
+		syntaxy.render();
+
+		<!-- jquery环境 -->
+
+		var options = {};
+		$( '#codebox' ).syntaxy( options );
+
+	</pre>
+	<script>
+		var options={};
+		$(".codebox").syntaxy(options);
+	</script>
+</body>
+</html>

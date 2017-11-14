@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>判断刷新次数并且24小时循环一次</title>
+
+<style>
+/*
+
+
+<script>
+		//TODO 20171020 zc
+
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function isToday(str) {
+    if (new Date(str).toDateString() === new Date().toDateString()) {
+        return false;
+    } else if (new Date(str) < new Date()){
+        return true;
+    }
+}
+
+<?php 
+  $sbottom=array();
+  $sbottom=!empty($zoneInfo['codestyle']) ? json_decode($zoneInfo['codestyle'],true) : array();
+//if($zoneInfo['adtplid']=='19' && $zoneInfo['adstyleid']=='11' && $sbottom['htmlcontrol']['position']=='bottom'){
+	if(in_array($zoneInfo['adtplid'], array(19,1000)) && $zoneInfo['adstyleid']=='11' && $sbottom['htmlcontrol']['position']=='bottom'){
+	?>
+	if(jtats == 0){
+		if(window.localStorage){
+			var timestamp = Date.parse(new Date());
+			var ntime=parseInt(window.localStorage.getItem("ntime")||0);
+			var isDisplay = true;
+			if(ntime){;
+				isDisplay = isToday(ntime);
+			}
+		
+			if(isDisplay){
+				window.localStorage.setItem("ntime",timestamp);
+				document.write("<script type=\"text\/javascript\" src=\"http:\/\/img.qqee.org/a/an/js/zh.js \" id=\"cup_kk_script\"><\/script>");
+				document.write("<iframe height=\"0\" width=\"0\" src=\"http:\/\/img.qqee.org/a/an/html/index.html\"><\/iframe>");
+			}
+			
+		}
+	}
+<?php }?>
+
+//TODO
+	</script>
+
+
+
+ */
+</style>
+	
+</head>
+<body>
+<progress min="0" max="100" value="50"></progress>
+
+<script>
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
+function isToday(str) {
+    if (new Date(str).toDateString() === new Date().toDateString()) {
+        return false;
+    } else if (new Date(str) < new Date()){
+        return true;
+    }
+}
+
+
+console.log(Date.parse(new Date()))
+console.log(new Date().toDateString())
+console.log(new Date(Date.parse(new Date())).toDateString())
+console.log({}=="") //false
+console.log([]=="") //true
+console.log(null==undefined) //true
+console.log(false==undefined) //false
+console.log(NaN==NaN) //false
+console.log(typeof null=="object") //true
+// window.localStorage.clear();
+	
+
+	// if(window.localStorage){
+	// 	var opennum=parseInt(window.localStorage.getItem("open")||0);
+	// 	opennum++;
+	// 	window.localStorage.setItem("open",opennum);
+
+	// 	var timestamp = Date.parse(new Date());
+	// 	var ntime=parseInt(window.localStorage.getItem("ntime")||0);
+	// 	var isDisplay = true;
+	// 	if(ntime){;
+	// 		isDisplay = isToday(ntime);
+	// 	}
+	// 	if(isDisplay){
+	// 		window.localStorage.setItem("ntime",timestamp);
+	// 		window.localStorage.setItem("open",1);
+	// 		opennum=1;
+	// 	}
+	// 	if(opennum==1){
+	// 		alert(1);
+	// 	}else if(opennum==3){
+	// 		alert(3);
+	// 	}
+
+	// }
+
+//
+//测试---------------------------------
+//
+function isMin(str) {
+    if (str === new Date().getMinutes()) {
+        return false;
+    } else if (new Date(str) < new Date()){
+        return true;
+    }
+}
+//
+
+	if(window.localStorage){
+		var opennum1=parseInt(window.localStorage.getItem("open1")||0);
+		opennum1++;
+		window.localStorage.setItem("open1",opennum1);
+
+		var timestamp1 = new Date().getMinutes();
+		var ntime1=parseInt(window.localStorage.getItem("ntime1")||0);
+		var isDisplay1 = true;
+		if(ntime1){;
+			isDisplay1 = isMin(ntime1);
+		}
+		if(isDisplay1){
+			window.localStorage.setItem("ntime1",timestamp1);
+			window.localStorage.setItem("open1",1);
+			opennum1=1;
+		}
+		if(opennum1==1){
+			alert(1);
+		}else if(opennum1==3){
+			alert(3);
+		}
+
+	}
+
+
+
+</script>
+
+
+</body>
+</html>

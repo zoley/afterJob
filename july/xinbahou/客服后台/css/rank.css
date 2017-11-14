@@ -1,0 +1,137 @@
+
+/*新增*/
+.hidden{display:none;}
+/*新增*/
+.rank_box {
+    display: inline-block;
+    background: white;
+    border-top: 3px solid #DDE0E3;
+    float: left;
+    margin: 10px 20px;
+}
+table {
+    margin: 10px 10px 30px 10px;
+    color: #333;
+    float: left;
+}
+.rank_title {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+    font-size: 16px;
+}    
+
+.rank_box:first-of-type,.rank_box:nth-of-type(3)  {
+    width: 29%;
+}
+.rank_box:first-of-type table,.rank_box:nth-of-type(3) table  {
+    width: 90%;
+}
+.rank_box:nth-of-type(2),.rank_box:nth-of-type(4)  {
+    width: 63%;
+}
+.rank_box:nth-of-type(2) table,.rank_box:nth-of-type(4) table  {
+    width: 45%;
+}
+@media only screen and (max-width: 1365px) {
+	.rank_box:nth-of-type(2),.rank_box:nth-of-type(4)  {
+    width: 90%;
+    float: left;
+}
+.rank_box:first-of-type,.rank_box:nth-of-type(3)  {
+    width: 90%;
+    float: left;
+}
+.rank_box:nth-of-type(2) table,.rank_box:nth-of-type(4) table  {
+    width: 90%;
+}
+}
+table {
+    margin: 10px 10px 30px 10px;
+    color: #333;
+    float: left;
+}
+.rank_title {
+    height: 50px;
+    line-height: 50px;
+    padding: 0 30px;
+    font-size: 16px;
+    color: #333;
+    border-bottom: 1px solid #dde0e3;
+}
+.rank_btn {font-size: 15px;display: inline-block;border: 1px solid #dde;line-height: 27px;height: 27px;margin-top: 10px;margin-left: 10px;padding: 0 10px;border-radius: 5px;}
+.rank_btn:hover{
+	cursor: pointer;
+	background-color:#6CC67E ;
+	color: white;
+	border: 1px solid #6CC67E;
+	box-shadow: 1px 1px 1px gray;
+}
+th {
+    height: 40px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #333;
+}
+
+td {
+    height: 40px;
+    text-align: center;
+    border-top: 1px solid #dde0e3;
+}
+
+tr td span {
+    display: inline-block;
+    width: 35px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 3px;
+    color: white;
+    background-color: #3398DB;
+}
+.table1 tr:nth-of-type(1) td span,.table1 tr:nth-of-type(2) td span,.table1 tr:nth-of-type(3) td span{
+	background-color: #16A085;
+}
+.green_white{
+	background-color:#6CC67E ;
+	color: white;
+	border: 1px solid #6CC67E;
+}
+.rank_btn {font-size: 15px;display: inline-block;border: 1px solid #dde;line-height: 27px;height: 27px;margin-top: 10px;margin-left: 10px;padding: 0 10px;border-radius: 5px;}
+.rank_btn:hover{
+	cursor: pointer;
+	background-color:#6CC67E ;
+	color: white;
+	border: 1px solid #6CC67E;
+	box-shadow: 1px 1px 1px gray;
+}
+th {
+    height: 40px;
+    font-size: 15px;
+    font-weight: normal;
+    color: #333;
+}
+
+td {
+    height: 40px;
+    text-align: center;
+    border-top: 1px solid #dde0e3;
+}
+
+tr td span {
+    display: inline-block;
+    width: 35px;
+    height: 25px;
+    line-height: 25px;
+    border-radius: 3px;
+    color: white;
+    background-color: #3398DB;
+}
+.table1 tr:nth-of-type(1) td span,.table1 tr:nth-of-type(2) td span,.table1 tr:nth-of-type(3) td span{
+	background-color: #16A085;
+}
+.green_white{
+	background-color:#6CC67E ;
+	color: white;
+	border: 1px solid #6CC67E;
+}

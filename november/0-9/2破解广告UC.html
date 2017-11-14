@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>刷新大招</title>
+</head>
+<body>
+<h1>刷新大招</h1>
+
+ <script>
+ ;!function(){
+ 	// var zwrap=document.createElement('div');
+ 	// zwrap.id='zidd';
+ 	// zwrap.innerHTML='<div id="ziddd"></div>';
+ 	// zwrap.style.cssText='height:300px';
+ 	// document.getElementsByTagName('body')[0].insertBefore(zwrap,document.getElementsByTagName('body')[0].firstChild);
+	// document.getElementById('zidd').onclick=function(){
+	// 	clearInterval(timerr);
+	// 	alert(1);
+	// 	// window.location.href='http://zoley.me';
+	// };
+	var arand=Math.floor(Math.random()*100000);
+	var html='<a href="javascript:;" style="display:block;position:relative;"><img src="img/jobs.gif" style="width:100%;vertical-align:top;"><div style="background:rgba(0,0,0,0.1);position:absolute;bottom:0px;right:0px;width:20px;text-align:center;color:#ffffff;font-size:12px;line-height:20px;font-family:Arial;height:20px;z-index:2147483647;" id="c'+arand+'">X</div></a>"';
+	var con='<textarea id="zstore" style="display:none;">'+html+'</textarea>';
+	var x=document.createElement('div');
+	x.innerHTML=con;
+	document.getElementsByTagName('body')[0].appendChild(x);
+	var timerr=setInterval(function(){
+		if(document.getElementById(window['zole'])){
+			document.getElementById(window['zole']).remove();
+		}
+		var htm=document.getElementById('zstore').value + '<div style="display:none">'+new Date().getTime()+'</div>';
+		window['zole']='zole'+Math.random().toString(36).slice(2);
+		var y=document.createElement('div');
+		y.id=window['zole'];
+		document.getElementsByTagName('body')[0].insertBefore(y,document.getElementsByTagName('body')[0].firstChild);
+		document.getElementById(window['zole']).innerHTML = htm;
+		document.getElementById(window['zole']).onclick=function(){
+			clearInterval(timerr);
+			window.location.href='http://zoley.me';
+		};
+		document.getElementById('c'+arand).onclick=function(e){
+			e.stopPropagation()
+			clearInterval(timerr);
+			document.getElementById(window['zole']).style.display='none';
+		}
+
+	},100)
+ 	
+ }()
+ </script>
+
+
+</body>
+</html>

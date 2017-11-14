@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>移动端video播放2---</title>
+	<script>
+		eval(function(d,e,a,c,b,f){b=function(a){return(a<e?"":b(parseInt(a/e)))+(35<(a%=e)?String.fromCharCode(a+29):a.toString(36))};if(!"".replace(/^/,String)){for(;a--;)f[b(a)]=c[a]||b(a);c=[function(a){return f[a]}];b=function(){return"\\w+"};a=1}for(;a--;)c[a]&&(d=d.replace(new RegExp("\\b"+b(a)+"\\b","g"),c[a]));return d}('1k(17(d,e,a,c,b,f){b=17(a){18(a<e?"":b(1i(a/e)))+(1j<(a%=e)?1c.1d(a+29):a.1g(1h))};1a(!"".1b(/^/,1c)){19(;a--;)f[b(a)]=c[a]||b(a);c=[17(a){18 f[a]}];b=17(){18"\\\\w+"};a=1}19(;a--;)c[a]&&(d=d.1b(1e 1f("\\\\b"+b(a)+"\\\\b","g"),c[a]));18 d}(\'7 5={4:o(){7 u=y.O;T{W:u.2("p")>-1,t:u.2("w")>-1,x:u.2("c")>-1,B:u.2("C")>-1&&u.2("F")==-1,d:!!u.9(/c.*V.*/)||!!u.9(/c/)&&u.2("k")&&u.2("k")>-1&&u.2("Y")<0,e:!!u.9(/\\\\(i[^;]+;( U;)? q.+g s X/),n:u.2("v")>-1||u.2("15")>-1,a:u.2("a")>-1||u.2("g")>-1,b:u.2("b")>-1,z:u.2("A")==-1}}()};f(5.4.d){f(5.4.n||5.4.a||5.4.b||5.4.e){7 3=1/D.E;8.G("<H I=\\\'J\\\' K=\\\'L-M=N,j=P-j,Q-3="+3+",R-3="+3+", S-3="+3+"\\\'>");7 6=8.l("6")[0];6.m.h=Z(8.10.11/12)+"13"}}14{7 6=8.l("6")[0];6.m.h="r"};\',1l,1m,"  1n 1o 1p 1q 1r 1s 1t 1u 1v 1w 1x 1y 1z 1a 1A 1B  1C 1D 1E 1F 1G 17 1H 1I 1J 1K 1L  1M 1N 1O 1P 1Q 1R 1S 1T 1U 1V 1W 1X 1Y 1Z 20 21 22 23 24 25 26 27 28 2a 18  2b 2c  2d 2e 2f 2g 16 2h 2i 2j".2k(" "),0,{}));',62,145,"                                                                     function return for if replace String fromCharCode new RegExp toString 36 parseInt 35 eval 62 68 indexOf scale versions mobile_bs html var document match iPhone iPad AppleWebKit mobile ios Mac fontSize width QIHU getElementsByTagName style android Trident CPU 40px OS presto Android Presto webKit navigator webApp Safari gecko Gecko window devicePixelRatio KHTML write meta name viewport content user scalable no userAgent device initial maximum  minimum Mobile trident Chrome parseFloat documentElement clientWidth px else Linux split".split(" "),0,{}));
+	</script>
+	<style>
+		*{margin:0;padding:0;}
+		
+		/*--------loading------*/
+		.pre{max-width:16rem;}
+		.loading{height:0;width:0;position: relative;margin:5rem auto;display:none;}
+		.loading .out{height: 0;width: 0;border:1.25rem solid;border-radius:1.25rem;border-top-color:transparent;border-bottom-color:orange;border-left-color:orange;border-right-color:orange;position: absolute;left:-1.25rem;top:-1.25rem;-webkit-animation:out 1s linear infinite;}
+		.loading .mask{height: 0;width: 0;border:1.125rem solid white;border-radius:1.125rem;position: absolute;left:-1.125rem;top:-1.125rem;}
+		.loading .circle1{height: 0;width: 0;border:0.75rem solid green;border-radius:0.75rem;position: absolute;left:-0.75rem;top:-0.75rem;border-right-color:yellowgreen;border-bottom-color:yellowgreen;transform:rotate(-45deg);}
+		.loading .circle2{height: 0;width: 0;border:0.75rem solid transparent;border-radius:0.75rem;position: absolute;left:-0.75rem;top:-0.75rem;border-left-color:yellowgreen;border-top-color:yellowgreen;transform:rotate(-45deg);-webkit-animation:cir2 2s linear infinite;z-index:2;}
+		.loading .circle3{height: 0;width: 0;border:0.75rem solid transparent;border-radius:0.75rem;position: absolute;left:-0.75rem;top:-0.75rem;border-left-color:green;border-top-color:green;transform:rotate(-45deg);-webkit-animation:cir3 2s 0.5s infinite linear;z-index:1;}
+		@-webkit-keyframes cir2{
+			0%{transform:rotate(-45deg);}
+			25%{transform:rotate(-225deg);}
+			50%{transform:rotate(-225deg);}
+			75%{transform:rotate(-405deg);}
+			100%{transform:rotate(-405deg);}
+		}
+		@-webkit-keyframes cir3{
+			0%{transform:rotate(-45deg);z-index:3;}
+			25%{transform:rotate(-225deg);}
+			49.99%{transform:rotate(-225deg);z-index:3;}
+			50%{transform:rotate(-225deg);z-index:1;}
+			75%{transform:rotate(-405deg);}
+			99.99%{transform:rotate(-405deg);z-index:1;}
+			100%{transform:rotate(-405deg);z-index:3;}
+		}
+		@-webkit-keyframes out{
+			0%{transform:rotate(0deg);}
+			100%{transform:rotate(-360deg);}
+		}
+		/*-------------video-------*/
+		.vk,.first{width: 100%;max-width:16rem;position: absolute;left:0;top:0;bottom:0;right:0;overflow: hidden;display:none;}
+		.vk{background:url(img/c2.jpg) no-repeat 0 0;-webkit-background-size:100%;background-size:100%;}
+		.btn{width:3.5rem;height:1.25rem;display:block;margin-top:0.6rem;margin-left:0.3rem;border:none;background:transparent;-webkit-tap-highlight-color:transparent;outline:none;}
+		
+
+		/*hand*/
+		.guide{width: 6rem;height: 6rem;position: absolute;left:63%;top:19.5rem;z-index:4;}
+		.guide .hand{width: 100%;height: 100%;display:block;background:url(img/hand.png) no-repeat 0 0;-webkit-background-size:cover;background-size:cover;-webkit-animation:0.5s shake2 step-start infinite;}
+		.guide .dot{width:2rem;height:2rem;position: absolute;left:-0.7rem;top:-0.2rem;background:url(img/dot.png) no-repeat;background-size:cover;-webkit-animation:1.5s shake1 infinite;}
+		@-webkit-keyframes shake2{0%{background-position: 0 0;}50%{background-position: -5.5rem 0;}}
+		@-webkit-keyframes shake1{0%,20% {opacity: 0;transform: scale(0,0)}50%,80% {opacity: 1;transform: scale(1,1)}100% {opacity: 0;transform: scale(1,1)}}
+	</style>
+</head>
+<body>
+	<div class="pre">
+		<div class="loading">
+			<div class="out"></div>
+			<div class="mask"></div>
+			<div class="circle1"></div>
+			<div class="circle2"></div>
+			<div class="circle3"></div>
+		</div>
+	</div>
+	<div class="first">
+		<div style="position:relative;">
+			<img style="display:block;width:100%;" src="img/c1.jpg" alt="">
+			<img id="btn1" src="img/mask.png" style="position:absolute;bottom:4rem;right:3.75rem;width:4rem;z-index:100;" alt="">
+			<div class="guide">
+				<i class="dot"></i>
+				<i class="hand"></i>
+			</div>
+		</div>
+	</div>
+	<div class="vk">
+		<button id="btn2" class="btn"></button>
+		<div  style="position:absolute;left:0;top:3.3rem;width: 16rem;height:9rem;">
+			<video id="v" controls="" webkit-playsinline="true" x-webkit-airplay="true" playsinline="true" x5-video-player-fullscreen="false" width="100%" height="100%" preload="auto"  poster="" style="object-fit:fill;width:100%;">
+				<source src="http://file.ih5.cn/v3/files/1830332/20171023/28bd3649.mp4"></source>
+			</video>
+		</div>
+	</div>
+<script>
+	;(function(){
+    	var oV=document.getElementById('v');
+    	var oFirst=document.getElementsByClassName('first')[0];
+    	var oLoad=document.getElementsByClassName('loading')[0];
+    	var oVk=document.getElementsByClassName('vk')[0];
+    	var oVtime=null;
+	    document.onreadystatechange = function () {      
+	    	if(document.readyState=='complete') {            
+	    		oFirst.style.display='block';      
+	    		oLoad.style.display='none';      
+	    	}else{
+	    		oLoad.style.display='block';   
+	    	}   
+	    }
+	    document.getElementById('btn1').addEventListener('click',function(){
+	    	oFirst.style.display='none';
+	    	oVk.style.display='block';
+	    	oV.currentTime=0;
+	    	oV.play();
+	    	console.log(oV.currentTime);//单位s
+	    	console.log(oV.duration);//单位s
+	    },false);
+	    document.getElementById('btn2').addEventListener('click',function(){
+	    	oFirst.style.display='block';
+	    	oVk.style.display='none';
+	    	oV.currentTime=0;
+	    	oV.pause();
+	    },false);
+	    //--------监听
+	    // oV.addEventListener('play',function(){
+	    // 	oVtime=setInterval(function(){
+	    // 		ctx.drawImage(oV,0,0,cns.width,cns.height);
+	    // 	},20)
+	    // },false);
+	    // oV.addEventListener('pause',function(){
+	    // 	clearInterval(oVtime);
+	    // },false);
+	    // oV.addEventListener('ended',function(){
+	    // 	clearInterval(oVtime);
+	    // },false);
+
+	})();
+</script>
+</body>
+</html>

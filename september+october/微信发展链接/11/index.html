@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>请选择你的性别</title>
+    <link rel="shortcut icon" type="image/x-icon" href="https://mp.weixin.qq.com/favicon.ico">
+</head>
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script>
+    var iScale = 1;
+    iScale = iScale / window.devicePixelRatio;
+    document.write('<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=' + iScale + ',minimum-scale=' + iScale + ',maximum-scale=' + iScale + '">');
+    var iWidth = document.documentElement.clientWidth;
+    document.getElementsByTagName('html')[0].style.fontSize = iWidth / 16 + 'px';
+</script>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        list-style:none;
+    }
+    
+    .select{
+        font-size: 1rem;
+        margin-top: 15%;
+        text-align: center;
+    }
+    .dividing{
+        width: 90%;
+        margin:  0 auto;
+    }
+    .books{
+        font-size: 0.7rem;
+        text-align: center;
+        color: #a5a3a3;
+    }
+    .gender{
+        display: inline-block;
+        width: 30%;
+        height: 11rem;
+        text-align: center;
+        text-decoration:none;
+        font-size: 0.6rem;
+        color: black;
+        -webkit-tap-highlight-color:transparent;
+    }
+
+    a.male{
+        margin: 12% 6.9% 12% 11.5%;
+    }
+    a.female{
+        margin: 12% 11.5% 12% 6.9%;
+    }
+    .gender img{
+        width: 100%;
+        border-radius: 50%;
+
+    }
+    .gender span{
+        display: inline-block;
+        height: 3rem;
+        font-size: 0.6rem;
+        color:#a5a3a3;
+    }
+    .m,.f{
+        width: 2rem;
+        height: 2rem;
+        line-height: 2rem;
+        font-size: 0.8rem;
+        text-align: center;
+        color:#828282 ;
+        border: 1px solid #666;
+        border-radius: 2rem;
+        background-color: #f5f5f5;
+        margin: 0 auto;
+    }
+    .into{
+        position: absolute;
+        left: 30%;
+        top: 85%;
+        width: 6rem;
+        height: 2rem;
+        text-align: center;
+        text-decoration:none;
+        line-height: 2rem;
+        font-size: 1rem;
+        font-weight: bold;
+        color: #828282;
+        text-shadow:3px 3px 4px #828282;
+        -webkit-text-shadow:3px 3px 4px #828282;
+        background-color: #d8d8d8;
+        border: 1px solid #828282;
+        box-shadow: 8px 8px 14px #828282;
+    }
+    .shadow{
+        box-shadow: 0.03px 0.03px 20px #f74949;
+        -webkit-box-shadow: 0.03px 0.03px 20px #f74949;
+    }
+    .literals{
+        color: #d99d21;
+        text-shadow:1px 1px 2px #a46c33;
+        -webkit-text-shadow:3px 3px 4px #a46c33;
+        background-color: #eae5c8;
+        border: 1px solid #d5ab70;
+        box-shadow: 8px 8px 14px #bf7621;
+    }
+    .ww{
+        color:#fff;
+        background-color:#e8554d;
+        border:0 none;
+    }
+</style>
+<body>
+    <p class="select">请选择你的性别</p>
+    <div class="dividing">
+        <img src="img/1.png" alt="" width="100%">
+    </div>
+    <p class="books">根据你的性别为你推荐最热门的书籍</p>
+    <a class="gender male" href="javascript:;">
+        <img id="male" src="img/QQ图片20171030102251.png" alt="">
+        <p class="m">男</p>
+        <span>滴滴！老司机开车了，手纸拿好姿势摆正!</span>
+    </a>
+    <a class="gender female" href="javascript:;">
+        <img id="female" src="img/17_170914091117_2.jpg" alt="">
+        <p class="f">女</p>
+        <span>渣男、绿茶婊台猖狂？且看我手撕渣男找忠犬！</span>
+    </a>
+    <a class="into" href="http://www.8818688.cn/6/">猛戳进入</a>
+    <script>
+        $(document).ready(function(){
+            $("#male").addClass('shadow');
+            $("a.male .m").addClass('ww');
+            $(".into").addClass("literals");
+
+            $("a.male").click(function () {
+                $("#male").addClass('shadow');
+                $("#female").removeClass("shadow");
+                $("a.male .m").addClass('ww');
+                $("a.female .f").removeClass('ww');
+                $(".into").addClass("literals");
+            });
+            $("a.female").click(function () {
+                $("#female").addClass("shadow");
+                $("#male").removeClass("shadow");
+                $("a.female .f").addClass('ww');
+                $("a.male .m").removeClass('ww');
+                $(".into").attr("href","http://www.8818588.cn/5/");
+                $(".into").addClass("literals");
+
+            });
+        });
+
+    </script>
+</body>
+</html>

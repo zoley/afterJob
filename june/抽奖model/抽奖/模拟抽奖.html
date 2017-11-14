@@ -1,0 +1,231 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="gb2312">
+<title>无标题文档</title>
+<style>
+*{ margin:0; padding:0; list-style:none; box-sizing:border-box}
+#game{ width:800px; height:500px; margin:50px auto}
+#game-table{height:100%}
+#game-table>tbody>tr{ background-color:orange}
+#game-table>tbody>tr>td{ width:14%; height:100px;}
+#game-table>tbody>tr>td>img{ display:block; margin:0 auto; border-radius:10px; box-shadow:5px 5px 5px rgba(0,0,0,0.6)}
+#game-table>tbody>tr>td>img:hover{ border:1px solid red; box-shadow:7px 7px 8px rgba(0,0,0,0.6)}
+#kaishi{ background:#fff;}
+#kaishi>p{ font-size:28px; color:red; font-weight:600; font-family:"仿宋"}
+#kaishi>p:nth-child(2){ font-size:20px; color:teal; margin-top:10px;}
+#kaishi>input{width: 200px;height: 100px;background: purple;border-radius: 8px;box-shadow: 5px 5px 5px black;font-size: 50px;white-space: pre;color: white;font-weight: bold;border: none;margin-top: 20px;}    
+#kaishi>input:hover{border-radius: 8px;box-shadow: 8px 8px 10px black;}
+</style>
+</head>
+
+<body>
+<div id="game">
+   <table id="game-table" width="100%" border="0" cellspacing="0" cellpadding="0">
+     <tbody>
+      <tr>
+        <td class='0'><img src="0.png" width="110"></td>
+        <td class='1'><img src="1.png" width="110"></td>
+        <td class='2'><img src="2.png" width="110"></td>
+        <td class='3'><img src="3.png" width="110"></td>
+        <td class='4'><img src="4.png" width="110"></td>
+        <td class='5'><img src="5.png" width="110"></td>
+      </tr>
+      <tr>
+        <td class='17'><img src="6.png" width="110"></td>
+        <td align="center" colspan="4" rowspan="3" id="kaishi">
+           <P>你好！欢迎参加全民抽奖活动！</P>
+           <p id="pa">你还剩余<span>3</span>次机会哦</p>
+           <input type="button" name="off" id="dianji" value="开始">
+        </td>
+        <td class='6'><img src="7.png" width="110"></td>
+      </tr>
+      <tr>
+        <td class='16'><img src="8.png" width="110"></td>
+        <td class='7'><img src="10.png" width="110"></td>
+      </tr>
+      <tr>
+        <td class='15'><img src="10.png" width="110"></td>
+        <td class='8'><img src="7.png" width="110"></td>
+      </tr>
+      <tr>
+        <td class='14'><img src="4.png" width="110"></td>
+        <td class='13'><img src="5.png" width="110"></td>
+        <td class='12'><img src="10.png" width="110"></td>
+        <td class='11'><img src="0.png" width="110"></td>
+        <td class='10'><img src="2.png" width="110"></td>
+        <td class='9'><img src="9.png" width="110"></td>
+      </tr>
+     </tbody> 
+    </table>
+
+</div>
+<script>
+window.onload=function(){
+	var oTab=document.getElementById('game-table');
+	var oInput=document.getElementById('kaishi');
+	var aTd=oTab.getElementsByTagName('td');
+	var oDj=document.getElementById('dianji');
+	var oPa=document.getElementById("pa");
+	var num=3;
+	var index=-1;
+	var oNum=0;   //产生随机数（随机圈数要走多少圈）
+	var Timers=null;
+	var sNum=0;   //记录上一次td
+	var Time=0;         //时间
+	var miao=0.9;       //秒数
+	var quanshu=0;     //累计圈数是否与产生的随机数相同
+	var oIndex=null   //最后的奖品对应的下标
+	oPa.innerHTML='你还剩余<span>'+num+'</span>次机会哦'
+	for(var i=0;i<aTd.length;i++){
+		if(i==7) continue
+		aTd[i].index=i
+		}
+	oDj.onclick=function(){
+		if(oDj.name=='on')
+		{
+			alert('抽奖正在进行中，稍后！！！')
+			}else if(oDj.name=='off'){
+		if(num==0)
+			 {
+				 alert('抽奖次数已经用完了！！！')
+				 }else{
+				 time=50;
+				num--
+				oPa.innerHTML='你还剩余<span>'+num+'</span>次机会哦'
+				aTd[sNum].style.backgroundColor='orange'
+				oDj.name='on'
+			    oNum=parseInt(dom(6,3))   //随机判断出走几圈
+				console.log(oNum)
+				 shijian()
+						 }
+
+				}
+		}	
+			function shijian(){
+				clearInterval(Timers)
+				Timers=setInterval(function(){
+								index++
+/*								console.log(index)
+*/								if(index==aTd.length-1){     //这里判断是都走完一圈了，走完一圈转圈速度变慢
+									index=0
+/*									console.log(index)
+*/									 time=parseInt(time/miao)
+									 miao-=0.1
+									 if(miao<0.2){miao=0.2}
+									 quanshu++
+									 console.log(quanshu)
+									 if(quanshu==oNum){
+										 oIndex=parseInt(dom(17,0))
+										 console.log(oIndex)
+										 }
+									 shijian()
+/*									 console.log(time)
+*/									}
+								aTd[sNum].style.backgroundColor='orange'
+								for(var i=0;i<aTd.length;i++){
+									if(i==7){i=8}
+									if(aTd[i].className==index){
+										sNum=i
+										aTd[i].style.backgroundColor='red'
+										if(index==oIndex){
+											aTd[i].style.backgroundColor='red'
+											if(oIndex==2||oIndex==10){
+												num++
+												oPa.innerHTML='你还剩余<span>'+num+'</span>次机会哦'
+												}
+/*											console.log(oIndex)
+*/											setTimeout(function(){
+												alertUser(oIndex)
+												},100)
+											quanshu=0;
+											clearInterval(Timers)
+											index=-1;
+											miao=0.9
+											oDj.name='off'
+											quanshu=0;
+											setTimeout(function(){
+												oIndex=null
+												},200)
+		/*												console.log(num)
+*/											
+											}												
+										}
+									}
+								},time)		
+						}	
+
+		      //产生随机数函数
+				function dom(num,num1){
+					 oNum=(Math.random()*(num-num1)+num1).toFixed(2)
+					if(oNum==7){
+						dom()
+						}else{
+							return oNum
+							}
+					}
+			//奖项设置
+	function alertUser(numId){
+/*		console.log(numId)
+*/		switch(numId){
+				case 0:
+					alert("恭喜您！价值5000元的华硕笔记本带回家！请至领奖台兑奖！");
+					break;
+				case 1:
+					alert("恭喜您！价值1000元的GEAR带回家！请至领奖台兑奖！");
+					break;
+				case 2:
+					alert("运气还不错！加一次中奖机会");
+					break;
+				case 3:
+					alert("恭喜您！价值100元的小度WIFI带回家！请至领奖台兑奖！");
+					break;
+				case 4:
+					alert("天哪！您是最幸运的人，这里的所有奖品您都可以带回家啦！请至领奖台兑奖！");
+					break;
+				case 5:
+					alert("恭喜您！价值150元的小米电源带回家！请至领奖台兑奖！");
+					break;
+				case 6:
+					alert("恭喜您！价值1999元的小米手机3带回家！请至领奖台兑奖！");
+					break;
+				case 7:
+					alert("抱歉!您没有中奖！");
+					break;
+				case 8:
+					alert("恭喜您！价值1999元的小米手机3带回家！请至领奖台兑奖！");
+					break;
+				case 9:
+					alert("恭喜您！价值1000元的GEAR带回家！请至领奖台兑奖！");
+					break;
+				case 10:
+					alert("运气还不错！加一次中奖机会");
+					break;
+				case 11:
+					alert("恭喜您！价值5000元的华硕笔记本带回家！请至领奖台兑奖！");
+					break;
+				case 12:
+					alert("抱歉!您没有中奖！");
+					break;
+				case 13:
+					alert("恭喜您！价值150元的小米电源带回家！请至领奖台兑奖！");
+					break;
+				case 14:
+					alert("天哪！您是最幸运的人，这里的所有奖品您都可以带回家啦！请至领奖台兑奖！");
+					break;
+				case 15:
+					alert("抱歉!您没有中奖！ ");
+					break;
+				case 16:
+					alert("恭喜您！价值100元的天气预报时钟带回家！请至领奖台兑奖！");
+					break;
+				case 17:
+					alert("恭喜您！价值50元的京东礼品卡带回家！请至领奖台兑奖！");
+					break;			}
+}	
+
+		
+	}
+</script>
+</body>
+</html>

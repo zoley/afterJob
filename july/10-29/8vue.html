@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<title>vue初涉</title>
+	<script src="js/vue.js"></script>
+	<style>
+		* {margin: 0;padding: 0;box-sizing: border-box
+}
+
+html {
+	font-size: 15px;font-family: Ubuntu, simHei, sans-serif;font-weight: 400
+}
+
+body {font-size: 1rem;padding: 20px;
+}
+
+table,
+td,
+th {border-collapse: collapse;border-spacing: 0
+}
+
+table {width: 100%
+}
+
+td,
+th {border: 1px solid #bcbcbc;padding: 5px 10px
+}
+
+th {background: #42b983;font-size: 1.2rem;font-weight: 400;color: #fff;cursor: pointer
+}
+
+tr:nth-of-type(odd) {background: #fff
+}
+
+tr:nth-of-type(even) {background: #eee
+}
+
+fieldset {border: 1px solid #BCBCBC;padding: 15px;
+}
+
+input {outline: none
+}
+
+input[type=text] {border: 1px solid #ccc;padding: .5rem .3rem;
+}
+
+input[type=text]:focus {border-color: #42b983;
+}
+
+button {outline: none;padding: 5px 8px;color: #fff;border: 1px solid #BCBCBC;border-radius: 3px;background-color: #009A61;cursor: pointer;
+}
+button:hover{opacity: 0.8;
+}
+
+#app {margin: 0 auto;max-width: 640px
+}
+
+.form-group {margin: 10px;
+}
+
+.form-group > label {display: inline-block;width: 10rem;text-align: right;
+}
+
+.form-group > input,
+.form-group > select {display: inline-block;height: 2.5rem;line-height: 2.5rem;
+}
+
+.text-center{text-align: center;
+}
+
+.pagination {display: inline-block;padding-left: 0;margin: 21px 0;border-radius: 3px;
+}
+
+.pagination > li {display: inline;
+}
+
+.pagination > li > a {position: relative;float: left;padding: 6px 12px;line-height: 1.5;text-decoration: none;color: #009a61;background-color: #fff;border: 1px solid #ddd;margin-left: -1px;list-style: none;
+}
+
+.pagination > li > a:hover {background-color: #eee;
+}
+
+.pagination .active {color: #fff;background-color: #009a61;border-left: none;border-right: none;
+}
+
+.pagination .active:hover {background: #009a61;cursor: default;
+}
+
+.pagination > li:first-child > a .p {border-bottom-left-radius: 3px;border-top-left-radius: 3px;
+}
+
+.pagination > li:last-child > a {border-bottom-right-radius: 3px;border-top-right-radius: 3px;
+}
+.sb1-enter,.sb1-leave-to{
+	opacity:0;
+}
+/*.sb1-enter-to,.sb1-leave{
+	opacity:1;
+}*/
+.sb1-enter-active,.sb1-leave-active{
+	transition:1s;
+}
+.sb2-enter,.sb2-leave-to{
+	opacity:0;
+	transform:translateX(10px);
+}
+/*.sb2-enter-to,.sb2-leave{
+	opacity:1;
+}*/
+.sb2-enter-active,.sb2-leave-active{
+	transition:1s ease;
+}
+
+
+.sb3-enter-active {
+  animation: bounce-in 1s;
+}
+.sb3-leave-active {
+  animation: bounce-in 1s reverse;
+}
+@keyframes bounce-in {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.flip-list-move {
+  transition: transform 1s;
+}
+</style>
+</head>
+<body>
+	<!-- view -->
+	<div class="app">
+		<p>{{ message }}</p>
+		<input type="text" v-model="message">
+		<p>{{reverseMessage}}</p>
+		<p>{{now}}</p>
+	</div>
+	<div class="app2">
+		<h1>Hello ,Vue !</h1>
+		<h1 v-if="ye1">yes!</h1>
+		<h1 v-else="no">no!</h1>
+		<h1 v-if="age>=25">Age:{{age}}</h1>
+		<h1 v-if="name.indexOf('jac')>=0">Name:{{name}}</h1>
+	</div>
+	<div id="app">
+		<table style="border:1px solid green;border-collapse:collapse;">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Age</th>
+					<th>Sex</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr v-for="person in people">
+					<td>{{ person.name  }}</td>
+					<td>{{ person.age  }}</td>
+					<td>{{ person.sex  }}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="app2">
+		<ul class="pagination">
+			<li v-for="n in pageCount">
+				<!-- <a href="javascripit:void(0)" v-bind:class="activeNumber === n  ? 'active' : ''">{{ n  }}</a> -->
+				<!-- Vue.js为最常用的两个指令v-bind和v-on提供了缩写方式。v-bind指令可以缩写为一个冒号，v-on指令可以缩写为@符号。 -->
+				<a href="javascripit:void(0)" :class="activeNumber === n  ? 'active' : ''">{{ n  }}</a>
+				<a href="javascript:;" v-bind:class="activeNumber ===n ? 'active' : ''">{{n}}</a>
+			</li>
+		</ul>
+	</div>
+	<div class="app3">
+		<p><input type="text" v-model="message"></p>
+            <p>
+                <!--click事件直接绑定一个方法-->
+                <!-- <button v-on:click="greet">greet</button> -->
+                <button @click="greet">greet</button>
+            </p>
+            <p>
+                <!--click事件使用内联语句-->
+                <button v-on:click="say">hi</button>
+            </p>
+	</div>
+	<!-- //////////////// -->
+	<div id="guodu">
+		<button @click="show=!show">toggle</button>
+		<transition name="sb1" >
+			<p v-if="show">hello</p>
+		</transition>
+	</div>
+	<!-- ///////////////// -->
+	<div id="example-1">
+		<button @click="show = !show">
+			Toggle render
+		</button>
+		<transition name="sb2">
+			<p v-if="show">hello</p>
+		</transition>
+	</div>
+	<!-- ///////////////////// -->
+	<div id="example-2">
+		<button @click="show = !show">Toggle show</button>
+		<transition name="sb3">
+			<p v-if="show">Look at me!</p>
+		</transition>
+	</div>
+<!-- ////////////////////////////// -->
+		<div id="example-3">
+			<button @click="show = !show">Toggle gan</button>
+			<transition name="fade" mode="out-in">
+				<p v-if="show">sbsbsbsb</p>
+			</transition>
+		</div>
+		<div id="flip-list-demo" class="demo">
+			<button v-on:click="shuffle">Shuffle</button>
+			<transition-group name="flip-list" tag="ul">
+				<li v-for="item in items" v-bind:key="item">
+					{{ item }}
+				</li>
+			</transition-group>
+		</div>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+	<script>
+		new Vue({
+			el: '#flip-list-demo',
+			data: {
+				items: [1,2,3,4,5,6,7,8,9]
+			},
+			methods: {
+				shuffle: function () {
+					this.items = _.shuffle(this.items)
+				}
+			}
+		})
+		///////////////////////////////////////////////////
+		new Vue({
+			el: '#example-3',
+			data: {
+				show: true
+			}
+		})
+	////////////////////
+		new Vue({
+			el: '#example-2',
+			data: {
+				show: true
+			}
+		})
+	////////////////////
+		new Vue({
+			el: '#example-1',
+			data: {
+				show: true
+			}
+		})
+	////////////////
+	new Vue({
+		el:"#guodu",
+		data:{
+			show:true
+		}
+	})
+	/////////////
+	var app=new Vue({
+		el:".app",
+		data:{
+			message:"hello world !"
+		},
+		computed:{
+			reverseMessage:function(){
+				return this.message.split("").reverse().join("");
+			},
+			now:function(){
+				return (new Date).getTime() || Date.now();
+			}
+		}
+	})
+	// model
+	var exampleData={
+		ye1:true,
+		// no:true,
+		age:26,
+		name:"jacofie"
+
+	}
+	// viewmodel
+	var vm2=new Vue({
+		el:".app2",
+		data:exampleData
+	})
+	var vm3=new Vue({
+		el:"#app",
+		data:{
+			people:[{
+				name:"sb",
+				age:"23",
+				sex:"male"
+			},{
+				name:"sb2",
+				age:"213",
+				sex:"female"
+			},{
+				name:"sb3",
+				age:"34",
+				sex:"male"
+			}]
+		}
+	})
+	var vm4=new Vue({
+		el:"#app2",
+		data:{
+			activeNumber:1,
+			pageCount:10
+		}
+	})
+	var vm5=new Vue({
+		el:".app3",
+		data:{
+			message:"hello,lala-pona ！"
+		},
+		methods:{
+			greet:function(){
+				alert(this.message);
+			},
+			say:function(){
+				alert("笨蛋");
+			}
+		}
+	})
+
+
+
+	
+	</script>
+</body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="个人博客,个人小站,主成睿" />
+	<meta name="description" content="主成睿的个人小站">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>canvas五角星</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../../img/ico.ico">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/syntaxy.dark.min.css">
+	<link rel="stylesheet" href="../../css/blog.css">
+	<link rel="stylesheet" href="css/2.css">
+</head>
+<body>
+	<div class="bg"></div>
+	<header id="head">
+		<div class="motto">
+			<span>入不言兮出不辞，乘回风兮载云旗。</span>
+			<span>悲莫悲兮生别离，乐莫乐兮新相知。</span>
+		</div>
+		<div class="line"></div>
+	</header>
+	<div class="btn">
+		<div class="icon"></div>
+	</div>
+	<div id="nav">
+		<div class="photo"></div>
+		<ul>
+			<li><a href="http://zoley.me">主页<i></i></a></li>
+			<li><a class="active" href="http://zoley.me/blog.php">博客<i></i></a></li>
+			<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历<i></i></a></li>
+		</ul>
+		<div class="email">zole1314@163.com</div>
+	</div>
+	<div class="mask"></div>
+	<div class="container">
+		<div class="con-left fl">
+			<div class="articles">
+				<p class="back"><a href="http://zoley.me/blog.php">>>返回首页</a></p>
+				<h1 id="2">canvas五角星</h1>
+				<p class="authors">发布时间：2017-09-03 &nbsp; &nbsp; 编辑：<span>主小睿</span></p>
+				<div class="content">
+					<p>其实本人对于canvas是有点怵的，简单的小东西一般都用css来解决，比如画个进度条啊，时钟啊神马的，可是，需求到了小星星怎么办呢，css的画法暂时不会，只好使用canvas了。</p>
+					<div class="d-img"><img src="../../img/image/a2.1.jpg"></div>
+					<p>老规矩，先看demo。</p>
+					<fieldset id="fieldset">
+						<legend>canvas五角星</legend>
+						<canvas id="cns1"></canvas>	
+					</fieldset>
+					<p>原理倒也不难，我先把第一种画法贴出来。这种方法的旋转角度是固定的，灵活度不如第二种，不过却因为参数少而简单粗暴。</p>
+					<pre class="codebox" data-title="JS：" data-type="default" data-min-height="0px;">
+							function drawStar(context, r, x, y,color) {
+								context.lineWidth = 2;
+								context.beginPath();
+								var dit = Math.PI * 4 / 5;
+								var sin = Math.sin(0) * r + y;
+								var cos = Math.cos(0) * r + x;
+								context.moveTo(cos, sin);
+								for (var i = 0; i < 5; i++) {
+									var tempDit = dit * i;
+									sin = Math.sin(tempDit) * r + y;
+									cos = Math.cos(tempDit) * r + x;
+									context.lineTo(cos, sin);
+
+								}
+								// context.strokeStyle = "red";
+								context.shadowOffsetX=5;//默认为0;
+								context.shadowOffsetY=5;//默认为0;
+								context.shadowColor="black";
+								context.shadowBlur=10;
+								context.fillStyle =color;
+								context.closePath();
+								context.fill();
+								// context.stroke();//当然也可以画边框啦
+							}
+					</pre>
+					<p>下面我们来详细说说第二种画法。</p>
+					<p>首先要说我们如何画一个五角星。</p>
+					<div style="width:80%;margin:10px auto;max-width: 400px;"><img style="width:100%;" src="../../img/image/a2.2.jpg" alt=""></div>
+					<p>所以五角星的五个角分别间隔360/5=72°。五角星内外两个圆，半径分别为r和R，通过简单计算得出两个角度，从而计算出凹点凸点的坐标。</p>	
+					<div style="text-align: center;">
+						<div style="width:100%;max-width: 400px;display:inline-block;margin-bottom:15px;"><img style="width:100%;" src="../../img/image/a2.3.jpg" alt=""></div>
+						<div style="width:100%;max-width: 400px;display:inline-block;"><img style="width:100%;" src="../../img/image/a2.4.jpg" alt=""></div>
+					</div>
+					<p>终极大图--></p>
+					<div style="width:100%;margin:10px auto;max-width: 600px;"><img style="width:100%;" src="../../img/image/a2.5.jpg" alt=""></div>
+					<p>然后再把角度转换成计算的弧度，Math.PI/180*角度，所以</p>
+					<p>外顶点坐标---- </p>
+					<p style="color:#F5E548">x:  Math.cos( (18+72*i)/180*Math.PI) * R </p>
+					<p style="color:#F5E548">y:  Math.sin((18+72*i)/180*Math.PI) * R </p>
+					<p>内顶点坐标---</p>
+					<p style="color:#F5E548">x:  Math.cos( (54+72*i)/180*Math.PI) * r </p>
+					<p style="color:#F5E548">y:  Math.sin((54+72*i)/180*Math.PI) * r</p>
+					<p>到此为止，功能便实现啦。欧开，我懂的，代码如下：</p>
+					<pre class="codebox" data-title="JS：" data-type="default" data-min-height="0px;">
+						function drawStar2( cxt , r , R , x , y , rot , borderWidth , borderStyle , fillStyle){
+							cxt.beginPath();
+							for( var i = 0 ; i < 5 ; i ++){
+								cxt.lineTo(Math.cos((18+72*i - rot)/180*Math.PI) * R + x ,- Math.sin((18+72*i - rot )/180*Math.PI) * R + y);
+								cxt.lineTo(Math.cos((54+72*i - rot)/180*Math.PI) * r + x ,- Math.sin((54+72*i - rot )/180*Math.PI) * r + y);
+							}
+							cxt.closePath();
+
+							cxt.lineWidth = borderWidth;
+							cxt.strokeStyle = borderStyle;
+							cxt.fillStyle = fillStyle;
+							cxt.fill();
+							cxt.stroke();
+						}
+					</pre>
+					<p>既然说到了五角星，那么顺便再把其他的小东西也说了吧，嗯，先贴代码。</p>
+					<pre class="codebox" data-title="JS：" data-type="default" data-min-height="0px;">
+								function draw(dx,dy,numdeg){
+								    var s = 50;
+								    ctx.beginPath();
+								    ctx.fillStyle = 'pink';
+								    ctx.strokeStyle = 'rgb(0,0,100)';
+								    var deg = Math.PI / 15 * numdeg;
+								    for (var i = 0; i < 30; i++) {
+								        var x = Math.sin(i * deg);
+								        var y = Math.cos(i * deg);
+								        ctx.lineTo(dx + x * s, dy + y * s);
+								    }
+								    ctx.closePath();
+								    ctx.fill();
+								    ctx.stroke();
+								}
+
+								draw(10,10,10);////---三边形
+								draw(800,700,12);////---五角星
+								draw(1350,200,6);////---5边形
+								draw(650,200,5);////----六边形
+								draw(650,500,7);////----几多边形
+								draw(950,200,9);////----额额边形
+								draw(950,500,11);////---额额边形
+					</pre>
+					<br>
+					<fieldset id="fieldset2" style="padding:0;" >
+						<legend>draw demo</legend>
+						<canvas id="cns2"></canvas>
+					</fieldset>
+					<p>著作权归zole站长所有。商业转载请联系站长获得授权，非商业转载请注明出处！</p>
+					<p>本文出处：<a href="http://zoley.me/article/2" style="color:#008DE8">http://zoley.me/article/2</a></p>
+					<div class="shang">
+						<a href="javascript:;">赏</a>
+						<div class="shangs">
+							<i>╳</i>
+							<p>谢谢你请我吃糖果</p>
+							<div class="ercode">
+								<img class="wei" src="../../img/image/weixin.jpg" title="扫一扫">
+								<img class="zhi" src="../../img/image/alipay.jpg" title="扫一扫" style="display:none">
+							</div>
+							<span>扫码打赏，多少随意，您高兴就行</span>
+							<div class="choose">
+								<label><input type="radio" name="haha" checked> &nbsp;<b></b></label>
+								<label><input type="radio" name="haha"> &nbsp;<b></b></label>
+							</div>
+							<span class="dashang">打开微信扫一扫，即可进行扫码打赏哦</span>
+						</div>
+					</div>
+				</div>
+				<div id="SOHUCS" sid="2" class="changyan"></div>
+				<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+				<script type="text/javascript">
+					window.changyan.api.config({
+						appid: 'cyt9zXQLD',
+						conf: 'prod_7cbb58befa46b554911ecccd8faec7eb'
+					});
+				</script>
+			</div>
+		</div>
+		<div class="con-middle fl hidden-xs"></div>
+		<div class="con-right fr hidden-xs">
+			<div class="pardon">
+				<div class="photo"></div>
+				<h1>zole</h1>
+				<div class="email">zole1314@163.com</div>
+				<ul class="clearfix">
+					<li><a href="http://zoley.me">主页</a></li>
+					<li><a class="active" href="http://zoley.me/blog.php">博客</a></li>
+					<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历</a></li>
+				</ul>
+			</div>
+			<div class="clock">
+				<embed src="../../swf/clock.swf" wmode="transparent">
+			</div>
+		</div>
+	</div>
+	<div id="up"></div>
+	<footer>
+		<p>Copyright&copy;2017<a href="http://www.miitbeian.gov.cn/">&nbsp;苏ICP备17035373号</a>&nbsp;All Rights Reserved&nbsp;Design by zole</p>
+	</footer>
+	<canvas id="canvas"></canvas>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/canvasStar.js"></script>
+	<script src="../../js/syntaxy.min.js"></script>
+	<script src="../../js/blog.js"></script>
+	<script src="js/2.js"></script>
+	<script>
+		window.onload=function(){
+			var h1=document.getElementsByTagName("h1")[0];
+			$.ajax({
+				type:"post",
+				url:"http://zoley.me/inquire.php",
+				data:{id:h1.id},
+				success:function(data){
+					// console.log(data[0]);
+					//var d=JSON.parse(data);
+					var viewNum=parseInt(data[0]);
+					viewNum++;
+					$.ajax({
+						type:"post",
+						data:{view:viewNum,id:h1.id},
+						url:"http://zoley.me/contact.php",
+						success:function(){
+
+						}
+					})
+				}
+			})
+			
+		}
+	</script>
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+</body>
+</html>

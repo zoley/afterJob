@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>饼状loading</title>
+	<style>
+		.wrap{height:0;width:0;position: relative;margin:200px auto;}
+		.out{height: 0;width: 0;border:100px solid;border-radius:100px;border-top-color:transparent;border-bottom-color:orange;border-left-color:orange;border-right-color:orange;position: absolute;left:-100px;top:-100px;-webkit-animation:out 1s linear infinite;}
+		.mask{height: 0;width: 0;border:90px solid white;border-radius:90px;position: absolute;left:-90px;top:-90px;}
+		.circle1{height: 0;width: 0;border:60px solid green;border-radius:60px;position: absolute;left:-60px;top:-60px;border-right-color:yellowgreen;border-bottom-color:yellowgreen;transform:rotate(-45deg);}
+		.circle2{height: 0;width: 0;border:60px solid transparent;border-radius:60px;position: absolute;left:-60px;top:-60px;border-left-color:yellowgreen;border-top-color:yellowgreen;transform:rotate(-45deg);-webkit-animation:cir2 2s linear infinite;z-index:2;}
+		.circle3{height: 0;width: 0;border:60px solid transparent;border-radius:60px;position: absolute;left:-60px;top:-60px;border-left-color:green;border-top-color:green;transform:rotate(-45deg);-webkit-animation:cir3 2s 0.5s infinite linear;z-index:1;}
+		@-webkit-keyframes cir2{
+			0%{transform:rotate(-45deg);}
+			25%{transform:rotate(-225deg);}
+			50%{transform:rotate(-225deg);}
+			75%{transform:rotate(-405deg);}
+			100%{transform:rotate(-405deg);}
+		}
+		@-webkit-keyframes cir3{
+			0%{transform:rotate(-45deg);z-index:3;}
+			25%{transform:rotate(-225deg);}
+			49.99%{transform:rotate(-225deg);z-index:3;}
+			50%{transform:rotate(-225deg);z-index:1;}
+			75%{transform:rotate(-405deg);}
+			99.99%{transform:rotate(-405deg);z-index:1;}
+			100%{transform:rotate(-405deg);z-index:3;}
+		}
+		@-webkit-keyframes out{
+			0%{transform:rotate(0deg);}
+			100%{transform:rotate(-360deg);}
+		}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="out"></div>
+		<div class="mask"></div>
+		<div class="circle1"></div>
+		<div class="circle2"></div>
+		<div class="circle3"></div>
+	</div>
+</body>
+</html>

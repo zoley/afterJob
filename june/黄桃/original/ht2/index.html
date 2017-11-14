@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"> -->
+	<title>黄桃</title>
+	<link rel="stylesheet" href="css/ht2.css">
+	<script>
+	    var scale=1/window.devicePixelRatio;
+	    document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+	    var html=document.getElementsByTagName("html")[0];
+	    html.style.fontSize=document.documentElement.clientWidth/16+"px";
+	    //默认设计稿尺寸640px。所以1rem=40px;
+	</script>
+</head>
+<body>
+	<div class="wrap">
+		<div><img src="img/xht_01.jpg"></div>
+		<div><img src="img/xht_02.jpg"></div>
+		<div><img src="img/xht_03.jpg"></div>
+		<div class="pay">
+			<div>正品保证 假一罚十</div>
+			<form action="" method="post">
+				<p>请填写收件人信息：</p>
+				<p>
+					<span>姓名：</span>
+					<input type="text" name="username" required="">
+				</p>
+				<p>
+					<span>电话：</span>
+					<input type="tel" name="tel" required="" pattern="^1[34578]\d{9}$">
+				</p>
+				<p>
+					<span>地址：</span>
+					<input type="text" name="address" required="">
+				</p>
+				<p>您要购买的产品分类：</p>
+				<p class="choice">
+					<select name="product" id="select">
+						<option value="qg-4">4罐全国统一邮费￥29元</option>
+						<option value="jz-9">9罐礼盒装 江浙沪邮费￥49元</option>
+						<option value="qt-9">9罐礼盒装 其他地区邮费￥55元</option>
+					</select>
+				</p>
+				<p class="submit"><input type="submit" value="付 款"></p>
+
+			</form>
+		</div>
+		<div><img src="img/xht_05.jpg"></div>
+		<div><img src="img/xht_06.jpg"></div>
+		<div><img src="img/xht_07.jpg"></div>
+		<div><img src="img/xht_08.jpg"></div>
+		<div><img src="img/xht_09.jpg"></div>
+		<div><img src="img/xht_10.jpg"></div>
+	</div>
+<!-- 	<script>
+	select.onchange=function(){
+		alert(select.value)
+	}
+	</script> -->
+</body>
+</html>

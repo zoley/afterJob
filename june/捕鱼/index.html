@@ -1,0 +1,269 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <!-- <link rel="stylesheet" href="css/fish.css"> -->
+  <title>拯救加班狗</title>
+  <script>
+    var scale=1/window.devicePixelRatio;
+    document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+    var html=document.getElementsByTagName("html")[0];
+    html.style.fontSize=document.documentElement.clientWidth/16+"px";
+  </script>
+  <style>
+  body{overflow-x:hidden;}
+    *{margin:0;padding:0;}
+    .wrap{width: 100%;height: 100%;position: absolute;left:0;top:0;background:url(img/bg.png) no-repeat,#005A7B;background-size:16rem 10.575rem,cover;}
+    /*hand*/
+    .guide{width: 6rem;height: 6rem;position: absolute;left:63%;top:19.5rem;z-index:4;}
+    .guide .hand{width: 100%;height: 100%;display:block;background:url(img/hand.png) no-repeat 0 0;-webkit-background-size:cover;background-size:cover;-webkit-animation:0.5s shake2 step-start infinite;}
+    .guide .dot{width:2rem;height:2rem;position: absolute;left:-0.7rem;top:-0.2rem;background:url(img/dot.png) no-repeat;background-size:cover;-webkit-animation:1.5s shake1 infinite;}
+    @-webkit-keyframes shake2{0%{background-position: 0 0;}50%{background-position: -5.5rem 0;}}
+    @-webkit-keyframes shake1{0%,20% {opacity: 0;transform: scale(0,0)}50%,80% {opacity: 1;transform: scale(1,1)}100% {opacity: 0;transform: scale(1,1)}}
+    /*heart&star*/
+    .xuan{width: 6rem;height:3rem;font-size:0;margin-left:50%;}
+    .xuan .heart{width: 3rem;height:3rem;display:inline-block;background:url(img/heart-sprite.png) no-repeat;background-size:cover;-webkit-animation:1.2s twinkle1 steps(28) infinite;animation:1.2s twinkle1 steps(28) infinite;}
+    .xuan .star{width: 2.5rem;height:2.5rem;display:inline-block;background:url(img/star-sprite.png) no-repeat;background-size:cover;-webkit-animation:1.2s twinkle2 step-start infinite;}
+    @-webkit-keyframes twinkle1{0%{background-position: 0 0;}100%{background-position: -84rem 0;}}
+    @-webkit-keyframes twinkle2{0%{background-position:0 0}3.4%{background-position:-2.5rem 0}6.8%{background-position:-5rem 0}10.2%{background-position:-7.5rem 0}13.6%{background-position:-10rem 0}17%{background-position:-12.5rem 0}20.4%{background-position:-15rem 0}23.8%{background-position:-17.5rem 0}27.2%{background-position:-20rem 0}30.6%{background-position:-22.5rem 0}34%{background-position:-25rem 0}37.4%{background-position:-27.5rem 0}40.8%{background-position:-30rem 0}44.2%{background-position:-32.5rem 0}47.6%{background-position:-35rem 0}51%{background-position:-37.5rem 0}54.4%{background-position:-40rem 0}57.8%{background-position:-42.5rem 0}61.2%{background-position:-45rem 0}64.6%{background-position:-47.5rem 0}68%{background-position:-50rem 0}71.4%{background-position:-52.5rem 0}74.8%{background-position:-55rem 0}78.2%{background-position:-57.5rem 0}81.6%{background-position:-60rem 0}85%{background-position:-62.5rem 0}88.4%{background-position:-65rem 0}91.8%{background-position:-67.5rem 0}95.2%{background-position:-70rem 0}100%{background-position:0 0}}
+/*    @keyframes twinkle2 {
+    0%   {  background-position: 0 0; }
+    3.4% {  background-position: -100px 0; }
+    6.8% {  background-position: -200px 0; }
+    10.2%{  background-position: -300px 0; }
+    13.6%{  background-position: -400px 0; }
+    17%  {  background-position: -500px 0; }
+    20.4%{  background-position: -600px 0; }
+    23.8%{  background-position: -700px 0; }
+    27.2%{  background-position: -800px 0; }
+    30.6%{  background-position: -900px 0; }
+    34%  {  background-position: -1000px 0; }
+    37.4%{  background-position: -1100px 0; }
+    40.8%{  background-position: -1200px 0; }
+    44.2%{  background-position: -1300px 0; }
+    47.6%{  background-position: -1400px 0; }
+    51%  {  background-position: -1500px 0; }
+    54.4%{  background-position: -1600px 0; }
+    57.8%{  background-position: -1700px 0; }
+    61.2%{  background-position: -1800px 0; }
+    64.6%{  background-position: -1900px 0; }
+    68%  {  background-position: -2000px 0; }
+    71.4%{  background-position: -2100px 0; }
+    74.8%{  background-position: -2200px 0; }
+    78.2%{  background-position: -2300px 0; }
+    81.6%{  background-position: -2400px 0; }
+    85%  {  background-position: -2500px 0; }
+    88.4%{  background-position: -2600px 0; }
+    91.8%{  background-position: -2700px 0; }
+    95.2%{  background-position: -2800px 0; }
+    100% {  background-position: 0 0; }
+  }*/
+
+
+  .sea{width:16rem;position: relative;display:inline-block;margin-top:-0.5rem;overflow-x:hidden;}
+  .sea .wave{width: 16rem;height: 1.75rem;background:url(img/wave1.png) no-repeat left bottom;background-size:cover;position: absolute;top:0;left:0;-webkit-animation:1s wave step-start infinite;}
+  .sea .water{width: 16rem;height:10.325rem;background:url(img/water.jpg) no-repeat;background-size:cover;margin-top:1.6rem;overflow:hidden;}
+  .sea .btn{width: 7.6rem;height: 3rem;position: absolute;left:50%;top:8.8rem;margin-left:-3.8rem;background:url(img/btn.png) no-repeat;background-size: cover;z-index:2;}
+  @keyframes wave {
+    0%,8% {
+      background-image: url(img/wave1.png)
+    }
+
+    16% {
+      background-image: url(img/wave2.png)
+    }
+
+    24% {
+      background-image: url(img/wave3.png)
+    }
+
+    32% {
+      background-image: url(img/wave4.png)
+    }
+
+    40% {
+      background-image: url(img/wave5.png)
+    }
+
+    48% {
+      background-image: url(img/wave6.png)
+    }
+
+    56% {
+      background-image: url(img/wave7.png)
+    }
+
+    64% {
+      background-image: url(img/wave8.png)
+    }
+
+    72% {
+      background-image: url(img/wave9.png)
+    }
+
+    80% {
+      background-image: url(img/wave10.png)
+    }
+
+    88% {
+      background-image: url(img/wave11.png)
+    }
+
+    100% {
+      background-image: url(img/wave12.png)
+    }
+  }
+
+  .person {width: 3.125rem;height:6.7rem;position: relative;margin-top:0.5rem;}
+  .person .man{width: 3.5rem;height:4.5rem;position: absolute;top:0;left:1rem;background:url(img/person.png) no-repeat;background-size:100% 100%;z-index:2;}
+  .person .table{width: 5.125rem;height:4.496rem;position: absolute;top:3.1rem;left:0;background:url(img/table.png) no-repeat;background-size:cover;}
+  .person .fish-ready{width: 13rem;height:0.1rem;position: absolute;left:1rem;top:2.8rem;z-index:3;transition:2s;transform-origin:1.1rem 0;/*-webkit-animation:pole 0.5s alternate infinite;*/}
+  .person .hunt{transform:rotate(360deg);}
+  .person .unhunt{animation:0.5s pole infinite alternate;}
+  .person .fish-ready .pole{width: 10.6rem;height:0.1rem;position: absolute;left:0;top:0;background-color:#86390f;}
+  .person .fish-ready .basket{width: 2.5rem;height: 2.8rem;position: absolute;right:0;top:-0.36rem;background:url(img/basket.png) no-repeat;background-size:cover;-webkit-backface-visibility:hidden;}
+  @-webkit-keyframes pole{0%{transform:rotate(-2deg);transform-origin:0.2rem 0;}100%{transform:rotate(5deg);transform-origin:0.2rem 0;}}
+  .person .fish-ready .basket .gain{width: 1.3rem;height: 1.7rem;background:url(img/box1.png) no-repeat;background-size:cover;position: absolute;left:0.7rem;top:0.3rem;display:none;}
+
+  /*fish*/
+  .sea .water .bubble{width: 3rem;height: 3rem;position: absolute;left:-4rem;background:url(img/bubble.png) no-repeat;background-size:cover;/*transition:3s linear;*/ -webkit-animation:6s both swim linear;}
+  .sea .water .bubble img{width: 1.5rem;position: absolute;left:0.8rem;top:0.5rem;}
+  @-webkit-keyframes swim{0%{transform:translate(0rem,0rem);}20%{transform:translate(4rem,0.7rem);}40%{transform:translate(8rem,-0.7rem);}60%{transform:translate(12rem,0.7rem);}80%{transform:translate(16rem,-0.7rem);}100%{transform:translate(21rem,0.7rem);}}
+
+
+    .result{width: 100%;height: 100%;background:rgba(0,0,0,0.8);position: absolute;top:0;left:0;z-index:10;display:none;}
+    .result i{position: absolute;width: 0.6rem;height: 0.6rem;background:url(img/gclose.png) no-repeat;-webkit-background-size: 100% 100%;top:10%;right:5%;
+      background-size: 100% 100%;top:5%;right:10%;}
+    .result .ghead{width: 80%;margin:0 auto;}
+    .result .ghead img{width: 100%;display:block;}
+    .result .gbody{background-color:#FF364C;overflow:hidden;width: 80%;margin:0 auto;}
+    .result .gbody .con{width: 90%;margin:10px auto;}
+    .result .gbody .con img{width: 100%;display:block;}
+    .result .gbody span{display:block;width: 90%;height: 2rem;margin:0.5rem auto;text-align:center;line-height:2rem;font-size:1rem;background:url(img/gdown.png) no-repeat;-webkit-background-size: 100% 100%;background-size: 100% 100%;}
+    .result b{display:block;width: 80%;position: absolute;top:8%;left:50%;margin-left:-40%;}
+    .result b img{display:block;width: 100%}
+
+
+    /*prize*/
+    .prize{width: 100%;height:3rem;position: relative;font-size:0;border-bottom:1px solid #003A4E;}
+    .prize i{width: 2rem;height: 2rem;background:url(img/prize.png) no-repeat;background-size:cover;position: absolute;top:-0.15rem;left:0;}
+    .prize a img{width: 3rem;height: 3rem;}
+    .prize a:nth-of-type(1) img{margin-left:0.5rem;}
+</style>
+<!-- <script>
+window.onload=function(){
+  var arr=["img/wave1.png","img/wave2.png","img/wave3.png","img/wave4.png","img/wave5.png","img/wave6.png","img/wave7.png","img/wave8.png","img/wave9.png","img/wave10.png","img/wave11.png","img/wave12.png"]
+  var wave=document.getElementsByClassName("wave")[0];
+  var i=0;
+  // wave.style.cssText="-webkit-animation:1s wave step-start infinite;";
+  setInterval(function(){
+    i++;
+   wave.style.backgroundImage="url("+arr[i%arr.length]+")"
+  },100)
+}
+</script> -->
+</head>
+<body>
+  <div class="wrap">
+    <div class="guide">
+      <i class="dot"></i>
+      <i class="hand"></i>
+    </div>
+    <div class="xuan">
+      <i class="heart"></i>
+      <i class="star"></i>
+    </div>
+    <div class="person">
+      <div class="man"></div>
+      <div class="table"></div>
+      <div class="fish-ready" id="fish-ready">
+        <div class="pole"></div>
+        <div class="basket">
+          <div class="gain"></div>
+        </div>
+      </div>
+    </div>
+    <div class="sea">
+      <div class="wave"></div>
+      <div class="water">
+        <!--<div class="bubble">
+          <img src="img/box1.png">
+          <img src="img/box2.png">
+        </div> -->
+      </div>
+      <div class="btn"></div>
+    </div>
+    <div class="prize">
+      <i></i>
+      <a href="javascript:;"><img src="img/prize1.png"></a>
+      <a href="javascript:;"><img src="img/prize2.png"></a>
+      <a href="javascript:;"><img src="img/prize3.png"></a>
+      <a href="javascript:;"><img src="img/prize4.png"></a>
+      <a href="javascript:;"><img src="img/prize5.png"></a>
+    </div>
+    <div class="result">
+      <i></i>
+      <div class="ghead"><img src="img/ghead.png"></div>
+      <div class="gbody">
+        <div class="con">
+          <img src="img/r6.png">
+        </div>
+        <span class="gdown">马上使用</span>
+      </div>
+      <b><img src="img/gbg.png"></b>
+    </div>
+  </div>
+  <script src="js/jquery.min.js"></script>
+  <script>
+    $(function(){
+      resize();
+      function resize(){
+        var count=1;
+        var show=function(){
+          var src=Math.floor(Math.random()*(3-1)+1);
+          var top=Math.floor(Math.random()*(10-3)+1);
+          count++;
+          var bubble='<div style="top:'+top+'rem;" class="bubble f'+count+'"><img src="img/box'+src+'.png"></div>';
+          $(".sea .water").append(bubble);
+          setTimeout(function(){
+            $(".sea .water").children().eq(0).remove();
+          },7000)
+          setTimeout(show,1000);
+        }
+        show()
+        $(".btn").click(function(){
+          $(".fish-ready .basket").css({"backgroundImage":"url(img/basket5.png)","top":"-2.4rem"});
+          $("#fish-ready").addClass("hunt");
+          setTimeout(function(){
+            $(".fish-ready .basket").css({"backgroundImage":"url(img/basket.png)","top":"-0.36rem"});
+            $(".fish-ready .basket .gain").css("display","block");
+          },1000)
+
+          $(".result").delay(2000).fadeIn(450);
+        })
+        $(".result i").click(function(){
+          $(".result").css("display","none");
+          $("#fish-ready").removeClass("hunt");
+          $(".fish-ready .basket .gain").css("display","none");
+        })    
+        $(".result .gdown").click(function(){
+          window.location.href="http://www.baidu.com";
+        })
+        // $.ajax({
+        //   type:"post",
+        //   url:"....php",
+        //   data:{id:1},
+        //   dataType:"json",
+        //   success:function(str){
+        //     var data=JSON.parse(str);
+            
+        //   },
+        //   error:function(){}
+        // })
+      }
+
+    })
+  </script>
+</body>
+</html>

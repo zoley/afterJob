@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>ADtest</title>
+
+</head
+<body>
+	<script>
+
+	// 2017-08-16--------微信扫码----漂浮--叉叉
+	var Dw = document.body.clientWidth,
+	Dh = Dw * zone.height / zone.width,
+	o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.className = "a"+arand;
+	if(zone.htmlcontrol){
+		var _po = (zone.htmlcontrol.position== "top") ? "top" : "bottom";
+	}
+
+	o.style.cssText = "position: fixed;z-index: 2147483646;left:0px; "+_po+":0;width:100%;height:"+Dh+"px;text-align:center;background-color: rgba(0,0,0,.64);box-shadow: 0 -1px 1px rgba(0,0,0,.10);";
+	o.innerHTML = '<div  id="oneset'+arand+'" style="position:relative;display:block;width:100%;height:100%; zoom:1;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;"/></div><span style="height:20px; width:20px;line-height:20px;font-weight:bold; font-size:16px; color:green; position:absolute; top:0; right:0;" id="c'+arand+'">╳</span>';
+	var ostyle = document.createElement('style');
+	ostyle.innerHTML = '.a'+arand+'{-webkit-animation:afive 2s 4s both;-moz-animation:afive 2s 4s both;-ms-animation:afive 2s 4s both;animation:afive 2s 4s both}@-webkit-keyframes afive{0%{transform:scale(1);}30%{transform:scale(0.1);}70%{transform:scale(2);}100%{transform:scale(1);}}';
+	document.head.appendChild(ostyle);
+	document.body.appendChild(o)
+	console.log(getLocalTime(Math.round(new Date().getTime()/1000)));
+	function getLocalTime(nS) {     
+		return new Date(parseInt(nS) * 1000).toLocaleString('chinese',{hour12:false}).replace(/:\d{1,2}$/,' ');
+	}  
+	function close(){  
+		if(o) o.style.display='none';
+	}	
+	function onese(){
+		var imgs = new Image();
+		imgs.src=ads[0].url;
+		setTimeout(tizhan,300);
+
+	}
+	function tizhan(){
+		window.location.href=ads[0].urla;
+	}
+
+	__A( __G('c'+arand), "click",close);
+	__A( __G('oneset'+arand), "click",onese);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+</script>
+<script>
+	// 2017-08-23--------移动漂浮----可拖动drag
+	function calc(){
+		var now=parseInt(window.localStorage.getItem("num")||0);
+		window.localStorage.setItem("num",now+1);
+		if(now==500){
+			window.localStorage.clear();
+			return false;
+		}
+		return window.localStorage.getItem("num")-1;
+	}
+	var CS=calc();
+	console.log(CS)
+	var Dw = document.body.clientWidth,
+	Dh = Dw * zone.height / zone.width,
+	i = '<iframe src="' + ifsrc + '?&CS='+calc()+'" width="100%" height="' + Dh + '" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>', o = document.createElement("div"),
+	arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.className = 'a' + arand;
+	o.style.cssText = "position: fixed;z-index: 2147483646;left:0px;width:100%;height:"+Dh+"px;text-align:center;background-color: rgba(0,0,0,.64);box-shadow: 0 -1px 1px rgba(0,0,0,.10);";
+	if(zone.htmlcontrol){
+		var _po = (zone.htmlcontrol.position== 'top')?'bottom':'top';
+		(zone.htmlcontrol.position== 'top')? o.style.top = "0px" : o.style.bottom = "0px";
+		(zone.htmlcontrol.position== 'top')?(document.body.style.paddingTop = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-top')) + Dh + "px"):(document.body.style.paddingBottom = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-bottom')) + Dh + "px");
+	}
+	o.innerHTML = "<div style='position:relative;display:inline-block; zoom:1; vertical-align:middle; text-align:left;margin:0px auto;width:"+Dw+"px;height:"+Dh+"px'><div style='background:rgba(0,0,0,0.1);position:absolute;"+_po+":0px;right:0px;width:20px;text-align:center;color:#ffffff;font-size:12px;line-height:20px;font-family:Arial;height:20px;z-index:2147483647;' id='c"+arand+"'>X</div>"+i+"</div><div style='height:100%; overflow:hidden; display:inline-block; width:1px; overflow:hidden; margin-left:-1px; zoom:1; vertical-align:middle;'></div>";
+	var     ostyle = document.createElement('style');
+	ostyle.innerHTML = 'div.a'+arand+'{-webkit-animation:afive 2s 4s both;-moz-animation:afive 2s 4s both;-ms-animation:afive 2s 4s both;animation:afive 2s 4s both}@-webkit-keyframes afive{0%{transform:scale(1);}30%{transform:scale(0.1);}70%{transform:scale(2);}100%{transform:scale(1);}}';
+	document.head.appendChild(ostyle);
+	document.body.appendChild(o);
+	function close(){
+		if(o && Math.random() > 0.5) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+	
+	________________________________________________________________
+
+	var Dw = document.body.clientWidth,
+	Dh = Dw * zone.height / zone.width,
+	o = document.createElement("div"),
+	scale=Dw / zone.width,
+	arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.className = 'a' + arand;
+	if(zone.htmlcontrol){
+		var _po = (zone.htmlcontrol.position== "top") ? "top" : "bottom";
+	}
+
+	o.style.cssText = "position: fixed;z-index: 2147483646;left:0px; "+_po+":0;width:"+Dw+"px;height:"+Dh+"px;text-align:center;background:url("+urlImg+") no-repeat;background-size:"+Dw+"px "+Dh+"px";
+	o.innerHTML = '<div  id="oneset'+arand+'" style="position:relative;display:block;width:100%;height:100%; zoom:1;"><img id="i'+arand+'" src="' + ads[0].imageurl + '" style="width:'+93*scale+'px;height:'+91*scale+'px;position:absolute;top:'+40*scale+'px;left:'+100*scale+'px;"/></div><span style="height:20px; width:20px;line-height:20px;font-weight:bold; font-size:16px; color:green; position:absolute; top:0; right:0;" id="c'+arand+'">╳</span>';
+
+	document.body.appendChild(o)
+	var limit=998*scale;
+	var limit2=114*scale;
+	dragg(oImg);
+	function dragg(obj){
+		obj.addEventListener("touchstart",function(e){
+			e.preventDefault();
+			var e=e.targetTouches[0];
+			var disX=e.clientX;
+			var disY=e.clientY;
+			var tempX=disX-this.offsetLeft;
+			var tempY=disY-this.offsetTop;
+			var maxLeft=W-this.offsetWidth;
+			var maxTop=bgH-this.offsetHeight;
+			var lastLeft=0;
+			var lastTop=0;
+			obj.addEventListener("touchmove",function(e){
+				e.preventDefault();
+				var e=e.targetTouches[0];
+				var left1=e.clientX-tempX;
+				var top1=e.clientY-tempY;
+				if(left1<=0){
+					left1=0;
+				}else if(left1>maxLeft){
+					left1=maxLeft;
+				}                    
+				if(top1<=0){
+					top1=0;
+				}else if(top1>maxTop){
+					top1=maxTop;
+				}
+				obj.style.left=left1+"px";
+				obj.style.top=top1+"px";
+				lastLeft=left1;
+				lastTop=top1;
+			})
+			obj.addEventListener("touchend",function(e){
+				if(lastLeft<limit+6 && lastLeft>limit-6 && lastTop<limit2+6 && lastTop>limit2-6){
+					window.location.href="http://www.baidu.com";
+                        // window.open("http://www.baidu.com")
+                    }
+                })
+		})
+	}
+	function close(){  
+		if(o) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid); 
+</script>
+</body>
+</html>

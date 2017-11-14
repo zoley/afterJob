@@ -1,0 +1,15 @@
+/*con-con----s*/
+
+.con-con>div{width: 100%;background-color: #fff;border:1px solid #e5e6e7;}
+.con-con table{width: 100%;text-align:left;}
+.con-con table thead tr{width: 100%;background-color:#ECECEC;height: 76px;line-height: 76px;font-size:14px;color:#555;}
+.con-con table thead tr:first-child{background-color: #fff;font-size:16px;}
+.con-con table thead tr th{font-weight:normal;}
+.con-con table thead tr th:nth-child(1){padding-left:40px;}
+.con-con table tbody tr {border-bottom:1px solid #e5e6e7;height: 76px;line-height: 76px;}
+.con-con table tbody tr td:nth-child(1){padding-left:40px;color:#16A085;}
+.con-con table tbody tr td:nth-child(1) i{width: 16px;height: 16px;display:inline-block;background:url(../img/add.png) no-repeat;background-size:cover;vertical-align:middle;margin-right:10px;margin-bottom:5px;}
+.con-con table tbody tr td:last-child span{color:#16A085;width: 90px;height: 40px;border:1px solid #16A085;line-height: 40px;text-align:center;display:inline-block;border-radius:5px;}
+.con-con table tbody tr td:last-child {width: 170px;}
+.con-con table tbody tr td:last-child .nopay{color:red;border:1px solid red;}
+.con-con table tbody tr:hover{background-color:#E1E5E9;}

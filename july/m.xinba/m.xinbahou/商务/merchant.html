@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="辛巴网盟,辛巴广告联盟,移动广告平台,站长广告联盟,点击CPC" />
+	<meta name="description" content="辛巴网盟，辛巴广告联盟移动手机广告平台，一直致力于广告主拓展精准有效的投放通路，提供各种形式的网络广告投放服务；移动手机广告平台每天的广告显示量达到2亿次以上，超高的广告单价，预计千次展现收益20元。" />
+	<title>辛巴网盟-商务后台</title>
+	<link rel="shortcut icon" type="image/x-icon" href="img/ico.ico">
+	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/merchant.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/home.js"></script>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale="+scale+", maximum-scale="+scale+", minimum-scale="+scale+"'>")
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/25+"px";
+	</script>
+</head>
+<body>
+	<header id="head">
+		<div class="logo fl">
+			<i class="fl"></i>
+			<h1>辛巴网盟</h1>
+		</div>
+		<div class="menu fr">
+			<i id="show-menu"></i>			
+		</div>
+	</header>
+	<div id="side">
+		<a href="index.html"><i></i>平台概况<span>></span></a>
+		<a href="merchant.html"><i></i>厂商管理<span>></span></a>
+		<a href="plan.html"><i></i>计划管理<span>></span></a>
+		<a href="ads.html"><i></i>广告管理<span>></span></a>
+		<a href="javascript:;"><i></i>退出<span>></span></a>
+	</div>
+	<div id="content">
+		<div class="choose">
+			<a href="#">待审人员</a>
+			<a href="#">已审人员</a>
+			<a href="#">已锁定人员</a>
+		</div>
+		<div class="search">
+			<form action="" method="post">
+				<input type="text" name="plan_serch"/>
+				<select name="searchtype" class="plan_select">
+					<option value="username">厂商名称</option>
+					<option value="uid">厂商ID</option>
+					<option value="money">余额</option>
+				</select>
+				<button>搜索</button>
+			</form>
+		</div>
+		<h2>厂商管理 </h2>
+		<table>
+			<thead>
+				<tr>
+					<th>厂商ID</th>
+					<th>厂商名称</th>
+					<th>余额</th>
+					<th style="width:5rem;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td><a href="#跳转到站长页面" style="color:green">bi~biu1</a></td>
+					<td>阿西吧</td>
+					<td>158</td>
+					<td><a href="javascript:;" class="z-dell" title="锁定">未锁定</a></td>
+				</tr>
+				<tr>
+					<td><a href="#跳转到站长页面" style="color:green">bi~biu1</a></td>
+					<td>阿西吧</td>
+					<td>158</td>
+					<td><a href="javascript:;" class="z-dell red" title="锁定">已锁定</a></td>
+				</tr>
+				<tr>
+					<td><a href="#跳转到站长页面" style="color:green">bi~biu1</a></td>
+					<td>阿西吧</td>
+					<td>158</td>
+					<td><a href="javascript:;" class="z-dell" title="锁定">未锁定</a></td>
+				</tr>
+				<tr>
+					<td><a href="#跳转到站长页面" style="color:green">bi~biu1</a></td>
+					<td>阿西吧</td>
+					<td>158</td>
+					<td><a href="javascript:;" class="z-dell red" title="锁定">已锁定</a></td>
+				</tr>
+
+				<tr>
+					<td><a href="#跳转到站长页面" style="color:green">bi~biu1</a></td>
+					<td>阿西吧</td>
+					<td>158</td>
+					<td><a href="javascript:;" class="z-dell" title="锁定">未锁定</a></td>
+				</tr>
+				<tr>
+					<td><a href="#跳转到站长页面" style="color:green">bi~biu1</a></td>
+					<td>阿西吧</td>
+					<td>158</td>
+					<td><a href="javascript:;" class="z-dell red" title="锁定">已锁定</a></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

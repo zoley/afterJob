@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>视觉差</title>
+	<style>
+		*{margin:0;padding:0;}
+		img{width: 100%;vertical-align: top;}
+		.wrap{background:url(img/bg.png) repeat,#7AAF7A;width: 100%;height:800px;position: relative;overflow:hidden;}
+		.wrap .ceng1{width: 251px;height:41px;margin:60px auto;}
+		.wrap .ceng2,.wrap .ceng3,.wrap .ceng4{position: absolute;width: 1061px;height:467px;left:50%;margin-left:-530.5px;top:80px;}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="ceng1"><img src="img/ca1.png" alt=""></div>
+		<div class="ceng2"><img src="img/ca2.png" alt=""></div>
+		<div class="ceng3"><img src="img/ca3.png" alt=""></div>
+		<div class="ceng4"><img src="img/ca4.png" alt=""></div>
+	</div>
+	<script>
+		;!function(){
+			function getStyle(obj,attr) {
+				return obj.currentStyle ?obj.currentStyle[attr]:window.getComputedStyle(obj,false)[attr];
+			}
+			var oC1=document.getElementsByClassName("ceng2")[0];
+			var oC2=document.getElementsByClassName("ceng3")[0];
+			var W=document.documentElement.clientWidth;
+			var H=document.documentElement.clientHeight;
+			var L=parseInt(getStyle(oC1,"left"));
+			console.log(L)
+			document.onmouseover=document.onmousemove=function(e){
+				var e=e || event;
+				var l=((e.clientX-W/2)/(W/2)*50).toFixed(2);
+				var h=((e.clientY-H/2)/(H/2)*10).toFixed(2);
+				l=l<0?Math.floor(l):Math.ceil(l);
+				h=h<0?Math.floor(h):Math.ceil(h);
+				document.title=l+"hahah"+h;
+				oC2.style.left=(L+l)+"px";
+				oC1.style.top=(80+h)+"px";
+				oC2.style.top=(82+h)+"px";
+			}
+		}();
+	</script>
+</body>
+</html>

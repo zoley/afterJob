@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>流光字体</title>
+	<style>
+		/*body{-webkit-filter:grayscale(1);}*/
+		.wrap{width: 600px;height: 400px;margin:20px auto;position: relative;border:1px solid #ccc;}
+		.img{width: 500px;height: 300px;margin:50px auto;position: relative;}
+		.img img{width: 100%;height: 100%;}
+		.wrap:hover img{-webkit-filter:blur(1px);}
+		.mask{width: 397px;height: 220px;position: absolute;left:50%;top:50%;margin-left:-200px;margin-top:-110px;}
+		.wrap:hover .mask{background-color: #fff;opacity:0.2;transition:2s ease;}
+		h2{width: 400px;height: 220px;position: absolute;left:50%;top:50%;margin-left:-200px;margin-top:-110px;line-height: 220px;text-align:center;font-size:40px;background:-webkit-linear-gradient(0deg, red 0%, yellow 25%, blue 50%, green 75%, red 100%);-webkit-background-size:200% 100%;background-size:200% 100%;-webkit-background-clip: text;color:transparent;-webkit-animation:5s move infinite; opacity: 0;}
+		h2::before{content:"";position: absolute;width: 0;height: 217px;border-width:3px 0;left:50%;top:0;border-color:#000;}
+		.wrap:hover h2::before{width: 100%;height: 217px;border-color:white;border-style:solid;left:0;top:0;border-width:3px 0;transition:2s ease-in;}
+		h2::after{content:"";position: absolute;width: 394px;height: 0px;border-width:0 3px;left:0;top:50%;border-color:#000;}
+		.wrap:hover h2::after{width: 394px;height: 100%;border-color:white;border-style:solid;left:0;top:0;border-width:0 3px;transition:2s ease-in;}
+		@-webkit-keyframes move{0%{background-position: 0 0;}100%{background-position: -200% 0;}} 
+		.wrap:hover h2{opacity:1;}
+
+		/*-------------------*/
+		.gradient{background:-webkit-linear-gradient(270deg,#f35626,#feab3a);line-height:100px;-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-animation:5s hue infinite linear;}
+		@-webkit-keyframes hue{0%{-webkit-filter:hue-rotate(0deg);}100%{-webkit-filter:hue-rotate(-360deg);}}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div class="img">
+			<img src="img/timg.jpg">
+			<div class="mask"></div>
+			<h2>我是大笨蛋</h2>
+		</div>
+	</div>
+	<div class="gradient">
+		<h1>Pona-lala , my dotey</h1>
+	</div>
+</body>
+</html>

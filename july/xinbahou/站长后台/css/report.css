@@ -1,0 +1,54 @@
+/*content---s*/
+
+/*con-con----s*/
+.con-con .title{background-color: #fff;font-size:15px;height: 70px;width: 100%;margin-bottom:15px;border:1px solid #e5e6e7;line-height: 70px;padding-left:10px;box-sizing:border-box;color:#333;}
+.con-con .recent table{width: 100%;background-color: #fff;border:1px solid #e5e6e7;box-sizing:border-box;text-align:center;}
+.con-con .recent table thead tr{border-bottom:1px solid #e5e6e7;height: 51px;}
+.con-con .recent table tbody tr{height: 60px;}
+
+.con-con .condition{position: relative;;overflow:hidden;width: 100%;border:1px solid #e5e6e7;box-sizing:border-box;background-color:#fff;margin-top:20px;}
+
+.con-con .condition .choose{height: 34px;margin-top:20px;margin-bottom:40px;}
+.con-con .condition .choose>div{position: relative;height: 34px;border:1px solid #EBEBEF;line-height: 34px;float:left;margin-left:10px;font-size:13px;box-sizing:border-box;}
+.con-con .condition .choose>div:nth-of-type(1){border:none;margin-right:7px;}
+.con-con .condition .choose>div:nth-of-type(1) a{display:inline-block;width: 100px;height: 32px;border:1px solid #EBEBEF;text-align:center;}
+.con-con .condition .choose>div:nth-of-type(1) a:hover{background-color: #16A085;color:white;border-color:#16A085;}
+.con-con .condition .choose>div:nth-of-type(1) .active{background-color: #16A085;color:white;border-color:#16A085;}
+.con-con .condition .choose>div:nth-of-type(1) .report{width: 131px;height: 34px;border:1px solid #EBEBEF;outline:none;color:#777;vertical-align:top;}
+.con-con .condition .choose>div:nth-of-type(2) span{cursor:default;font-size:10px;padding-left:4px;}
+.con-con .condition .choose>div:nth-of-type(2) i{position: absolute;width: 7px;height: 7px;top:12px;right:6px;background:url(../img/arrow1.png) no-repeat;background-size:cover;}
+.con-con .condition .choose>div:nth-of-type(2){width: 180px;float:right;margin-right:40px;position: relative;}
+.con-con .condition .box{z-index:1;width: 400px;height: 180px;position: absolute;left:-222px;background-color:white;top:40px;border:1px solid #ddd;}
+.con-con .condition .box>div{width: 190px;height: 180px;padding-left:10px;}
+.con-con .condition .box>div h4{color:#333;line-height: 35px;}
+.con-con .condition .box .report-diy .range input{border:1px solid #ddd;width: 70px;height:25px;padding-left:5px;}
+.con-con .condition .box .report-diy .range {margin:15px 0 40px;}
+.con-con .condition .box .report-diy .sure a{color:white;width: 50px;height: 25px;border-radius:2px;display:inline-block;background-color:#008DE8;line-height: 25px;text-align:center;}
+.con-con .condition .box .report-diy .sure a+a{margin-left:15px;}
+.con-con .condition .box .report-diy .sure a:hover{background-color:#16A085;}
+.con-con .condition .box .report-fast table{width: 100%;font-size:13px;}
+.con-con .condition .box .report-fast table tr{height:25px;}
+.con-con .condition .box{display:none;}
+#container{height: 400px;min-width:650px;margin-bottom:70px;}
+.con-con .box-content table{width: 100%;text-align:center;}
+.con-con .box-content table thead tr{height: 70px;background-color:#F1F1F1;}
+.con-con .box-content table tbody tr{height: 70px;}
+.con-con .box-content table thead tr th {position: relative;}
+.con-con .box-content table thead tr th i{width: 12px;height: 12px;margin-left:7px;display:inline-block;vertical-align:middle;background:url(../img/what.png) no-repeat;background-size:cover;}
+.con-con .box-content table tbody tr:nth-of-type(2n){background-color:#F9F8F5;}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

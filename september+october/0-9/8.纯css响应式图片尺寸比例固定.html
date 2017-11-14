@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>纯css响应式图片尺寸比例固定+鼠标悬停特效</title>
+	<style>
+		.img{width:550px;padding-bottom:420px;height:0;background-color:green;overflow:hidden;margin:50px auto;border:1px solid red;position: relative;}
+		.img img{min-width:100%;transition:0.5s all ease;}
+		.word{position: absolute;left:0;top:0;bottom:0;right:0;}
+		.word h2{font:50px/80px "Segoe Script",cursive,"Microsoft Yahei";text-align: center;transition:0.5s all ease;margin-top:64px;}
+		.word h2 b{color:#ACF327;}
+		.word p{font:25px/30px cursive,"Microsoft Yahei";text-align: center;width:80%;margin:100px auto 0;transition:0.5s all ease;opacity:0;}
+		.img:hover .word h2{transform:translateY(66px);}
+		.img:hover .word p{transform:translateY(-35px);opacity:1;}
+		.img:hover img{transform:scale(1.1);-webkit-filter:hue-rotate(90deg);/*-webkit-filter:brightness(0.8);*/}
+		.img::before,.img::after{content:"";position: absolute;top:30px;right:30px;left:30px;bottom:30px;border:2px solid #3A88C7;z-index:2;transition:0.5s all ease;}
+		.img::before{border-left:none;border-right:none;transform:scale(0,1);top:50px;bottom:50px;}
+		.img::after{border-top:none;border-bottom:none;transform:scale(1,0);right:50px;left:50px;}
+		.img:hover.img::after{transform:scale(1,1);}
+		.img:hover.img::before{transform:scale(1,1);}
+
+		/*--------------------------------*/
+		.img2{width:40%;padding-bottom:30%;height:0;background-color:green;overflow:hidden;margin:50px auto;border:1px solid red;position: relative;}
+		.img2 img{min-width:100%;transition:0.5s all ease;}
+	</style>
+</head>
+<body>
+	<div class="img">
+		<img src="img/a1.jpg" alt="">
+		<div class="word">
+			<h2>Hello,<b>World</b></h2>
+			<p>No matter how bad it gets,the sun will always come out.</p>
+		</div>
+	</div>
+	<div class="img2">
+		<img src="img/a6.jpg" alt="">
+	</div>
+</body>
+</html>

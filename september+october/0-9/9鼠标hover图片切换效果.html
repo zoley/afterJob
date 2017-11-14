@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>鼠标hover图片切换效果</title>
+	<style>
+		*{margin:0;padding:0;}
+		.grid-box{position: relative;width: 280px;height: 220px;overflow: hidden;border-radius: 10px;border: 10px solid #dee5e1;margin: 0 auto;box-sizing:border-box;}
+
+        .pic1, .pic2{font-size: 0;box-sizing: content-box;width: 260px;height: 200px;position: absolute;top: 0;left: 0;cursor: pointer;}
+        .pic1 li{width: 50%;height: 100px;position: relative;overflow: hidden;float: left;}
+
+        .pic1 li > img{position: absolute;width:260px;}
+        .pic1 li > img,.pic1:hover li > img,.pic2 , .grid-box:hover .pic2{transition: all 0.5s ease;}
+        .pic1 li:nth-child(1) img{left:0;top:0;}
+        .pic1 li:nth-child(2) img{left: -130px;top: 0;}
+        .pic1 li:nth-child(3) img{left:0;top: -100px;}
+        .pic1 li:nth-child(4) img{left: -130px;top: -100px;}
+        .pic2{transform: scale(1.5);-o-transform: scale(1.5);-moz-transform: scale(1.5);background: url("img/a2.jpg") no-repeat center center;background-size: cover;z-index: -1;}
+        .grid-box:hover .pic2{transform: scale(1);-o-transform: scale(1);-moz-transform: scale(1);display: block;}
+        .pic1:hover li:nth-child(1) img{/*向下滑*/top:100px;}
+        .pic1:hover li:nth-child(2) img{/*向左滑*/left: -260px;}
+        .pic1:hover li:nth-child(3) img{/*向右滑*/left: 130px;}
+        .pic1:hover li:nth-child(4) img{/*向上滑*/top: -260px;}
+
+	</style>
+</head>
+<body>
+	<div class="grid-box">
+    <ul class="pic1">
+        <li><img src="img/a1.jpg" alt="图片1">
+        </li>
+        <li><img src="img/a1.jpg" alt="图片2">
+        </li>
+        <li><img src="img/a1.jpg" alt="图片3">
+        </li>
+        <li><img src="img/a1.jpg" alt="图片4">
+        </li>
+    </ul>
+    <span class="pic2"></span>
+</div>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+	<style>
+		.rot{transform:rotate(93deg);}
+
+	</style>
+</head>
+<body>
+	<div id="div" style="width:300px;height:10px;background:#000;position: absolute;left:400px;top:300px;transition:3s;-webkit-transform-origin: 0 0;"></div>
+	<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+	<input type="button" id="Button1" value="确定" />
+
+
+	<script src="jquery.min.js"></script>
+	<script>
+		$("#Button1").click(function(){
+			$("#div").addClass("rot")
+		})
+	</script>
+</body>
+
+</html>

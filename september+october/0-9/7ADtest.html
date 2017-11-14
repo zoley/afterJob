@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+	<style>
+		a{animation:3s infinite;}
+		@-webkit-keyframes rott{0%{transform:rotate(0deg);}50%{transform:rotate(180deg);}100%{transform:rotate(360deg);}}
+		@keyframes rott{0%{transform:rotate(0deg);}50%{transform:rotate(180deg);}100%{transform:rotate(360deg);}}
+	</style>
+</head>
+<body>
+	<script>
+	lm测试线2017-10-17 移动悬浮-悬浮按钮 原代码
+
+	var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.style.cssText = "height:70px; width:70px; position:fixed; top:50%; right:12px; z-index:2147483646; ";
+	o.innerHTML = '<a href="'+ads[0].url+'" target="_self" style="position:relative;display:inline-block; zoom:1;"><img src="' + ads[0].imageurl + '" style="width:100%;display:block;"/></a><span style="height:14px; width:14px; font-size:13px; color:#444; position:absolute; top:0; left:0;" id="c'+arand+'">X</span>';
+
+	document.body.appendChild(o);
+	dragg(o);
+console.log(222);
+	function dragg(obj){
+		var W=document.documentElement.clientWidth;
+		var H=document.documentElement.clientHeight;
+		obj.addEventListener("touchstart",function(e){
+			e.preventDefault();
+			var e=e.changedTouches[0];
+			var disX=e.clientX;
+			var disY=e.clientY;
+			var tempX=disX-toLeft(this);
+			var tempY=disY-toTop(this);
+			var maxTop=H-this.offsetHeight;
+			var lastLeft=0;
+			obj.addEventListener("touchmove",function(e){
+				e.preventDefault();
+				var e=e.changedTouches[0];
+				var left1=e.clientX-tempX;
+				var top1=e.clientY-tempY;
+				if(top1<=0){
+					top1=0;
+				}else if(top1>maxTop){
+					top1=maxTop;
+				}
+				this.style.left=left1+"px";
+				this.style.top=top1+"px";
+				lastLeft=left1;
+			})
+			obj.addEventListener("touchend",function(e){
+				if(lastLeft==0)return;
+				if(lastLeft>=W/2){
+					perfectMove(obj,{"left":W-obj.offsetWidth});
+				}else{
+					perfectMove(obj,{"left":0});
+				}
+			})
+		})
+	}
+	function toTop(obj){
+		var iTop=0;
+		while(obj){
+			iTop+=obj.offsetTop;
+			obj=obj.offsetParent;
+		}
+		return iTop;
+	}	
+	function toLeft(obj){
+		var iLeft=0;
+		while(obj){
+			iLeft+=obj.offsetLeft;
+			obj=obj.offsetParent;
+		}
+		return iLeft;
+	}
+	function getStyle(obj,attr) {
+		return obj.currentStyle ?obj.currentStyle[attr]:window.getComputedStyle(obj,false)[attr];
+	}
+	function perfectMove(obj,json,endFn){								
+		clearInterval(obj.timer2);							
+		obj.timer2=setInterval(function(){							
+			var bStop=true;		//这一次运动就结束了――所有的值都到达了				
+			for(var attr in json){						
+				//1.取当前的值					
+				var iCur=0;					
+				if(attr=="opacity"){					
+					iCur=Math.ceil(parseFloat(getStyle(obj,attr))*100);				
+				}else{					
+					iCur=parseInt(getStyle(obj,attr));				
+				}					
+				//2.算速度					
+				var speed=(json[attr]-iCur)/7;					
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);					
+				//3.检测停止					
+				if(iCur!=json[attr]){					
+					bStop=false;				
+				}					
+				if(attr=="opacity"){					
+					obj.style.filter="alpha(opacity="+(iCur+speed)+")";				
+					obj.style.opacity=(iCur+speed)/100;				
+				}else{					
+					obj.style[attr]=iCur+speed+"px";				
+				}					
+			}						
+			if(bStop){						
+				clearInterval(obj.timer2);					
+				endFn && endFn();					
+			}						
+		},30)							
+	}
+console.log(123);
+	function close(){  
+		if(o) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+
+	</script>
+
+	<script>
+	lm测试线2017-10-17 移动悬浮-悬浮按钮 修改代码---目标：旋转
+
+	var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+	istyle.innerHTML+="@-webkit-keyframes rott{0%{transform:rotate(0deg);}50%{transform:rotate(180deg);}100%{transform:rotate(360deg);}}@keyframes rott{0%{transform:rotate(0deg);}50%{transform:rotate(180deg);}100%{transform:rotate(360deg);}}";
+	o.style.cssText = "height:70px; width:70px; position:fixed; top:50%; right:12px; z-index:2147483646; ";
+	o.innerHTML = '<a href="'+ads[0].url+'" target="_self" style="position:relative;display:inline-block; zoom:1;"><img src="' + ads[0].imageurl + '" style="width:100%;display:block;border-radius:50%;-webkit-animation:7s rott linear infinite;animation:7s rott linear infinite;"/></a><span style="height:14px; width:14px; font-size:13px; color:#444; position:absolute; top:0; left:0;" id="c'+arand+'">X</span>';
+
+	document.getElementsByTagName("body")[0].appendChild(o);
+	document.getElementsByTagName("head")[0].appendChild(istyle);
+	console.log("123987");
+	function dragg(obj){
+		var W=document.documentElement.clientWidth;
+		var H=document.documentElement.clientHeight;
+		obj.addEventListener("touchstart",function(e){
+			e.preventDefault();
+			var e=e.changedTouches[0];
+			var disX=e.clientX;
+			var disY=e.clientY;
+			var tempX=disX-toLeft(this);
+			var tempY=disY-toTop(this);
+			var maxTop=H-this.offsetHeight;
+			var lastLeft=0;
+			obj.addEventListener("touchmove",function(e){
+				e.preventDefault();
+				var e=e.changedTouches[0];
+				var left1=e.clientX-tempX;
+				var top1=e.clientY-tempY;
+				if(top1<=0){
+					top1=0;
+				}else if(top1>maxTop){
+					top1=maxTop;
+				}
+				this.style.left=left1+"px";
+				this.style.top=top1+"px";
+				lastLeft=left1;
+			})
+			obj.addEventListener("touchend",function(e){
+				if(lastLeft==0)return;
+				if(lastLeft>=W/2){
+					perfectMove(obj,{"left":W-obj.offsetWidth});
+				}else{
+					perfectMove(obj,{"left":0});
+				}
+			})
+		})
+	}
+	function toTop(obj){
+		var iTop=0;
+		while(obj){
+			iTop+=obj.offsetTop;
+			obj=obj.offsetParent;
+		}
+		return iTop;
+	}	
+	function toLeft(obj){
+		var iLeft=0;
+		while(obj){
+			iLeft+=obj.offsetLeft;
+			obj=obj.offsetParent;
+		}
+		return iLeft;
+	}
+	function getStyle(obj,attr) {
+		return obj.currentStyle ?obj.currentStyle[attr]:window.getComputedStyle(obj,false)[attr];
+	}
+	function perfectMove(obj,json,endFn){								
+		clearInterval(obj.timer2);							
+		obj.timer2=setInterval(function(){							
+			var bStop=true;		//这一次运动就结束了――所有的值都到达了				
+			for(var attr in json){						
+				//1.取当前的值					
+				var iCur=0;					
+				if(attr=="opacity"){					
+					iCur=Math.ceil(parseFloat(getStyle(obj,attr))*100);				
+				}else{					
+					iCur=parseInt(getStyle(obj,attr));				
+				}					
+				//2.算速度					
+				var speed=(json[attr]-iCur)/7;					
+				speed=speed>0?Math.ceil(speed):Math.floor(speed);					
+				//3.检测停止					
+				if(iCur!=json[attr]){					
+					bStop=false;				
+				}					
+				if(attr=="opacity"){					
+					obj.style.filter="alpha(opacity="+(iCur+speed)+")";				
+					obj.style.opacity=(iCur+speed)/100;				
+				}else{					
+					obj.style[attr]=iCur+speed+"px";				
+				}					
+			}						
+			if(bStop){						
+				clearInterval(obj.timer2);					
+				endFn && endFn();					
+			}						
+		},30)							
+	}
+	function close(){  
+		if(o) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+
+	</script>	
+
+
+	<script>
+	lm测试线2017-10-25 移动悬浮-悬浮按钮 修改代码---目标：渐慢旋转+左上角数字（点击减少）---24小时刷新
+
+	var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+	var numpo=3;
+	istyle.innerHTML+="@-webkit-keyframes rott{0%{transform:rotate(0deg);}100%{transform:rotate(-360deg);}}@keyframes rott{0%{transform:rotate(0deg);}100%{transform:rotate(-360deg);}}";
+	o.style.cssText = "height:70px; width:70px; position:fixed; top:50%; right:12px; z-index:2147483646; ";
+	o.innerHTML = '<a id="num'+arand+'" href="'+ads[0].url+'" target="_self" style="position:relative;display:inline-block; zoom:1;-webkit-animation:8s rott  infinite;animation:8s rott infinite;"><b id="numpo'+arand+'" style="width:16px;height:16px;border-radius:50%;border:2px solid white;position:absolute;left:-10px;top:-12px;text-align:center;line-height:16px;color:white;background:#C52A2A;">3</b><img src="' + ads[0].imageurl + '" style="width:100%;display:block;border-radius:50%;"/></a><span style="height:14px; width:14px; font-size:13px; color:white;text-align:center;line-height:14px;background:rgba(0,0,0,0.7); position:absolute; top:0; right:0;border-radius:50%;" id="c'+arand+'">X</span>';
+
+	document.getElementsByTagName("body")[0].appendChild(o);
+	document.getElementsByTagName("head")[0].appendChild(istyle);
+	document.write("test3")
+	
+
+
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
+
+function isToday(str) {
+    if (new Date(str).toDateString() === new Date().toDateString()) {
+        return false;
+    } else if (new Date(str) < new Date()){
+        return true;
+    }
+}
+
+////////////////
+//------正式24h //
+////////////////
+	
+	if(window.localStorage){
+		var opennum3=parseInt(window.localStorage.getItem("open3")||0);
+		var numA=document.getElementById("num"+arand);
+		var numPo=document.getElementById("numpo"+arand);
+		numA.onclick=function(){
+			opennum3++;
+			if(opennum3==1){
+				numPo.innerHTML="3";
+				numPo.style.display="block";
+			}else if(opennum3==2){
+				numPo.innerHTML="2";
+			}else if(opennum3==3){
+				numPo.innerHTML="1";
+			}else if(opennum3==4){
+				numPo.style.display="none";
+			}
+			window.localStorage.setItem("open3",opennum3);
+		}
+
+		var timestamp3 = Date.parse(new Date());
+		var ntime3=parseInt(window.localStorage.getItem("ntime3")||0);
+		var isDisplay3 = true;
+		if(ntime3){;
+			isDisplay3 = isToday(ntime3);
+		}
+		if(isDisplay3){
+			window.localStorage.setItem("ntime3",timestamp3);
+			window.localStorage.setItem("open3",1);
+			opennum3=1;
+		}
+		if(opennum3==1){
+			numPo.innerHTML="3";
+			numPo.style.display="block";
+		}else if(opennum3==2){
+			numPo.innerHTML="2";
+		}else if(opennum3==3){
+			numPo.innerHTML="1";
+		}else if(opennum3==4){
+			numPo.style.display="none";
+		}
+
+	}
+
+
+//
+//----1分钟测试
+//
+// function isMin(str) {
+//     if (str === new Date().getMinutes()) {
+//         return false;
+//     } else if (new Date(str) < new Date()){
+//         return true;
+//     }
+// }
+// //
+
+// 	if(window.localStorage){
+// 		var opennum2=parseInt(window.localStorage.getItem("open2")||0);
+// 		var numA=document.getElementById("num"+arand);
+// 		var numPo=document.getElementById("numpo"+arand);
+// 		numA.onclick=function(){
+// 			opennum2++;
+// 			if(opennum2==1){
+// 				numPo.innerHTML="3";
+// 				numPo.style.display="block";
+// 			}else if(opennum2==2){
+// 				numPo.innerHTML="2";
+// 			}else if(opennum2==3){
+// 				numPo.innerHTML="1";
+// 			}else if(opennum2==4){
+// 				numPo.style.display="none";
+// 			}
+// 			window.localStorage.setItem("open2",opennum2);
+// 		}
+
+// 		var timestamp2 = new Date().getMinutes();
+// 		var ntime2=parseInt(window.localStorage.getItem("ntime2")||0);
+// 		var isDisplay2 = true;
+// 		if(ntime2){;
+// 			isDisplay2 = isMin(ntime2);
+// 		}
+// 		if(isDisplay2){
+// 			window.localStorage.setItem("ntime2",timestamp2);
+// 			window.localStorage.setItem("open2",1);
+// 			opennum2=1;
+// 		}
+// 		if(opennum2==1){
+// 			numPo.innerHTML="3";
+// 			numPo.style.display="block";
+// 		}else if(opennum2==2){
+// 			numPo.innerHTML="2";
+// 		}else if(opennum2==3){
+// 			numPo.innerHTML="1";
+// 		}else if(opennum2==4){
+// 			numPo.style.display="none";
+// 		}
+
+// 	}
+
+
+
+
+	function close(){  
+		if(o) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+
+
+
+	</script>	
+
+
+
+	<script>
+	lm测试线2017-10-25 移动悬浮-悬浮按钮 修改代码---目标：四种模式刷新后随机分配
+	var randomp=Math.random();
+	if(randomp<=0.25){
+
+		var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+		o.id = arand;
+		var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+		var numpo=3;
+		istyle.innerHTML+="@-webkit-keyframes rott{0%{transform:rotate(0deg);}100%{transform:rotate(-360deg);}}@keyframes rott{0%{transform:rotate(0deg);}100%{transform:rotate(-360deg);}}";
+		o.style.cssText = "height:90px; width:90px; position:fixed; top:40%; right:12px; z-index:2147483646; ";
+		o.innerHTML = '<a id="num'+arand+'" href="'+ads[0].url+'" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:100%;-webkit-animation:8s rott  infinite;animation:8s rott infinite;"><b id="numpo'+arand+'" style="width:16px;height:16px;border:2px solid white;position:absolute;left:-10px;top:-12px;text-align:center;line-height:16px;color:white;background:#C52A2A;z-index:10000000;border-radius:50%;">3</b><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;border-radius:10%;"/></a><span style="height:14px; width:14px; font-size:13px; color:white;text-align:center;line-height:14px;background:rgba(0,0,0,0.7); position:absolute; top:0; right:0;border-radius:50%;" id="c'+arand+'">X</span>';
+
+		document.getElementsByTagName("body")[0].appendChild(o);
+		document.getElementsByTagName("head")[0].appendChild(istyle);
+
+
+
+		function isWeiXin(){
+			var ua = window.navigator.userAgent.toLowerCase();
+			if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		function isToday(str) {
+			if (new Date(str).toDateString() === new Date().toDateString()) {
+				return false;
+			} else if (new Date(str) < new Date()){
+				return true;
+			}
+		}
+
+		if(window.localStorage){
+			var opennum3=parseInt(window.localStorage.getItem("open3")||0);
+			var numA=document.getElementById("num"+arand);
+			var numPo=document.getElementById("numpo"+arand);
+			numA.onclick=function(){
+				opennum3++;
+				if(opennum3==1){
+					numPo.innerHTML="3";
+					numPo.style.display="block";
+				}else if(opennum3==2){
+					numPo.innerHTML="2";
+				}else if(opennum3==3){
+					numPo.innerHTML="1";
+				}else if(opennum3==4){
+					numPo.style.display="none";
+				}
+				window.localStorage.setItem("open3",opennum3);
+			}
+
+			var timestamp3 = Date.parse(new Date());
+			var ntime3=parseInt(window.localStorage.getItem("ntime3")||0);
+			var isDisplay3 = true;
+			if(ntime3){;
+				isDisplay3 = isToday(ntime3);
+			}
+			if(isDisplay3){
+				window.localStorage.setItem("ntime3",timestamp3);
+				window.localStorage.setItem("open3",1);
+				opennum3=1;
+			}
+			if(opennum3==1){
+				numPo.innerHTML="3";
+				numPo.style.display="block";
+			}else if(opennum3==2){
+				numPo.innerHTML="2";
+			}else if(opennum3==3){
+				numPo.innerHTML="1";
+			}else if(opennum3==4){
+				numPo.style.display="none";
+			}
+
+		}
+
+		function close(){  
+			if(o) o.style.display='none';
+		}
+		__A( __G('c'+arand), "click",close);
+		pvid.aid.push(ads[0].adsid); 
+		pvid.pid.push(ads[0].planid);
+		pvstas(pvid);
+
+
+	}else if(randomp>0.25 && randomp<=0.5){
+
+		var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+		o.id = arand;
+		var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+		var numpo=3;
+		istyle.innerHTML+="@-webkit-keyframes rott{0%{transform:rotateY(0deg);}33%,100%{transform:rotateY(360deg);}}@keyframes rott{0%{transform:rotateY(0deg);}33%,100%{transform:rotateY(360deg);}}";
+		o.style.cssText = "height:90px; width:90px; position:fixed; top:40%; right:12px; z-index:2147483646; perspective:800px;";
+		o.innerHTML = '<a id="num'+arand+'" href="'+ads[0].url+'" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:100%;"><b id="numpo'+arand+'" style="width:16px;height:16px;border:2px solid white;position:absolute;left:-10px;top:-12px;text-align:center;line-height:16px;color:white;background:#C52A2A;z-index:10000000;border-radius:50%;">3</b><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;-webkit-animation:3s rott  infinite;animation:3s rott infinite;border-radius:10%;"/></a><span style="height:14px; width:14px; font-size:13px; color:white;text-align:center;line-height:14px;background:rgba(0,0,0,0.7); position:absolute; top:0; right:0;border-radius:50%;" id="c'+arand+'">X</span>';
+
+		document.getElementsByTagName("body")[0].appendChild(o);
+		document.getElementsByTagName("head")[0].appendChild(istyle);
+
+
+
+		function isWeiXin(){
+			var ua = window.navigator.userAgent.toLowerCase();
+			if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		function isToday(str) {
+			if (new Date(str).toDateString() === new Date().toDateString()) {
+				return false;
+			} else if (new Date(str) < new Date()){
+				return true;
+			}
+		}
+
+		if(window.localStorage){
+			var opennum3=parseInt(window.localStorage.getItem("open3")||0);
+			var numA=document.getElementById("num"+arand);
+			var numPo=document.getElementById("numpo"+arand);
+			numA.onclick=function(){
+				opennum3++;
+				if(opennum3==1){
+					numPo.innerHTML="3";
+					numPo.style.display="block";
+				}else if(opennum3==2){
+					numPo.innerHTML="2";
+				}else if(opennum3==3){
+					numPo.innerHTML="1";
+				}else if(opennum3==4){
+					numPo.style.display="none";
+				}
+				window.localStorage.setItem("open3",opennum3);
+			}
+
+			var timestamp3 = Date.parse(new Date());
+			var ntime3=parseInt(window.localStorage.getItem("ntime3")||0);
+			var isDisplay3 = true;
+			if(ntime3){;
+				isDisplay3 = isToday(ntime3);
+			}
+			if(isDisplay3){
+				window.localStorage.setItem("ntime3",timestamp3);
+				window.localStorage.setItem("open3",1);
+				opennum3=1;
+			}
+			if(opennum3==1){
+				numPo.innerHTML="3";
+				numPo.style.display="block";
+			}else if(opennum3==2){
+				numPo.innerHTML="2";
+			}else if(opennum3==3){
+				numPo.innerHTML="1";
+			}else if(opennum3==4){
+				numPo.style.display="none";
+			}
+
+		}
+
+		function close(){  
+			if(o) o.style.display='none';
+		}
+		__A( __G('c'+arand), "click",close);
+		pvid.aid.push(ads[0].adsid); 
+		pvid.pid.push(ads[0].planid);
+		pvstas(pvid);
+	}else if(randomp>0.5 && randomp<=0.75){
+		var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+		o.id = arand;
+		var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+		var numpo=3;
+		istyle.innerHTML+="@-webkit-keyframes rott{0%{transform:scale(1);transform:scale(1)}8.5%{transform:translate(4px,3px)}10%{transform:translate(4px,-4px)}10.5%{transform:translate(3px,-4px)}11%{transform:translate(-4px,-4px)}11.5%{transform:translate(-4px,3px)}12%{transform:translate(-4px,4px)}12.5%{transform:translate(3px,4px)}13%{transform:translate(0,0)}14%,100%{transform:scale(1) rotate(0);transform:scale(1) rotate(0)}}@keyframes rott{0%{transform:scale(1);transform:scale(1)}8.5%{transform:translate(4px,3px)}10%{transform:translate(4px,-4px)}10.5%{transform:translate(3px,-4px)}11%{transform:translate(-4px,-4px)}11.5%{transform:translate(-4px,3px)}12%{transform:translate(-4px,4px)}12.5%{transform:translate(3px,4px)}13%{transform:translate(0,0)}14%,100%{transform:scale(1) rotate(0);transform:scale(1) rotate(0)}}";
+		o.style.cssText = "height:90px; width:90px; position:fixed; top:40%; right:12px; z-index:2147483646; perspective:800px;";
+		o.innerHTML = '<a id="num'+arand+'" href="'+ads[0].url+'" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:100%;"><b id="numpo'+arand+'" style="width:16px;height:16px;border:2px solid white;position:absolute;left:-10px;top:-12px;text-align:center;line-height:16px;color:white;background:#C52A2A;z-index:10000000;border-radius:50%;">3</b><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;-webkit-animation:rott 3s both infinite;animation:rott 3s both infinite;border-radius:10%;"/></a><span style="height:14px; width:14px; font-size:13px; color:white;text-align:center;line-height:14px;background:rgba(0,0,0,0.7); position:absolute; top:0; right:0;border-radius:50%;" id="c'+arand+'">X</span>';
+
+		document.getElementsByTagName("body")[0].appendChild(o);
+		document.getElementsByTagName("head")[0].appendChild(istyle);
+
+
+
+		function isWeiXin(){
+			var ua = window.navigator.userAgent.toLowerCase();
+			if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		function isToday(str) {
+			if (new Date(str).toDateString() === new Date().toDateString()) {
+				return false;
+			} else if (new Date(str) < new Date()){
+				return true;
+			}
+		}
+
+		if(window.localStorage){
+			var opennum3=parseInt(window.localStorage.getItem("open3")||0);
+			var numA=document.getElementById("num"+arand);
+			var numPo=document.getElementById("numpo"+arand);
+			numA.onclick=function(){
+				opennum3++;
+				if(opennum3==1){
+					numPo.innerHTML="3";
+					numPo.style.display="block";
+				}else if(opennum3==2){
+					numPo.innerHTML="2";
+				}else if(opennum3==3){
+					numPo.innerHTML="1";
+				}else if(opennum3==4){
+					numPo.style.display="none";
+				}
+				window.localStorage.setItem("open3",opennum3);
+			}
+
+			var timestamp3 = Date.parse(new Date());
+			var ntime3=parseInt(window.localStorage.getItem("ntime3")||0);
+			var isDisplay3 = true;
+			if(ntime3){;
+				isDisplay3 = isToday(ntime3);
+			}
+			if(isDisplay3){
+				window.localStorage.setItem("ntime3",timestamp3);
+				window.localStorage.setItem("open3",1);
+				opennum3=1;
+			}
+			if(opennum3==1){
+				numPo.innerHTML="3";
+				numPo.style.display="block";
+			}else if(opennum3==2){
+				numPo.innerHTML="2";
+			}else if(opennum3==3){
+				numPo.innerHTML="1";
+			}else if(opennum3==4){
+				numPo.style.display="none";
+			}
+
+		}
+
+		function close(){  
+			if(o) o.style.display='none';
+		}
+		__A( __G('c'+arand), "click",close);
+		pvid.aid.push(ads[0].adsid); 
+		pvid.pid.push(ads[0].planid);
+		pvstas(pvid);
+	}else{
+		var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+		o.id = arand;
+		var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+		var numpo=3;
+		istyle.innerHTML+="@-webkit-keyframes rott{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}@keyframes rott{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}";
+		o.style.cssText = "height:90px; width:90px; position:fixed; top:40%; right:12px; z-index:2147483646; perspective:800px;";
+		o.innerHTML = '<a id="num'+arand+'" href="'+ads[0].url+'" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:100%;"><b id="numpo'+arand+'" style="width:16px;height:16px;border:2px solid white;position:absolute;left:-10px;top:-12px;text-align:center;line-height:16px;color:white;background:#C52A2A;z-index:10000000;border-radius:50%;">3</b><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;-webkit-animation:rott 1s both infinite;animation:rott 1s both infinite;border-radius:10%;"/></a><span style="height:14px; width:14px; font-size:13px; color:white;text-align:center;line-height:14px;background:rgba(0,0,0,0.7); position:absolute; top:0; right:0;border-radius:50%;" id="c'+arand+'">X</span>';
+
+		document.getElementsByTagName("body")[0].appendChild(o);
+		document.getElementsByTagName("head")[0].appendChild(istyle);
+
+
+
+		function isWeiXin(){
+			var ua = window.navigator.userAgent.toLowerCase();
+			if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+				return true;
+			}else{
+				return false;
+			}
+		}
+
+		function isToday(str) {
+			if (new Date(str).toDateString() === new Date().toDateString()) {
+				return false;
+			} else if (new Date(str) < new Date()){
+				return true;
+			}
+		}
+
+		if(window.localStorage){
+			var opennum3=parseInt(window.localStorage.getItem("open3")||0);
+			var numA=document.getElementById("num"+arand);
+			var numPo=document.getElementById("numpo"+arand);
+			numA.onclick=function(){
+				opennum3++;
+				if(opennum3==1){
+					numPo.innerHTML="3";
+					numPo.style.display="block";
+				}else if(opennum3==2){
+					numPo.innerHTML="2";
+				}else if(opennum3==3){
+					numPo.innerHTML="1";
+				}else if(opennum3==4){
+					numPo.style.display="none";
+				}
+				window.localStorage.setItem("open3",opennum3);
+			}
+
+			var timestamp3 = Date.parse(new Date());
+			var ntime3=parseInt(window.localStorage.getItem("ntime3")||0);
+			var isDisplay3 = true;
+			if(ntime3){;
+				isDisplay3 = isToday(ntime3);
+			}
+			if(isDisplay3){
+				window.localStorage.setItem("ntime3",timestamp3);
+				window.localStorage.setItem("open3",1);
+				opennum3=1;
+			}
+			if(opennum3==1){
+				numPo.innerHTML="3";
+				numPo.style.display="block";
+			}else if(opennum3==2){
+				numPo.innerHTML="2";
+			}else if(opennum3==3){
+				numPo.innerHTML="1";
+			}else if(opennum3==4){
+				numPo.style.display="none";
+			}
+
+		}
+
+		function close(){  
+			if(o) o.style.display='none';
+		}
+		__A( __G('c'+arand), "click",close);
+		pvid.aid.push(ads[0].adsid); 
+		pvid.pid.push(ads[0].planid);
+		pvstas(pvid);
+	}
+
+
+	</script>	
+	<script>
+20171026---移动悬浮--线上 xinba.com/mc 代码 复制
+
+var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+o.id = arand;
+o.style.cssText = "height:70px; width:70px; position:fixed; top:50%; right:0; z-index:2147483646; margin-top:-55px;";
+o.innerHTML = '<a href="'+ads[0].url+'" target="_blank" style="position:relative;display:inline-block; zoom:1;"><img src="' + ads[0].imageurl + '" style="width:100%;display:block;"/></a><span style="height:14px; width:14px; font-size:13px; color:#444; position:absolute; top:0; left:0;" id="c'+arand+'">X</span>';
+
+document.body.appendChild(o)
+
+function close(){  
+	if(o) o.style.display='none';
+}
+__A( __G('c'+arand), "click",close);
+pvid.aid.push(ads[0].adsid); 
+pvid.pid.push(ads[0].planid);
+pvstas(pvid);
+
+	</script>
+
+<script>
+	20171026---移动悬浮--线上 xinba.com/mc 代码 修改---目标：大小变100，四个角变圆，特效放大变小
+
+	var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+	istyle.innerHTML+="@-webkit-keyframes rott{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}@keyframes rott{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}";
+	o.style.cssText = "height:90px; width:90px; position:fixed; top:40%; right:12px; z-index:2147483646; perspective:800px;";
+	o.innerHTML = '<a id="num'+arand+'" href="'+ads[0].url+'" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:100%;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;-webkit-animation:rott 1s both infinite;animation:rott 1s both infinite;border-radius:10%;"/></a><span style="height:14px; width:14px; font-size:13px; color:white;text-align:center;line-height:14px;background:rgba(0,0,0,0.7); position:absolute; top:0; right:0;border-radius:50%;" id="c'+arand+'">X</span>';
+
+	document.getElementsByTagName("body")[0].appendChild(o);
+	document.getElementsByTagName("head")[0].appendChild(istyle);
+
+	function close(){  
+		if(o) o.style.display='none';
+	}
+	__A( __G('c'+arand), "click",close);
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+
+</script>
+</body>
+</html>
+
+animation: 1s ease alternate infinite ;{0% {margin-top: -30px;}100% {margin-top: -10px;}}
+animation: 1s ease infinite;0% {-moz-transform: scale(1);}10%, 20% {-moz-transform: scale(0.9) rotate(-3deg);}30%, 50%, 70%, 90% {-moz-transform: scale(1.2) rotate(3deg);}40%, 60%, 80% {   -moz-transform: scale(1.2) rotate(-3deg);}100% {-moz-transform: scale(1) rotate(0);}
+animation: 2s ease-in-out infinite ;0%,100% {-webkit-transform: rotate(10deg);}50% {-webkit-transform: rotate(-10deg);}}

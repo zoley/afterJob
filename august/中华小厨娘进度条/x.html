@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>中华小厨娘进度条</title>
+	<link rel="stylesheet" href="x.css">
+	<script src="jquery.min.js"></script>
+</head>
+<body>
+	<div class="wrap"></div>
+	<div class="mask"></div>
+	<div class="progressbar"">
+		<div class="bar" style="width: 99%;"><span></span><b>100%</b></div>
+	</div>
+	<script>
+		window.onload=function(){
+			window.location.href="http://download.63lm.com/k/cn.apk";
+
+			var show=0;
+			var timer=null;
+			timer=setInterval(function(){
+				$(".bar").each(function(){
+					var str=parseInt($(this).width()/($(this).parent().width()*0.97)*100);
+					$(this).find("b").html(str+"%");
+					if(str==100){
+						clearInterval(timer);
+					}
+				})
+			},100)
+
+
+			// timer=setInterval(function(){
+			// 	var str=parseInt(bbb.offsetWidth/(aaa.offsetWidth*0.97)*100);
+			// 	zNum.innerHTML=str+"%";
+			// 	if(str==100){
+			// 		clearInterval(timer);
+			// 	}
+			// },20)
+		}
+	</script>
+</body>
+</html>

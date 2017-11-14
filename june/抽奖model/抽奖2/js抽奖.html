@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>抽奖demo 利用canvas</title>
+    <style>
+        *{margin:0;padding:0;}
+        body{background: #000}
+        canvas{background: #fff}
+        img{width:186px;height:186px; position: absolute;left:calc(500px - 93px);top:calc(300px - 93px);cursor:pointer}
+    </style>
+</head>
+<body>
+    <canvas id="canvas" width="1000" height="600"></canvas>
+    <img src="playbtn.png" />
+</body>
+<script src="move.js"></script>
+<script>
+
+    //模拟数据 需求根据数据长度来创建多少个奖项
+    var dataArr = [
+        {'title':'100积分','pic':'1.jpg','id':'0'},
+        {'title':'200积分','pic':'1.jpg','id':'1'},
+        {'title':'300积分','pic':'1.jpg','id':'2'},
+        {'title':'400积分','pic':'1.jpg','id':'3'},
+        {'title':'500积分','pic':'1.jpg','id':'4'},
+        {'title':'600积分','pic':'1.jpg','id':'5'},
+        {'title':'700积分','pic':'1.jpg','id':'6'},
+        {'title':'800积分','pic':'1.jpg','id':'7'},
+    ];
+
+    var canvas = document.getElementById('canvas');
+    var cT = canvas.getContext('2d');
+    var x = 500;
+    var y = 300;
+    var r = 280;
+    var num = 360 /  dataArr.length;
+    var radian = Math.PI / 180;
+    //画转盘
+    for(var i=0;i<dataArr.length;i++){
+        cT.beginPath();
+        cT.fillStyle = i%2?'black':'red';
+        cT.moveTo(x,y);
+        cT.arc(x,y,r,(num * i - num /2) * radian ,(num * (i+1) - num /2) * radian);
+        cT.closePath();
+        cT.fill();
+        cT.beginPath();
+        cT.fillStyle = 'yellow';
+        cT.closePath();
+    };
+
+    var oImg = document.querySelector('img');
+    //按钮开关
+    var Switch = 0;
+    oImg.onclick = function(){
+       if(Switch)return;
+        Switch = 1;
+        var phpData = Math.floor(Math.random(0 * dataArr.length) * 10);
+        var op = {
+            'elem':'img',
+            'style':'rotate',
+            'target':num * (phpData + 1) + 1800,
+            'time':3000,
+            'type':'easeOutStrong',
+            'callback':function(){console.log('转完了');Switch = 0;}
+        };
+        //调用对象 旋转
+        new Move(op).Go();
+    };
+
+</script>
+</html>

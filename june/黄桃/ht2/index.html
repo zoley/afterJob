@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<!-- <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0"> -->
+	<title>黄桃</title>
+	<script>
+	    var scale=1/window.devicePixelRatio;
+	    document.write("<meta name='viewport' content='user-scalable=no,width=device-width,initial-scale="+scale+",maximum-scale="+scale+", minimum-scale="+scale+"'>");
+	    var html=document.getElementsByTagName("html")[0];
+	    html.style.fontSize=document.documentElement.clientWidth/16+"px";
+	    //默认设计稿尺寸640px。所以1rem=40px;
+	</script>
+	<style>
+		*{margin:0;padding:0;border:0;outline:0;-webkit-box-sizing:border-box}a{-webkit-tap-highlight-color:transparent;text-decoration:none;color:#333}input{-webkit-appearance:none}li,ul{list-style:none}.fl{float:left}.fr{float:right}.clearfix:after{height:0;line-height:0;content:"";visibility:hidden;clear:both;display:block}body{font-size:14px;font-family:"Microsoft Yahei"}.wrap{width:100%;margin:0 auto}.wrap>div{width:100%}.wrap>div>img{width:100%;display:block}.wrap .pay{height:17.5rem;width:100%;overflow:hidden;margin-bottom:.75rem}.wrap .pay>div{width:11rem;height:2rem;margin:.75rem auto;border:2px solid #FF9A18;font-size:.75rem;line-height:2rem;text-align:center;color:#FF9A18}.wrap .pay form>p{width:72%;height:1.375rem;line-height:1.375rem;font-size:.6rem;margin:.5rem auto}.wrap .pay form>p>span{padding-left:2em}.wrap .pay form>p>input{width:8rem;height:1.25rem;border:1px solid #3c3c3c;vertical-align:middle;padding-left:1em;font-size:.5rem}.wrap .pay form .choice,.wrap .pay form>.submit{text-align:center}.wrap .pay form>p>select{background:url(img/arrow.png) no-repeat right center;background-size:1.25rem 1.25rem;width:10rem;height:1.25rem;border:1px solid #3c3c3c;vertical-align:middle;font-size:.5rem;appearance:none;-moz-appearance:none;-webkit-appearance:none;padding-left:12px}.wrap .pay form>p>select option{font-size:14px}.wrap .pay form>.submit input{width:9rem;height:1.25rem;display:inline-block;background-color:#FF9A18;color:#fff;border-radius:.25rem;margin-top:.5rem;border:none;font-size:.875rem;padding-left:0}
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<div><img src="img/xht_01.jpg"></div>
+		<div><img src="img/xht_02.jpg"></div>
+		<div><img src="img/xht_03.jpg"></div>
+		<div class="pay">
+			<div>正品保证 假一罚十</div>
+			<form action="" method="post">
+				<p>请填写收件人信息：</p>
+				<p>
+					<span>姓名：</span>
+					<input type="text" name="username" required="">
+				</p>
+				<p>
+					<span>电话：</span>
+					<input type="tel" name="tel" required="" pattern="^1[34578]\d{9}$">
+				</p>
+				<p>
+					<span>地址：</span>
+					<input type="text" name="address" required="">
+				</p>
+				<p>您要购买的产品分类：</p>
+				<p class="choice">
+					<select name="product">
+						<option value="qg-4">4罐全国统一邮费￥29元</option>
+						<option value="jz-9">9罐礼盒装 江浙沪邮费￥49元</option>
+						<option value="qt-9">9罐礼盒装 其他地区邮费￥55元</option>
+					</select>
+				</p>
+				<p class="submit"><input type="submit" value="付 款"></p>
+
+			</form>
+		</div>
+		<div><img src="img/xht_05.jpg"></div>
+		<div><img src="img/xht_06.jpg"></div>
+		<div><img src="img/xht_07.jpg"></div>
+		<div><img src="img/xht_08.jpg"></div>
+		<div><img src="img/xht_09.jpg"></div>
+		<div><img src="img/xht_10.jpg"></div>
+	</div>
+	<script>
+
+	</script>
+</body>
+</html>

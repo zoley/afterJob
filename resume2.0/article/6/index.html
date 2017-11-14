@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="个人博客,个人小站,主成睿" />
+	<meta name="description" content="主成睿的个人小站">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>爆炸图片</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../../img/ico.ico">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/syntaxy.dark.min.css">
+	<link rel="stylesheet" href="../../css/blog.css">
+	<link rel="stylesheet" href="css/6.css">
+</head>
+<body>
+	<div class="bg"></div>
+	<header id="head">
+		<div class="motto">
+			<span>孤村落日残霞，轻烟老树寒鸦，一点飞鸿影下。</span>
+			<span>青山绿水，白草红叶黄花。</span>
+		</div>
+		<div class="line"></div>
+	</header>
+	<div class="btn">
+		<div class="icon"></div>
+	</div>
+	<div id="nav">
+		<div class="photo"></div>
+		<ul>
+			<li><a href="http://zoley.me">主页<i></i></a></li>
+			<li><a class="active" href="http://zoley.me/blog.php">博客<i></i></a></li>
+			<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历<i></i></a></li>
+		</ul>
+		<div class="email">zole1314@163.com</div>
+	</div>
+	<div class="mask"></div>
+	<div class="container">
+		<div class="con-left fl">
+			<div class="articles">
+				<p class="back"><a href="http://zoley.me/blog.php">>>返回首页</a></p>
+				<h1 id="6">爆炸图片</h1>
+				<p class="authors">发布时间：2017-10-14 &nbsp; &nbsp; 编辑：<span>主小睿</span></p>
+				<div class="content">
+					<p>爆炸图片实际是碎片化扩散的特效模拟。ul作为一个大画布，每一个小格子li都是其组成部分，然后让每一个li都拥有属于ul的图片各自区块，就像是拼图一样。</p>
+					<p>老规矩，先看demo。</p>
+					<fieldset id="fieldset">
+						<legend>爆炸图片</legend>
+						<iframe name="childPage" id="childPage" src="http://www.zoley.me/2/picbomb" frameborder="0" width=100% height=800></iframe>
+					</fieldset>
+					<p>原理不难，重要的是其中的几行代码牵扯到了数学的计算，每次鼠标点击的时候让其从点击处开始绽放。</p>
+					<p>另外一个是循环操作元素的方法，当然不止运用于这一例，每一个轮播图其实都可以用到。之前做轮播的时候总是傻乎乎的把每一个列表都在HTML中写出来，然后用js把UL内容翻倍，当运行到重复的第一个数据时，则替换为原始的第一个数据，这样就可以循环下去。</p>
+					<p>不过这里并没有运用这种思路，而是采取了一行简简单单的代码——数组操作：arr.push(arr.shift());</p>
+					<p>每次运行的时候把数据数组中的第一项摘出来放到数组中的最后一项，自然可以永久循环下去。</p>
+					<p>艾玛，我之前可真傻。。。(இдஇ)</p>
+					<p>OK,又到了上代码的时候了。</p>
+					<pre class="codebox" data-title="HTML：" data-type="default" data-min-height="0px;">
+						<div class="bg"></div>
+						<p>请点击图片查看效果</p>
+						<div class="wrap" id="wrap">
+							<ul>
+							</ul>
+						</div>
+					</pre>
+					<p>当当当当，大CSS粉墨登场↖(^ω^)↗  其实就那么一丢丢</p>
+					<pre class="codebox" data-title="CSS：" data-type="default" data-min-height="0px;">
+						*{margin:0;padding:0;list-style:none;box-sizing:border-box;}
+						.wrap{margin:100px auto 0;width: 506px;height: 506px;border:3px solid white;}
+						.wrap ul{width: 100%;height: 100%;perspective:800px;position: relative;}
+						.wrap ul li{position: absolute;width: 50px;height: 50px;}
+						p{margin:70px 0 0;text-align:center;color:#B91D1D;font-family:'Microsoft Yahei';font-size:25px;}
+						.bg{background:url(img/bg.jpg) center center;background-size:cover;position: absolute;top:0;bottom:0;left:0;right:0;z-index:-1;opacity:0.6;}
+					</pre>
+					<p>喂！JS大兄弟，到你登场啦！</p>
+					<pre class="codebox" data-title="JS：" data-type="default" data-min-height="0px;">
+						$(function() {
+							var arrImg = ["img/a1.jpg", "img/a2.jpg", "img/a3.jpg", "img/a4.jpg", "img/a5.jpg", "img/a6.jpg", "img/a7.jpg"];
+							var aLi = $("ul").get(0).children;
+							var liW = 50;
+							var liH = 50;
+							var num = 10;
+
+							function createLi() {
+								for (var i = 0; i < 100; i++) {
+									var li = document.createElement("li");
+									li.top = parseInt(i / num) * liH;
+									li.left = i % num * liW;
+									styleLi(li);
+									$(li).click(function() {
+										arrImg.push(arrImg.shift());
+										for (var i = 0; i < aLi.length; i++) {
+											var distX = (aLi[i].left - this.left) / liW,
+												distY = (aLi[i].top - this.top) / liH;
+											distX = distX == 0 ? 0.5 : distX;
+											distY = distY == 0 ? 0.5 : distY;
+											gogo(aLi[i], distX, distY);
+										}
+									});
+									$("ul").append($(li));
+								}
+							}
+							createLi();
+
+							function gogo(obj, distX, distY) {
+								var distZ = Math.sqrt((num - Math.abs(distX)) * (num - Math.abs(distX)) + (num - Math.abs(distY)) * (num - Math.abs(distY))),
+									delay = Math.abs(distX) + Math.abs(distY),
+									rotateX = (100 * distZ + 360) * (Math.random() - 0.5),
+									rotateY = (100 * distZ + 360) * (Math.random() - 0.5),
+									translateX = distZ * liW / 25 * distX / Math.abs(distX),
+									translateY = distZ * liH / 25 * distY / Math.abs(distY),
+									translateZ = distZ * 50 + 200;
+								setTimeout(function() {
+									$(obj).css({
+										"transform": "translateX(" + translateX + "px) translateY(" + translateY + "px) translateZ(" + translateZ + "px) rotateX(" + rotateX + "deg) rotateY(" + rotateY + "deg)",
+										"transition": "all " + (delay * 50 + 700) / 1000 + "s linear"
+									});
+									$(obj).animate({
+										"opacity": 0
+									}, delay * 50 + 500, "linear", function() {
+										styleLi(obj);
+									});
+								}, delay * 30);
+							};
+
+							function styleLi(obj) {
+								obj.style.cssText = "";
+								$(obj).css({
+									"background": "url(" + arrImg[0] + ") no-repeat",
+									"background-position": (-obj.left) + "px " + (-obj.top) + "px",
+									"background-size": "500px 500px",
+									"top": obj.top + "px",
+									"left": obj.left + "px",
+									"transform": "translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg)",
+									"opacity": 1
+								});
+							};
+						})
+					</pre>
+					<p>欧开，功能到此就基本实现啦！PS：想要碎片飞出UL框框别忘了设置景深哦！</p>
+					<p>另外呢，鉴于我这个破站是响应式的，咱不能只考虑PC端的样子啊，这像素那像素绝对长度写的那么爽，直接弄到手机里立马啪啪啪打脸。</p>
+					<p>你说可以用&lt;meta:vp&gt;把width设置成device-width嘛！</p>
+					<p>这样当然可以，可问题又来了——我并不是直接把代码写在本页面，而是直接iframe把之前写的拽过来，于是悲催了，在子页面设置的vp并不能生效于当前页面。</p>
+					<p>于是，你又说了，可以动态设置像素比啊，嗯，我试了下，这个确实可以。但依然有问题，是我的问题：本站文章系列页面我嫌弃麻烦并没有动态设置像素比，如果单独为本页面再设置一个实在是麻烦还有修改其他一堆写好的东西，比如通用的css。这里我先把动态设置像素比的一段JS贴出来，如下：</p>
+					<pre class="codebox" data-title="JS：" data-type="default" data-min-height="0px;">
+						var mobile_bs = {
+						  versions: function() {
+						    var u = navigator.userAgent;
+						    return {
+						      trident: u.indexOf('Trident') > -1,
+						      //IE内核
+						      presto: u.indexOf('Presto') > -1,
+						      //opera内核
+						      webKit: u.indexOf('AppleWebKit') > -1,
+						      //苹果、谷歌内核
+						      gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1,
+						      //火狐内核
+						      mobile: !! u.match(/AppleWebKit.*Mobile.*/) || !! u.match(/AppleWebKit/) && u.indexOf('QIHU') && u.indexOf('QIHU') > -1 && u.indexOf('Chrome') < 0,
+						      //是否为移动终端
+						      ios: !! u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+						      //ios终端
+						      android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1,
+						      //android终端或者uc浏览器
+						      iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1,
+						      //是否为iPhone或者QQHD浏览器
+						      iPad: u.indexOf('iPad') > -1,
+						      //是否iPad
+						      webApp: u.indexOf('Safari') == -1 //是否web应该程序，没有头部与底部
+						    }
+						  }()
+						};
+						if (mobile_bs.versions.mobile) {
+						  if (mobile_bs.versions.android || mobile_bs.versions.iPhone || mobile_bs.versions.iPad || mobile_bs.versions.ios) {
+						    var scale = 1 / window.devicePixelRatio;
+						    document.write("< meta name='viewport' content='user-scalable=no,width=device-width,initial-scale=" + scale + ",maximum-scale=" + scale + ", minimum-scale=" + scale + "'>");
+						    var html = document.getElementsByTagName("html")[0];
+						    html.style.fontSize = parseFloat(document.documentElement.clientWidth / 15) + "px";
+						  }
+						} else {
+						  var html = document.getElementsByTagName("html")[0];
+						  html.style.fontSize = "50px";
+						};
+					</pre>
+					<p>好啦，既然这也不行，那也不行，那要怎么办才好？——凉拌：缩放（同域名下iframe父子页面可以互相进行DOM操作）。</p>
+					<p>艾玛，这就对了嘛，咱让那个UL框框在手机端的时候进行CSS上的缩放不就KO了嘛，真真是蠢到一定境界了。</p>
+					<p>客观，今儿咱就到这吧~下次再见么么哒 （づ￣3￣）づ╭❤～</p>
+					<p id="zhenbang">真棒！鼓掌，撒花~~~</p>
+					<div style="width:80%;margin:10px auto;max-width: 400px;"><img style="width:100%;"  src="../../img/two.gif" alt=""></div>
+					
+					
+					<p>著作权归zole站长所有。商业转载请联系站长获得授权，非商业转载请注明出处！</p>
+					<p>本文出处：<a href="http://zoley.me/article/6" style="color:#008DE8">http://zoley.me/article/6</a></p>
+					<div class="shang">
+						<a href="javascript:;">赏</a>
+						<div class="shangs">
+							<i>╳</i>
+							<p>谢谢你请我吃糖果</p>
+							<div class="ercode">
+								<img class="wei" src="../../img/image/weixin.jpg" title="扫一扫">
+								<img class="zhi" src="../../img/image/alipay.jpg" title="扫一扫" style="display:none">
+							</div>
+							<span>扫码打赏，多少随意，您高兴就行</span>
+							<div class="choose">
+								<label><input type="radio" name="haha" checked> &nbsp;<b></b></label>
+								<label><input type="radio" name="haha"> &nbsp;<b></b></label>
+							</div>
+							<span class="dashang">打开微信扫一扫，即可进行扫码打赏哦</span>
+						</div>
+					</div>
+				</div>
+				<div id="SOHUCS" sid="6" class="changyan"></div>
+				<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+				<script type="text/javascript">
+					window.changyan.api.config({
+						appid: 'cyt9zXQLD',
+						conf: 'prod_7cbb58befa46b554911ecccd8faec7eb'
+					});
+				</script>
+			</div>
+		</div>
+		<div class="con-middle fl hidden-xs"></div>
+		<div class="con-right fr hidden-xs">
+			<div class="pardon">
+				<div class="photo"></div>
+				<h1>zole</h1>
+				<div class="email">zole1314@163.com</div>
+				<ul class="clearfix">
+					<li><a href="http://zoley.me">主页</a></li>
+					<li><a class="active" href="http://zoley.me/blog.php">博客</a></li>
+					<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历</a></li>
+				</ul>
+			</div>
+			<div class="clock">
+				<embed src="../../swf/clock.swf" wmode="transparent">
+			</div>
+		</div>
+	</div>
+	<div id="up"></div>
+	<footer>
+		<p>Copyright&copy;2017<a href="http://www.miitbeian.gov.cn/">&nbsp;苏ICP备17035373号</a>&nbsp;All Rights Reserved&nbsp;Design by zole</p>
+	</footer>
+	<canvas id="canvas"></canvas>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/canvasStar.js"></script>
+	<script src="../../js/syntaxy.min.js"></script>
+	<script src="../../js/blog.js"></script>
+	<script>
+		window.onload=function(){
+			var h1=document.getElementsByTagName("h1")[0];
+			$.ajax({
+				type:"post",
+				url:"http://zoley.me/inquire.php",
+				data:{id:h1.id},
+				success:function(data){
+					// console.log(data[0]);
+					//var d=JSON.parse(data);
+					var viewNum=parseInt(data[0]);
+					viewNum++;
+					$.ajax({
+						type:"post",
+						data:{view:viewNum,id:h1.id},
+						url:"http://zoley.me/contact.php",
+						success:function(){
+
+						}
+					})
+				}
+			})
+			
+			//---iframe
+			var scaleP=1/window.devicePixelRatio;
+			if($(window).width()<768){
+				var childWrap=window.frames["childPage"].document.getElementById("wrap");
+				$(childWrap).css({"-webkit-transform":"scale(0.5)","margin":" -50px -120px"});
+				$("#childPage").height("500px");
+			}
+		}
+	</script>
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+</body>
+</html>

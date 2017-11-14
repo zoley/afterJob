@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="辛巴网盟,辛巴广告联盟,移动广告平台,站长广告联盟,点击CPC" />
+	<meta name="description" content="辛巴网盟，辛巴广告联盟移动手机广告平台，一直致力于广告主拓展精准有效的投放通路，提供各种形式的网络广告投放服务；移动手机广告平台每天的广告显示量达到2亿次以上，超高的广告单价，预计千次展现收益20元。" />
+	<title>辛巴网盟-站长后台</title>
+	<link rel="shortcut icon" type="image/x-icon" href="img/ico.ico">
+	<link rel="stylesheet" href="css/home.css">
+	<link rel="stylesheet" href="css/ads.css">
+	<script src="js/jquery.min.js"></script>
+	<script src="js/home.js"></script>
+	<script>
+		var scale=1/window.devicePixelRatio;
+		document.write("<meta name='viewport' content='width=device-width, user-scalable=no, initial-scale="+scale+", maximum-scale="+scale+", minimum-scale="+scale+"'>")
+		var html=document.getElementsByTagName("html")[0];
+		html.style.fontSize=document.documentElement.clientWidth/25+"px";
+	</script>
+</head>
+<body>
+	<header id="head">
+		<div class="logo fl">
+			<i class="fl"></i>
+			<h1>辛巴网盟</h1>
+		</div>
+		<div class="menu fr">
+			<i id="show-menu"></i>			
+		</div>
+	</header>
+	<div id="side">
+		<a href="index.html"><i></i>我的概况<span>></span></a>
+		<a href="ads.html"><i></i>我的广告<span>></span></a>
+		<a href="web.html"><i></i>网站管理<span>></span></a>
+		<a href="javascript:;"><i></i>退出<span>></span></a>
+	</div>
+	<div id="content">
+		<a href="buildWeb.html">新建网站</a>
+
+		<h2>网站管理 </h2>
+		<table>
+			<thead>
+				<tr>
+					<th>网站名称</th>
+					<th>域名</th>
+					<th>分类</th>
+					<th style="width:6.5rem;text-align: center;">操作</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>百度</td>
+					<td>baidu.com</td>
+					<td>漂浮</td>
+					<td><a href="editWeb.html" class="edit">修改</a> &nbsp;<a href="javascript:;" class="delete red">删除</a></td>
+				</tr>
+				<tr>
+					<td>百度</td>
+					<td>baidu.com</td>
+					<td>漂浮</td>
+					<td><a href="editWeb.html" class="edit">修改</a> &nbsp;<a href="javascript:;" class="delete red">删除</a></td>
+				</tr>
+				<tr>
+					<td>百度</td>
+					<td>baidu.com</td>
+					<td>漂浮</td>
+					<td><a href="editWeb.html" class="edit">修改</a> &nbsp;<a href="javascript:;" class="delete red">删除</a></td>
+				</tr>
+				<tr>
+					<td>百度</td>
+					<td>baidu.com</td>
+					<td>漂浮</td>
+					<td><a href="editWeb.html" class="edit">修改</a> &nbsp;<a href="javascript:;" class="delete red">删除</a></td>
+				</tr>
+				<tr>
+					<td>百度</td>
+					<td>baidu.com</td>
+					<td>漂浮</td>
+					<td><a href="editWeb.html" class="edit">修改</a> &nbsp;<a href="javascript:;" class="delete red">删除</a></td>
+				</tr>
+				
+			</tbody>
+		</table>
+	</div>
+	<div id="lean_overlay" class="con_del1" style=" position: fixed; z-index: 100; top: 0px; left: 0px; width: 100%; height: 100%; opacity: 0.1; background: rgb(0, 0, 0);"></div>
+	<div class="modal1 con_del2" style="width:15rem;height:8.5rem; ">
+		<div class="modal-header">
+			<div class="modal_title">
+				删除
+			</div>
+			<div class="modal_close"></div>
+		</div>
+		<div class="modal-body">
+			<div class="icon"></div>
+			<div class="text">
+				确认删除吗？
+			</div>
+		</div>
+		<div class="modal-footer">
+			<button id="modeal_ok1" class="btn bnt51a35" type="submit">确认</button>
+			<button id="modeal_cancel1" class="btn rowbnt" type="submit">取消</button>
+		</div>
+	</div>
+</body>
+</html>

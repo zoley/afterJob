@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>shoppingMarket</title>
+	<style>
+		html,body,ul,li,p,h1,h2,h3,h4,input,textarea,form,table,img,th,td,select{margin:0;padding:0;}
+		img,input{border:0;}
+		ul,li{list-style: none;}a{text-decoration:none;}body{font-size:14px;font-family:"Microsoft Yahei";}
+		/*table{border-collapse:collapse;}*/
+		.container{width: 750px;position: relative;margin:50px auto;}
+		.container table{width: 100%;background-color:#CADEFF;}
+		.container table thead th{background: #e2f2ff;border-top: 3px solid #a7cbff;height: 40px;text-align: center;}
+		.container table tbody td{height: 100px;background-color:#fff;text-align: center;}
+		.container table tbody tr:hover td{background-color:rgb(238,246,255);}
+		.container table tbody td:nth-of-type(2) div:nth-of-type(1){width: 100px;height: 80px;display:inline-block;}
+		.container table tbody td:nth-of-type(2) div:nth-of-type(1)>img{width: 100%;height: 100%;vertical-align:middle;}
+		.container table tbody td:nth-of-type(2) div:nth-of-type(2){height: 80px;display:inline-block;line-height: 80px;}
+		.container tbody td:first-of-type input{width:0;height:0;display:none;}
+		.container table label{width:20px;height:20px;background:url(img/icon1.png) no-repeat;display:inline-block;-webkit-background-size:cover;background-size:cover;}
+		.container table tbody td:nth-of-type(2){text-align:left;}
+		.container table tbody td:nth-of-type(4) input{width:30px;border:1px solid #ccc;text-align: center;}
+		.container table tbody td:nth-of-type(4) span{background-color:#e0e0e0;cursor:pointer;border-radius:50%;width: 18px;height: 18px;text-align: center;line-height: 18px;display:inline-block;}
+		.tfoot{height: 50px;padding:0 10px;background:-webkit-linear-gradient(270deg,rgb(241,241,241) 0%,rgb(226,226,226) 100%) no-repeat;line-height: 50px;}
+		.tfoot i{width:20px;height:20px;background:url(img/icon1.png) no-repeat;display:inline-block;-webkit-background-size:cover;background-size:cover;vertical-align: middle;}
+		.tfoot .bg,.container table .bg{background:url(img/icon2.png) no-repeat;-webkit-background-size:cover;background-size:cover;}
+		.tfoot input{width:0px;height:0;}
+		.tfoot label {padding:0 20px 0 5px;}
+		.tfoot div{float:right;}
+		.tfoot div a{display:inline-block;color:#f40;font-size:17px;padding-left:20px;}
+
+	</style>
+</head>
+<body onselectstart="return false">
+	<div class="container">
+		<form action="" method="post">
+			<table cellspacing="1">
+				<thead>
+					<tr>
+						<th width="35"></th>
+						<th>商品</th>
+						<th width="70">单价</th>
+						<th width="100">数量</th>
+						<th width="70">小计</th>
+						<th width="100">操作</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><label class="lab-inp"></label><input type="checkbox" id="i1"></td>
+						<td>
+							<div>
+								<img src="img/1.jpg">
+							</div>
+							<div>
+								<span>Casio/卡西欧 EX-TR350</span>
+							</div>
+						</td>
+						<td>2000</td>
+						<td><span>-</span><input type="text" value="1"><span>+</span></td>
+						<td class="count">2000</td>
+						<td><a class="del" href="javascript:;">刪除</a></td>
+					</tr>
+					<tr>
+						<td><label class="lab-inp"></label><input type="checkbox" id="i2"></td>
+						<td>
+							<div>
+								<img src="img/2.jpg">
+							</div>
+							<div>
+								<span>Canon/佳能 PowerShot SX50 HS</span>
+							</div>
+						</td>
+						<td>5000</td>
+						<td><span>-</span><input type="text" value="1"><span>+</span></td>
+						<td class="count">5000</td>
+						<td><a class="del" href="javascript:;">刪除</a></td>
+					</tr>
+					<tr>
+						<td><label class="lab-inp"></label><input type="checkbox" id="i3"></td>
+						<td>
+							<div>
+								<img src="img/3.jpg">
+							</div>
+							<div>
+								<span>Sony/索尼 DSC-WX300</span>
+							</div>
+						</td>
+						<td>2214</td>
+						<td><span>-</span><input type="text" value="1"><span>+</span></td>
+						<td class="count">2214</td>
+						<td><a class="del" href="javascript:;">刪除</a></td>
+					</tr>
+					<tr>
+						<td><label class="lab-inp"></label><input type="checkbox" id="i4"></td>
+						<td>
+							<div>
+								<img src="img/4.jpg">
+							</div>
+							<div>
+								<span>Fujifilm/富士 instax mini</span>
+							</div>
+						</td>
+						<td>1112</td>
+						<td><span>-</span><input type="text" value="1"><span>+</span></td>
+						<td class="count">1112</td>
+						<td><a class="del" href="javascript:;">刪除</a></td>
+					</tr>
+				</tbody>
+			</table>
+			<div class="tfoot">
+				<i></i><label class="last-lab">全选</label><input type="checkbox" id="i5">
+				<a class="del-c" href="javascript:;">刪除</a>
+				<div>
+					合计：&yen;<span id="total" style="color:green">0</span>
+					<a href="javascript:;">结算（<span id="jishu">0</span>）</a>
+				</div>
+			</div>
+		</form>
+	</div>
+	<script src="js/jquery.min.js"></script>
+	<script>
+		$(function(){
+			var num=0;
+				
+			//全选
+			$("i").click(function(){
+				if($(this).siblings("input").get(0).checked==false){
+					$(this).siblings("input").get(0).checked=true;
+					$("tbody label").next().each(function(){
+						$(this).get(0).checked=true;
+					})
+					$("i").addClass("bg");
+					$("tbody label").addClass("bg");
+					num=4;
+				}else{
+					$(this).siblings("input").get(0).checked=false;
+					$("tbody label").next().each(function(){
+						$(this).get(0).checked=false;
+					})
+					$("i").removeClass("bg");
+					$("tbody label").removeClass("bg");
+					num=0;
+				}
+				$("#jishu").html(num);
+				
+			})
+			//单个选择
+			$("tbody label").click(function(){
+				if($(this).next().get(0).checked==false){
+					$(this).next().get(0).checked=true;
+					$(this).addClass("bg");
+					num++;
+				}else{
+					$(this).next().get(0).checked=false;
+					$(this).removeClass("bg");
+					num--;
+				}
+				if(num==$("tbody label").length){
+					$("i").siblings("input").get(0).checked=true;
+					$("i").addClass("bg");
+				}else{
+					$("i").siblings("input").get(0).checked=false;
+					$("i").removeClass("bg");
+				}
+				$("#jishu").html(num);
+			})
+			//单个删除
+			$(".del").click(function(){
+				var sure=confirm("确定删除此商品吗？");
+				if(sure){
+					if($(this).parentsUntil("tbody").find("td:first").find(".lab-inp").next().get(0).checked==true){
+						num--;
+						$("#jishu").html(num);			
+					}                  
+					$(this).parentsUntil("tbody").remove();
+				}
+			})
+			//整体删除			
+			$(".del-c").click(function(){
+				var sure=confirm("确定删除所选商品吗？");
+				if(sure){
+					$("tbody label").each(function(){
+						if($(this).next().get(0).checked==true){
+							$(this).parentsUntil("tbody").remove();
+							$("i").removeClass("bg");
+							num--;
+						}
+					})
+					$("#jishu").html(num);
+				}
+			})
+			$("tbody tr").each(function(i){
+				var td3=$(this).find("td:nth-of-type(3)")
+				var td4=$(this).find("td:nth-of-type(4)")
+				var td5=$(this).find("td:nth-of-type(5)")
+				var unit=parseInt(td4.find("span").eq(1).prev().val());
+				td4.find("span").eq(0).click(function(){
+					if($(this).next().val()=="1"){
+						$(this).css("display","none");
+						return false;
+					}
+					unit--;
+					td4.find("span").eq(1).prev().val(unit);
+					td5.html(parseInt(td3.html())*unit);
+					
+				})			
+				td4.find("span").eq(1).click(function(){
+					unit++;
+					td4.find("span").eq(1).prev().val(unit);
+					td5.html(parseInt(td3.html())*unit);
+					if($(this).next().val()!=="1"){
+						$(this).prev().prev().css("display","inline-block");
+					}
+				})
+			})
+
+			setInterval(function(){
+				var total=0;
+				var aCount=document.getElementsByClassName("count");
+				for(var i=0;i<aCount.length;i++){
+					aCount[i].index=i;
+					if(aCount[i].parentNode.children[0].children[1].checked==true){
+						total+=parseInt(aCount[i].innerHTML)
+					}
+				}
+				$("#total").html(total);
+			},100)
+
+		})
+	</script>
+</body>
+</html>

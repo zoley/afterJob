@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="个人博客,个人小站,主成睿" />
+	<meta name="description" content="主成睿的个人小站">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>纯JS实现分页效果</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../../img/ico.ico">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/syntaxy.dark.min.css">
+	<link rel="stylesheet" href="../../css/blog.css">
+	<link rel="stylesheet" href="css/1.css">
+</head>
+<body>
+	<div class="bg"></div>
+	<header id="head">
+		<div class="motto">
+			<span>入不言兮出不辞，乘回风兮载云旗。</span>
+			<span>悲莫悲兮生别离，乐莫乐兮新相知。</span>
+		</div>
+		<div class="line"></div>
+	</header>
+	<div class="btn">
+		<div class="icon"></div>
+	</div>
+	<div id="nav">
+		<div class="photo"></div>
+		<ul>
+			<li><a href="http://zoley.me">主页<i></i></a></li>
+			<li><a class="active" href="http://zoley.me/blog.php">博客<i></i></a></li>
+			<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历<i></i></a></li>
+		</ul>
+		<div class="email">zole1314@163.com</div>
+	</div>
+	<div class="mask"></div>
+	<div class="container">
+		<div class="con-left fl">
+			<div class="articles">
+				<p class="back"><a href="http://zoley.me/blog.php">>>返回首页</a></p>
+				<h1 id="1">纯JS实现分页效果</h1>
+				<p class="authors">发布时间：2017-08-31 &nbsp; &nbsp; 编辑：<span>主小睿</span></p>
+				<div class="content">
+					<p>之前一直对这种偏后台性的操作懵懵懂懂，觉得用ajax调用数据库里的东西好麻烦，还需要PHP的兄弟写个小接口，那么就先用已知的json数据练练手吧，首先要把分页的原理搞清楚，而不是简单的用display：none或者block这么粗暴而臃肿的手段来实现。</p>
+					<p>老规矩，先看demo。</p>
+					<fieldset id="dividePage">
+						<legend>DividePage Demo</legend>
+						<ul>
+						</ul>
+						<div class="select"></div>	
+					</fieldset>
+					<p>既然不能使用CSS来简单操作，那只能用JS来添加和更换了。首先把demo的数据加载进来，<a href="js/data.js" target="_blank" style="color:#008DE8;">data.js</a>,然后判断总页数，以及每一页的最后一个数据的num是否小于总num ，如果小于则使用该num，否则就意味着超过了总num ，则使用总num。</p>
+					<p>哦了，两句话齐活，代码奉上。。。</p>
+					<p>HTML代码不要少的更可怜哦</p>
+					<pre class="codebox" data-title="HTML：" data-type="default" data-min-height="0px;">
+						<ul>
+						</ul>
+						<div class="select"></div>	
+					</pre>
+					<p>CSS随便搞搞，不至于太难看</p>
+					<pre class="codebox" data-title="CSS：" data-type="default" data-min-height="0px;">
+						ul li{border-bottom:1px dashed green;font-size:14px;margin-bottom:5px;}
+						ul li h4{font-size:14px;color:#eee;line-height:15px;}
+						ul li p{line-height:15px;}
+						.select{position: absolute;left:30px;bottom:20px;}
+						.select a{color:#008DE8;}
+					</pre>
+					<p>欧开，终于到我们的大JS啦</p>
+					<pre class="codebox" data-title="JAVASCRIPT：" data-type="default" data-min-height="0px;">
+						function dividePage(currentPage,perPageNum){
+							var dPage=document.getElementById("dividePage");
+							var oSel=dPage.getElementsByClassName("select")[0];
+							var oUl=dPage.getElementsByTagName("ul")[0];
+							var totalNum=data.data[0].con.length;
+							var totalPage=null;
+							//判断总数据个数/总页数是否可以取整，否则下一页
+							if(totalNum/perPageNum!=parseInt(totalNum/perPageNum)){
+								totalPage=parseInt(totalNum/perPageNum)+1;
+							}else{
+								totalPage=parseInt(totalNum/perPageNum);
+							}
+							//判断最后一个数据是否小于总数据
+							var upNum=(currentPage-1)*perPageNum+1;
+							var downNum=currentPage*perPageNum;
+							downNum=(downNum>totalNum)?totalNum:downNum;
+							var str="";
+							for(var i=upNum-1;i<downNum;i++){
+								str+="<li><h4>"+data.data[0].con[i].title+"</h4><p>"+data.data[0].con[i].content+"</p><\/li>"
+							}
+							oUl.innerHTML=str;
+							var strr="共有"+totalNum+"记录，分"+totalPage+"页，当前是第"+currentPage+"页  ";
+							if(currentPage>1){
+								strr+="<a href='javascript:;' onclick='dividePage(1,"+perPageNum+")'>首页</a> ";
+								strr+=" <a href='javascript:;' onclick='dividePage("+(currentPage-1)+","+perPageNum+")'>上一页</a> ";
+							}else{
+								strr+="首页  上一页";
+							}
+							if(currentPage<totalPage){
+								strr+=" <a href='javascript:;' onclick='dividePage("+(currentPage+1)+","+perPageNum+")'>下一页</a>";
+								strr+=" <a href='javascript:;' onclick='dividePage("+totalPage+","+perPageNum+")'>尾页</a> ";
+							}else{
+								strr+="下一页  尾页";
+							}
+							oSel.innerHTML=strr;
+						}
+						dividePage(1,7);
+					</pre>
+					<p>到此为止，功能便实现啦</p>
+					<p>著作权归zole站长所有。商业转载请联系站长获得授权，非商业转载请注明出处！</p>
+					<p>本文出处：<a href="http://zoley.me/article/1" style="color:#008DE8">http://zoley.me/article/1</a></p>
+					<div class="shang">
+						<a href="javascript:;">赏</a>
+						<div class="shangs">
+							<i>╳</i>
+							<p>谢谢你请我吃糖果</p>
+							<div class="ercode">
+								<img class="wei" src="../../img/image/weixin.jpg" title="扫一扫">
+								<img class="zhi" src="../../img/image/alipay.jpg" title="扫一扫" style="display:none">
+							</div>
+							<span>扫码打赏，多少随意，您高兴就行</span>
+							<div class="choose">
+								<label><input type="radio" name="haha" checked> &nbsp;<b></b></label>
+								<label><input type="radio" name="haha"> &nbsp;<b></b></label>
+							</div>
+							<span class="dashang">打开微信扫一扫，即可进行扫码打赏哦</span>
+						</div>
+					</div>
+				</div>
+				<div id="SOHUCS" sid="1" class="changyan"></div>
+				<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+				<script type="text/javascript">
+					window.changyan.api.config({
+						appid: 'cyt9zXQLD',
+						conf: 'prod_7cbb58befa46b554911ecccd8faec7eb'
+					});
+				</script>
+			</div>
+		</div>
+		<div class="con-middle fl hidden-xs"></div>
+		<div class="con-right fr hidden-xs">
+			<div class="pardon">
+				<div class="photo"></div>
+				<h1>zole</h1>
+				<div class="email">zole1314@163.com</div>
+				<ul class="clearfix">
+					<li><a href="http://zoley.me">主页</a></li>
+					<li><a class="active" href="http://zoley.me/blog.php">博客</a></li>
+					<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历</a></li>
+				</ul>
+			</div>
+			<div class="clock">
+				<embed src="../../swf/clock.swf" wmode="transparent">
+			</div>
+		</div>
+	</div>
+	<div id="up"></div>
+	<footer>
+		<p>Copyright&copy;2017<a href="http://www.miitbeian.gov.cn/">&nbsp;苏ICP备17035373号</a>&nbsp;All Rights Reserved&nbsp;Design by zole</p>
+	</footer>
+	<canvas id="canvas"></canvas>
+	<script src="js/data.js"></script>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/canvasStar.js"></script>
+	<script src="../../js/syntaxy.min.js"></script>
+	<script src="../../js/blog.js"></script>
+	<script>
+		window.onload=function(){
+			var h1=document.getElementsByTagName("h1")[0];
+			$.ajax({
+				type:"post",
+				url:"http://zoley.me/inquire.php",
+				data:{id:h1.id},
+				success:function(data){
+					// console.log(data[0]);
+					//var d=JSON.parse(data);
+					var viewNum=parseInt(data[0]);
+					viewNum++;
+					$.ajax({
+						type:"post",
+						data:{view:viewNum,id:h1.id},
+						url:"http://zoley.me/contact.php",
+						success:function(){
+
+						}
+					})
+				}
+			})
+			
+		}
+	</script>
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+</body>
+</html>

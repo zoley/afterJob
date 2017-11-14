@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>this</title>
+</head>
+
+<body>
+	<script>
+	//---移动漂浮备份2017-11-08
+		
+	var Dw = document.body.clientWidth,
+	Dh = Dw * zone.height / zone.width,
+	i = '<iframe src="' + ifsrc +'" width="100%" height="' + Dh + '" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>', o = document.createElement("div"),
+	arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.className = 'a' + arand;
+	o.style.cssText = "position: fixed;z-index: 2147483646;left:0px;width:100%;height:"+Dh+"px;text-align:center;background-color: rgba(0,0,0,.64);box-shadow: 0 -1px 1px rgba(0,0,0,.10);";
+	if(zone.htmlcontrol){
+		var _po = (zone.htmlcontrol.position== 'top')?'bottom':'top';
+		(zone.htmlcontrol.position== 'top')? o.style.top = "0px" : o.style.bottom = "0px";
+		(zone.htmlcontrol.position== 'top')?(document.body.style.paddingTop = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-top')) + Dh + "px"):(document.body.style.paddingBottom = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-bottom')) + Dh + "px");
+	}
+	o.innerHTML = "<div style='position:relative;display:inline-block; zoom:1; vertical-align:middle; text-align:left;margin:0px auto;width:"+Dw+"px;height:"+Dh+"px'><div style='background:rgba(0,0,0,0.1);position:absolute;"+_po+":0px;right:0px;width:20px;text-align:center;color:#ffffff;font-size:12px;line-height:20px;font-family:Arial;height:20px;z-index:2147483647;' id='c"+arand+"'>X</div>"+i+"</div><div style='height:100%; overflow:hidden; display:inline-block; width:1px; overflow:hidden; margin-left:-1px; zoom:1; vertical-align:middle;'></div>";
+	var     ostyle = document.createElement('style');
+	ostyle.innerHTML = 'div.a'+arand+'{-webkit-animation:afive 2s 4s both;-moz-animation:afive 2s 4s both;-ms-animation:afive 2s 4s both;animation:afive 2s 4s both}@-webkit-keyframes afive{0%{transform:scale(1);}30%{transform:scale(0.1);}70%{transform:scale(2);}100%{transform:scale(1);}}';
+	document.head.appendChild(ostyle);
+	document.body.appendChild(o);
+	function close(){
+		if(o && Math.random() > 0.5) o.style.display='none';
+	}
+           
+	__A( __G('c'+arand), "click",close);
+
+
+//----
+	var Dw = document.body.clientWidth,
+    Dh = Dw * config.height / config.width,
+   
+	str = "<a target='_blank' href='"+ads[0].url+"' id='v_ads'><img src='"+ads[0].imageurl+"' border='0' width='100%' height='"+Dh+"'></a>";
+	document.writeln(str);
+
+
+	pvid.aid.push(ads[0].adsid); 
+	pvid.pid.push(ads[0].planid);
+	pvstas(pvid);
+
+	</script>
+
+	<script>
+		//---移动漂浮2017-11-08-->修改目标，干过UC拦截，100毫秒无限次刷新
+	
+
+	var Dw = document.body.clientWidth,
+	Dh = Dw * zone.height / zone.width,
+	i = '<iframe src="' + ifsrc +'" width="100%" height="' + Dh + '" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>', o = document.createElement("div"),
+	arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.className = 'a' + arand;
+	o.style.cssText = "position: fixed;z-index: 2147483646;left:0px;width:100%;height:"+Dh+"px;text-align:center;background-color: rgba(0,0,0,.64);box-shadow: 0 -1px 1px rgba(0,0,0,.10);";
+	if(zone.htmlcontrol){
+		var _po = (zone.htmlcontrol.position== 'top')?'bottom':'top';
+		(zone.htmlcontrol.position== 'top')? o.style.top = "0px" : o.style.bottom = "0px";
+		(zone.htmlcontrol.position== 'top')?(document.body.style.paddingTop = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-top')) + Dh + "px"):(document.body.style.paddingBottom = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-bottom')) + Dh + "px");
+	}
+	o.innerHTML = "<div style='position:relative;display:inline-block; zoom:1; vertical-align:middle; text-align:left;margin:0px auto;width:"+Dw+"px;height:"+Dh+"px'><div style='background:rgba(0,0,0,0.1);position:absolute;"+_po+":0px;right:0px;width:20px;text-align:center;color:#ffffff;font-size:12px;line-height:20px;font-family:Arial;height:20px;z-index:2147483647;' id='c"+arand+"'>X</div>"+i+"</div><div style='height:100%; overflow:hidden; display:inline-block; width:1px; overflow:hidden; margin-left:-1px; zoom:1; vertical-align:middle;'></div>";
+	var     ostyle = document.createElement('style');
+	ostyle.innerHTML = 'div.a'+arand+'{-webkit-animation:afive 2s 4s both;-moz-animation:afive 2s 4s both;-ms-animation:afive 2s 4s both;animation:afive 2s 4s both}@-webkit-keyframes afive{0%{transform:scale(1);}30%{transform:scale(0.1);}70%{transform:scale(2);}100%{transform:scale(1);}}';
+	document.head.appendChild(ostyle);
+
+	document.getElementsByTagName('body')[0].appendChild(o);
+	var zhtml=document.getElementById(arand).outerHTML;
+	console.log(zhtml)
+	document.getElementById(arand).style.display='none';
+	var con='<textarea id="zstore" style="display:none;">'+zhtml+'</textarea>';
+	var x=document.createElement('div');
+	x.innerHTML=con;
+	document.getElementsByTagName('body')[0].appendChild(x);
+	setInterval(function(){
+		if(document.getElementById(window['zole'])){
+			document.getElementById(window['zole']).remove();
+		}
+		var htm=document.getElementById('zstore').value + '<div style="display:none">'+new Date().getTime()+'</div>';
+		window['zole']='zole'+Math.random().toString(36).slice(2);
+		var y=document.createElement('div');
+		y.id=window['zole'];
+		document.getElementsByTagName('body')[0].insertBefore(y,document.getElementsByTagName('body')[0].firstChild);
+		document.getElementById(window['zole']).innerHTML = htm;
+
+	},100)	
+
+	function close(){
+		if(o && Math.random() > 0.5) o.style.display='none';
+	}
+           
+	__A( __G('c'+arand), "click",close);
+
+
+
+	</script>
+	<script>
+		//----2---移动漂浮2017-11-08-->2修改目标，干过UC拦截，100毫秒无限次刷新
+	
+
+	var Dw = document.body.clientWidth,
+	Dh = Dw * zone.height / zone.width,
+	i = '<a href="'+ads[0].url+'" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:'+Dh+'px;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;"/></a>', o = document.createElement("div"),
+	arand=Math.floor(Math.random()*100000);
+	o.id = arand;
+	o.className = 'a' + arand;
+	o.style.cssText = "";
+	if(zone.htmlcontrol){
+		var _po = (zone.htmlcontrol.position== 'top')?'bottom':'top';
+		// (zone.htmlcontrol.position== 'top')? o.style.top = "0px" : o.style.bottom = "0px";
+		(zone.htmlcontrol.position== 'top')?(document.body.style.paddingTop = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-top')) + Dh + "px"):(document.body.style.paddingBottom = parseInt(window.getComputedStyle(document.body, null).getPropertyValue('padding-bottom')) + Dh + "px");
+	}
+	o.innerHTML = "<div style='position:relative;display:inline-block; zoom:1; vertical-align:middle; text-align:left;margin:0px auto;width:100%;height:"+Dh+"px'><div style='background:rgba(0,0,0,0.1);position:absolute;"+_po+":0px;right:0px;width:20px;text-align:center;color:#ffffff;font-size:12px;line-height:20px;font-family:Arial;height:20px;z-index:2147483647;' id='c"+arand+"'>X</div>"+i+"</div><div style='height:100%; overflow:hidden; display:inline-block; width:1px; overflow:hidden; margin-left:-1px; zoom:1; vertical-align:middle;'></div>";
+	var     ostyle = document.createElement('style');
+	ostyle.innerHTML = 'div.a'+arand+'{-webkit-animation:afive 2s 4s both;-moz-animation:afive 2s 4s both;-ms-animation:afive 2s 4s both;animation:afive 2s 4s both}@-webkit-keyframes afive{0%{transform:scale(1);}30%{transform:scale(0.1);}70%{transform:scale(2);}100%{transform:scale(1);}}';
+	document.head.appendChild(ostyle);
+
+	// document.getElementsByTagName('body')[0].appendChild(o);
+	var zhtml=o.outerHTML;
+	// console.log(zhtml)
+	// document.getElementById(arand).style.display='none';
+	var con='<textarea id="zstore" style="display:none;">'+zhtml+'</textarea>';
+	var x=document.createElement('div');
+	x.innerHTML=con;
+	document.getElementsByTagName('body')[0].appendChild(x);
+	var timerr=setInterval(function(){
+		if(document.getElementById(window['zole'])){
+			document.getElementById(window['zole']).remove();
+		}
+		var htm=document.getElementById('zstore').value + '<div style="display:none">'+new Date().getTime()+'</div>';
+		window['zole']='zole'+Math.random().toString(36).slice(2);
+		var y=document.createElement('div');
+		y.id=window['zole'];
+		y.style.cssText = "position: fixed;z-index: 214748369;left:0px;width:100%;height:"+Dh+"px;text-align:center;background-color: rgba(0,0,0,.64);box-shadow: 0 -1px 1px rgba(0,0,0,.10);";
+		if(zone.htmlcontrol){
+			(zone.htmlcontrol.position== 'top')? y.style.top = "0px" : y.style.bottom = "0px";
+		}
+		document.getElementsByTagName('body')[0].insertBefore(y,document.getElementsByTagName('body')[0].firstChild);
+		document.getElementById(window['zole']).innerHTML = htm;
+		document.getElementById(window['zole']).onclick=function(){
+			window.location.href=ads[0].url;
+		}
+		document.getElementById('c'+arand).onclick=function(e){
+			e.stopPropagation()
+			clearInterval(timerr);
+			document.getElementById(window['zole']).style.display='none';
+		}
+		function close(e){
+			if(document.getElementById(window['zole'])) {
+				e.stopPropagation(e)
+				clearInterval(timerr);
+				document.getElementById(window['zole']).style.display='none';
+			};
+		}
+	           
+		__A( __G('c'+arand), "click",close);
+
+	},100)	
+
+	</script>
+
+	<script>
+	//---video 贴片广告 新增----
+	//
+	var zbox=document.createElement('div');
+	var s = 'a'+Math.random().toString(36).slice(2,12);
+	zbox.id=s;
+	zbox.style.cssText='z-index:999999999999999;position:absolute;left:0;top:0;right:0;bottom:0;background:black;';
+	zbox.innerHTML='<a href="'+ads[0].url+'" style="-webkit-tap-highlight-color:transparent;display:block;width:100%;height:100%;margin:0;padding:0;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;vertical-align:top;"></a><p style="margin:0;padding:0;position:absolute;top:5px;right:5px;width:24%;height:25px;border-radius:25px;background:rgba(0,0,0,0.7);color:white;text-align: center;line-height:25px;font:normal normal 14px arial;padding-top: 4px;box-sizing: border-box;"><span></span><strong id="remaint">15</strong> <span>秒</span>  <i style="font-style:normal;" id="zjump" style="display:inline-block;">跳过</i></p>'
+	var remaintn=15;
+	var timerr=setInterval(function(){
+		remaintn--;
+		if(document.getElementById('remaint')){
+			document.getElementById('remaint').innerHTML=remaintn;
+		}
+		if(remaintn==0){
+			var x=document.getElementById(s);
+			x.style.display='none';
+			clearInterval(timerr);
+		}
+	},1000)
+	document.write(zbox.outerHTML);
+	document.getElementById('zjump').onclick=function(){
+		if(Math.random()>0.5){
+			document.getElementById(s).remove();
+			clearInterval(timerr);
+		}
+	}
+
+	</script>
+
+</body>
+</html>
