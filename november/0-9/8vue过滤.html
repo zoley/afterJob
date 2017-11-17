@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-过滤滚一遍</title>
+    <link rel="stylesheet" href="lib/bootstrap.min.css">
+    <script src="js/vue.js"></script>
+    <script src="js/vue-resource.min.js"></script>
+    <style>
+        .red{background-color: red;}
+        [v-cloak]{display: none;}
+    </style>
+</head>
+<body>
+    <div id="box" v-cloak>
+        <button @click="go" class="btn btn-primary">走你</button>
+        <P v-text="b" :class="{red:on}"></P>
+        <button class="btn btn-success" @click='alert'>粗来</button>
+        <input type="text" @keydown.haha="change" v-model="message">
+        <ul>
+            <li v-for="(item,index) in arr2" :key="index">{{item}}</li>
+        </ul>
+        <div v-drag style="width:100px;height:100px;background:#af5422;position:absolute;left:50px;top:300px;"></div>
+        <div v-drag style="width:100px;height:100px;background:#0df547;position:absolute;right:50px;bottom:200px;"></div>
+    </div>
+    <script>
+        window.onload=function(){
+            new Vue({
+                data:{
+                    msg:'',
+                    message:'',//过滤词
+                    on:0,
+                    arr:['apple','pear','banana','lemon','orange','peach'],
+                    arry:[1,6,2,10,5,3]
+                },
+                computed:{
+                    b:function(){
+                        return this.msg+1;
+                    },
+                    arr1:function(){ //limitBy
+                        return this.arr.slice(2);
+                    },
+                    arr2:function(){ //filterBy
+                        var that=this;
+                        return this.arr.filter(function(item){
+                            return item.indexOf(that.message)!=-1;
+                        })
+                    },
+                    arr3:function(){
+                        return this.arry.sort(function(a,b){
+                            return b-a;
+                        });
+                    },
+                    arr4:function(){
+                        return this.arr.sort().reverse();
+                    }
+
+                },
+                methods:{
+                    go:function(){
+                        this.$http({
+                            url:"./9p.php",
+                            data:{
+                                'id':829,
+                                'name':'马桶'
+                            }
+                        }).then(function(res){
+                            var arr=res.data.split(',');
+                            this.msg=Number(arr[0]);
+                        })
+                    },
+                    alert: function(){
+                        var that=this;
+                       setTimeout(function () {
+                            var omg = document.createElement('img');
+                            omg.src = 'img/a6.jpg';
+                            omg.style.cssText = "width:100px;"
+                            that.$el.appendChild(omg);
+                        }, 2000) 
+                    },
+                    change(){
+                        this.on=!this.on;
+                    }
+                },
+                mounted:function(){
+                    document.onkeydown=function(e){
+                        console.log(e.keyCode);
+                    }
+                }
+            }).$mount('#box');
+        }
+        Vue.config.keyCodes.haha=20;
+        Vue.directive('drag',{
+            inserted:function(el){
+                el.onmousedown=function(e){
+                    var disx=e.clientX-el.offsetLeft;
+                    var disy=e.clientY-el.offsetTop;
+                    document.onmousemove=function(e){
+                        var left=e.clientX-disx;
+                        var top=e.clientY-disy;
+                        el.style.left=left+'px';
+                        el.style.top=top+'px';
+                    }
+                    document.onmouseup=function(){
+                        document.onmousemove=document.onmouseup=null;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>
