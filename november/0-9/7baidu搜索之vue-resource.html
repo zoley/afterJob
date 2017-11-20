@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div id="app" class="container" style="margin-top:200px;">
-		<input v-focus type="text" class="form-control" placeholder="请输入搜索内容" style="width:90%;display:inline-block;" v-model="msg" @keyup="get($event)" @keydown.down="godown()" @keydown.up.prevent="goup()"><button style="width:10%;" class="btn btn-primary" @click="submit(msg)">搜索</button>
+		<input v-focus type="text" class="form-control" placeholder="请输入搜索内容" style="width:82%;display:inline-block;" v-model="msg" @keyup="get($event)" @keydown.down="godown()" @keydown.up.prevent="goup()"><button style="width:18%;" class="btn btn-primary" @click="submit(msg)">搜索</button>
 		<ul class="bg-info" style="width:90%;padding:0;">
 			<li style="list-style: none;" v-for="(item,index) in gdata" :class="{'bg-danger':index==now}" @click="submit(item)">{{item}}</li>
 		</ul>
