@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue-test</title>
+	<script src="js/vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<button @click='hi($event)'>按钮</button>
+	</div>
+	<script>
+	new Vue({
+		el:'#app',
+		methods:{
+			hi(e){
+				console.log(e.clientX);
+			}
+		}
+	})
+	</script>
+</body>
+</html>

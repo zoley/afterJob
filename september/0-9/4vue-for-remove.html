@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue-for-operate</title>
+	<script src="js/vue.js"></script>
+	<style>
+		.status{text-decoration:line-through;}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<item-app :list="items"></item-app>
+	</div>
+	<template id="item-task">
+		<ul>
+			<h1>My item <span v-show="remain">({{remain}})</span></h1>
+			<li v-for="(item,index) in list" :class="{'status':item.status}" style="cursor:pointer;" class="a" >
+				<span @click="toggletask(item)">{{item.content}}</span>
+				<button @click="del(index)">删除</button>
+			</li>
+		</ul>
+	</template>
+
+	<script>
+	Vue.component("item-app",{
+		template:"#item-task",
+		props:["list"],
+		methods:{
+			toggletask:function(item){
+				item.status=!item.status;
+			},
+			del(index){
+				this.list.splice(index,1);
+			}
+			// del(item){
+			// 	var index=this.list.indexOf(item);
+			// 	this.list.splice(index,1);
+			// }
+		},
+		computed:{
+			remain(){
+				return this.list.filter(function(item){
+					return !item.status;
+				}).length;	
+			}
+		}
+	})
+	new Vue({
+		el:"#app",
+		data:function(){
+			return {
+				items:[
+					{"content":"something in my house","status":true},
+					{"content":"somebody who is love me","status":false},
+					{"content":"many people whose leg is slim","status":true}
+				]
+			}
+		}
+	})
+	</script>
+</body>
+</html>

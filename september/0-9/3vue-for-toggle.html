@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue-for-toggle</title>
+	<script src="js/vue.js"></script>
+	<style>
+		.status{
+			text-decoration:line-through;
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<item-app v-bind:list="items"></item-app>
+		<item-app v-bind:list="tasks"></item-app>
+		<item-app v-bind:list="items"></item-app>
+	</div>
+	<template id="item-task" >
+		<ul>
+			<li @click="atoggle(item)" style="cursor: pointer;" v-for="item in list" v-bind:class="item.status?'status':''">{{item.content}}</li>
+		</ul>
+	</template>
+	<script>
+		Vue.component('item-app',{
+			template:"#item-task",
+			props:['list'],
+			methods:{
+				atoggle(item){
+					item.status=!item.status;
+				}
+			}
+		})
+		new Vue({
+			el:"#app",
+			data:{
+				items:[
+					{"content":"something in my house","status":true},
+					{"content":"somebody who is love me","status":false},
+					{"content":"many people whose leg is slim","status":true}
+				],
+				tasks:[
+					{"content":"i love you dotey","status":false},
+					{"content":"do you love me too","status":true}
+				]
+			}
+		})
+	</script>
+</body>
+</html>
