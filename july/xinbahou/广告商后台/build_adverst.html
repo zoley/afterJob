@@ -4,8 +4,17 @@
 	<meta charset="UTF-8">
 	<title>辛巴网盟-广告商后台</title>
 	<link rel="shortcut icon" type="image/x-icon" href="img/ico.ico">
+	<link rel="stylesheet" href="css/minicolors.css">
 	<link rel="stylesheet" href="css/home.css">
 	<link rel="stylesheet" href="css/build_adverst.css">
+	<style>
+		.controls{position: relative;}
+		.minicolors-theme-default{position: absolute;top:4px;right:2px;}
+		.minicolors-theme-default .minicolors-swatch {width:50px !important;height:50px !important;}
+		.zhide{display:none;}
+		.zhide4,.zhide8{display:none;}
+		.zc{color:#0088cc;}
+	</style>
 </head>
 <body>
 	<header id="head" class="wrap">
@@ -105,14 +114,13 @@
 					          <label class="control-label">显示尺寸</label>
 					          <div class="controls">
 					            <select name="specs" id="ad_size">
-                                    <option value="640x80"> 640x80</option>
                                     <option value="640x200"> 640x200</option>
                                     <option value="640x150" selected=""> 640x150</option>
                                     <option value="500x100"> 500x100</option>
                                 </select>
 					        </div>
 					        </div>
-					        <div class="control-group">
+					        <div class="control-group zhide">
 					          <label class="control-label">显示效果</label>
 					          <div class="controls">
 									<input type="radio" name="files" value="up" checked="">上传图片 
@@ -123,10 +131,56 @@
 					          			<input type="text" name="urlfile" id="urlfile" class="input_text span30" value="/a/2017-07-10/14996578831033.jpg"></span>
 					          </div>
 					        </div>
-					        <div class="control-group">
-					          <label class="control-label">后台地址</label>
+					        <div class="control-group zhide1">
+					          <label class="control-label">标题文字1</label>
 					          <div class="controls">
-					          	<input type="url" required="required" name="sitename" id="sitename" class="input2" value="">		
+					          	<input type="text" required="required" name="sitename1" id="sitename1" class="input2 zc" value="">		
+						        <input type="hidden" id="zcolor1" name="zcolor1" class="zdemo" value="#0088cc">
+					          </div>
+					        </div>
+					        <div class="control-group zhide2">
+					          <label class="control-label">标题文字2</label>
+					          <div class="controls">
+					          	<input type="text" required="required" name="sitename2" id="sitename2" class="input2 zc" value="">		
+						        <input type="hidden" id="zcolor2" name="zcolor2" class="zdemo" value="#0088cc">
+					          </div>
+					        </div>
+					        <div class="control-group zhide3">
+					          <label class="control-label">标题文字3</label>
+					          <div class="controls">
+					          	<input type="text" required="required" name="sitename3" id="sitename3" class="input2 zc" value="">		
+						        <input type="hidden" id="zcolor3" name="zcolor3" class="zdemo" value="#0088cc">
+					          </div>
+					        </div>
+					        <div class="control-group zhide4">
+					          <label class="control-label">标题文字4</label>
+					          <div class="controls">
+					          	<input type="text" required="required" name="sitename4" id="sitename4" class="input2 zc" value="">		
+						        <input type="hidden" id="zcolor4" name="zcolor4" class="zdemo" value="#0088cc">
+					          </div>
+					        </div>
+					        <div class="control-group zhide5">
+					          <label class="control-label">后台地址1</label>
+					          <div class="controls">
+					          	<input type="url" required="required" name="sitename5" id="sitename5" class="input2" value="">		
+					          </div>
+					        </div>
+					        <div class="control-group zhide6">
+					          <label class="control-label">后台地址2</label>
+					          <div class="controls">
+					          	<input type="url" required="required" name="sitename6" id="sitename6" class="input2" value="">		
+					          </div>
+					        </div>
+					        <div class="control-group zhide7">
+					          <label class="control-label">后台地址3</label>
+					          <div class="controls">
+					          	<input type="url" required="required" name="sitename7" id="sitename7" class="input2" value="">		
+					          </div>
+					        </div>
+					        <div class="control-group zhide8">
+					          <label class="control-label">后台地址4</label>
+					          <div class="controls">
+					          	<input type="url" required="required" name="sitename8" id="sitename8" class="input2" value="">		
 					          </div>
 					        </div>
 					        <div class="form-actions" style="margin-top:60px; margin-bottom:60px">
@@ -185,7 +239,8 @@
 	</div>
 	<script src="js/jquery.min.js"></script>
 	<script src="js/home.js"></script>
-	
+
+	<script src="js/minicolors.min.js"></script>
 		<script type="text/javascript">
 			$(".radiobox").on("click",function(){
 				$(this).addClass(" checked").siblings(".radiobox").removeClass(" checked")
@@ -206,6 +261,46 @@
 		                  });
 			  } 
 			 files();
+
+
+			 $('.zdemo').minicolors({
+			 	position: $(".zdemo").attr('data-position'),
+			 	theme: 'default'
+			 });
+			 $('.zdemo').change(function(){
+			 	$(this).parent().prev().css('color',$(this).val());
+			 })
+
+			 $('#ad_size').get(0).addEventListener('change',function(){
+			 	if(this.value=='500x100'){
+			 		$('.zhide7').css('display','none');
+			 		$('.zhide3').css('display','none');
+			 		$('.zhide8').css('display','none');
+			 		$('.zhide4').css('display','none');
+			 		$('.zhide7 input').attr('disabled',true);
+			 		$('.zhide3 input').attr('disabled',true);
+			 		$('.zhide8 input').attr('disabled',true);
+			 		$('.zhide4 input').attr('disabled',true);
+			 	}else if(this.value=='640x150'){
+			 		$('.zhide7').css('display','block');
+			 		$('.zhide3').css('display','block');
+			 		$('.zhide8').css('display','none');
+			 		$('.zhide4').css('display','none');
+			 		$('.zhide7 input').attr('disabled',false);
+			 		$('.zhide3 input').attr('disabled',false);
+			 		$('.zhide8 input').attr('disabled',true);
+			 		$('.zhide4 input').attr('disabled',true);
+			 	}else if(this.value=='640x200'){
+			 		$('.zhide8').css('display','block');
+			 		$('.zhide4').css('display','block');
+			 		$('.zhide7').css('display','block');
+			 		$('.zhide3').css('display','block');
+			 		$('.zhide7 input').attr('disabled',false);
+			 		$('.zhide3 input').attr('disabled',false);
+			 		$('.zhide8 input').attr('disabled',false);
+			 		$('.zhide4 input').attr('disabled',false);
+			 	}
+			 },false);
 		</script>
 
 </body>

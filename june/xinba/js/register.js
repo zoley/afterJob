@@ -37,6 +37,7 @@ $(function(){
         var re5=/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/;//emal
         var re6=/^[\u4e00-\u9fa5]{2,}$/;//收款人
         var re7=/^[0-9]{4,}/;//收款账号
+        var re8 =/[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$/;//url
         aObj.push(obj);
         obj.onblur=function(){
             if(!obj.value){

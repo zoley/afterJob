@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>adBackups</title>
+</head>
+<body>
+	<script>
+	//-----2017/11/22-----移动图文备份
+	var Dw = document.body.clientWidth;
+	var Dh = Dw * zone.height / zone.width;
+	var i = '<iframe src="' + ifsrc + '" width="100%" height="'+Dh+'" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe>';
+	document.writeln(i);
+
+	//------
+	var show = {};
+	show.init = function() {
+		show.putda();
+	}
+	show.putda = function (){
+		css = "<style>body,p {padding:0; margin:0; font:normal 14px/20px Microsoft Yahei;}.row_2col {width:100%;}.row_2col td {text-align:center; width:50%; padding:5px;}.row_2col img {width:160px;}.row_2col p {margin-top:5px;}.headline{color:#0000FF;font-weight:bold;}.headline{font-size:14px;text-decoration:underline;line-height:22px;font-weight:normal;color:#000;}.headline:hover{text-decoration:none;}</style>";
+		document.write(css);
+		var html='<table class="row_2col"><tr>';
+		var  s =  1;
+		for (k = 0, l = 2; k < l; k++) {
+
+			if (!ads[k]) {
+				var n = Math.floor(Math.random() * ads.length + 1) - 1;
+				ads[k] = ads[n];
+			}
+
+			html += '<td><a href="'+ads[k].url+'" target="_blank"><img src="'+ads[k].imageurl+'" class="img"></a><p><a href="'+ads[k].url+'" target="_blank" class="headline" style="text-decoration:none;">'+ads[k].headline+'</a></p></td>';
+			pvid.aid.push(ads[k].adsid);
+			pvid.pid.push(ads[k].planid);
+			s++;
+		}
+		html +='</tr></table>';
+		document.write(html);
+	}
+	show.init();
+	pvstas(pvid);
+
+	</script>
+
+	<script>
+	//----2017/11/22----移动图文修改，三行文字，各自点击跳转
+	var Dw = document.body.clientWidth;
+    var Dh = Dw * zone.height / zone.width;
+    var zbox=document.createElement('div');
+    var s = 'a'+Math.random().toString(36).slice(2,12);
+    zbox.id=s;
+    zbox.style.cssText='width:100%;height:'+Dh+'px;position:relative;';
+
+    zbox.innerHTML='<iframe src="'+ifsrc+'*'+Dh+'" width="100%" height="100%" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe><p style="margin:0;padding:0;position:absolute;top:0px;right:0px;width:20px;height:20px;border-radius:20px;background:rgba(0,0,0,0.18);color:white;text-align: center;line-height:20px;font:normal normal 14px arial;padding-top: 2px;box-sizing: border-box;"><i style="font-style:normal;" id="shut" style="display:inline-block;">X</i></p>';
+    document.write(zbox.outerHTML);
+    document.getElementById('shut').onclick=function(){
+        document.getElementById(s).style.display='none';
+    };
+
+	//--------
+	var show = {};
+    show.init = function() {
+        show.putda();
+    };
+    show.putda = function (){
+        css = "<style>body,p {padding:0; margin:0; font:normal 14px/20px Microsoft Yahei;}.row_2col {width:100%;height: 100%}.headline{color:#0000FF;font-weight:bold;}.headline{font-size:18px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; text-decoration:underline;font-weight:normal;display: block;padding: 0 15px;}.headline:hover{text-decoration:underline;padding: 0 15px;}</style>";
+        document.write(css);
+        var html='<div class="row_2col">';
+        var l=ads.length;
+        var url=window.location.href;
+        var height=url.split('*')[1];
+        var aHeight=height / l;
+        console.log(ads.length);
+        for (var k = 0; k < l; k++) {
+            if (!ads[k]) {
+                var n = Math.floor(Math.random() * ads.length + 1) - 1;
+                ads[k] = ads[n];
+            }
+            html += '<p><a href="'+ads[k].url+'" target="_blank" class="headline" style="height:'+aHeight+'px;line-height:'+aHeight+'px;color:#000; ">'+ads[k].headline+'</a></p>';
+        }
+        html +='</div>';
+        document.write(html);
+    };
+    show.init();
+	</script>
+
+	<script>
+	//----2017/11/27----移动图文修改，带点颜色
+	var Dw = document.body.clientWidth;
+    var Dh = Dw * zone.height / zone.width;
+    var zbox=document.createElement('div');
+    var s = 'a'+Math.random().toString(36).slice(2,12);
+    zbox.id=s;
+    zbox.style.cssText='width:100%;height:'+Dh+'px;position:relative;';
+
+    zbox.innerHTML='<iframe src="'+ifsrc+'*'+Dh+'" width="100%" height="100%" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe><p style="margin:0;padding:0;position:absolute;top:0px;right:0px;width:20px;height:20px;border-radius:20px;background:rgba(0,0,0,0.18);color:white;text-align: center;line-height:20px;font:normal normal 14px arial;padding-top: 2px;box-sizing: border-box;"><i style="font-style:normal;" id="shut" style="display:inline-block;">X</i></p>';
+    document.write(zbox.outerHTML);
+    document.getElementById('shut').onclick=function(){
+        document.getElementById(s).style.display='none';
+    };
+
+	//--------
+		var show = {};
+        show.init = function() {
+            show.putda();
+        };
+        show.putda = function (){
+            css = "<style>body,p {padding:0; margin:0; font:normal 14px/20px Microsoft Yahei;}.row_2col {width:100%;height: 100%}.headline{color:#0000FF;font-weight:bold;}.headline{font-size:18px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; text-decoration:underline;font-weight:normal;display: block;padding: 0 15px;}.headline:hover{text-decoration:underline;padding: 0 15px;}.headline{background-image: -webkit-linear-gradient(left,  #147B96,#febaf7,#e605df, #E6D205 25%, #147B96 50%, #E6D205 75%, #febaf7,#e605df,#147B96);background-image: linear-gradient(left, #147B96,#febaf7,#e605df, #E6D205 25%, #147B96 50%, #E6D205 75%,#febaf7,#e605df,#147B96);-webkit-text-fill-color: transparent;text-fill-color: transparent;  -webkit-background-clip: text;background-clip: text;-webkit-background-size: 200% 100%;background-size: 200% 100%;-webkit-animation: masked-animation 6s infinite linear;animation: masked-animation 6s infinite linear;}@keyframes masked-animation { 0%{ background-position: 0 0;} 100% { background-position: -100% 0;} }@-webkit-keyframes masked-animation { 0%{ background-position: 0 0;} 100% { background-position: -100% 0;} }</style>";
+            document.write(css);
+            var html='<div class="row_2col">';
+            var l=ads.length;
+            var url=window.location.href;
+            var height=url.split('*')[1];
+            var aHeight=height / l;
+            console.log(ads);
+            for (k = 0; k < l; k++) {
+
+                html += '<p><a href="'+ads[k].url+'" target="_blank" class="headline" style="height:'+aHeight+'px;line-height:'+aHeight+'px;">'+ads[k].headline+'</a></p>';
+               console.log(document.getElementsByClassName('headline'));
+            }
+            html +='</div>';
+            document.write(html);
+        };
+        show.init();
+	</script>
+</body>
+</html>

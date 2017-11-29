@@ -94,13 +94,21 @@ lunban();
 
 var len=$("#fixed .z-contact a").length;
 var timerr=null;
-$("#top1 a:first-child").hover(function(){
+// $("#top1 a:first-child").hover(function(){
+// 	$("#fixed .z-contact").css("height",(40*len+len+1)+"px");
+// },function(){
+// 	timerr=setTimeout(function(){
+// 		$("#fixed .z-contact").css("height",(0)+"px");
+// 	},500)
+// });
+$("#top1 a:first-child").click(function(){
 	$("#fixed .z-contact").css("height",(40*len+len+1)+"px");
-},function(){
+})
+$("#top1 a:first-child").mouseout(function(){
 	timerr=setTimeout(function(){
 		$("#fixed .z-contact").css("height",(0)+"px");
 	},500)
-});
+})
 $("#fixed .z-contact").hover(function(){
 	clearInterval(timerr);
 	// $("#fixed .z-contact").css("height",(40*len+len+1)+"px");
