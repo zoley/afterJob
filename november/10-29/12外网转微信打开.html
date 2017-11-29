@@ -1,0 +1,42 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>跳转中</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+    </style>
+</head>
+<body>
+    <script type="text/javascript">
+        var ll = document.referrer;
+        document.write('<iframe src="' + ll + '" frameborder="0" scrolling="yes" width="100%" height="100%" ></iframe>');
+    </script>
+    <div style="display:none">
+        <script src="https://s4.cnzz.com/z_stat.php?id=1260099821&web_id=1260099821" language="JavaScript"></script>
+    </div>
+    <script>
+        function is_weixin() {
+            var ua = navigator.userAgent.toLowerCase();
+            if (ua.match(/MicroMessenger/i) == "micromessenger") {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        if(is_weixin()){
+            window.location.href = "http://mp.weixin.qq.com/s/RWWdTObx2JYTYq6BSuW9Ig"; 
+        }else{
+            location.href = "weixin://dl/business/?ticket=t1e0a732bc3a4c90ad65d75b9bc82d848#wechat_redirect";    
+        }
+
+
+        //返回 weixin://dl/business/?ticket=  https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxae3e8056daea8727&redirect_uri=https%3A%2F%2Fplogin.m.jd.com%2Fcgi-bin%2Fm%2Fwxcallback%3Flsid%3Dtuy2qzwzqmctdrblrnimhlr7mt23wepp&response_type=code&scope=snsapi_userinfo&state=nhpznk21
+    </script>
+</body>
+</html>

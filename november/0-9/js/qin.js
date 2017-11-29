@@ -29,7 +29,7 @@
     function fillSpan($ele) {
         // var content = [
         //     '<span>',
-        //     [].join.call($ele.html(), '</span><span>'),
+        //     [].join.call($ele.html(), '</span><span>'),  
         //     '</span>'
         // ].join(''); // IE9+
         var baseContent = $ele.html();
@@ -48,10 +48,11 @@
                 top: position.top + "px",
                 left: position.left + "px"
             });
-            setTimeout(function () {
-                $span.css("position", "absolute");
-            }, 0);
+            // setTimeout(function () {
+            //     $span.css("position", "absolute");
+            // }, 0);//也可以在循环外面写成 $ele.children('span').css({position:'absolute'})
         });
+        $ele.children().css('position', 'absolute');
         $ele.data("stringPosition", positionArr);
     }
 
