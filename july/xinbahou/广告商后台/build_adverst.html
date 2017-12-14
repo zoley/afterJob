@@ -63,7 +63,7 @@
 			<div class="con-con">
 				<div class="main_container clearfix " >
 					<div class="box-title"><span>添加广告</span></div>
-					<form action="" method="POST" class="form-horizontal" id="form_b">
+					<form action="" method="get" class="form-horizontal" id="form_b">
 					        <div class="control-group">
 					          <label class="control-label">所属计划</label>
 					             	<div class="controls">
@@ -155,32 +155,32 @@
 					        <div class="control-group zhide4">
 					          <label class="control-label">标题文字4</label>
 					          <div class="controls">
-					          	<input type="text" required="required" name="sitename4" id="sitename4" class="input2 zc" value="">		
+					          	<input type="text" required="required" name="sitename4" id="sitename4" class="input2 zc" disabled="" value="">		
 						        <input type="hidden" id="zcolor4" name="zcolor4" class="zdemo" value="#0088cc">
 					          </div>
 					        </div>
 					        <div class="control-group zhide5">
 					          <label class="control-label">后台地址1</label>
 					          <div class="controls">
-					          	<input type="url" required="required" name="sitename5" id="sitename5" class="input2" value="">		
+					          	<input type="text" required="required" name="sitename5" id="sitename5" class="input2" value="" pattern="[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$">		
 					          </div>
 					        </div>
 					        <div class="control-group zhide6">
 					          <label class="control-label">后台地址2</label>
 					          <div class="controls">
-					          	<input type="url" required="required" name="sitename6" id="sitename6" class="input2" value="">		
+					          	<input type="text" required="required" name="sitename6" id="sitename6" class="input2" value="" pattern="[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$">		
 					          </div>
 					        </div>
 					        <div class="control-group zhide7">
 					          <label class="control-label">后台地址3</label>
 					          <div class="controls">
-					          	<input type="url" required="required" name="sitename7" id="sitename7" class="input2" value="">		
+					          	<input type="text" required="required" name="sitename7" id="sitename7" class="input2"  value="" pattern="[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$">		
 					          </div>
 					        </div>
 					        <div class="control-group zhide8">
 					          <label class="control-label">后台地址4</label>
 					          <div class="controls">
-					          	<input type="url" required="required" name="sitename8" id="sitename8" class="input2" value="">		
+					          	<input type="text" required="required" name="sitename8" id="sitename8" class="input2" disabled="" value="" pattern="[a-zA-Z0-9][-a-zA-Z0-9]{0,62}(\.[a-zA-Z0-9][-a-zA-Z0-9]{0,62})+$">		
 					          </div>
 					        </div>
 					        <div class="form-actions" style="margin-top:60px; margin-bottom:60px">
@@ -270,17 +270,17 @@
 			 $('.zdemo').change(function(){
 			 	$(this).parent().prev().css('color',$(this).val());
 			 })
-
+			 var 
 			 $('#ad_size').get(0).addEventListener('change',function(){
 			 	if(this.value=='500x100'){
 			 		$('.zhide7').css('display','none');
 			 		$('.zhide3').css('display','none');
 			 		$('.zhide8').css('display','none');
 			 		$('.zhide4').css('display','none');
-			 		$('.zhide7 input').attr('disabled',true);
-			 		$('.zhide3 input').attr('disabled',true);
-			 		$('.zhide8 input').attr('disabled',true);
-			 		$('.zhide4 input').attr('disabled',true);
+			 		$('.zhide7 input').attr({'disabled':true,'required':false});
+			 		$('.zhide3 input').attr({'disabled':true,'required':false});
+			 		$('.zhide8 input').attr({'disabled':true,'required':false});
+			 		$('.zhide4 input').attr({'disabled':true,'required':false});
 			 	}else if(this.value=='640x150'){
 			 		$('.zhide7').css('display','block');
 			 		$('.zhide3').css('display','block');
@@ -288,8 +288,8 @@
 			 		$('.zhide4').css('display','none');
 			 		$('.zhide7 input').attr('disabled',false);
 			 		$('.zhide3 input').attr('disabled',false);
-			 		$('.zhide8 input').attr('disabled',true);
-			 		$('.zhide4 input').attr('disabled',true);
+			 		$('.zhide8 input').attr({'disabled':true,'required':false});
+			 		$('.zhide4 input').attr({'disabled':true,'required':false});
 			 	}else if(this.value=='640x200'){
 			 		$('.zhide8').css('display','block');
 			 		$('.zhide4').css('display','block');

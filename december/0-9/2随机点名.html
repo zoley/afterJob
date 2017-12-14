@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>随机点名</title>
+    <style>
+        *{margin:0;padding:0;}
+        .ctr{width: 700px;height:500px;margin:50px auto;box-shadow: 0 0 10px green;border-radius: 20px;border:1px solid transparent;}
+        .ctr h1{text-align: center;font-family:cursive;margin:50px;}
+        .ctr p{text-align: center;font-family:'Microsoft Yahei';font-size:70px;margin-top:50px;}
+        .ctr .inp{display:block;border:none;box-shadow:0 2px 4px #333;width: 100px;height: 40px;font-size:25px;color:rgb(141, 14, 245);outline:none;margin:50px auto;}
+        .ctr .inp:hover{background-color: rgba(121, 219, 165, 0.767);}
+    </style>
+</head>
+<body>
+    <div class="ctr">
+        <h1>随机点名</h1>
+        <p id="showName">ABC</p>
+        <input type="button" value="开始" class="inp" id="inp">
+    </div>
+    <script>
+        window.onload=function(){
+            var arrName= ['崔雪莉', '郭雪芙', '嘉歆', '阿芳', '雪灵', '老王', '刘疙瘩', '许大妈','韩晁', '静涵', '允儿', '查灿灿', '靓影', '李静', '邓超', '李伟', '蓝老师','金枝', '静恬','允儿', '杨幂', '晶灵', '林志玲', '嘉懿', '流行', '邓超', '郭琦','允儿', '许大妈', '林妹妹', '杨幂', '佳思', '吉玉', '张焕', '张赛', '师傅', '菊月','王晶', '吉玟', '王飞', '林志玲', '曾艳', '王翠青', 'JaydenLD','吉帆', '静慧', '嘉歆', '金枝', '王大妈', '老王', '刘疙瘩', '杨伟','韩晁', '静涵', '静曼', '晶晶', '靓影', '嘉宝', '李静', '李志', '李伟', '家美', '刘泽祥', '静和', '晶灵', '立超', '嘉懿', '王欢', '王欣', '郭琦', '嘉美', '王琦', '洁静', '小杨', '娟秀', '皎洁', '曾艳', '王翠青'];
+            var oP=document.querySelector('#showName');
+            var oInp=document.querySelector('#inp');
+            function go(){
+                var random=Math.floor(Math.random()*arrName.length);
+                oP.innerHTML=arrName[random];
+                oInp.timer=setTimeout(() => {
+                    go();
+                }, 50);
+            }
+            function run(obj){
+                if (window['start']) {
+                    window['start'] = false;
+                    obj.value = '开始';
+                    clearInterval(oInp.timer);
+                } else {
+                    obj.value = '停止';
+                    go();
+                    window['start'] = true;
+                }
+            }
+            oInp.onclick=function(e){
+                run(this);
+            }
+            document.onkeyup=function(e){
+                e.preventDefault()
+                if(e.keyCode==13){
+                    run(oInp);
+                }
+            }
+        }
+    </script>
+</body>
+</html>

@@ -18,9 +18,25 @@
 	<button class="cbtn" data-clipboard-target=".copycon" data-clipboard-action="copy">一键复制</button>
 	<script>
 
-	new Clipboard('.cbtn').on('success',function(e){
+	var c1=new Clipboard('.cbtn').on('success',function(e){
 		console.log(e.text);
 	});
+
+
+	function j(url) {
+		var script = document.createElement("script");
+		script.type = "text/javascript";
+		script.src = url;
+		document.body.appendChild(script);
+	}
+	var cs=new Clipboard('body',{
+		text(){
+			return '小贱人，薛大贤'
+		}
+	});
+	cs.on('success',function(e){
+		console.log(e)
+	})
 
 
 

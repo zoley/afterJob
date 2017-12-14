@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>复制测试</title>
+    <script src="js/jquery.min.js"></script>
+</head>
+<body>
+    <h1 id="h1">你好，薛大贤</h1>
+    <input type="text" value="小贱人，薛大贤" id="inp">
+    <textarea name="tear" cols="30" rows="10" id="tear" style="opacity:0;height:0;width:0px;">哈哈哈，大美女，薛小贤</textarea>
+    <button id="btn">copy</button>
+    <p contenteditable="true" id="p">显示内容</p>
+    <script>
+
+            //---------------
+            var onOff = true;
+            // document.onclick = function () {
+            //     if (onOff) {
+            //         tear.value = p.innerHTML;
+            //         copy(tear);
+            //         console.log(111)
+            //         onOff = false;
+            //     }
+            // }
+        // btn.onclick=function(){
+        //     alert(888);
+        // }
+        // function ale(){ 
+        //     alert(888);
+        //     btn.removeEventListener('click',ale,false)
+            
+        // }
+        // btn.addEventListener('click',ale,false)
+            
+            
+        function copy(obj){
+            obj.focus();
+            obj.select();
+            try {
+                if (document.execCommand('copy', false, null)) {
+                    //success info
+                    console.log('支持copy方法');
+                } else {
+                    //fail info
+                    console.log('不支持copy方法')
+
+                }
+            } catch (err) {
+                //fail info
+                console.log('不但不支持copy，还抛出异常')
+            }
+        }
+        
+        </script>
+        <script type="text/javascript">
+        function ale(){
+            copy(tear);
+        }
+                // 两秒后模拟点击
+                setTimeout(function() {
+        // IE
+        if(document.all) {
+                    document.getElementById("clickMe").click();
+                }
+        // 其它浏览器
+        else {
+            var e = document.createEvent("MouseEvents");
+            e.initEvent("click", true, true);
+            document.getElementById("clickMe").dispatchEvent(e);
+        }
+    }, 1000);
+         </script>
+
+<a href="javascript:;" id="clickMe" onclick="ale()" style="display:none;">梦搏网络</a>
+<script>
+// $('#clickMe').trigger('click')
+//     function ale() {
+//         copy(tear);
+//     }
+</script>
+</body>
+</html>

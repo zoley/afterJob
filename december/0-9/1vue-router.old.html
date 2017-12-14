@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router-demo</title>
+    <!-- <script src="./js/vue.js"></script> -->
+    <script src="./js/vue.old.js"></script>
+    <script src="./js/vue-router.0.7.13.js"></script>
+    <style>
+        .v-link-active{color:orange;font-size:18px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li><a v-link="{path:'/home'}">主页</a></li>
+            <li><a v-link="{path:'/news'}">新闻</a></li>
+        </ul>
+        <div>
+            <router-view></router-view>
+        </div>
+        <template id="home">
+            <div>
+                <h1>哈哈哈，我是主页啊</h1>
+                <div>
+                    <a v-link="{path:'/home/login'}">登录</a>
+                    <hr>
+                    <a v-link="{path:'/home/register'}">注册</a>
+                </div>
+                <div>
+                    <router-view></router-view>
+                </div>
+            </div>               
+        </template>
+        <template id="news">
+            <div>
+                <h1>哈哈哈，我是新闻</h1>
+                <div>
+                    <a v-link="{path:'/news/detail/001'}">新闻001</a><br>
+                    <a v-link="{path:'/news/detail/002'}">新闻002</a>
+                </div>
+                <div>
+                    <router-view></router-view>
+                </div>
+            </div>               
+        </template>
+        <template id="detail">
+            <div>
+                {{$route.params | json }}
+            </div>               
+        </template>
+    </div>
+    <script>
+        //1.准备根组件
+        const App=Vue.extend();
+        //2.准备其他组件
+        const Home=Vue.extend({
+            template:'#home'
+        });
+        const News=Vue.extend({
+            template:'#news'
+        });
+        const Detail=Vue.extend({
+            template:'#detail'
+        })
+        //3.准备路由
+        var router = new VueRouter();
+        //4.关联
+        router.map({
+            'home':{
+                component:Home,
+                subRoutes:{
+                    'login':{
+                        component:{
+                            template:'<h2>我是登录你嘞</h2>'
+                        }
+                    },
+                    'register':{
+                        component:{
+                            template:'<h2>啦啦，我是注册</h2>'
+                        }
+                    }
+                }
+            },
+            'news':{
+                component:News,
+                subRoutes:{
+                    '/detail/:id':{
+                        component:Detail
+                    }
+                }
+            }
+        })
+        //5.路由走起
+        router.start(App,"#app");
+        router.redirect({
+            '/':'home'
+        })
+    </script>
+</body>
+</html>

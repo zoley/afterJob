@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vue-router-demo</title>
+    <!-- <script src="./js/vue.js"></script> -->
+    <script src="./js/vue.js"></script>
+    <script src="./js/vue-router.js"></script>
+    <style>
+        .v-link-active{color:orange;font-size:18px;}
+    </style>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li><router-link to="/home">主页思密达</router-link></li>
+            <li><router-link to="/news">新闻皮卡丘</router-link></li>
+        </ul>
+        <div>
+            <router-view></router-view>
+        </div>
+        <!-- <template id="home">
+            <div>
+                <h1>哈哈哈，我是主页啊</h1>
+                <div>
+                    <router-link to="/home/login">登录</router-link>
+                    <hr>
+                    <router-link to="/home/register">注册</router-link>
+                </div>
+                <div>
+                    <router-view></router-view>
+                </div>
+            </div>               
+        </template>
+        <template id="news">
+            <div>
+                <h1>耶耶耶，我是新闻</h1>
+                <div>
+                    <router-link to="/news/detail/001">新闻001</router-link>
+                    <router-link to="/news/detail/002">新闻002</router-link>
+                </div>
+                <div>
+                    <router-view></router-view>
+                </div>
+            </div>               
+        </template>
+        <template id="detail">
+            <div>
+                {{$route.params | json }}
+            </div>               
+        </template> -->
+    </div>
+    <script>
+        //1.定义组件
+        const Home={
+            template:'<div>foo</div>'
+        };
+        const News={
+            template:'<div>bar</div>'
+        };
+        const Detail={
+            template:'<div>foo</div>'
+        }
+        //3.定义路由
+        const routes=[
+            {path:'/home',component:Home},
+            {path:'/news',component:News}
+        ]
+        const router = new VueRouter({
+            routes //(缩写)相当于 routes:routes
+        });
+        //4.启动
+        const app=new Vue({
+            router:router
+        }).$mount('#app')
+    </script>
+</body>
+</html>

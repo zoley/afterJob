@@ -105,7 +105,7 @@
             show.putda();
         };
         show.putda = function (){
-            css = "<style>body,p {padding:0; margin:0; font:normal 14px/20px Microsoft Yahei;}.row_2col {width:100%;height: 100%}.headline{color:#0000FF;font-weight:bold;}.headline{font-size:18px;overflow: hidden;text-overflow:ellipsis;white-space: nowrap; text-decoration:underline;font-weight:normal;display: block;padding: 0 15px;}.headline:hover{text-decoration:underline;padding: 0 15px;}.headline{background-image: -webkit-linear-gradient(left,  #147B96,#febaf7,#e605df, #E6D205 25%, #147B96 50%, #E6D205 75%, #febaf7,#e605df,#147B96);background-image: linear-gradient(left, #147B96,#febaf7,#e605df, #E6D205 25%, #147B96 50%, #E6D205 75%,#febaf7,#e605df,#147B96);-webkit-text-fill-color: transparent;text-fill-color: transparent;  -webkit-background-clip: text;background-clip: text;-webkit-background-size: 200% 100%;background-size: 200% 100%;-webkit-animation: masked-animation 6s infinite linear;animation: masked-animation 6s infinite linear;}@keyframes masked-animation { 0%{ background-position: 0 0;} 100% { background-position: -100% 0;} }@-webkit-keyframes masked-animation { 0%{ background-position: 0 0;} 100% { background-position: -100% 0;} }</style>";
+            css = "<style>body,p {padding:0; margin:0; font:normal 14px/20px Microsoft Yahei;}p {padding:0 15px}.row_2col {width:100%;height: 100%}.headline{color:#0000FF;font-weight:bold;}.headline{font-size:18px;overflow: hidden;white-space: nowrap; text-decoration:underline;font-weight:normal;display: block;width:100%;background-image: -webkit-linear-gradient(left,  #147B96,#febaf7,#e605df, #E6D205 25%, #147B96 50%, #E6D205 75%, #febaf7,#e605df,#147B96);background-image: linear-gradient(left, #147B96,#febaf7,#e605df, #E6D205 25%, #147B96 50%, #E6D205 75%,#febaf7,#e605df,#147B96);-webkit-background-clip: text;background-clip: text;-webkit-text-fill-color: transparent;text-fill-color: transparent; -webkit-animation: masked-animation 6s infinite linear;animation: masked-animation 6s infinite linear;-webkit-background-size: 200% 100%;background-size: 200% 100%;}@keyframes masked-animation { 0%{ background-position: 0 0;} 100% { background-position: -100% 0;} }@-webkit-keyframes masked-animation { 0%{ background-position: 0 0;} 100% { background-position: -100% 0;} }</style>";
             document.write(css);
             var html='<div class="row_2col">';
             var l=ads.length;
@@ -115,11 +115,45 @@
             console.log(ads);
             for (k = 0; k < l; k++) {
 
-                html += '<p><a href="'+ads[k].url+'" target="_blank" class="headline" style="height:'+aHeight+'px;line-height:'+aHeight+'px;">'+ads[k].headline+'</a></p>';
-               console.log(document.getElementsByClassName('headline'));
+                html += '<p><a href="'+ads[k].url+'" target="_blank" class="headline" style="height:'+aHeight+'px;line-height:'+aHeight+'px; ">'+ads[k].headline+'</a></p>';
             }
             html +='</div>';
             document.write(html);
+            var HL1=document.getElementsByClassName('headline')[0];
+            var HL2=document.getElementsByClassName('headline')[1];
+            var HL3=document.getElementsByClassName('headline')[2];
+            var HL4=document.getElementsByClassName('headline')[3];
+            var arrHL=[HL1, HL2, HL3, HL4];
+            function jie(obj){
+                obj.innerHTML=obj.innerHTML.slice(0, 18) + '···';
+            }
+            if(!HL3){
+                HL2.style.cssText += "-webkit-animation: masked-animation 10s infinite linear;animation: masked-animation 10s infinite linear;";
+                for(var i=0;i<2;i++){
+                    if(arrHL[i].innerHTML.length>18){
+                        jie(arrHL[i]);
+                    }
+                }
+            }else{
+                if(!HL4){
+                    HL2.style.cssText += "-webkit-animation: masked-animation 10s infinite linear;animation: masked-animation 10s infinite linear;";
+                    HL3.style.cssText += "-webkit-animation: masked-animation 9s infinite linear;animation: masked-animation 9s infinite linear;";
+                    for (var i = 0; i < 3; i++) {
+                        if (arrHL[i].innerHTML.length > 18) {
+                            jie(arrHL[i]);
+                        }
+                    }
+                }else{
+                    HL2.style.cssText += "-webkit-animation: masked-animation 10s infinite linear;animation: masked-animation 10s infinite linear;";
+                    HL3.style.cssText += "-webkit-animation: masked-animation 9s infinite linear;animation: masked-animation 9s infinite linear;";
+                    HL4.style.cssText += "-webkit-animation: masked-animation 12s infinite linear;animation: masked-animation 12s infinite linear;";
+                    for (var i = 0; i < 4; i++) {
+                        if (arrHL[i].innerHTML.length > 18) {
+                            jie(arrHL[i]);
+                        }
+                    }
+                }
+            }
         };
         show.init();
 	</script>

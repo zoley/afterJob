@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vueComponent</title>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id="app">
+        <app :zoe="message" :x-s="msg" @gain="get"></app>
+        <ol>
+            <li v-for="(item,index) in zoee">{{item.type}}</li>
+        </ol>
+    </div>
+    <template id="test">
+        <div>
+            <ul>
+                <li v-for="(item,index) in zoe">{{item.name}} &nbsp;<b>{{index}}</b></li>
+            </ul>
+            <input type="button" v-model="xS" @click="send">
+        </div>
+    </template>
+    <script>
+    window.onload=function(){
+        Vue.component('app',{
+            template:'#test',
+            data:function(){
+                return {
+                    list:[
+                        {'name':'zoe','type':'person'},
+                        {'name':'little','type':'dog'},
+                        {'name':'mimi','type':'cat'}
+                    ]
+                }
+            },
+            props:['zoe','xS'],
+            methods:{
+                send(){
+                    this.$emit('gain',this.list);
+                }
+            }
+        })
+        var vm=new Vue({
+            data(){
+                return {
+                    msg:'哈哈哈，我是数据',
+                    message:[
+                        {'name':'smile','type':'apple'},
+                        {'name':'jam','type':'pear'},
+                        {'name':'ammy','type':'orange'}
+                    ],
+                    zoee:[]
+                }
+            },
+            methods:{
+                get(zoe){
+                    this.zoee=zoe;
+                }
+            }
+        }).$mount('#app')
+        // vm.msg='你好';
+    }
+    </script>
+</body>
+</html>

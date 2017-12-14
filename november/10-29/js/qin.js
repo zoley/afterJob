@@ -11,7 +11,7 @@
     })
     $.fn.qin=function(opt){
         var options={
-            dis:25, //上下拉伸最大距离 
+            dis:22, //上下拉伸最大距离 
             duration:500, //晃动时间
             reduce:0.1 //递减频率
         }
