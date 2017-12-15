@@ -5,13 +5,122 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>vue2.0 单一事件控制组件通信</title>
-    <script src="js/vue.js"></script>
+    <!-- <script src="js/vue.js"></script> -->
+    <script src="https://cdn.bootcss.com/vue/2.5.9/vue.min.js"></script>
+    <style>
+        .cc span{color:rgb(138, 42, 216);}
+        [v-cloak] {display: none;} 
+    </style>
 </head>
 <body>
-    <div id="app">
-        <com-a></com-a>
-        <com-a></com-a>
-        <com-a></com-a>
+    <div id="app" v-cloak>
+        <fieldset>
+            <legend>父从子级拿到数据显示区域</legend>
+            <ul>
+                <li v-for="val in msg">{{val}}</li>
+            </ul>
+        </fieldset>
+        <hr>
+        <com-a @dataa='heng'></com-a>
+        <com-b></com-b>
+        <com-c :fu='parent'></com-c>
     </div>
+    <script>
+        window.onload=function(){
+            var Event=new Vue();
+            var A={
+                data(){
+                    return{
+                        a:'我是A数据',
+                        list:['apple','orange','pear','banana']
+                    }
+                },
+                template:`
+                    <div>
+                        <span>{{a}}</span>
+                        <input type="button" value="传A数据到C" @click="send">
+                    </div>
+                `,
+                methods:{
+                    send(){
+                        Event.$emit('coma',this.a);
+                    }
+                },
+                mounted(){
+                    this.$emit('dataa',this.list);
+                }
+            }
+            var B={
+                data() {
+                    return {
+                        a: {'b':'我是B数据'}
+                    }
+                },
+                template:`
+                    <div>
+                        <span>{{a.b}}</span>
+                        <input type="button" value="传B数据到C" @click="send">
+                    </div>
+                `,
+                methods: {
+                    send() {
+                        Event.$emit('comb', this.a);
+                    }
+                }
+            }
+            var C={
+                template:`
+                    <div class="cc">
+                        <hr>
+                        <h4>我是C数据准备接收。。。</h4>
+                        <p>从A来的：<span>{{a}}</span> ——><input type="button" value="变A（不同步）" @click="change"></p>
+                        <p>从B来的：<span>{{b.b}}</span> ——><input type="button" value="变B（同步）" @click="change2"></p>
+                        <p>从父级来的：<span>{{fu}}</span></p>
+                    </div>
+                `,
+                props:['fu'],
+                data() {
+                    return {
+                        a: '',
+                        b: {}
+                    }
+                },
+                mounted(){
+                    Event.$on('coma',function (a) {
+                        this.a = a;
+                    }.bind(this));
+                    Event.$on('comb',function(b){
+                        this.b=b;
+                    }.bind(this));
+                },
+                methods:{
+                    change(){
+                        this.a='改变了'
+                    },
+                    change2(){
+                        this.b.b='改变了2'
+                    }
+                }
+            }
+            new Vue({
+                data(){
+                    return{
+                        parent:'哈哈，我是根数据',
+                        msg:[]
+                    }
+                },
+                components:{
+                    comA:A,
+                    comB:B,
+                    comC:C
+                },
+                methods:{
+                    heng(a){
+                        this.msg=a;
+                    }
+                }
+            }).$mount('#app');
+        }
+    </script>
 </body>
 </html>

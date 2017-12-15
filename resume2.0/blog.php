@@ -14,8 +14,8 @@
 	<div class="bg"></div>
 	<header id="head">
 		<div class="motto">
-			<span>入不言兮出不辞，乘回风兮载云旗。</span>
-			<span>悲莫悲兮生别离，乐莫乐兮新相知。</span>
+			<span>沉思往事立残阳。被酒莫惊春睡重，</span>
+			<span>赌书消得泼茶香。当时只道是寻常。</span>
 		</div>
 		<div class="line"></div>
 	</header>

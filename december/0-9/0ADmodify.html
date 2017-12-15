@@ -37,7 +37,7 @@
 		if (navigator.userAgent.indexOf('UC') != -1) {
 			var Dw = document.body.clientWidth,
 				Dh = Dw * zone.height / zone.width,
-				i = '<a href="' + ggs[0].url + '" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:' + Dh + 'px;"><img src="' + ggs[0].imageurl + '" style="width:100%;height:100%;display:block;"/></a>', o = document.createElement("div"),
+				i = '<a href="' + ads[0].url + '" target="_self" style="position:relative;display:block; zoom:1;width:100%;height:' + Dh + 'px;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;display:block;"/></a>', o = document.createElement("div"),
 				arand = Math.floor(Math.random() * 100000);
 			o.id = arand;
 			o.className = 'a' + arand;
@@ -75,7 +75,7 @@
 				document.getElementsByTagName('body')[0].insertBefore(y, document.getElementsByTagName('body')[0].firstChild);
 				document.getElementById(window['zole']).innerHTML = htm;
 				document.getElementById(window['zole']).onclick = function () {
-					window.location.href = ggs[0].url;
+					window.location.href = ads[0].url;
 				}
 				document.getElementById('c' + arand).onclick = function (e) {
 					e.stopPropagation()
@@ -146,7 +146,7 @@
 				document.getElementById(s).remove();
 				clearInterval(timerr);
 			} else {
-				window.location.href = ggs[0].url;
+				window.location.href = ads[0].url;
 			}
 		}
 
@@ -154,12 +154,12 @@
 		//-----------------------
 
 
-		str = '<a href="' + ggs[0].url + '" style="line-height:100%;-webkit-tap-highlight-color:transparent;position:absolute;left:0;top:0%;width:100%;height:100%;overflow:hidden;margin:0;padding:0;"><img src="' + ggs[0].imageurl + '" style="width:100%;height:100%;vertical-align:top;object-fit:contain;"></a>';
+		str = '<a href="' + ads[0].url + '" style="line-height:100%;-webkit-tap-highlight-color:transparent;position:absolute;left:0;top:0%;width:100%;height:100%;overflow:hidden;margin:0;padding:0;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;vertical-align:top;object-fit:contain;"></a>';
 		document.writeln(str);
 
 
-		pvid.aid.push(ggs[0].adsid);
-		pvid.pid.push(ggs[0].planid);
+		pvid.aid.push(ads[0].adsid);
+		pvid.pid.push(ads[0].planid);
 		pvstas(pvid);
 
 
@@ -193,15 +193,15 @@
 		var Dw = document.body.clientWidth,
 		Dh = Dw * config.height / config.width,
 
-		str = "<div id='clickgo' style='width:100%;height:" + Dh + "px;background:url(" + ggs[0].imageurl + ") no-repeat center center;background-size:cover;'></div>";
+		str = "<div id='clickgo' style='width:100%;height:" + Dh + "px;background:url(" + ads[0].imageurl + ") no-repeat center center;background-size:cover;'></div>";
 		document.writeln(str);
 		document.getElementById('clickgo').onclick = function () {
-			window.open(ggs[0].url);
+			window.open(ads[0].url);
 		}
 
 
-		pvid.aid.push(ggs[0].adsid);
-		pvid.pid.push(ggs[0].planid);
+		pvid.aid.push(ads[0].adsid);
+		pvid.pid.push(ads[0].planid);
 		pvstas(pvid);
 	</script>
 </body>

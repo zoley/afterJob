@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta charset="UTF-8">
+	<meta name="keywords" content="个人博客,个人小站,主成睿" />
+	<meta name="description" content="主成睿的个人小站">
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<title>vue之单一事件控制组件通信EventBus</title>
+	<link rel="shortcut icon" type="image/x-icon" href="../../img/ico.ico">
+	<link rel="stylesheet" href="../../css/bootstrap.css">
+	<link rel="stylesheet" href="../../css/syntaxy.dark.min.css">
+	<link rel="stylesheet" href="../../css/blog.css">
+	<link rel="stylesheet" href="css/8.css">
+	<!-- <style>.stx-wrap .stx-header{display:none;}</style> -->
+</head>
+<body>
+	<div class="bg"></div>
+	<header id="head">
+		<div class="motto">
+			<span>皑如山上雪，皎若云间月。</span>
+			<span>闻君有两意，故来相决绝。</span>
+		</div>
+		<div class="line"></div>
+	</header>
+	<div class="btn">
+		<div class="icon"></div>
+	</div>
+	<div id="nav">
+		<div class="photo"></div>
+		<ul>
+			<li><a href="http://zoley.me">主页<i></i></a></li>
+			<li><a class="active" href="http://zoley.me/blog.php">博客<i></i></a></li>
+			<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历<i></i></a></li>
+		</ul>
+		<div class="email">zole1314@163.com</div>
+	</div>
+	<div class="mask"></div>
+	<div class="container">
+		<div class="con-left fl">
+			<div class="articles">
+				<p class="back"><a href="http://zoley.me/blog.php">>>返回首页</a></p>
+				<h1 id="8">vue之单一事件控制组件通信EventBus</h1>
+				<p class="authors">发布时间：2017-12-14 &nbsp; &nbsp; 编辑：<span>主小睿</span></p>
+				<div class="content">
+					<div style="width:90%;margin:20px auto;max-width: 500px;"><img style="width:100%;border-radius: 10px;"  src="../../img/image/a8.1.jpg" alt=""></div>
+					<p>鉴于本人还是vue的初学者，所以理解可能不够透彻，所以本文旨在记录学习中的小知识点，以便以后温习。</p>
+					<p>本文主要是讲了vue中如何进行父子组件以及兄弟组件之间的通信——传递数据。父传子采用<span class="abc">自定义属性+props:[]</span>的方法，子传父采用<span class="abc">$emit() & $on()——自定义事件</span>的方法，而兄弟组件则采用<span class="abc">eventBus</span>的方式来实现。这里有个问题就是父子之间是否也可以用<span class="abc">eventBus</span>的方式来实现呢？亲测，应该是不能。</p>
+					<p>老规矩，先看demo。</p>
+					<fieldset id="fieldset">
+						<legend>组件通信demo</legend>
+						<iframe src="http://zoley.me/1/vuecom" frameborder="0" style="width:100%;height:400px;"></iframe>
+					</fieldset>
+					<p>首先我们说子组件接收父组件数据，在父组件内添加自定义属性，然后在子组件内把刚刚自定义的属性作为props数组的一个值，然后就可以在子组件中使用刚刚自定义的数据了。文字一堆不好理解，不如直接看代码。</p>
+					<pre class="codebox" data-title="html+js" data-type="default" data-min-height="0px;">
+						<div id="app" v-cloak>
+							<com-c :fu='parent'></com-c>
+						</div>
+						<script>
+							window.onload = function () {
+								var C = {
+									template: `
+						                    <div class="cc">
+						                        <p>从父级来的：<span>{{fu}}</span></p>
+						                    </div>
+						                `,
+									props: ['fu']
+								}
+								new Vue({
+									data() {
+										return {
+											parent: '哈哈，我是根数据'
+										}
+									},
+									components: {
+										comC: C
+									}
+								}).$mount('#app');
+							}
+						</script>
+					</pre>
+					<p>如上所示，<span class="abc">:fu="parent"</span>就是自定义的属性，并可以直接在子组件中使用。</p>
+					<p>其次关于父组件接收子组件：首先是在子组件中把数据用<span class="abc">$emit</span>发送出去，然后父级自定义组件进行接收使用即可。说的再清楚，不如举个栗子。(这里我默认直接页面加载后就直接发送数据，有需要添加事件的可以自己调节)</p>
+					<pre class="codebox" data-title="html+js" data-type="default" data-min-height="0px;">
+						<div id="app" v-cloak>
+							<fieldset>
+								<legend>父从子级拿到数据显示区域</legend>
+								<ul>
+									<li v-for="val in msg">{{val}}</li>
+								</ul>
+							</fieldset>
+							<com-a @dataa='heng'></com-a>
+							<script>
+								window.onload = function () {
+									var A = {
+										data() {
+											return {
+												list: ['apple', 'orange', 'pear', 'banana']
+											}
+										},
+										mounted() {
+											this.$emit('dataa', this.list);
+										}
+									}
+									new Vue({
+										data() {
+											return {
+												msg: []//这里先自定义一个空数组，用来接收A组件发送过来的数据
+											}
+										},
+										components: {
+											comA: A
+										},
+										methods: {
+											heng(a) {
+												this.msg = a;
+											}
+										}
+									}).$mount('#app');
+								}
+							</script>
+						</div>
+					</pre>
+					<p>好啦，父子之间解决后我们再来试试兄弟之间的通信。这里先在全局定义一个实例，eventBus就是依据这个实例进行操作的。同样是采用<span class="abc">$emit() & $on()</span>的方法，不过在兄弟传值的过程中，比如A和B分别都给C传递数据，在C接收了数据之后想要对数据进行操作，比如数据a和数据b，此时一种是原数据不跟着变化，另一种是也跟着变化。具体情况展现如下，例子在最开始的demo里有，其中A不同步，B同步。</p>
+					<pre class="codebox" data-title="html+js" data-type="default" data-min-height="0px;">
+						<div id="app" v-cloak>
+							<com-a></com-a>
+							<com-b></com-b>
+							<com-c></com-c>
+						</div>
+						<script>
+							window.onload = function () {
+								var Event = new Vue();
+								var A = {
+									data() {
+										return {
+											a: '我是A数据'
+										}
+									},
+									template: `
+						                    <div>
+						                        <span>{{a}}</span>
+						                        <input type="button" value="传A数据到C" @click="send">
+						                    </div>
+						                `,
+									methods: {
+										send() {
+											Event.$emit('coma', this.a);
+										}
+									}
+								}
+								var B = {
+									data() {
+										return {
+											a: { 'b': '我是B数据' }
+										}
+									},
+									template: `
+						                    <div>
+						                        <span>{{a.b}}</span>
+						                        <input type="button" value="传B数据到C" @click="send">
+						                    </div>
+						                `,
+									methods: {
+										send() {
+											Event.$emit('comb', this.a);
+										}
+									}
+								}
+								var C = {
+									template: `
+						                    <div class="cc">
+						                        <hr>
+						                        <h4>我是C数据准备接收。。。</h4>
+						                        <p>从A来的：<span>{{a}}</span> ——><input type="button" value="变A（不同步）" @click="change"></p>
+						                        <p>从B来的：<span>{{b.b}}</span> ——><input type="button" value="变B（同步）" @click="change2"></p>
+						                    </div>
+						                `,
+									data() {
+										return {
+											a: '',
+											b: {}
+										}
+									},
+									mounted() {
+										Event.$on('coma', function (a) {
+											this.a = a;
+										}.bind(this));
+										Event.$on('comb', function (b) {
+											this.b = b;
+										}.bind(this));
+									},
+									methods: {
+										change() {
+											this.a = '改变了'
+										},
+										change2() {
+											this.b.b = '改变了2'
+										}
+									}
+								}
+								new Vue({
+									components: {
+										comA: A,
+										comB: B,
+										comC: C
+									}
+								}).$mount('#app');
+							}
+						</script>
+					</pre>
+					<p>此时最开始的demo便实现啦！还是很简单滴是不是？</p>
+					<p id="zhenbang">真棒！鼓掌，撒花~~~今儿咱就到这吧~下次再见么么哒 （づ￣3￣）づ╭❤～</p>
+					<div style="width:80%;margin:10px auto;max-width: 400px;"><img style="width:100%;"  src="../../img/two.gif" alt=""></div>
+					
+					<p>著作权归zole站长所有。商业转载请联系站长获得授权，非商业转载请注明出处！</p>
+					<p>本文出处：<a href="http://zoley.me/article/8" style="color:#008DE8">http://zoley.me/article/8</a></p>
+					<div class="shang">
+						<a href="javascript:;">赏</a>
+						<div class="shangs">
+							<i>╳</i>
+							<p>谢谢你请我吃糖果</p>
+							<div class="ercode">
+								<img class="wei" src="../../img/image/weixin.jpg" title="扫一扫">
+								<img class="zhi" src="../../img/image/alipay.jpg" title="扫一扫" style="display:none">
+							</div>
+							<span>扫码打赏，多少随意，您高兴就行</span>
+							<div class="choose">
+								<label><input type="radio" name="haha" checked> &nbsp;<b></b></label>
+								<label><input type="radio" name="haha"> &nbsp;<b></b></label>
+							</div>
+							<span class="dashang">打开微信扫一扫，即可进行扫码打赏哦</span>
+						</div>
+					</div>
+				</div>
+				<div id="SOHUCS" sid="8" class="changyan"></div>
+				<script charset="utf-8" type="text/javascript" src="https://changyan.sohu.com/upload/changyan.js" ></script>
+				<script type="text/javascript">
+					window.changyan.api.config({
+						appid: 'cyt9zXQLD',
+						conf: 'prod_7cbb58befa46b554911ecccd8faec7eb'
+					});
+				</script>
+			</div>
+		</div>
+		<div class="con-middle fl hidden-xs"></div>
+		<div class="con-right fr hidden-xs">
+			<div class="pardon">
+				<div class="photo"></div>
+				<h1>zole</h1>
+				<div class="email">zole1314@163.com</div>
+				<ul class="clearfix">
+					<li><a href="http://zoley.me">主页</a></li>
+					<li><a class="active" href="http://zoley.me/blog.php">博客</a></li>
+					<li><a href="http://cv.qiaobutang.com/r/5936c0b30cf22e28dc285c63">简历</a></li>
+				</ul>
+			</div>
+			<div class="clock">
+				<embed src="../../swf/clock.swf" wmode="transparent">
+			</div>
+		</div>
+	</div>
+	<div id="up"></div>
+	<footer>
+		<p>Copyright&copy;2017<a href="http://www.miitbeian.gov.cn/">&nbsp;苏ICP备17035373号</a>&nbsp;All Rights Reserved&nbsp;Design by zole</p>
+	</footer>
+	<canvas id="canvas"></canvas>
+	<script src="../../js/jquery.min.js"></script>
+	<script src="../../js/canvasStar.js"></script>
+	<script src="../../js/syntaxy.min.js"></script>
+	<script src="../../js/blog.js"></script>
+	<script>
+		window.onload=function(){
+			var h1=document.getElementsByTagName("h1")[0];
+			$.ajax({
+				type:"post",
+				url:"http://zoley.me/inquire.php",
+				data:{id:h1.id},
+				success:function(data){
+					// console.log(data[0]);
+					//var d=JSON.parse(data);
+					var viewNum=parseInt(data[0]);
+					viewNum++;
+					$.ajax({
+						type:"post",
+						data:{view:viewNum,id:h1.id},
+						url:"http://zoley.me/contact.php",
+						success:function(){
+
+						}
+					})
+				}
+			})
+			
+
+		}
+	</script>
+	<script>
+		(function(){
+			var bp = document.createElement('script');
+			var curProtocol = window.location.protocol.split(':')[0];
+			if (curProtocol === 'https') {
+				bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+			}
+			else {
+				bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+			}
+			var s = document.getElementsByTagName("script")[0];
+			s.parentNode.insertBefore(bp, s);
+		})();
+	</script>
+</body>
+</html>

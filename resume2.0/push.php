@@ -9,6 +9,7 @@
 	    'http://www.zoley.me/article/5',
 	    'http://www.zoley.me/article/6',
 	    'http://www.zoley.me/article/7',
+	    'http://www.zoley.me/article/8',
 	    'http://www.zoley.me/2/2048',
 	    'http://www.zoley.me/2/mplayer',
 	    'http://www.zoley.me/2/canvasbg',
