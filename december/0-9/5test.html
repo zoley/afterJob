@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta charset="UTF-8">
+</head>
+
+<body>
+	<button id='chg'>change</button>
+	<div>a空間啊哈聖誕節瘋狂和健康傻的叫客服</div>
+	<script>
+
+		// var btn = document.getElementById('chg');
+		// var tip = true;
+		// btn.onclick = function () {
+		// 	alert('你居然在按钮没有被按下的时候就触发了！！！');
+		// }();
+		function setClipboardText(event) {
+			event.preventDefault();
+			var node = document.createElement('div');
+			node.innerHTML = window.getSelection(0).toString();
+			var result = window.getSelection(0).toString();
+			if (result.length > 51) {
+				result = result.substring(0, 50);
+			}
+			var htmlData = '<div>此版权归所XXXXX所有。<br />'
+				+ '如有它用请联系XXXXXXX获得授权。<br />'
+				+ '来源：XXXXXXXX<br /><br />'
+				+ '每次复制最多50个字<br /><br />'
+				+ result
+				+ '</div>';
+			var textData = '此版权归所XXXXXX所有。\n'
+				+ '如有它用请联系XXXXXXXX获得授权。\n'
+				+ '每次复制最多50个字\n'
+				+ result;
+			if (event.clipboardData) {
+				event.clipboardData.clearData("text");
+				event.clipboardData.setData("text/html", htmlData);
+				event.clipboardData.setData('text/plain', textData);
+			}
+			else if (window.clipboardData) {
+				return window.clipboardData.setData("text", textData);
+			}
+		};
+
+		document.addEventListener('copy', function (event) {
+			setClipboardText(event);
+		});
+	</script>
+</body>
+
+</html>

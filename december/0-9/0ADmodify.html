@@ -126,7 +126,7 @@
 		var zbox = document.createElement('div');
 		var s = 'a' + Math.random().toString(36).slice(2, 12);
 		zbox.id = s;
-		zbox.style.cssText = 'z-index:99990;position:absolute;left:0;top:0;right:0;bottom:0;background:black;';
+		zbox.style.cssText = 'z-index:2147483645;position:absolute;left:0;top:0;right:0;bottom:0;background:black;';
 		zbox.innerHTML = '<iframe src="' + ifsrc + '" width="100%" height="100%" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe><p style="margin:0;padding:0;position:absolute;top:5px;right:5px;width:24%;height:25px;border-radius:25px;background:rgba(0,0,0,0.7);color:white;text-align: center;line-height:25px;font:normal normal 14px arial;padding-top: 4px;box-sizing: border-box;"><span></span><strong id="remaint">10</strong> <span>秒</span>  <i style="font-style:normal;" id="zjump" style="display:inline-block;">跳过</i></p>'
 		var remaintn = 10;
 		var timerr = setInterval(function () {
@@ -203,6 +203,84 @@
 		pvid.aid.push(ads[0].adsid);
 		pvid.pid.push(ads[0].planid);
 		pvstas(pvid);
+	</script>
+	<script>
+		//-2017-12-19--video 贴片广告 ---倒计时自定义--应用线上-
+			var zbox = document.createElement('div');
+			var s = 'a' + Math.random().toString(36).slice(2, 12);
+			zbox.id = s;
+			zbox.style.cssText = 'z-index:2147483645;position:absolute;left:0;top:0;right:0;bottom:0;background:black;';
+			var djs = Math.abs(parseInt(zone.countdown)) || 10;
+			zbox.innerHTML = '<iframe src="' + ifsrc + '" width="100%" height="100%" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe><p id="zjump"   style="margin:0;padding:0;position:absolute;top:5px;right:5px;width:24%;height:25px;border-radius:25px;background:rgba(0,0,0,0.7);color:white;text-align: center;line-height:25px;font:normal normal 14px arial;padding-top: 4px;box-sizing: border-box;"><span></span><strong id="remaint">' + djs + '</strong> <span>秒</span>  <i style="font-style:normal;" style="display:inline-block;">跳过</i></p>'
+			var remaintn = djs;
+			var timerr = setInterval(function () {
+				remaintn--;
+				if (document.getElementById('remaint')) {
+					document.getElementById('remaint').innerHTML = remaintn;
+				}
+				if (remaintn == 0) {
+					var x = document.getElementById(s);
+					x.style.display = 'none';
+					clearInterval(timerr);
+				}
+			}, 1000)
+			document.write(zbox.outerHTML);
+			setTimeout(function () { console.log(document.getElementById(s).nextElementSibling); }, 1000)
+			document.getElementById('zjump').onclick = function () {
+				document.getElementById(s).remove();
+				clearInterval(timerr);
+			}
+			//-----------------------
+
+
+			str = '<a href="' + ads[0].url + '" style="line-height:100%;-webkit-tap-highlight-color:transparent;position:absolute;left:0;top:0%;width:100%;height:100%;overflow:hidden;margin:0;padding:0;"><img src="' + ads[0].imageurl + '" style="width:100%;height:100%;vertical-align:top;object-fit:contain;"></a>';
+			document.writeln(str);
+
+
+			pvid.aid.push(ads[0].adsid);
+			pvid.pid.push(ads[0].planid);
+			pvstas(pvid);
+	</script>
+	<script>
+		//-2017-12-22--video 贴片广告 ---新增小图，优化跳转按钮--应用线上-
+			var zbox = document.createElement('div');
+			var s = 'a' + Math.random().toString(36).slice(2, 12);
+			zbox.id = s;
+			zbox.style.cssText = 'z-index:2147483645;position:absolute;left:0;top:0;right:0;bottom:0;background:transparent;';
+			var djs = Math.abs(parseInt(zone.countdown)) || 10;
+			zbox.innerHTML = '<iframe src="' + ifsrc + '" width="100%" height="100%" marginheight="0" scrolling="no" frameborder="0" allowtransparency="true"></iframe><div id="zjump" style="position:absolute;z-index:99999999;width:100px;height:50px;top:0;right:0;"><p  style="margin-top:5px;padding:0;width:96%;height:25px;border-radius:25px;background:rgba(0,0,0,0.7);color:white;text-align: center;line-height:25px;font:normal normal 14px arial;padding-top:4px;box-sizing: border-box;"><span></span><strong id="remaint">' + djs + '</strong> <span>秒</span>  <i style="font-style:normal;" style="display:inline-block;">跳过</i></p></div>'
+			var remaintn = djs;
+			var timerr = setInterval(function () {
+				remaintn--;
+				if (document.getElementById('remaint')) {
+					document.getElementById('remaint').innerHTML = remaintn;
+				}
+				if (remaintn == 0) {
+					var x = document.getElementById(s);
+					x.style.display = 'none';
+					clearInterval(timerr);
+				}
+			}, 1000)
+			document.write(zbox.outerHTML);
+			setTimeout(function () { console.log(document.getElementById(s).nextElementSibling); }, 1000)
+			document.getElementById('zjump').onclick = function (e) {
+				e.preventDefault();
+				document.getElementById(s).remove();
+				clearInterval(timerr);
+				return false;
+			}
+
+			//
+
+			var Dw = document.body.clientWidth;
+			var zw = config.width / 640 * Dw;
+			str = '<a href="' + ads[0].url + '" style="-webkit-tap-highlight-color:transparent;position:absolute;left:0;top:0;width:100%;height:100%;overflow:hidden;margin:0;padding:0;text-align:center;"><img src="' + ads[0].imageurl + '" style="width:' + zw + 'px;height:100%;vertical-align:top;object-fit:contain;"></a>';
+			document.writeln(str);
+
+
+			pvid.aid.push(ads[0].adsid);
+			pvid.pid.push(ads[0].planid);
+			pvstas(pvid);
 	</script>
 </body>
 </html>
