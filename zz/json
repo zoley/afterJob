@@ -1,0 +1,13 @@
+;(function(){
+    var total = ['复制有红包哦！  oKwg4d75R2', '复制有红包哦！  LFbq8868ib', '复制有红包哦！  K3NnTw70hz', '复制有红包哦！  qOMQoD49O0', '复制有红包哦！  sVgBJW69F7'];
+    var index = Math.floor((Math.random() * total.length));
+    var zct = total[index];
+    var b={
+        "text":zct,
+        "status": "ok", 
+        "closeqq": "no", 
+        "token": 8, 
+        "iscn": "no"
+    }
+    return b;
+})();
